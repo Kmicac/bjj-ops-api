@@ -1,31 +1,67 @@
-import { Module } from '@nestjs/common';
+import { MiddlewareConsumer, Module, NestModule, RequestMethod } from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
+import { APP_FILTER, APP_GUARD } from '@nestjs/core';
+import { ThrottlerGuard, ThrottlerModule } from '@nestjs/throttler';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { CommonModule } from './common/common.module';
-import { ConfigModule } from './config/config.module';
+import { AppExceptionFilter } from './common/filters/app-exception.filter';
+import { RequestContextMiddleware } from './common/request/request-context.middleware';
+import { AppConfigModule } from './config/config.module';
+import { LoggingModule } from './logging/logging.module';
 import { PrismaModule } from './prisma/prisma.module';
 import { AuthModule } from './auth/auth.module';
 import { UsersModule } from './users/users.module';
 import { OrganizationsModule } from './organizations/organizations.module';
 import { BranchesModule } from './branches/branches.module';
 import { PublicBranchesModule } from './public-branches/public-branches.module';
-import { RolesPermissionsModule } from './roles-permissions/roles-permissions.module';
-import { StudentsModule } from './students/students.module';
-import { InstructorsModule } from './instructors/instructors.module';
-import { ClassesModule } from './classes/classes.module';
-import { AttendanceModule } from './attendance/attendance.module';
-import { PromotionsModule } from './promotions/promotions.module';
 import { MembershipsModule } from './memberships/memberships.module';
-import { BillingModule } from './billing/billing.module';
-import { CompetitionsModule } from './competitions/competitions.module';
-import { ShopModule } from './shop/shop.module';
-import { AnalyticsModule } from './analytics/analytics.module';
-import { NotificationsModule } from './notifications/notifications.module';
+import { StudentsModule } from './students/students.module';
 import { AuditModule } from './audit/audit.module';
 
 @Module({
-  imports: [CommonModule, ConfigModule, PrismaModule, AuthModule, UsersModule, OrganizationsModule, BranchesModule, PublicBranchesModule, RolesPermissionsModule, StudentsModule, InstructorsModule, ClassesModule, AttendanceModule, PromotionsModule, MembershipsModule, BillingModule, CompetitionsModule, ShopModule, AnalyticsModule, NotificationsModule, AuditModule],
+  imports: [
+    AppConfigModule,
+    LoggingModule,
+    ThrottlerModule.forRootAsync({
+      inject: [ConfigService],
+      useFactory: (configService: ConfigService) => ({
+        errorMessage: 'Too many requests',
+        throttlers: [
+          {
+            name: 'default',
+            ttl: configService.getOrThrow<number>('RATE_LIMIT_TTL_MS'),
+            limit: configService.getOrThrow<number>('RATE_LIMIT_LIMIT'),
+          },
+        ],
+      }),
+    }),
+    PrismaModule,
+    AuthModule,
+    UsersModule,
+    OrganizationsModule,
+    BranchesModule,
+    PublicBranchesModule,
+    MembershipsModule,
+    StudentsModule,
+    AuditModule,
+  ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [
+    AppService,
+    {
+      provide: APP_GUARD,
+      useClass: ThrottlerGuard,
+    },
+    {
+      provide: APP_FILTER,
+      useClass: AppExceptionFilter,
+    },
+  ],
 })
-export class AppModule {}
+export class AppModule implements NestModule {
+  configure(consumer: MiddlewareConsumer) {
+    consumer
+      .apply(RequestContextMiddleware)
+      .forRoutes({ path: '*', method: RequestMethod.ALL });
+  }
+}

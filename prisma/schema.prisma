@@ -1,13 +1,268 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Get a free hosted Postgres database in seconds: `npx create-db`
-
 generator client {
-  provider = "prisma-client"
-  output   = "../generated/prisma"
+  provider     = "prisma-client"
+  output       = "../src/generated/prisma"
+  runtime      = "nodejs"
+  moduleFormat = "cjs"
 }
 
 datasource db {
   provider = "postgresql"
+}
+
+enum OrganizationStatus {
+  DRAFT
+  ACTIVE
+  SUSPENDED
+  INACTIVE
+  CLOSED
+}
+
+enum BranchStatus {
+  DRAFT
+  ACTIVE
+  SUSPENDED
+  INACTIVE
+  CLOSED
+  TRANSITION
+}
+
+enum UserStatus {
+  ACTIVE
+  INVITED
+  SUSPENDED
+  INACTIVE
+}
+
+enum MembershipRole {
+  MESTRE
+  ORG_ADMIN
+  ACADEMY_MANAGER
+  HEAD_COACH
+  INSTRUCTOR
+  STAFF
+  STUDENT
+}
+
+enum MembershipStatus {
+  INVITED
+  ACTIVE
+  SUSPENDED
+  REVOKED
+}
+
+enum MembershipScopeType {
+  ORGANIZATION_WIDE
+  SELECTED_BRANCHES
+}
+
+enum StudentStatus {
+  ACTIVE
+  PAUSED
+  DELINQUENT
+  SUSPENDED
+  INACTIVE
+}
+
+model User {
+  id              String                   @id @default(cuid())
+  email           String                   @unique
+  // Nullable by design: bootstrap/invite can create identities before the user sets a password.
+  passwordHash    String?
+  firstName       String
+  lastName        String
+  phone           String?
+  status          UserStatus               @default(ACTIVE)
+  emailVerifiedAt DateTime?                @db.Timestamptz(3)
+  lastLoginAt     DateTime?                @db.Timestamptz(3)
+  createdAt       DateTime                 @default(now()) @db.Timestamptz(3)
+  updatedAt       DateTime                 @updatedAt @db.Timestamptz(3)
+  deletedAt       DateTime?                @db.Timestamptz(3)
+
+  memberships     OrganizationMembership[]
+  students        Student[]
+  auditLogs       AuditLog[]               @relation("AuditActor")
+}
+
+model Organization {
+  id              String                   @id @default(cuid())
+  name            String
+  slug            String                   @unique
+  description     String?
+  defaultTimezone String
+  status          OrganizationStatus       @default(DRAFT)
+  createdAt       DateTime                 @default(now()) @db.Timestamptz(3)
+  updatedAt       DateTime                 @updatedAt @db.Timestamptz(3)
+  deletedAt       DateTime?                @db.Timestamptz(3)
+
+  branches        Branch[]
+  memberships     OrganizationMembership[]
+  students        Student[]
+  publicProfiles  BranchPublicProfile[]
+  auditLogs       AuditLog[]
+
+  @@index([status])
+}
+
+model Branch {
+  id                 String                   @id @default(cuid())
+  organizationId     String
+  name               String
+  slug               String
+  countryCode        String                   @db.Char(2)
+  region             String?
+  city               String
+  addressLine1       String?
+  addressLine2       String?
+  postalCode         String?
+  timezone           String
+  headCoachMembershipId String?
+  status             BranchStatus             @default(DRAFT)
+  isPublicListed     Boolean                  @default(false)
+  createdAt          DateTime                 @default(now()) @db.Timestamptz(3)
+  updatedAt          DateTime                 @updatedAt @db.Timestamptz(3)
+  deletedAt          DateTime?                @db.Timestamptz(3)
+
+  organization       Organization             @relation(fields: [organizationId], references: [id], onDelete: Restrict)
+  headCoachMembership OrganizationMembership? @relation("BranchHeadCoachMembership", fields: [headCoachMembershipId, organizationId], references: [id, organizationId], onDelete: Restrict)
+  publicProfile      BranchPublicProfile?
+  students           Student[]
+  primaryMemberships OrganizationMembership[] @relation("MembershipPrimaryBranch")
+  membershipScopes   MembershipBranchScope[]
+  auditLogs          AuditLog[]
+
+  @@unique([id, organizationId])
+  @@unique([organizationId, slug])
+  @@index([organizationId, status])
+  @@index([countryCode, city])
+}
+
+model BranchPublicProfile {
+  id             String       @id @default(cuid())
+  organizationId String
+  branchId       String
+  displayName    String?
+  shortBio       String?
+  publicEmail    String?
+  publicPhone    String?
+  whatsapp       String?
+  instagram      String?
+  facebook       String?
+  youtube        String?
+  tiktok         String?
+  website        String?
+  isPublished    Boolean      @default(false)
+  createdAt      DateTime     @default(now()) @db.Timestamptz(3)
+  updatedAt      DateTime     @updatedAt @db.Timestamptz(3)
+
+  organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Restrict)
+  branch         Branch       @relation(fields: [branchId, organizationId], references: [id, organizationId], onDelete: Cascade)
+
+  @@unique([branchId])
+  @@unique([branchId, organizationId])
+  @@index([organizationId, isPublished])
+}
+
+model OrganizationMembership {
+  id              String                  @id @default(cuid())
+  organizationId  String
+  userId          String
+  status          MembershipStatus        @default(INVITED)
+  scopeType       MembershipScopeType     @default(SELECTED_BRANCHES)
+  primaryBranchId String?
+  createdAt       DateTime                @default(now()) @db.Timestamptz(3)
+  updatedAt       DateTime                @updatedAt @db.Timestamptz(3)
+
+  organization    Organization            @relation(fields: [organizationId], references: [id], onDelete: Restrict)
+  user            User                    @relation(fields: [userId], references: [id], onDelete: Restrict)
+  primaryBranch   Branch?                 @relation("MembershipPrimaryBranch", fields: [primaryBranchId, organizationId], references: [id, organizationId], onDelete: Restrict)
+  headCoachOfBranches Branch[]            @relation("BranchHeadCoachMembership")
+  branchScopes    MembershipBranchScope[]
+  roles           MembershipRoleAssignment[]
+  auditLogs       AuditLog[]              @relation("AuditActorMembership")
+
+  @@unique([id, organizationId])
+  @@unique([organizationId, userId])
+  @@index([organizationId, status])
+  @@index([userId, status])
+}
+
+model MembershipRoleAssignment {
+  id             String                 @id @default(cuid())
+  organizationId String
+  membershipId   String
+  role           MembershipRole
+  createdAt      DateTime               @default(now()) @db.Timestamptz(3)
+
+  membership     OrganizationMembership @relation(fields: [membershipId, organizationId], references: [id, organizationId], onDelete: Cascade)
+
+  @@unique([membershipId, role])
+  @@index([organizationId, role])
+}
+
+model MembershipBranchScope {
+  id             String                 @id @default(cuid())
+  organizationId String
+  membershipId   String
+  branchId       String
+  createdAt      DateTime               @default(now()) @db.Timestamptz(3)
+
+  membership     OrganizationMembership @relation(fields: [membershipId, organizationId], references: [id, organizationId], onDelete: Cascade)
+  branch         Branch                 @relation(fields: [branchId, organizationId], references: [id, organizationId], onDelete: Cascade)
+
+  @@unique([membershipId, branchId])
+  @@index([organizationId, branchId])
+}
+
+model Student {
+  id                   String        @id @default(cuid())
+  organizationId       String
+  primaryBranchId      String
+  userId               String?
+  firstName            String
+  lastName             String
+  email                String?
+  phone                String?
+  dateOfBirth          DateTime?     @db.Date
+  status               StudentStatus @default(ACTIVE)
+  startedBjjAt         DateTime?     @db.Date
+  joinedOrganizationAt DateTime?     @db.Date
+  currentBelt          String?
+  currentStripes       Int           @default(0)
+  createdAt            DateTime      @default(now()) @db.Timestamptz(3)
+  updatedAt            DateTime      @updatedAt @db.Timestamptz(3)
+  deletedAt            DateTime?     @db.Timestamptz(3)
+
+  organization         Organization  @relation(fields: [organizationId], references: [id], onDelete: Restrict)
+  primaryBranch        Branch        @relation(fields: [primaryBranchId, organizationId], references: [id, organizationId], onDelete: Restrict)
+  user                 User?         @relation(fields: [userId], references: [id], onDelete: SetNull)
+
+  @@unique([id, organizationId])
+  @@unique([organizationId, userId])
+  @@index([organizationId, status])
+  @@index([primaryBranchId, status])
+}
+
+model AuditLog {
+  id                String                  @id @default(cuid())
+  organizationId    String
+  branchId          String?
+  actorUserId       String?
+  actorMembershipId String?
+  requestId         String?
+  ipAddress         String?
+  userAgent         String?
+  action            String
+  entityType        String
+  entityId          String
+  metadata          Json?
+  createdAt         DateTime                @default(now()) @db.Timestamptz(3)
+
+  organization      Organization            @relation(fields: [organizationId], references: [id], onDelete: Restrict)
+  branch            Branch?                 @relation(fields: [branchId, organizationId], references: [id, organizationId], onDelete: Restrict)
+  actor             User?                   @relation("AuditActor", fields: [actorUserId], references: [id], onDelete: SetNull)
+  actorMembership   OrganizationMembership? @relation("AuditActorMembership", fields: [actorMembershipId, organizationId], references: [id, organizationId], onDelete: Restrict)
+
+  @@index([organizationId, entityType, entityId])
+  @@index([organizationId, createdAt])
+  @@index([actorUserId, createdAt])
 }

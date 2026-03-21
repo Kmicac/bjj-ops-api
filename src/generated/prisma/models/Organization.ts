@@ -217,6 +217,11 @@ export type OrganizationWhereInput = {
   branches?: Prisma.BranchListRelationFilter
   memberships?: Prisma.OrganizationMembershipListRelationFilter
   students?: Prisma.StudentListRelationFilter
+  classSchedules?: Prisma.ClassScheduleListRelationFilter
+  classSessions?: Prisma.ClassSessionListRelationFilter
+  attendanceRecords?: Prisma.AttendanceRecordListRelationFilter
+  promotionRequests?: Prisma.PromotionRequestListRelationFilter
+  promotionEvaluations?: Prisma.PromotionEvaluationListRelationFilter
   publicProfiles?: Prisma.BranchPublicProfileListRelationFilter
   auditLogs?: Prisma.AuditLogListRelationFilter
 }
@@ -234,6 +239,11 @@ export type OrganizationOrderByWithRelationInput = {
   branches?: Prisma.BranchOrderByRelationAggregateInput
   memberships?: Prisma.OrganizationMembershipOrderByRelationAggregateInput
   students?: Prisma.StudentOrderByRelationAggregateInput
+  classSchedules?: Prisma.ClassScheduleOrderByRelationAggregateInput
+  classSessions?: Prisma.ClassSessionOrderByRelationAggregateInput
+  attendanceRecords?: Prisma.AttendanceRecordOrderByRelationAggregateInput
+  promotionRequests?: Prisma.PromotionRequestOrderByRelationAggregateInput
+  promotionEvaluations?: Prisma.PromotionEvaluationOrderByRelationAggregateInput
   publicProfiles?: Prisma.BranchPublicProfileOrderByRelationAggregateInput
   auditLogs?: Prisma.AuditLogOrderByRelationAggregateInput
 }
@@ -254,6 +264,11 @@ export type OrganizationWhereUniqueInput = Prisma.AtLeast<{
   branches?: Prisma.BranchListRelationFilter
   memberships?: Prisma.OrganizationMembershipListRelationFilter
   students?: Prisma.StudentListRelationFilter
+  classSchedules?: Prisma.ClassScheduleListRelationFilter
+  classSessions?: Prisma.ClassSessionListRelationFilter
+  attendanceRecords?: Prisma.AttendanceRecordListRelationFilter
+  promotionRequests?: Prisma.PromotionRequestListRelationFilter
+  promotionEvaluations?: Prisma.PromotionEvaluationListRelationFilter
   publicProfiles?: Prisma.BranchPublicProfileListRelationFilter
   auditLogs?: Prisma.AuditLogListRelationFilter
 }, "id" | "slug">
@@ -301,6 +316,11 @@ export type OrganizationCreateInput = {
   branches?: Prisma.BranchCreateNestedManyWithoutOrganizationInput
   memberships?: Prisma.OrganizationMembershipCreateNestedManyWithoutOrganizationInput
   students?: Prisma.StudentCreateNestedManyWithoutOrganizationInput
+  classSchedules?: Prisma.ClassScheduleCreateNestedManyWithoutOrganizationInput
+  classSessions?: Prisma.ClassSessionCreateNestedManyWithoutOrganizationInput
+  attendanceRecords?: Prisma.AttendanceRecordCreateNestedManyWithoutOrganizationInput
+  promotionRequests?: Prisma.PromotionRequestCreateNestedManyWithoutOrganizationInput
+  promotionEvaluations?: Prisma.PromotionEvaluationCreateNestedManyWithoutOrganizationInput
   publicProfiles?: Prisma.BranchPublicProfileCreateNestedManyWithoutOrganizationInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutOrganizationInput
 }
@@ -318,6 +338,11 @@ export type OrganizationUncheckedCreateInput = {
   branches?: Prisma.BranchUncheckedCreateNestedManyWithoutOrganizationInput
   memberships?: Prisma.OrganizationMembershipUncheckedCreateNestedManyWithoutOrganizationInput
   students?: Prisma.StudentUncheckedCreateNestedManyWithoutOrganizationInput
+  classSchedules?: Prisma.ClassScheduleUncheckedCreateNestedManyWithoutOrganizationInput
+  classSessions?: Prisma.ClassSessionUncheckedCreateNestedManyWithoutOrganizationInput
+  attendanceRecords?: Prisma.AttendanceRecordUncheckedCreateNestedManyWithoutOrganizationInput
+  promotionRequests?: Prisma.PromotionRequestUncheckedCreateNestedManyWithoutOrganizationInput
+  promotionEvaluations?: Prisma.PromotionEvaluationUncheckedCreateNestedManyWithoutOrganizationInput
   publicProfiles?: Prisma.BranchPublicProfileUncheckedCreateNestedManyWithoutOrganizationInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutOrganizationInput
 }
@@ -335,6 +360,11 @@ export type OrganizationUpdateInput = {
   branches?: Prisma.BranchUpdateManyWithoutOrganizationNestedInput
   memberships?: Prisma.OrganizationMembershipUpdateManyWithoutOrganizationNestedInput
   students?: Prisma.StudentUpdateManyWithoutOrganizationNestedInput
+  classSchedules?: Prisma.ClassScheduleUpdateManyWithoutOrganizationNestedInput
+  classSessions?: Prisma.ClassSessionUpdateManyWithoutOrganizationNestedInput
+  attendanceRecords?: Prisma.AttendanceRecordUpdateManyWithoutOrganizationNestedInput
+  promotionRequests?: Prisma.PromotionRequestUpdateManyWithoutOrganizationNestedInput
+  promotionEvaluations?: Prisma.PromotionEvaluationUpdateManyWithoutOrganizationNestedInput
   publicProfiles?: Prisma.BranchPublicProfileUpdateManyWithoutOrganizationNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutOrganizationNestedInput
 }
@@ -352,6 +382,11 @@ export type OrganizationUncheckedUpdateInput = {
   branches?: Prisma.BranchUncheckedUpdateManyWithoutOrganizationNestedInput
   memberships?: Prisma.OrganizationMembershipUncheckedUpdateManyWithoutOrganizationNestedInput
   students?: Prisma.StudentUncheckedUpdateManyWithoutOrganizationNestedInput
+  classSchedules?: Prisma.ClassScheduleUncheckedUpdateManyWithoutOrganizationNestedInput
+  classSessions?: Prisma.ClassSessionUncheckedUpdateManyWithoutOrganizationNestedInput
+  attendanceRecords?: Prisma.AttendanceRecordUncheckedUpdateManyWithoutOrganizationNestedInput
+  promotionRequests?: Prisma.PromotionRequestUncheckedUpdateManyWithoutOrganizationNestedInput
+  promotionEvaluations?: Prisma.PromotionEvaluationUncheckedUpdateManyWithoutOrganizationNestedInput
   publicProfiles?: Prisma.BranchPublicProfileUncheckedUpdateManyWithoutOrganizationNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutOrganizationNestedInput
 }
@@ -493,6 +528,76 @@ export type OrganizationUpdateOneRequiredWithoutStudentsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.OrganizationUpdateToOneWithWhereWithoutStudentsInput, Prisma.OrganizationUpdateWithoutStudentsInput>, Prisma.OrganizationUncheckedUpdateWithoutStudentsInput>
 }
 
+export type OrganizationCreateNestedOneWithoutClassSchedulesInput = {
+  create?: Prisma.XOR<Prisma.OrganizationCreateWithoutClassSchedulesInput, Prisma.OrganizationUncheckedCreateWithoutClassSchedulesInput>
+  connectOrCreate?: Prisma.OrganizationCreateOrConnectWithoutClassSchedulesInput
+  connect?: Prisma.OrganizationWhereUniqueInput
+}
+
+export type OrganizationUpdateOneRequiredWithoutClassSchedulesNestedInput = {
+  create?: Prisma.XOR<Prisma.OrganizationCreateWithoutClassSchedulesInput, Prisma.OrganizationUncheckedCreateWithoutClassSchedulesInput>
+  connectOrCreate?: Prisma.OrganizationCreateOrConnectWithoutClassSchedulesInput
+  upsert?: Prisma.OrganizationUpsertWithoutClassSchedulesInput
+  connect?: Prisma.OrganizationWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.OrganizationUpdateToOneWithWhereWithoutClassSchedulesInput, Prisma.OrganizationUpdateWithoutClassSchedulesInput>, Prisma.OrganizationUncheckedUpdateWithoutClassSchedulesInput>
+}
+
+export type OrganizationCreateNestedOneWithoutClassSessionsInput = {
+  create?: Prisma.XOR<Prisma.OrganizationCreateWithoutClassSessionsInput, Prisma.OrganizationUncheckedCreateWithoutClassSessionsInput>
+  connectOrCreate?: Prisma.OrganizationCreateOrConnectWithoutClassSessionsInput
+  connect?: Prisma.OrganizationWhereUniqueInput
+}
+
+export type OrganizationUpdateOneRequiredWithoutClassSessionsNestedInput = {
+  create?: Prisma.XOR<Prisma.OrganizationCreateWithoutClassSessionsInput, Prisma.OrganizationUncheckedCreateWithoutClassSessionsInput>
+  connectOrCreate?: Prisma.OrganizationCreateOrConnectWithoutClassSessionsInput
+  upsert?: Prisma.OrganizationUpsertWithoutClassSessionsInput
+  connect?: Prisma.OrganizationWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.OrganizationUpdateToOneWithWhereWithoutClassSessionsInput, Prisma.OrganizationUpdateWithoutClassSessionsInput>, Prisma.OrganizationUncheckedUpdateWithoutClassSessionsInput>
+}
+
+export type OrganizationCreateNestedOneWithoutAttendanceRecordsInput = {
+  create?: Prisma.XOR<Prisma.OrganizationCreateWithoutAttendanceRecordsInput, Prisma.OrganizationUncheckedCreateWithoutAttendanceRecordsInput>
+  connectOrCreate?: Prisma.OrganizationCreateOrConnectWithoutAttendanceRecordsInput
+  connect?: Prisma.OrganizationWhereUniqueInput
+}
+
+export type OrganizationUpdateOneRequiredWithoutAttendanceRecordsNestedInput = {
+  create?: Prisma.XOR<Prisma.OrganizationCreateWithoutAttendanceRecordsInput, Prisma.OrganizationUncheckedCreateWithoutAttendanceRecordsInput>
+  connectOrCreate?: Prisma.OrganizationCreateOrConnectWithoutAttendanceRecordsInput
+  upsert?: Prisma.OrganizationUpsertWithoutAttendanceRecordsInput
+  connect?: Prisma.OrganizationWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.OrganizationUpdateToOneWithWhereWithoutAttendanceRecordsInput, Prisma.OrganizationUpdateWithoutAttendanceRecordsInput>, Prisma.OrganizationUncheckedUpdateWithoutAttendanceRecordsInput>
+}
+
+export type OrganizationCreateNestedOneWithoutPromotionRequestsInput = {
+  create?: Prisma.XOR<Prisma.OrganizationCreateWithoutPromotionRequestsInput, Prisma.OrganizationUncheckedCreateWithoutPromotionRequestsInput>
+  connectOrCreate?: Prisma.OrganizationCreateOrConnectWithoutPromotionRequestsInput
+  connect?: Prisma.OrganizationWhereUniqueInput
+}
+
+export type OrganizationUpdateOneRequiredWithoutPromotionRequestsNestedInput = {
+  create?: Prisma.XOR<Prisma.OrganizationCreateWithoutPromotionRequestsInput, Prisma.OrganizationUncheckedCreateWithoutPromotionRequestsInput>
+  connectOrCreate?: Prisma.OrganizationCreateOrConnectWithoutPromotionRequestsInput
+  upsert?: Prisma.OrganizationUpsertWithoutPromotionRequestsInput
+  connect?: Prisma.OrganizationWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.OrganizationUpdateToOneWithWhereWithoutPromotionRequestsInput, Prisma.OrganizationUpdateWithoutPromotionRequestsInput>, Prisma.OrganizationUncheckedUpdateWithoutPromotionRequestsInput>
+}
+
+export type OrganizationCreateNestedOneWithoutPromotionEvaluationsInput = {
+  create?: Prisma.XOR<Prisma.OrganizationCreateWithoutPromotionEvaluationsInput, Prisma.OrganizationUncheckedCreateWithoutPromotionEvaluationsInput>
+  connectOrCreate?: Prisma.OrganizationCreateOrConnectWithoutPromotionEvaluationsInput
+  connect?: Prisma.OrganizationWhereUniqueInput
+}
+
+export type OrganizationUpdateOneRequiredWithoutPromotionEvaluationsNestedInput = {
+  create?: Prisma.XOR<Prisma.OrganizationCreateWithoutPromotionEvaluationsInput, Prisma.OrganizationUncheckedCreateWithoutPromotionEvaluationsInput>
+  connectOrCreate?: Prisma.OrganizationCreateOrConnectWithoutPromotionEvaluationsInput
+  upsert?: Prisma.OrganizationUpsertWithoutPromotionEvaluationsInput
+  connect?: Prisma.OrganizationWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.OrganizationUpdateToOneWithWhereWithoutPromotionEvaluationsInput, Prisma.OrganizationUpdateWithoutPromotionEvaluationsInput>, Prisma.OrganizationUncheckedUpdateWithoutPromotionEvaluationsInput>
+}
+
 export type OrganizationCreateNestedOneWithoutAuditLogsInput = {
   create?: Prisma.XOR<Prisma.OrganizationCreateWithoutAuditLogsInput, Prisma.OrganizationUncheckedCreateWithoutAuditLogsInput>
   connectOrCreate?: Prisma.OrganizationCreateOrConnectWithoutAuditLogsInput
@@ -519,6 +624,11 @@ export type OrganizationCreateWithoutBranchesInput = {
   deletedAt?: Date | string | null
   memberships?: Prisma.OrganizationMembershipCreateNestedManyWithoutOrganizationInput
   students?: Prisma.StudentCreateNestedManyWithoutOrganizationInput
+  classSchedules?: Prisma.ClassScheduleCreateNestedManyWithoutOrganizationInput
+  classSessions?: Prisma.ClassSessionCreateNestedManyWithoutOrganizationInput
+  attendanceRecords?: Prisma.AttendanceRecordCreateNestedManyWithoutOrganizationInput
+  promotionRequests?: Prisma.PromotionRequestCreateNestedManyWithoutOrganizationInput
+  promotionEvaluations?: Prisma.PromotionEvaluationCreateNestedManyWithoutOrganizationInput
   publicProfiles?: Prisma.BranchPublicProfileCreateNestedManyWithoutOrganizationInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutOrganizationInput
 }
@@ -535,6 +645,11 @@ export type OrganizationUncheckedCreateWithoutBranchesInput = {
   deletedAt?: Date | string | null
   memberships?: Prisma.OrganizationMembershipUncheckedCreateNestedManyWithoutOrganizationInput
   students?: Prisma.StudentUncheckedCreateNestedManyWithoutOrganizationInput
+  classSchedules?: Prisma.ClassScheduleUncheckedCreateNestedManyWithoutOrganizationInput
+  classSessions?: Prisma.ClassSessionUncheckedCreateNestedManyWithoutOrganizationInput
+  attendanceRecords?: Prisma.AttendanceRecordUncheckedCreateNestedManyWithoutOrganizationInput
+  promotionRequests?: Prisma.PromotionRequestUncheckedCreateNestedManyWithoutOrganizationInput
+  promotionEvaluations?: Prisma.PromotionEvaluationUncheckedCreateNestedManyWithoutOrganizationInput
   publicProfiles?: Prisma.BranchPublicProfileUncheckedCreateNestedManyWithoutOrganizationInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutOrganizationInput
 }
@@ -567,6 +682,11 @@ export type OrganizationUpdateWithoutBranchesInput = {
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   memberships?: Prisma.OrganizationMembershipUpdateManyWithoutOrganizationNestedInput
   students?: Prisma.StudentUpdateManyWithoutOrganizationNestedInput
+  classSchedules?: Prisma.ClassScheduleUpdateManyWithoutOrganizationNestedInput
+  classSessions?: Prisma.ClassSessionUpdateManyWithoutOrganizationNestedInput
+  attendanceRecords?: Prisma.AttendanceRecordUpdateManyWithoutOrganizationNestedInput
+  promotionRequests?: Prisma.PromotionRequestUpdateManyWithoutOrganizationNestedInput
+  promotionEvaluations?: Prisma.PromotionEvaluationUpdateManyWithoutOrganizationNestedInput
   publicProfiles?: Prisma.BranchPublicProfileUpdateManyWithoutOrganizationNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutOrganizationNestedInput
 }
@@ -583,6 +703,11 @@ export type OrganizationUncheckedUpdateWithoutBranchesInput = {
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   memberships?: Prisma.OrganizationMembershipUncheckedUpdateManyWithoutOrganizationNestedInput
   students?: Prisma.StudentUncheckedUpdateManyWithoutOrganizationNestedInput
+  classSchedules?: Prisma.ClassScheduleUncheckedUpdateManyWithoutOrganizationNestedInput
+  classSessions?: Prisma.ClassSessionUncheckedUpdateManyWithoutOrganizationNestedInput
+  attendanceRecords?: Prisma.AttendanceRecordUncheckedUpdateManyWithoutOrganizationNestedInput
+  promotionRequests?: Prisma.PromotionRequestUncheckedUpdateManyWithoutOrganizationNestedInput
+  promotionEvaluations?: Prisma.PromotionEvaluationUncheckedUpdateManyWithoutOrganizationNestedInput
   publicProfiles?: Prisma.BranchPublicProfileUncheckedUpdateManyWithoutOrganizationNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutOrganizationNestedInput
 }
@@ -600,6 +725,11 @@ export type OrganizationCreateWithoutPublicProfilesInput = {
   branches?: Prisma.BranchCreateNestedManyWithoutOrganizationInput
   memberships?: Prisma.OrganizationMembershipCreateNestedManyWithoutOrganizationInput
   students?: Prisma.StudentCreateNestedManyWithoutOrganizationInput
+  classSchedules?: Prisma.ClassScheduleCreateNestedManyWithoutOrganizationInput
+  classSessions?: Prisma.ClassSessionCreateNestedManyWithoutOrganizationInput
+  attendanceRecords?: Prisma.AttendanceRecordCreateNestedManyWithoutOrganizationInput
+  promotionRequests?: Prisma.PromotionRequestCreateNestedManyWithoutOrganizationInput
+  promotionEvaluations?: Prisma.PromotionEvaluationCreateNestedManyWithoutOrganizationInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutOrganizationInput
 }
 
@@ -616,6 +746,11 @@ export type OrganizationUncheckedCreateWithoutPublicProfilesInput = {
   branches?: Prisma.BranchUncheckedCreateNestedManyWithoutOrganizationInput
   memberships?: Prisma.OrganizationMembershipUncheckedCreateNestedManyWithoutOrganizationInput
   students?: Prisma.StudentUncheckedCreateNestedManyWithoutOrganizationInput
+  classSchedules?: Prisma.ClassScheduleUncheckedCreateNestedManyWithoutOrganizationInput
+  classSessions?: Prisma.ClassSessionUncheckedCreateNestedManyWithoutOrganizationInput
+  attendanceRecords?: Prisma.AttendanceRecordUncheckedCreateNestedManyWithoutOrganizationInput
+  promotionRequests?: Prisma.PromotionRequestUncheckedCreateNestedManyWithoutOrganizationInput
+  promotionEvaluations?: Prisma.PromotionEvaluationUncheckedCreateNestedManyWithoutOrganizationInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutOrganizationInput
 }
 
@@ -648,6 +783,11 @@ export type OrganizationUpdateWithoutPublicProfilesInput = {
   branches?: Prisma.BranchUpdateManyWithoutOrganizationNestedInput
   memberships?: Prisma.OrganizationMembershipUpdateManyWithoutOrganizationNestedInput
   students?: Prisma.StudentUpdateManyWithoutOrganizationNestedInput
+  classSchedules?: Prisma.ClassScheduleUpdateManyWithoutOrganizationNestedInput
+  classSessions?: Prisma.ClassSessionUpdateManyWithoutOrganizationNestedInput
+  attendanceRecords?: Prisma.AttendanceRecordUpdateManyWithoutOrganizationNestedInput
+  promotionRequests?: Prisma.PromotionRequestUpdateManyWithoutOrganizationNestedInput
+  promotionEvaluations?: Prisma.PromotionEvaluationUpdateManyWithoutOrganizationNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutOrganizationNestedInput
 }
 
@@ -664,6 +804,11 @@ export type OrganizationUncheckedUpdateWithoutPublicProfilesInput = {
   branches?: Prisma.BranchUncheckedUpdateManyWithoutOrganizationNestedInput
   memberships?: Prisma.OrganizationMembershipUncheckedUpdateManyWithoutOrganizationNestedInput
   students?: Prisma.StudentUncheckedUpdateManyWithoutOrganizationNestedInput
+  classSchedules?: Prisma.ClassScheduleUncheckedUpdateManyWithoutOrganizationNestedInput
+  classSessions?: Prisma.ClassSessionUncheckedUpdateManyWithoutOrganizationNestedInput
+  attendanceRecords?: Prisma.AttendanceRecordUncheckedUpdateManyWithoutOrganizationNestedInput
+  promotionRequests?: Prisma.PromotionRequestUncheckedUpdateManyWithoutOrganizationNestedInput
+  promotionEvaluations?: Prisma.PromotionEvaluationUncheckedUpdateManyWithoutOrganizationNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutOrganizationNestedInput
 }
 
@@ -679,6 +824,11 @@ export type OrganizationCreateWithoutMembershipsInput = {
   deletedAt?: Date | string | null
   branches?: Prisma.BranchCreateNestedManyWithoutOrganizationInput
   students?: Prisma.StudentCreateNestedManyWithoutOrganizationInput
+  classSchedules?: Prisma.ClassScheduleCreateNestedManyWithoutOrganizationInput
+  classSessions?: Prisma.ClassSessionCreateNestedManyWithoutOrganizationInput
+  attendanceRecords?: Prisma.AttendanceRecordCreateNestedManyWithoutOrganizationInput
+  promotionRequests?: Prisma.PromotionRequestCreateNestedManyWithoutOrganizationInput
+  promotionEvaluations?: Prisma.PromotionEvaluationCreateNestedManyWithoutOrganizationInput
   publicProfiles?: Prisma.BranchPublicProfileCreateNestedManyWithoutOrganizationInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutOrganizationInput
 }
@@ -695,6 +845,11 @@ export type OrganizationUncheckedCreateWithoutMembershipsInput = {
   deletedAt?: Date | string | null
   branches?: Prisma.BranchUncheckedCreateNestedManyWithoutOrganizationInput
   students?: Prisma.StudentUncheckedCreateNestedManyWithoutOrganizationInput
+  classSchedules?: Prisma.ClassScheduleUncheckedCreateNestedManyWithoutOrganizationInput
+  classSessions?: Prisma.ClassSessionUncheckedCreateNestedManyWithoutOrganizationInput
+  attendanceRecords?: Prisma.AttendanceRecordUncheckedCreateNestedManyWithoutOrganizationInput
+  promotionRequests?: Prisma.PromotionRequestUncheckedCreateNestedManyWithoutOrganizationInput
+  promotionEvaluations?: Prisma.PromotionEvaluationUncheckedCreateNestedManyWithoutOrganizationInput
   publicProfiles?: Prisma.BranchPublicProfileUncheckedCreateNestedManyWithoutOrganizationInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutOrganizationInput
 }
@@ -727,6 +882,11 @@ export type OrganizationUpdateWithoutMembershipsInput = {
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   branches?: Prisma.BranchUpdateManyWithoutOrganizationNestedInput
   students?: Prisma.StudentUpdateManyWithoutOrganizationNestedInput
+  classSchedules?: Prisma.ClassScheduleUpdateManyWithoutOrganizationNestedInput
+  classSessions?: Prisma.ClassSessionUpdateManyWithoutOrganizationNestedInput
+  attendanceRecords?: Prisma.AttendanceRecordUpdateManyWithoutOrganizationNestedInput
+  promotionRequests?: Prisma.PromotionRequestUpdateManyWithoutOrganizationNestedInput
+  promotionEvaluations?: Prisma.PromotionEvaluationUpdateManyWithoutOrganizationNestedInput
   publicProfiles?: Prisma.BranchPublicProfileUpdateManyWithoutOrganizationNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutOrganizationNestedInput
 }
@@ -743,6 +903,11 @@ export type OrganizationUncheckedUpdateWithoutMembershipsInput = {
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   branches?: Prisma.BranchUncheckedUpdateManyWithoutOrganizationNestedInput
   students?: Prisma.StudentUncheckedUpdateManyWithoutOrganizationNestedInput
+  classSchedules?: Prisma.ClassScheduleUncheckedUpdateManyWithoutOrganizationNestedInput
+  classSessions?: Prisma.ClassSessionUncheckedUpdateManyWithoutOrganizationNestedInput
+  attendanceRecords?: Prisma.AttendanceRecordUncheckedUpdateManyWithoutOrganizationNestedInput
+  promotionRequests?: Prisma.PromotionRequestUncheckedUpdateManyWithoutOrganizationNestedInput
+  promotionEvaluations?: Prisma.PromotionEvaluationUncheckedUpdateManyWithoutOrganizationNestedInput
   publicProfiles?: Prisma.BranchPublicProfileUncheckedUpdateManyWithoutOrganizationNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutOrganizationNestedInput
 }
@@ -759,6 +924,11 @@ export type OrganizationCreateWithoutStudentsInput = {
   deletedAt?: Date | string | null
   branches?: Prisma.BranchCreateNestedManyWithoutOrganizationInput
   memberships?: Prisma.OrganizationMembershipCreateNestedManyWithoutOrganizationInput
+  classSchedules?: Prisma.ClassScheduleCreateNestedManyWithoutOrganizationInput
+  classSessions?: Prisma.ClassSessionCreateNestedManyWithoutOrganizationInput
+  attendanceRecords?: Prisma.AttendanceRecordCreateNestedManyWithoutOrganizationInput
+  promotionRequests?: Prisma.PromotionRequestCreateNestedManyWithoutOrganizationInput
+  promotionEvaluations?: Prisma.PromotionEvaluationCreateNestedManyWithoutOrganizationInput
   publicProfiles?: Prisma.BranchPublicProfileCreateNestedManyWithoutOrganizationInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutOrganizationInput
 }
@@ -775,6 +945,11 @@ export type OrganizationUncheckedCreateWithoutStudentsInput = {
   deletedAt?: Date | string | null
   branches?: Prisma.BranchUncheckedCreateNestedManyWithoutOrganizationInput
   memberships?: Prisma.OrganizationMembershipUncheckedCreateNestedManyWithoutOrganizationInput
+  classSchedules?: Prisma.ClassScheduleUncheckedCreateNestedManyWithoutOrganizationInput
+  classSessions?: Prisma.ClassSessionUncheckedCreateNestedManyWithoutOrganizationInput
+  attendanceRecords?: Prisma.AttendanceRecordUncheckedCreateNestedManyWithoutOrganizationInput
+  promotionRequests?: Prisma.PromotionRequestUncheckedCreateNestedManyWithoutOrganizationInput
+  promotionEvaluations?: Prisma.PromotionEvaluationUncheckedCreateNestedManyWithoutOrganizationInput
   publicProfiles?: Prisma.BranchPublicProfileUncheckedCreateNestedManyWithoutOrganizationInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutOrganizationInput
 }
@@ -807,6 +982,11 @@ export type OrganizationUpdateWithoutStudentsInput = {
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   branches?: Prisma.BranchUpdateManyWithoutOrganizationNestedInput
   memberships?: Prisma.OrganizationMembershipUpdateManyWithoutOrganizationNestedInput
+  classSchedules?: Prisma.ClassScheduleUpdateManyWithoutOrganizationNestedInput
+  classSessions?: Prisma.ClassSessionUpdateManyWithoutOrganizationNestedInput
+  attendanceRecords?: Prisma.AttendanceRecordUpdateManyWithoutOrganizationNestedInput
+  promotionRequests?: Prisma.PromotionRequestUpdateManyWithoutOrganizationNestedInput
+  promotionEvaluations?: Prisma.PromotionEvaluationUpdateManyWithoutOrganizationNestedInput
   publicProfiles?: Prisma.BranchPublicProfileUpdateManyWithoutOrganizationNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutOrganizationNestedInput
 }
@@ -823,6 +1003,511 @@ export type OrganizationUncheckedUpdateWithoutStudentsInput = {
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   branches?: Prisma.BranchUncheckedUpdateManyWithoutOrganizationNestedInput
   memberships?: Prisma.OrganizationMembershipUncheckedUpdateManyWithoutOrganizationNestedInput
+  classSchedules?: Prisma.ClassScheduleUncheckedUpdateManyWithoutOrganizationNestedInput
+  classSessions?: Prisma.ClassSessionUncheckedUpdateManyWithoutOrganizationNestedInput
+  attendanceRecords?: Prisma.AttendanceRecordUncheckedUpdateManyWithoutOrganizationNestedInput
+  promotionRequests?: Prisma.PromotionRequestUncheckedUpdateManyWithoutOrganizationNestedInput
+  promotionEvaluations?: Prisma.PromotionEvaluationUncheckedUpdateManyWithoutOrganizationNestedInput
+  publicProfiles?: Prisma.BranchPublicProfileUncheckedUpdateManyWithoutOrganizationNestedInput
+  auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutOrganizationNestedInput
+}
+
+export type OrganizationCreateWithoutClassSchedulesInput = {
+  id?: string
+  name: string
+  slug: string
+  description?: string | null
+  defaultTimezone: string
+  status?: $Enums.OrganizationStatus
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
+  branches?: Prisma.BranchCreateNestedManyWithoutOrganizationInput
+  memberships?: Prisma.OrganizationMembershipCreateNestedManyWithoutOrganizationInput
+  students?: Prisma.StudentCreateNestedManyWithoutOrganizationInput
+  classSessions?: Prisma.ClassSessionCreateNestedManyWithoutOrganizationInput
+  attendanceRecords?: Prisma.AttendanceRecordCreateNestedManyWithoutOrganizationInput
+  promotionRequests?: Prisma.PromotionRequestCreateNestedManyWithoutOrganizationInput
+  promotionEvaluations?: Prisma.PromotionEvaluationCreateNestedManyWithoutOrganizationInput
+  publicProfiles?: Prisma.BranchPublicProfileCreateNestedManyWithoutOrganizationInput
+  auditLogs?: Prisma.AuditLogCreateNestedManyWithoutOrganizationInput
+}
+
+export type OrganizationUncheckedCreateWithoutClassSchedulesInput = {
+  id?: string
+  name: string
+  slug: string
+  description?: string | null
+  defaultTimezone: string
+  status?: $Enums.OrganizationStatus
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
+  branches?: Prisma.BranchUncheckedCreateNestedManyWithoutOrganizationInput
+  memberships?: Prisma.OrganizationMembershipUncheckedCreateNestedManyWithoutOrganizationInput
+  students?: Prisma.StudentUncheckedCreateNestedManyWithoutOrganizationInput
+  classSessions?: Prisma.ClassSessionUncheckedCreateNestedManyWithoutOrganizationInput
+  attendanceRecords?: Prisma.AttendanceRecordUncheckedCreateNestedManyWithoutOrganizationInput
+  promotionRequests?: Prisma.PromotionRequestUncheckedCreateNestedManyWithoutOrganizationInput
+  promotionEvaluations?: Prisma.PromotionEvaluationUncheckedCreateNestedManyWithoutOrganizationInput
+  publicProfiles?: Prisma.BranchPublicProfileUncheckedCreateNestedManyWithoutOrganizationInput
+  auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutOrganizationInput
+}
+
+export type OrganizationCreateOrConnectWithoutClassSchedulesInput = {
+  where: Prisma.OrganizationWhereUniqueInput
+  create: Prisma.XOR<Prisma.OrganizationCreateWithoutClassSchedulesInput, Prisma.OrganizationUncheckedCreateWithoutClassSchedulesInput>
+}
+
+export type OrganizationUpsertWithoutClassSchedulesInput = {
+  update: Prisma.XOR<Prisma.OrganizationUpdateWithoutClassSchedulesInput, Prisma.OrganizationUncheckedUpdateWithoutClassSchedulesInput>
+  create: Prisma.XOR<Prisma.OrganizationCreateWithoutClassSchedulesInput, Prisma.OrganizationUncheckedCreateWithoutClassSchedulesInput>
+  where?: Prisma.OrganizationWhereInput
+}
+
+export type OrganizationUpdateToOneWithWhereWithoutClassSchedulesInput = {
+  where?: Prisma.OrganizationWhereInput
+  data: Prisma.XOR<Prisma.OrganizationUpdateWithoutClassSchedulesInput, Prisma.OrganizationUncheckedUpdateWithoutClassSchedulesInput>
+}
+
+export type OrganizationUpdateWithoutClassSchedulesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  defaultTimezone?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumOrganizationStatusFieldUpdateOperationsInput | $Enums.OrganizationStatus
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  branches?: Prisma.BranchUpdateManyWithoutOrganizationNestedInput
+  memberships?: Prisma.OrganizationMembershipUpdateManyWithoutOrganizationNestedInput
+  students?: Prisma.StudentUpdateManyWithoutOrganizationNestedInput
+  classSessions?: Prisma.ClassSessionUpdateManyWithoutOrganizationNestedInput
+  attendanceRecords?: Prisma.AttendanceRecordUpdateManyWithoutOrganizationNestedInput
+  promotionRequests?: Prisma.PromotionRequestUpdateManyWithoutOrganizationNestedInput
+  promotionEvaluations?: Prisma.PromotionEvaluationUpdateManyWithoutOrganizationNestedInput
+  publicProfiles?: Prisma.BranchPublicProfileUpdateManyWithoutOrganizationNestedInput
+  auditLogs?: Prisma.AuditLogUpdateManyWithoutOrganizationNestedInput
+}
+
+export type OrganizationUncheckedUpdateWithoutClassSchedulesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  defaultTimezone?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumOrganizationStatusFieldUpdateOperationsInput | $Enums.OrganizationStatus
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  branches?: Prisma.BranchUncheckedUpdateManyWithoutOrganizationNestedInput
+  memberships?: Prisma.OrganizationMembershipUncheckedUpdateManyWithoutOrganizationNestedInput
+  students?: Prisma.StudentUncheckedUpdateManyWithoutOrganizationNestedInput
+  classSessions?: Prisma.ClassSessionUncheckedUpdateManyWithoutOrganizationNestedInput
+  attendanceRecords?: Prisma.AttendanceRecordUncheckedUpdateManyWithoutOrganizationNestedInput
+  promotionRequests?: Prisma.PromotionRequestUncheckedUpdateManyWithoutOrganizationNestedInput
+  promotionEvaluations?: Prisma.PromotionEvaluationUncheckedUpdateManyWithoutOrganizationNestedInput
+  publicProfiles?: Prisma.BranchPublicProfileUncheckedUpdateManyWithoutOrganizationNestedInput
+  auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutOrganizationNestedInput
+}
+
+export type OrganizationCreateWithoutClassSessionsInput = {
+  id?: string
+  name: string
+  slug: string
+  description?: string | null
+  defaultTimezone: string
+  status?: $Enums.OrganizationStatus
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
+  branches?: Prisma.BranchCreateNestedManyWithoutOrganizationInput
+  memberships?: Prisma.OrganizationMembershipCreateNestedManyWithoutOrganizationInput
+  students?: Prisma.StudentCreateNestedManyWithoutOrganizationInput
+  classSchedules?: Prisma.ClassScheduleCreateNestedManyWithoutOrganizationInput
+  attendanceRecords?: Prisma.AttendanceRecordCreateNestedManyWithoutOrganizationInput
+  promotionRequests?: Prisma.PromotionRequestCreateNestedManyWithoutOrganizationInput
+  promotionEvaluations?: Prisma.PromotionEvaluationCreateNestedManyWithoutOrganizationInput
+  publicProfiles?: Prisma.BranchPublicProfileCreateNestedManyWithoutOrganizationInput
+  auditLogs?: Prisma.AuditLogCreateNestedManyWithoutOrganizationInput
+}
+
+export type OrganizationUncheckedCreateWithoutClassSessionsInput = {
+  id?: string
+  name: string
+  slug: string
+  description?: string | null
+  defaultTimezone: string
+  status?: $Enums.OrganizationStatus
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
+  branches?: Prisma.BranchUncheckedCreateNestedManyWithoutOrganizationInput
+  memberships?: Prisma.OrganizationMembershipUncheckedCreateNestedManyWithoutOrganizationInput
+  students?: Prisma.StudentUncheckedCreateNestedManyWithoutOrganizationInput
+  classSchedules?: Prisma.ClassScheduleUncheckedCreateNestedManyWithoutOrganizationInput
+  attendanceRecords?: Prisma.AttendanceRecordUncheckedCreateNestedManyWithoutOrganizationInput
+  promotionRequests?: Prisma.PromotionRequestUncheckedCreateNestedManyWithoutOrganizationInput
+  promotionEvaluations?: Prisma.PromotionEvaluationUncheckedCreateNestedManyWithoutOrganizationInput
+  publicProfiles?: Prisma.BranchPublicProfileUncheckedCreateNestedManyWithoutOrganizationInput
+  auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutOrganizationInput
+}
+
+export type OrganizationCreateOrConnectWithoutClassSessionsInput = {
+  where: Prisma.OrganizationWhereUniqueInput
+  create: Prisma.XOR<Prisma.OrganizationCreateWithoutClassSessionsInput, Prisma.OrganizationUncheckedCreateWithoutClassSessionsInput>
+}
+
+export type OrganizationUpsertWithoutClassSessionsInput = {
+  update: Prisma.XOR<Prisma.OrganizationUpdateWithoutClassSessionsInput, Prisma.OrganizationUncheckedUpdateWithoutClassSessionsInput>
+  create: Prisma.XOR<Prisma.OrganizationCreateWithoutClassSessionsInput, Prisma.OrganizationUncheckedCreateWithoutClassSessionsInput>
+  where?: Prisma.OrganizationWhereInput
+}
+
+export type OrganizationUpdateToOneWithWhereWithoutClassSessionsInput = {
+  where?: Prisma.OrganizationWhereInput
+  data: Prisma.XOR<Prisma.OrganizationUpdateWithoutClassSessionsInput, Prisma.OrganizationUncheckedUpdateWithoutClassSessionsInput>
+}
+
+export type OrganizationUpdateWithoutClassSessionsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  defaultTimezone?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumOrganizationStatusFieldUpdateOperationsInput | $Enums.OrganizationStatus
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  branches?: Prisma.BranchUpdateManyWithoutOrganizationNestedInput
+  memberships?: Prisma.OrganizationMembershipUpdateManyWithoutOrganizationNestedInput
+  students?: Prisma.StudentUpdateManyWithoutOrganizationNestedInput
+  classSchedules?: Prisma.ClassScheduleUpdateManyWithoutOrganizationNestedInput
+  attendanceRecords?: Prisma.AttendanceRecordUpdateManyWithoutOrganizationNestedInput
+  promotionRequests?: Prisma.PromotionRequestUpdateManyWithoutOrganizationNestedInput
+  promotionEvaluations?: Prisma.PromotionEvaluationUpdateManyWithoutOrganizationNestedInput
+  publicProfiles?: Prisma.BranchPublicProfileUpdateManyWithoutOrganizationNestedInput
+  auditLogs?: Prisma.AuditLogUpdateManyWithoutOrganizationNestedInput
+}
+
+export type OrganizationUncheckedUpdateWithoutClassSessionsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  defaultTimezone?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumOrganizationStatusFieldUpdateOperationsInput | $Enums.OrganizationStatus
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  branches?: Prisma.BranchUncheckedUpdateManyWithoutOrganizationNestedInput
+  memberships?: Prisma.OrganizationMembershipUncheckedUpdateManyWithoutOrganizationNestedInput
+  students?: Prisma.StudentUncheckedUpdateManyWithoutOrganizationNestedInput
+  classSchedules?: Prisma.ClassScheduleUncheckedUpdateManyWithoutOrganizationNestedInput
+  attendanceRecords?: Prisma.AttendanceRecordUncheckedUpdateManyWithoutOrganizationNestedInput
+  promotionRequests?: Prisma.PromotionRequestUncheckedUpdateManyWithoutOrganizationNestedInput
+  promotionEvaluations?: Prisma.PromotionEvaluationUncheckedUpdateManyWithoutOrganizationNestedInput
+  publicProfiles?: Prisma.BranchPublicProfileUncheckedUpdateManyWithoutOrganizationNestedInput
+  auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutOrganizationNestedInput
+}
+
+export type OrganizationCreateWithoutAttendanceRecordsInput = {
+  id?: string
+  name: string
+  slug: string
+  description?: string | null
+  defaultTimezone: string
+  status?: $Enums.OrganizationStatus
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
+  branches?: Prisma.BranchCreateNestedManyWithoutOrganizationInput
+  memberships?: Prisma.OrganizationMembershipCreateNestedManyWithoutOrganizationInput
+  students?: Prisma.StudentCreateNestedManyWithoutOrganizationInput
+  classSchedules?: Prisma.ClassScheduleCreateNestedManyWithoutOrganizationInput
+  classSessions?: Prisma.ClassSessionCreateNestedManyWithoutOrganizationInput
+  promotionRequests?: Prisma.PromotionRequestCreateNestedManyWithoutOrganizationInput
+  promotionEvaluations?: Prisma.PromotionEvaluationCreateNestedManyWithoutOrganizationInput
+  publicProfiles?: Prisma.BranchPublicProfileCreateNestedManyWithoutOrganizationInput
+  auditLogs?: Prisma.AuditLogCreateNestedManyWithoutOrganizationInput
+}
+
+export type OrganizationUncheckedCreateWithoutAttendanceRecordsInput = {
+  id?: string
+  name: string
+  slug: string
+  description?: string | null
+  defaultTimezone: string
+  status?: $Enums.OrganizationStatus
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
+  branches?: Prisma.BranchUncheckedCreateNestedManyWithoutOrganizationInput
+  memberships?: Prisma.OrganizationMembershipUncheckedCreateNestedManyWithoutOrganizationInput
+  students?: Prisma.StudentUncheckedCreateNestedManyWithoutOrganizationInput
+  classSchedules?: Prisma.ClassScheduleUncheckedCreateNestedManyWithoutOrganizationInput
+  classSessions?: Prisma.ClassSessionUncheckedCreateNestedManyWithoutOrganizationInput
+  promotionRequests?: Prisma.PromotionRequestUncheckedCreateNestedManyWithoutOrganizationInput
+  promotionEvaluations?: Prisma.PromotionEvaluationUncheckedCreateNestedManyWithoutOrganizationInput
+  publicProfiles?: Prisma.BranchPublicProfileUncheckedCreateNestedManyWithoutOrganizationInput
+  auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutOrganizationInput
+}
+
+export type OrganizationCreateOrConnectWithoutAttendanceRecordsInput = {
+  where: Prisma.OrganizationWhereUniqueInput
+  create: Prisma.XOR<Prisma.OrganizationCreateWithoutAttendanceRecordsInput, Prisma.OrganizationUncheckedCreateWithoutAttendanceRecordsInput>
+}
+
+export type OrganizationUpsertWithoutAttendanceRecordsInput = {
+  update: Prisma.XOR<Prisma.OrganizationUpdateWithoutAttendanceRecordsInput, Prisma.OrganizationUncheckedUpdateWithoutAttendanceRecordsInput>
+  create: Prisma.XOR<Prisma.OrganizationCreateWithoutAttendanceRecordsInput, Prisma.OrganizationUncheckedCreateWithoutAttendanceRecordsInput>
+  where?: Prisma.OrganizationWhereInput
+}
+
+export type OrganizationUpdateToOneWithWhereWithoutAttendanceRecordsInput = {
+  where?: Prisma.OrganizationWhereInput
+  data: Prisma.XOR<Prisma.OrganizationUpdateWithoutAttendanceRecordsInput, Prisma.OrganizationUncheckedUpdateWithoutAttendanceRecordsInput>
+}
+
+export type OrganizationUpdateWithoutAttendanceRecordsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  defaultTimezone?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumOrganizationStatusFieldUpdateOperationsInput | $Enums.OrganizationStatus
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  branches?: Prisma.BranchUpdateManyWithoutOrganizationNestedInput
+  memberships?: Prisma.OrganizationMembershipUpdateManyWithoutOrganizationNestedInput
+  students?: Prisma.StudentUpdateManyWithoutOrganizationNestedInput
+  classSchedules?: Prisma.ClassScheduleUpdateManyWithoutOrganizationNestedInput
+  classSessions?: Prisma.ClassSessionUpdateManyWithoutOrganizationNestedInput
+  promotionRequests?: Prisma.PromotionRequestUpdateManyWithoutOrganizationNestedInput
+  promotionEvaluations?: Prisma.PromotionEvaluationUpdateManyWithoutOrganizationNestedInput
+  publicProfiles?: Prisma.BranchPublicProfileUpdateManyWithoutOrganizationNestedInput
+  auditLogs?: Prisma.AuditLogUpdateManyWithoutOrganizationNestedInput
+}
+
+export type OrganizationUncheckedUpdateWithoutAttendanceRecordsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  defaultTimezone?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumOrganizationStatusFieldUpdateOperationsInput | $Enums.OrganizationStatus
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  branches?: Prisma.BranchUncheckedUpdateManyWithoutOrganizationNestedInput
+  memberships?: Prisma.OrganizationMembershipUncheckedUpdateManyWithoutOrganizationNestedInput
+  students?: Prisma.StudentUncheckedUpdateManyWithoutOrganizationNestedInput
+  classSchedules?: Prisma.ClassScheduleUncheckedUpdateManyWithoutOrganizationNestedInput
+  classSessions?: Prisma.ClassSessionUncheckedUpdateManyWithoutOrganizationNestedInput
+  promotionRequests?: Prisma.PromotionRequestUncheckedUpdateManyWithoutOrganizationNestedInput
+  promotionEvaluations?: Prisma.PromotionEvaluationUncheckedUpdateManyWithoutOrganizationNestedInput
+  publicProfiles?: Prisma.BranchPublicProfileUncheckedUpdateManyWithoutOrganizationNestedInput
+  auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutOrganizationNestedInput
+}
+
+export type OrganizationCreateWithoutPromotionRequestsInput = {
+  id?: string
+  name: string
+  slug: string
+  description?: string | null
+  defaultTimezone: string
+  status?: $Enums.OrganizationStatus
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
+  branches?: Prisma.BranchCreateNestedManyWithoutOrganizationInput
+  memberships?: Prisma.OrganizationMembershipCreateNestedManyWithoutOrganizationInput
+  students?: Prisma.StudentCreateNestedManyWithoutOrganizationInput
+  classSchedules?: Prisma.ClassScheduleCreateNestedManyWithoutOrganizationInput
+  classSessions?: Prisma.ClassSessionCreateNestedManyWithoutOrganizationInput
+  attendanceRecords?: Prisma.AttendanceRecordCreateNestedManyWithoutOrganizationInput
+  promotionEvaluations?: Prisma.PromotionEvaluationCreateNestedManyWithoutOrganizationInput
+  publicProfiles?: Prisma.BranchPublicProfileCreateNestedManyWithoutOrganizationInput
+  auditLogs?: Prisma.AuditLogCreateNestedManyWithoutOrganizationInput
+}
+
+export type OrganizationUncheckedCreateWithoutPromotionRequestsInput = {
+  id?: string
+  name: string
+  slug: string
+  description?: string | null
+  defaultTimezone: string
+  status?: $Enums.OrganizationStatus
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
+  branches?: Prisma.BranchUncheckedCreateNestedManyWithoutOrganizationInput
+  memberships?: Prisma.OrganizationMembershipUncheckedCreateNestedManyWithoutOrganizationInput
+  students?: Prisma.StudentUncheckedCreateNestedManyWithoutOrganizationInput
+  classSchedules?: Prisma.ClassScheduleUncheckedCreateNestedManyWithoutOrganizationInput
+  classSessions?: Prisma.ClassSessionUncheckedCreateNestedManyWithoutOrganizationInput
+  attendanceRecords?: Prisma.AttendanceRecordUncheckedCreateNestedManyWithoutOrganizationInput
+  promotionEvaluations?: Prisma.PromotionEvaluationUncheckedCreateNestedManyWithoutOrganizationInput
+  publicProfiles?: Prisma.BranchPublicProfileUncheckedCreateNestedManyWithoutOrganizationInput
+  auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutOrganizationInput
+}
+
+export type OrganizationCreateOrConnectWithoutPromotionRequestsInput = {
+  where: Prisma.OrganizationWhereUniqueInput
+  create: Prisma.XOR<Prisma.OrganizationCreateWithoutPromotionRequestsInput, Prisma.OrganizationUncheckedCreateWithoutPromotionRequestsInput>
+}
+
+export type OrganizationUpsertWithoutPromotionRequestsInput = {
+  update: Prisma.XOR<Prisma.OrganizationUpdateWithoutPromotionRequestsInput, Prisma.OrganizationUncheckedUpdateWithoutPromotionRequestsInput>
+  create: Prisma.XOR<Prisma.OrganizationCreateWithoutPromotionRequestsInput, Prisma.OrganizationUncheckedCreateWithoutPromotionRequestsInput>
+  where?: Prisma.OrganizationWhereInput
+}
+
+export type OrganizationUpdateToOneWithWhereWithoutPromotionRequestsInput = {
+  where?: Prisma.OrganizationWhereInput
+  data: Prisma.XOR<Prisma.OrganizationUpdateWithoutPromotionRequestsInput, Prisma.OrganizationUncheckedUpdateWithoutPromotionRequestsInput>
+}
+
+export type OrganizationUpdateWithoutPromotionRequestsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  defaultTimezone?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumOrganizationStatusFieldUpdateOperationsInput | $Enums.OrganizationStatus
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  branches?: Prisma.BranchUpdateManyWithoutOrganizationNestedInput
+  memberships?: Prisma.OrganizationMembershipUpdateManyWithoutOrganizationNestedInput
+  students?: Prisma.StudentUpdateManyWithoutOrganizationNestedInput
+  classSchedules?: Prisma.ClassScheduleUpdateManyWithoutOrganizationNestedInput
+  classSessions?: Prisma.ClassSessionUpdateManyWithoutOrganizationNestedInput
+  attendanceRecords?: Prisma.AttendanceRecordUpdateManyWithoutOrganizationNestedInput
+  promotionEvaluations?: Prisma.PromotionEvaluationUpdateManyWithoutOrganizationNestedInput
+  publicProfiles?: Prisma.BranchPublicProfileUpdateManyWithoutOrganizationNestedInput
+  auditLogs?: Prisma.AuditLogUpdateManyWithoutOrganizationNestedInput
+}
+
+export type OrganizationUncheckedUpdateWithoutPromotionRequestsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  defaultTimezone?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumOrganizationStatusFieldUpdateOperationsInput | $Enums.OrganizationStatus
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  branches?: Prisma.BranchUncheckedUpdateManyWithoutOrganizationNestedInput
+  memberships?: Prisma.OrganizationMembershipUncheckedUpdateManyWithoutOrganizationNestedInput
+  students?: Prisma.StudentUncheckedUpdateManyWithoutOrganizationNestedInput
+  classSchedules?: Prisma.ClassScheduleUncheckedUpdateManyWithoutOrganizationNestedInput
+  classSessions?: Prisma.ClassSessionUncheckedUpdateManyWithoutOrganizationNestedInput
+  attendanceRecords?: Prisma.AttendanceRecordUncheckedUpdateManyWithoutOrganizationNestedInput
+  promotionEvaluations?: Prisma.PromotionEvaluationUncheckedUpdateManyWithoutOrganizationNestedInput
+  publicProfiles?: Prisma.BranchPublicProfileUncheckedUpdateManyWithoutOrganizationNestedInput
+  auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutOrganizationNestedInput
+}
+
+export type OrganizationCreateWithoutPromotionEvaluationsInput = {
+  id?: string
+  name: string
+  slug: string
+  description?: string | null
+  defaultTimezone: string
+  status?: $Enums.OrganizationStatus
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
+  branches?: Prisma.BranchCreateNestedManyWithoutOrganizationInput
+  memberships?: Prisma.OrganizationMembershipCreateNestedManyWithoutOrganizationInput
+  students?: Prisma.StudentCreateNestedManyWithoutOrganizationInput
+  classSchedules?: Prisma.ClassScheduleCreateNestedManyWithoutOrganizationInput
+  classSessions?: Prisma.ClassSessionCreateNestedManyWithoutOrganizationInput
+  attendanceRecords?: Prisma.AttendanceRecordCreateNestedManyWithoutOrganizationInput
+  promotionRequests?: Prisma.PromotionRequestCreateNestedManyWithoutOrganizationInput
+  publicProfiles?: Prisma.BranchPublicProfileCreateNestedManyWithoutOrganizationInput
+  auditLogs?: Prisma.AuditLogCreateNestedManyWithoutOrganizationInput
+}
+
+export type OrganizationUncheckedCreateWithoutPromotionEvaluationsInput = {
+  id?: string
+  name: string
+  slug: string
+  description?: string | null
+  defaultTimezone: string
+  status?: $Enums.OrganizationStatus
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
+  branches?: Prisma.BranchUncheckedCreateNestedManyWithoutOrganizationInput
+  memberships?: Prisma.OrganizationMembershipUncheckedCreateNestedManyWithoutOrganizationInput
+  students?: Prisma.StudentUncheckedCreateNestedManyWithoutOrganizationInput
+  classSchedules?: Prisma.ClassScheduleUncheckedCreateNestedManyWithoutOrganizationInput
+  classSessions?: Prisma.ClassSessionUncheckedCreateNestedManyWithoutOrganizationInput
+  attendanceRecords?: Prisma.AttendanceRecordUncheckedCreateNestedManyWithoutOrganizationInput
+  promotionRequests?: Prisma.PromotionRequestUncheckedCreateNestedManyWithoutOrganizationInput
+  publicProfiles?: Prisma.BranchPublicProfileUncheckedCreateNestedManyWithoutOrganizationInput
+  auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutOrganizationInput
+}
+
+export type OrganizationCreateOrConnectWithoutPromotionEvaluationsInput = {
+  where: Prisma.OrganizationWhereUniqueInput
+  create: Prisma.XOR<Prisma.OrganizationCreateWithoutPromotionEvaluationsInput, Prisma.OrganizationUncheckedCreateWithoutPromotionEvaluationsInput>
+}
+
+export type OrganizationUpsertWithoutPromotionEvaluationsInput = {
+  update: Prisma.XOR<Prisma.OrganizationUpdateWithoutPromotionEvaluationsInput, Prisma.OrganizationUncheckedUpdateWithoutPromotionEvaluationsInput>
+  create: Prisma.XOR<Prisma.OrganizationCreateWithoutPromotionEvaluationsInput, Prisma.OrganizationUncheckedCreateWithoutPromotionEvaluationsInput>
+  where?: Prisma.OrganizationWhereInput
+}
+
+export type OrganizationUpdateToOneWithWhereWithoutPromotionEvaluationsInput = {
+  where?: Prisma.OrganizationWhereInput
+  data: Prisma.XOR<Prisma.OrganizationUpdateWithoutPromotionEvaluationsInput, Prisma.OrganizationUncheckedUpdateWithoutPromotionEvaluationsInput>
+}
+
+export type OrganizationUpdateWithoutPromotionEvaluationsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  defaultTimezone?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumOrganizationStatusFieldUpdateOperationsInput | $Enums.OrganizationStatus
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  branches?: Prisma.BranchUpdateManyWithoutOrganizationNestedInput
+  memberships?: Prisma.OrganizationMembershipUpdateManyWithoutOrganizationNestedInput
+  students?: Prisma.StudentUpdateManyWithoutOrganizationNestedInput
+  classSchedules?: Prisma.ClassScheduleUpdateManyWithoutOrganizationNestedInput
+  classSessions?: Prisma.ClassSessionUpdateManyWithoutOrganizationNestedInput
+  attendanceRecords?: Prisma.AttendanceRecordUpdateManyWithoutOrganizationNestedInput
+  promotionRequests?: Prisma.PromotionRequestUpdateManyWithoutOrganizationNestedInput
+  publicProfiles?: Prisma.BranchPublicProfileUpdateManyWithoutOrganizationNestedInput
+  auditLogs?: Prisma.AuditLogUpdateManyWithoutOrganizationNestedInput
+}
+
+export type OrganizationUncheckedUpdateWithoutPromotionEvaluationsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  defaultTimezone?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumOrganizationStatusFieldUpdateOperationsInput | $Enums.OrganizationStatus
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  branches?: Prisma.BranchUncheckedUpdateManyWithoutOrganizationNestedInput
+  memberships?: Prisma.OrganizationMembershipUncheckedUpdateManyWithoutOrganizationNestedInput
+  students?: Prisma.StudentUncheckedUpdateManyWithoutOrganizationNestedInput
+  classSchedules?: Prisma.ClassScheduleUncheckedUpdateManyWithoutOrganizationNestedInput
+  classSessions?: Prisma.ClassSessionUncheckedUpdateManyWithoutOrganizationNestedInput
+  attendanceRecords?: Prisma.AttendanceRecordUncheckedUpdateManyWithoutOrganizationNestedInput
+  promotionRequests?: Prisma.PromotionRequestUncheckedUpdateManyWithoutOrganizationNestedInput
   publicProfiles?: Prisma.BranchPublicProfileUncheckedUpdateManyWithoutOrganizationNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutOrganizationNestedInput
 }
@@ -840,6 +1525,11 @@ export type OrganizationCreateWithoutAuditLogsInput = {
   branches?: Prisma.BranchCreateNestedManyWithoutOrganizationInput
   memberships?: Prisma.OrganizationMembershipCreateNestedManyWithoutOrganizationInput
   students?: Prisma.StudentCreateNestedManyWithoutOrganizationInput
+  classSchedules?: Prisma.ClassScheduleCreateNestedManyWithoutOrganizationInput
+  classSessions?: Prisma.ClassSessionCreateNestedManyWithoutOrganizationInput
+  attendanceRecords?: Prisma.AttendanceRecordCreateNestedManyWithoutOrganizationInput
+  promotionRequests?: Prisma.PromotionRequestCreateNestedManyWithoutOrganizationInput
+  promotionEvaluations?: Prisma.PromotionEvaluationCreateNestedManyWithoutOrganizationInput
   publicProfiles?: Prisma.BranchPublicProfileCreateNestedManyWithoutOrganizationInput
 }
 
@@ -856,6 +1546,11 @@ export type OrganizationUncheckedCreateWithoutAuditLogsInput = {
   branches?: Prisma.BranchUncheckedCreateNestedManyWithoutOrganizationInput
   memberships?: Prisma.OrganizationMembershipUncheckedCreateNestedManyWithoutOrganizationInput
   students?: Prisma.StudentUncheckedCreateNestedManyWithoutOrganizationInput
+  classSchedules?: Prisma.ClassScheduleUncheckedCreateNestedManyWithoutOrganizationInput
+  classSessions?: Prisma.ClassSessionUncheckedCreateNestedManyWithoutOrganizationInput
+  attendanceRecords?: Prisma.AttendanceRecordUncheckedCreateNestedManyWithoutOrganizationInput
+  promotionRequests?: Prisma.PromotionRequestUncheckedCreateNestedManyWithoutOrganizationInput
+  promotionEvaluations?: Prisma.PromotionEvaluationUncheckedCreateNestedManyWithoutOrganizationInput
   publicProfiles?: Prisma.BranchPublicProfileUncheckedCreateNestedManyWithoutOrganizationInput
 }
 
@@ -888,6 +1583,11 @@ export type OrganizationUpdateWithoutAuditLogsInput = {
   branches?: Prisma.BranchUpdateManyWithoutOrganizationNestedInput
   memberships?: Prisma.OrganizationMembershipUpdateManyWithoutOrganizationNestedInput
   students?: Prisma.StudentUpdateManyWithoutOrganizationNestedInput
+  classSchedules?: Prisma.ClassScheduleUpdateManyWithoutOrganizationNestedInput
+  classSessions?: Prisma.ClassSessionUpdateManyWithoutOrganizationNestedInput
+  attendanceRecords?: Prisma.AttendanceRecordUpdateManyWithoutOrganizationNestedInput
+  promotionRequests?: Prisma.PromotionRequestUpdateManyWithoutOrganizationNestedInput
+  promotionEvaluations?: Prisma.PromotionEvaluationUpdateManyWithoutOrganizationNestedInput
   publicProfiles?: Prisma.BranchPublicProfileUpdateManyWithoutOrganizationNestedInput
 }
 
@@ -904,6 +1604,11 @@ export type OrganizationUncheckedUpdateWithoutAuditLogsInput = {
   branches?: Prisma.BranchUncheckedUpdateManyWithoutOrganizationNestedInput
   memberships?: Prisma.OrganizationMembershipUncheckedUpdateManyWithoutOrganizationNestedInput
   students?: Prisma.StudentUncheckedUpdateManyWithoutOrganizationNestedInput
+  classSchedules?: Prisma.ClassScheduleUncheckedUpdateManyWithoutOrganizationNestedInput
+  classSessions?: Prisma.ClassSessionUncheckedUpdateManyWithoutOrganizationNestedInput
+  attendanceRecords?: Prisma.AttendanceRecordUncheckedUpdateManyWithoutOrganizationNestedInput
+  promotionRequests?: Prisma.PromotionRequestUncheckedUpdateManyWithoutOrganizationNestedInput
+  promotionEvaluations?: Prisma.PromotionEvaluationUncheckedUpdateManyWithoutOrganizationNestedInput
   publicProfiles?: Prisma.BranchPublicProfileUncheckedUpdateManyWithoutOrganizationNestedInput
 }
 
@@ -916,6 +1621,11 @@ export type OrganizationCountOutputType = {
   branches: number
   memberships: number
   students: number
+  classSchedules: number
+  classSessions: number
+  attendanceRecords: number
+  promotionRequests: number
+  promotionEvaluations: number
   publicProfiles: number
   auditLogs: number
 }
@@ -924,6 +1634,11 @@ export type OrganizationCountOutputTypeSelect<ExtArgs extends runtime.Types.Exte
   branches?: boolean | OrganizationCountOutputTypeCountBranchesArgs
   memberships?: boolean | OrganizationCountOutputTypeCountMembershipsArgs
   students?: boolean | OrganizationCountOutputTypeCountStudentsArgs
+  classSchedules?: boolean | OrganizationCountOutputTypeCountClassSchedulesArgs
+  classSessions?: boolean | OrganizationCountOutputTypeCountClassSessionsArgs
+  attendanceRecords?: boolean | OrganizationCountOutputTypeCountAttendanceRecordsArgs
+  promotionRequests?: boolean | OrganizationCountOutputTypeCountPromotionRequestsArgs
+  promotionEvaluations?: boolean | OrganizationCountOutputTypeCountPromotionEvaluationsArgs
   publicProfiles?: boolean | OrganizationCountOutputTypeCountPublicProfilesArgs
   auditLogs?: boolean | OrganizationCountOutputTypeCountAuditLogsArgs
 }
@@ -962,6 +1677,41 @@ export type OrganizationCountOutputTypeCountStudentsArgs<ExtArgs extends runtime
 /**
  * OrganizationCountOutputType without action
  */
+export type OrganizationCountOutputTypeCountClassSchedulesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ClassScheduleWhereInput
+}
+
+/**
+ * OrganizationCountOutputType without action
+ */
+export type OrganizationCountOutputTypeCountClassSessionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ClassSessionWhereInput
+}
+
+/**
+ * OrganizationCountOutputType without action
+ */
+export type OrganizationCountOutputTypeCountAttendanceRecordsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.AttendanceRecordWhereInput
+}
+
+/**
+ * OrganizationCountOutputType without action
+ */
+export type OrganizationCountOutputTypeCountPromotionRequestsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.PromotionRequestWhereInput
+}
+
+/**
+ * OrganizationCountOutputType without action
+ */
+export type OrganizationCountOutputTypeCountPromotionEvaluationsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.PromotionEvaluationWhereInput
+}
+
+/**
+ * OrganizationCountOutputType without action
+ */
 export type OrganizationCountOutputTypeCountPublicProfilesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.BranchPublicProfileWhereInput
 }
@@ -987,6 +1737,11 @@ export type OrganizationSelect<ExtArgs extends runtime.Types.Extensions.Internal
   branches?: boolean | Prisma.Organization$branchesArgs<ExtArgs>
   memberships?: boolean | Prisma.Organization$membershipsArgs<ExtArgs>
   students?: boolean | Prisma.Organization$studentsArgs<ExtArgs>
+  classSchedules?: boolean | Prisma.Organization$classSchedulesArgs<ExtArgs>
+  classSessions?: boolean | Prisma.Organization$classSessionsArgs<ExtArgs>
+  attendanceRecords?: boolean | Prisma.Organization$attendanceRecordsArgs<ExtArgs>
+  promotionRequests?: boolean | Prisma.Organization$promotionRequestsArgs<ExtArgs>
+  promotionEvaluations?: boolean | Prisma.Organization$promotionEvaluationsArgs<ExtArgs>
   publicProfiles?: boolean | Prisma.Organization$publicProfilesArgs<ExtArgs>
   auditLogs?: boolean | Prisma.Organization$auditLogsArgs<ExtArgs>
   _count?: boolean | Prisma.OrganizationCountOutputTypeDefaultArgs<ExtArgs>
@@ -1033,6 +1788,11 @@ export type OrganizationInclude<ExtArgs extends runtime.Types.Extensions.Interna
   branches?: boolean | Prisma.Organization$branchesArgs<ExtArgs>
   memberships?: boolean | Prisma.Organization$membershipsArgs<ExtArgs>
   students?: boolean | Prisma.Organization$studentsArgs<ExtArgs>
+  classSchedules?: boolean | Prisma.Organization$classSchedulesArgs<ExtArgs>
+  classSessions?: boolean | Prisma.Organization$classSessionsArgs<ExtArgs>
+  attendanceRecords?: boolean | Prisma.Organization$attendanceRecordsArgs<ExtArgs>
+  promotionRequests?: boolean | Prisma.Organization$promotionRequestsArgs<ExtArgs>
+  promotionEvaluations?: boolean | Prisma.Organization$promotionEvaluationsArgs<ExtArgs>
   publicProfiles?: boolean | Prisma.Organization$publicProfilesArgs<ExtArgs>
   auditLogs?: boolean | Prisma.Organization$auditLogsArgs<ExtArgs>
   _count?: boolean | Prisma.OrganizationCountOutputTypeDefaultArgs<ExtArgs>
@@ -1046,6 +1806,11 @@ export type $OrganizationPayload<ExtArgs extends runtime.Types.Extensions.Intern
     branches: Prisma.$BranchPayload<ExtArgs>[]
     memberships: Prisma.$OrganizationMembershipPayload<ExtArgs>[]
     students: Prisma.$StudentPayload<ExtArgs>[]
+    classSchedules: Prisma.$ClassSchedulePayload<ExtArgs>[]
+    classSessions: Prisma.$ClassSessionPayload<ExtArgs>[]
+    attendanceRecords: Prisma.$AttendanceRecordPayload<ExtArgs>[]
+    promotionRequests: Prisma.$PromotionRequestPayload<ExtArgs>[]
+    promotionEvaluations: Prisma.$PromotionEvaluationPayload<ExtArgs>[]
     publicProfiles: Prisma.$BranchPublicProfilePayload<ExtArgs>[]
     auditLogs: Prisma.$AuditLogPayload<ExtArgs>[]
   }
@@ -1456,6 +2221,11 @@ export interface Prisma__OrganizationClient<T, Null = never, ExtArgs extends run
   branches<T extends Prisma.Organization$branchesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Organization$branchesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$BranchPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   memberships<T extends Prisma.Organization$membershipsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Organization$membershipsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$OrganizationMembershipPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   students<T extends Prisma.Organization$studentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Organization$studentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$StudentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  classSchedules<T extends Prisma.Organization$classSchedulesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Organization$classSchedulesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ClassSchedulePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  classSessions<T extends Prisma.Organization$classSessionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Organization$classSessionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ClassSessionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  attendanceRecords<T extends Prisma.Organization$attendanceRecordsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Organization$attendanceRecordsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AttendanceRecordPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  promotionRequests<T extends Prisma.Organization$promotionRequestsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Organization$promotionRequestsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PromotionRequestPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  promotionEvaluations<T extends Prisma.Organization$promotionEvaluationsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Organization$promotionEvaluationsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PromotionEvaluationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   publicProfiles<T extends Prisma.Organization$publicProfilesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Organization$publicProfilesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$BranchPublicProfilePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   auditLogs<T extends Prisma.Organization$auditLogsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Organization$auditLogsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AuditLogPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
@@ -1958,6 +2728,126 @@ export type Organization$studentsArgs<ExtArgs extends runtime.Types.Extensions.I
   take?: number
   skip?: number
   distinct?: Prisma.StudentScalarFieldEnum | Prisma.StudentScalarFieldEnum[]
+}
+
+/**
+ * Organization.classSchedules
+ */
+export type Organization$classSchedulesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the ClassSchedule
+   */
+  select?: Prisma.ClassScheduleSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the ClassSchedule
+   */
+  omit?: Prisma.ClassScheduleOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ClassScheduleInclude<ExtArgs> | null
+  where?: Prisma.ClassScheduleWhereInput
+  orderBy?: Prisma.ClassScheduleOrderByWithRelationInput | Prisma.ClassScheduleOrderByWithRelationInput[]
+  cursor?: Prisma.ClassScheduleWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.ClassScheduleScalarFieldEnum | Prisma.ClassScheduleScalarFieldEnum[]
+}
+
+/**
+ * Organization.classSessions
+ */
+export type Organization$classSessionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the ClassSession
+   */
+  select?: Prisma.ClassSessionSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the ClassSession
+   */
+  omit?: Prisma.ClassSessionOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ClassSessionInclude<ExtArgs> | null
+  where?: Prisma.ClassSessionWhereInput
+  orderBy?: Prisma.ClassSessionOrderByWithRelationInput | Prisma.ClassSessionOrderByWithRelationInput[]
+  cursor?: Prisma.ClassSessionWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.ClassSessionScalarFieldEnum | Prisma.ClassSessionScalarFieldEnum[]
+}
+
+/**
+ * Organization.attendanceRecords
+ */
+export type Organization$attendanceRecordsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the AttendanceRecord
+   */
+  select?: Prisma.AttendanceRecordSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the AttendanceRecord
+   */
+  omit?: Prisma.AttendanceRecordOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.AttendanceRecordInclude<ExtArgs> | null
+  where?: Prisma.AttendanceRecordWhereInput
+  orderBy?: Prisma.AttendanceRecordOrderByWithRelationInput | Prisma.AttendanceRecordOrderByWithRelationInput[]
+  cursor?: Prisma.AttendanceRecordWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.AttendanceRecordScalarFieldEnum | Prisma.AttendanceRecordScalarFieldEnum[]
+}
+
+/**
+ * Organization.promotionRequests
+ */
+export type Organization$promotionRequestsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the PromotionRequest
+   */
+  select?: Prisma.PromotionRequestSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the PromotionRequest
+   */
+  omit?: Prisma.PromotionRequestOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.PromotionRequestInclude<ExtArgs> | null
+  where?: Prisma.PromotionRequestWhereInput
+  orderBy?: Prisma.PromotionRequestOrderByWithRelationInput | Prisma.PromotionRequestOrderByWithRelationInput[]
+  cursor?: Prisma.PromotionRequestWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.PromotionRequestScalarFieldEnum | Prisma.PromotionRequestScalarFieldEnum[]
+}
+
+/**
+ * Organization.promotionEvaluations
+ */
+export type Organization$promotionEvaluationsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the PromotionEvaluation
+   */
+  select?: Prisma.PromotionEvaluationSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the PromotionEvaluation
+   */
+  omit?: Prisma.PromotionEvaluationOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.PromotionEvaluationInclude<ExtArgs> | null
+  where?: Prisma.PromotionEvaluationWhereInput
+  orderBy?: Prisma.PromotionEvaluationOrderByWithRelationInput | Prisma.PromotionEvaluationOrderByWithRelationInput[]
+  cursor?: Prisma.PromotionEvaluationWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.PromotionEvaluationScalarFieldEnum | Prisma.PromotionEvaluationScalarFieldEnum[]
 }
 
 /**

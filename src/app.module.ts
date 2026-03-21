@@ -17,6 +17,9 @@ import { PublicBranchesModule } from './public-branches/public-branches.module';
 import { MembershipsModule } from './memberships/memberships.module';
 import { StudentsModule } from './students/students.module';
 import { AuditModule } from './audit/audit.module';
+import { ClassesModule } from './classes/classes.module';
+import { AttendanceModule } from './attendance/attendance.module';
+import { PromotionsModule } from './promotions/promotions.module';
 
 @Module({
   imports: [
@@ -43,6 +46,9 @@ import { AuditModule } from './audit/audit.module';
     PublicBranchesModule,
     MembershipsModule,
     StudentsModule,
+    ClassesModule,
+    AttendanceModule,
+    PromotionsModule,
     AuditModule,
   ],
   controllers: [AppController],

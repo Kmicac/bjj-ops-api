@@ -25,7 +25,7 @@ describe('Tenant And Scope Isolation (e2e)', () => {
   });
 
   it('enforces tenant isolation and organization-wide scope for membership management', async () => {
-    const server = app.getHttpAdapter().getInstance();
+    const server = app.getHttpServer();
     const bootstrap = await request(server)
       .post('/api/v1/auth/bootstrap')
       .send({

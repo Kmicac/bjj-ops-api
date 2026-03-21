@@ -32,7 +32,7 @@ describe('Auth Flows (e2e)', () => {
   });
 
   it('bootstraps the system once, logs in, and returns the current principal', async () => {
-    const server = app.getHttpAdapter().getInstance();
+    const server = app.getHttpServer();
     const bootstrap = await request(server)
       .post('/api/v1/auth/bootstrap')
       .send(bootstrapPayload)

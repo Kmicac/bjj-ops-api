@@ -47,7 +47,8 @@ export type StudentMinAggregateOutputType = {
   status: $Enums.StudentStatus | null
   startedBjjAt: Date | null
   joinedOrganizationAt: Date | null
-  currentBelt: string | null
+  promotionTrack: $Enums.PromotionTrack | null
+  currentBelt: $Enums.PromotionRank | null
   currentStripes: number | null
   createdAt: Date | null
   updatedAt: Date | null
@@ -67,7 +68,8 @@ export type StudentMaxAggregateOutputType = {
   status: $Enums.StudentStatus | null
   startedBjjAt: Date | null
   joinedOrganizationAt: Date | null
-  currentBelt: string | null
+  promotionTrack: $Enums.PromotionTrack | null
+  currentBelt: $Enums.PromotionRank | null
   currentStripes: number | null
   createdAt: Date | null
   updatedAt: Date | null
@@ -87,6 +89,7 @@ export type StudentCountAggregateOutputType = {
   status: number
   startedBjjAt: number
   joinedOrganizationAt: number
+  promotionTrack: number
   currentBelt: number
   currentStripes: number
   createdAt: number
@@ -117,6 +120,7 @@ export type StudentMinAggregateInputType = {
   status?: true
   startedBjjAt?: true
   joinedOrganizationAt?: true
+  promotionTrack?: true
   currentBelt?: true
   currentStripes?: true
   createdAt?: true
@@ -137,6 +141,7 @@ export type StudentMaxAggregateInputType = {
   status?: true
   startedBjjAt?: true
   joinedOrganizationAt?: true
+  promotionTrack?: true
   currentBelt?: true
   currentStripes?: true
   createdAt?: true
@@ -157,6 +162,7 @@ export type StudentCountAggregateInputType = {
   status?: true
   startedBjjAt?: true
   joinedOrganizationAt?: true
+  promotionTrack?: true
   currentBelt?: true
   currentStripes?: true
   createdAt?: true
@@ -264,7 +270,8 @@ export type StudentGroupByOutputType = {
   status: $Enums.StudentStatus
   startedBjjAt: Date | null
   joinedOrganizationAt: Date | null
-  currentBelt: string | null
+  promotionTrack: $Enums.PromotionTrack
+  currentBelt: $Enums.PromotionRank | null
   currentStripes: number
   createdAt: Date
   updatedAt: Date
@@ -307,7 +314,8 @@ export type StudentWhereInput = {
   status?: Prisma.EnumStudentStatusFilter<"Student"> | $Enums.StudentStatus
   startedBjjAt?: Prisma.DateTimeNullableFilter<"Student"> | Date | string | null
   joinedOrganizationAt?: Prisma.DateTimeNullableFilter<"Student"> | Date | string | null
-  currentBelt?: Prisma.StringNullableFilter<"Student"> | string | null
+  promotionTrack?: Prisma.EnumPromotionTrackFilter<"Student"> | $Enums.PromotionTrack
+  currentBelt?: Prisma.EnumPromotionRankNullableFilter<"Student"> | $Enums.PromotionRank | null
   currentStripes?: Prisma.IntFilter<"Student"> | number
   createdAt?: Prisma.DateTimeFilter<"Student"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Student"> | Date | string
@@ -315,6 +323,8 @@ export type StudentWhereInput = {
   organization?: Prisma.XOR<Prisma.OrganizationScalarRelationFilter, Prisma.OrganizationWhereInput>
   primaryBranch?: Prisma.XOR<Prisma.BranchScalarRelationFilter, Prisma.BranchWhereInput>
   user?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
+  attendanceRecords?: Prisma.AttendanceRecordListRelationFilter
+  promotionRequests?: Prisma.PromotionRequestListRelationFilter
 }
 
 export type StudentOrderByWithRelationInput = {
@@ -330,6 +340,7 @@ export type StudentOrderByWithRelationInput = {
   status?: Prisma.SortOrder
   startedBjjAt?: Prisma.SortOrderInput | Prisma.SortOrder
   joinedOrganizationAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  promotionTrack?: Prisma.SortOrder
   currentBelt?: Prisma.SortOrderInput | Prisma.SortOrder
   currentStripes?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -338,6 +349,8 @@ export type StudentOrderByWithRelationInput = {
   organization?: Prisma.OrganizationOrderByWithRelationInput
   primaryBranch?: Prisma.BranchOrderByWithRelationInput
   user?: Prisma.UserOrderByWithRelationInput
+  attendanceRecords?: Prisma.AttendanceRecordOrderByRelationAggregateInput
+  promotionRequests?: Prisma.PromotionRequestOrderByRelationAggregateInput
 }
 
 export type StudentWhereUniqueInput = Prisma.AtLeast<{
@@ -358,7 +371,8 @@ export type StudentWhereUniqueInput = Prisma.AtLeast<{
   status?: Prisma.EnumStudentStatusFilter<"Student"> | $Enums.StudentStatus
   startedBjjAt?: Prisma.DateTimeNullableFilter<"Student"> | Date | string | null
   joinedOrganizationAt?: Prisma.DateTimeNullableFilter<"Student"> | Date | string | null
-  currentBelt?: Prisma.StringNullableFilter<"Student"> | string | null
+  promotionTrack?: Prisma.EnumPromotionTrackFilter<"Student"> | $Enums.PromotionTrack
+  currentBelt?: Prisma.EnumPromotionRankNullableFilter<"Student"> | $Enums.PromotionRank | null
   currentStripes?: Prisma.IntFilter<"Student"> | number
   createdAt?: Prisma.DateTimeFilter<"Student"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Student"> | Date | string
@@ -366,6 +380,8 @@ export type StudentWhereUniqueInput = Prisma.AtLeast<{
   organization?: Prisma.XOR<Prisma.OrganizationScalarRelationFilter, Prisma.OrganizationWhereInput>
   primaryBranch?: Prisma.XOR<Prisma.BranchScalarRelationFilter, Prisma.BranchWhereInput>
   user?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
+  attendanceRecords?: Prisma.AttendanceRecordListRelationFilter
+  promotionRequests?: Prisma.PromotionRequestListRelationFilter
 }, "id" | "id_organizationId" | "organizationId_userId">
 
 export type StudentOrderByWithAggregationInput = {
@@ -381,6 +397,7 @@ export type StudentOrderByWithAggregationInput = {
   status?: Prisma.SortOrder
   startedBjjAt?: Prisma.SortOrderInput | Prisma.SortOrder
   joinedOrganizationAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  promotionTrack?: Prisma.SortOrder
   currentBelt?: Prisma.SortOrderInput | Prisma.SortOrder
   currentStripes?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -409,7 +426,8 @@ export type StudentScalarWhereWithAggregatesInput = {
   status?: Prisma.EnumStudentStatusWithAggregatesFilter<"Student"> | $Enums.StudentStatus
   startedBjjAt?: Prisma.DateTimeNullableWithAggregatesFilter<"Student"> | Date | string | null
   joinedOrganizationAt?: Prisma.DateTimeNullableWithAggregatesFilter<"Student"> | Date | string | null
-  currentBelt?: Prisma.StringNullableWithAggregatesFilter<"Student"> | string | null
+  promotionTrack?: Prisma.EnumPromotionTrackWithAggregatesFilter<"Student"> | $Enums.PromotionTrack
+  currentBelt?: Prisma.EnumPromotionRankNullableWithAggregatesFilter<"Student"> | $Enums.PromotionRank | null
   currentStripes?: Prisma.IntWithAggregatesFilter<"Student"> | number
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Student"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Student"> | Date | string
@@ -426,7 +444,8 @@ export type StudentCreateInput = {
   status?: $Enums.StudentStatus
   startedBjjAt?: Date | string | null
   joinedOrganizationAt?: Date | string | null
-  currentBelt?: string | null
+  promotionTrack?: $Enums.PromotionTrack
+  currentBelt?: $Enums.PromotionRank | null
   currentStripes?: number
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -434,6 +453,8 @@ export type StudentCreateInput = {
   organization: Prisma.OrganizationCreateNestedOneWithoutStudentsInput
   primaryBranch: Prisma.BranchCreateNestedOneWithoutStudentsInput
   user?: Prisma.UserCreateNestedOneWithoutStudentsInput
+  attendanceRecords?: Prisma.AttendanceRecordCreateNestedManyWithoutStudentInput
+  promotionRequests?: Prisma.PromotionRequestCreateNestedManyWithoutStudentInput
 }
 
 export type StudentUncheckedCreateInput = {
@@ -449,11 +470,14 @@ export type StudentUncheckedCreateInput = {
   status?: $Enums.StudentStatus
   startedBjjAt?: Date | string | null
   joinedOrganizationAt?: Date | string | null
-  currentBelt?: string | null
+  promotionTrack?: $Enums.PromotionTrack
+  currentBelt?: $Enums.PromotionRank | null
   currentStripes?: number
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
+  attendanceRecords?: Prisma.AttendanceRecordUncheckedCreateNestedManyWithoutStudentInput
+  promotionRequests?: Prisma.PromotionRequestUncheckedCreateNestedManyWithoutStudentInput
 }
 
 export type StudentUpdateInput = {
@@ -466,7 +490,8 @@ export type StudentUpdateInput = {
   status?: Prisma.EnumStudentStatusFieldUpdateOperationsInput | $Enums.StudentStatus
   startedBjjAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   joinedOrganizationAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  currentBelt?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  promotionTrack?: Prisma.EnumPromotionTrackFieldUpdateOperationsInput | $Enums.PromotionTrack
+  currentBelt?: Prisma.NullableEnumPromotionRankFieldUpdateOperationsInput | $Enums.PromotionRank | null
   currentStripes?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -474,6 +499,8 @@ export type StudentUpdateInput = {
   organization?: Prisma.OrganizationUpdateOneRequiredWithoutStudentsNestedInput
   primaryBranch?: Prisma.BranchUpdateOneRequiredWithoutStudentsNestedInput
   user?: Prisma.UserUpdateOneWithoutStudentsNestedInput
+  attendanceRecords?: Prisma.AttendanceRecordUpdateManyWithoutStudentNestedInput
+  promotionRequests?: Prisma.PromotionRequestUpdateManyWithoutStudentNestedInput
 }
 
 export type StudentUncheckedUpdateInput = {
@@ -489,11 +516,14 @@ export type StudentUncheckedUpdateInput = {
   status?: Prisma.EnumStudentStatusFieldUpdateOperationsInput | $Enums.StudentStatus
   startedBjjAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   joinedOrganizationAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  currentBelt?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  promotionTrack?: Prisma.EnumPromotionTrackFieldUpdateOperationsInput | $Enums.PromotionTrack
+  currentBelt?: Prisma.NullableEnumPromotionRankFieldUpdateOperationsInput | $Enums.PromotionRank | null
   currentStripes?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  attendanceRecords?: Prisma.AttendanceRecordUncheckedUpdateManyWithoutStudentNestedInput
+  promotionRequests?: Prisma.PromotionRequestUncheckedUpdateManyWithoutStudentNestedInput
 }
 
 export type StudentCreateManyInput = {
@@ -509,7 +539,8 @@ export type StudentCreateManyInput = {
   status?: $Enums.StudentStatus
   startedBjjAt?: Date | string | null
   joinedOrganizationAt?: Date | string | null
-  currentBelt?: string | null
+  promotionTrack?: $Enums.PromotionTrack
+  currentBelt?: $Enums.PromotionRank | null
   currentStripes?: number
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -526,7 +557,8 @@ export type StudentUpdateManyMutationInput = {
   status?: Prisma.EnumStudentStatusFieldUpdateOperationsInput | $Enums.StudentStatus
   startedBjjAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   joinedOrganizationAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  currentBelt?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  promotionTrack?: Prisma.EnumPromotionTrackFieldUpdateOperationsInput | $Enums.PromotionTrack
+  currentBelt?: Prisma.NullableEnumPromotionRankFieldUpdateOperationsInput | $Enums.PromotionRank | null
   currentStripes?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -546,7 +578,8 @@ export type StudentUncheckedUpdateManyInput = {
   status?: Prisma.EnumStudentStatusFieldUpdateOperationsInput | $Enums.StudentStatus
   startedBjjAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   joinedOrganizationAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  currentBelt?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  promotionTrack?: Prisma.EnumPromotionTrackFieldUpdateOperationsInput | $Enums.PromotionTrack
+  currentBelt?: Prisma.NullableEnumPromotionRankFieldUpdateOperationsInput | $Enums.PromotionRank | null
   currentStripes?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -586,6 +619,7 @@ export type StudentCountOrderByAggregateInput = {
   status?: Prisma.SortOrder
   startedBjjAt?: Prisma.SortOrder
   joinedOrganizationAt?: Prisma.SortOrder
+  promotionTrack?: Prisma.SortOrder
   currentBelt?: Prisma.SortOrder
   currentStripes?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -610,6 +644,7 @@ export type StudentMaxOrderByAggregateInput = {
   status?: Prisma.SortOrder
   startedBjjAt?: Prisma.SortOrder
   joinedOrganizationAt?: Prisma.SortOrder
+  promotionTrack?: Prisma.SortOrder
   currentBelt?: Prisma.SortOrder
   currentStripes?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -630,6 +665,7 @@ export type StudentMinOrderByAggregateInput = {
   status?: Prisma.SortOrder
   startedBjjAt?: Prisma.SortOrder
   joinedOrganizationAt?: Prisma.SortOrder
+  promotionTrack?: Prisma.SortOrder
   currentBelt?: Prisma.SortOrder
   currentStripes?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -639,6 +675,11 @@ export type StudentMinOrderByAggregateInput = {
 
 export type StudentSumOrderByAggregateInput = {
   currentStripes?: Prisma.SortOrder
+}
+
+export type StudentScalarRelationFilter = {
+  is?: Prisma.StudentWhereInput
+  isNot?: Prisma.StudentWhereInput
 }
 
 export type StudentCreateNestedManyWithoutUserInput = {
@@ -771,12 +812,48 @@ export type EnumStudentStatusFieldUpdateOperationsInput = {
   set?: $Enums.StudentStatus
 }
 
+export type EnumPromotionTrackFieldUpdateOperationsInput = {
+  set?: $Enums.PromotionTrack
+}
+
+export type NullableEnumPromotionRankFieldUpdateOperationsInput = {
+  set?: $Enums.PromotionRank | null
+}
+
 export type IntFieldUpdateOperationsInput = {
   set?: number
   increment?: number
   decrement?: number
   multiply?: number
   divide?: number
+}
+
+export type StudentCreateNestedOneWithoutAttendanceRecordsInput = {
+  create?: Prisma.XOR<Prisma.StudentCreateWithoutAttendanceRecordsInput, Prisma.StudentUncheckedCreateWithoutAttendanceRecordsInput>
+  connectOrCreate?: Prisma.StudentCreateOrConnectWithoutAttendanceRecordsInput
+  connect?: Prisma.StudentWhereUniqueInput
+}
+
+export type StudentUpdateOneRequiredWithoutAttendanceRecordsNestedInput = {
+  create?: Prisma.XOR<Prisma.StudentCreateWithoutAttendanceRecordsInput, Prisma.StudentUncheckedCreateWithoutAttendanceRecordsInput>
+  connectOrCreate?: Prisma.StudentCreateOrConnectWithoutAttendanceRecordsInput
+  upsert?: Prisma.StudentUpsertWithoutAttendanceRecordsInput
+  connect?: Prisma.StudentWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.StudentUpdateToOneWithWhereWithoutAttendanceRecordsInput, Prisma.StudentUpdateWithoutAttendanceRecordsInput>, Prisma.StudentUncheckedUpdateWithoutAttendanceRecordsInput>
+}
+
+export type StudentCreateNestedOneWithoutPromotionRequestsInput = {
+  create?: Prisma.XOR<Prisma.StudentCreateWithoutPromotionRequestsInput, Prisma.StudentUncheckedCreateWithoutPromotionRequestsInput>
+  connectOrCreate?: Prisma.StudentCreateOrConnectWithoutPromotionRequestsInput
+  connect?: Prisma.StudentWhereUniqueInput
+}
+
+export type StudentUpdateOneRequiredWithoutPromotionRequestsNestedInput = {
+  create?: Prisma.XOR<Prisma.StudentCreateWithoutPromotionRequestsInput, Prisma.StudentUncheckedCreateWithoutPromotionRequestsInput>
+  connectOrCreate?: Prisma.StudentCreateOrConnectWithoutPromotionRequestsInput
+  upsert?: Prisma.StudentUpsertWithoutPromotionRequestsInput
+  connect?: Prisma.StudentWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.StudentUpdateToOneWithWhereWithoutPromotionRequestsInput, Prisma.StudentUpdateWithoutPromotionRequestsInput>, Prisma.StudentUncheckedUpdateWithoutPromotionRequestsInput>
 }
 
 export type StudentCreateWithoutUserInput = {
@@ -789,13 +866,16 @@ export type StudentCreateWithoutUserInput = {
   status?: $Enums.StudentStatus
   startedBjjAt?: Date | string | null
   joinedOrganizationAt?: Date | string | null
-  currentBelt?: string | null
+  promotionTrack?: $Enums.PromotionTrack
+  currentBelt?: $Enums.PromotionRank | null
   currentStripes?: number
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
   organization: Prisma.OrganizationCreateNestedOneWithoutStudentsInput
   primaryBranch: Prisma.BranchCreateNestedOneWithoutStudentsInput
+  attendanceRecords?: Prisma.AttendanceRecordCreateNestedManyWithoutStudentInput
+  promotionRequests?: Prisma.PromotionRequestCreateNestedManyWithoutStudentInput
 }
 
 export type StudentUncheckedCreateWithoutUserInput = {
@@ -810,11 +890,14 @@ export type StudentUncheckedCreateWithoutUserInput = {
   status?: $Enums.StudentStatus
   startedBjjAt?: Date | string | null
   joinedOrganizationAt?: Date | string | null
-  currentBelt?: string | null
+  promotionTrack?: $Enums.PromotionTrack
+  currentBelt?: $Enums.PromotionRank | null
   currentStripes?: number
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
+  attendanceRecords?: Prisma.AttendanceRecordUncheckedCreateNestedManyWithoutStudentInput
+  promotionRequests?: Prisma.PromotionRequestUncheckedCreateNestedManyWithoutStudentInput
 }
 
 export type StudentCreateOrConnectWithoutUserInput = {
@@ -859,7 +942,8 @@ export type StudentScalarWhereInput = {
   status?: Prisma.EnumStudentStatusFilter<"Student"> | $Enums.StudentStatus
   startedBjjAt?: Prisma.DateTimeNullableFilter<"Student"> | Date | string | null
   joinedOrganizationAt?: Prisma.DateTimeNullableFilter<"Student"> | Date | string | null
-  currentBelt?: Prisma.StringNullableFilter<"Student"> | string | null
+  promotionTrack?: Prisma.EnumPromotionTrackFilter<"Student"> | $Enums.PromotionTrack
+  currentBelt?: Prisma.EnumPromotionRankNullableFilter<"Student"> | $Enums.PromotionRank | null
   currentStripes?: Prisma.IntFilter<"Student"> | number
   createdAt?: Prisma.DateTimeFilter<"Student"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Student"> | Date | string
@@ -876,13 +960,16 @@ export type StudentCreateWithoutOrganizationInput = {
   status?: $Enums.StudentStatus
   startedBjjAt?: Date | string | null
   joinedOrganizationAt?: Date | string | null
-  currentBelt?: string | null
+  promotionTrack?: $Enums.PromotionTrack
+  currentBelt?: $Enums.PromotionRank | null
   currentStripes?: number
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
   primaryBranch: Prisma.BranchCreateNestedOneWithoutStudentsInput
   user?: Prisma.UserCreateNestedOneWithoutStudentsInput
+  attendanceRecords?: Prisma.AttendanceRecordCreateNestedManyWithoutStudentInput
+  promotionRequests?: Prisma.PromotionRequestCreateNestedManyWithoutStudentInput
 }
 
 export type StudentUncheckedCreateWithoutOrganizationInput = {
@@ -897,11 +984,14 @@ export type StudentUncheckedCreateWithoutOrganizationInput = {
   status?: $Enums.StudentStatus
   startedBjjAt?: Date | string | null
   joinedOrganizationAt?: Date | string | null
-  currentBelt?: string | null
+  promotionTrack?: $Enums.PromotionTrack
+  currentBelt?: $Enums.PromotionRank | null
   currentStripes?: number
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
+  attendanceRecords?: Prisma.AttendanceRecordUncheckedCreateNestedManyWithoutStudentInput
+  promotionRequests?: Prisma.PromotionRequestUncheckedCreateNestedManyWithoutStudentInput
 }
 
 export type StudentCreateOrConnectWithoutOrganizationInput = {
@@ -940,13 +1030,16 @@ export type StudentCreateWithoutPrimaryBranchInput = {
   status?: $Enums.StudentStatus
   startedBjjAt?: Date | string | null
   joinedOrganizationAt?: Date | string | null
-  currentBelt?: string | null
+  promotionTrack?: $Enums.PromotionTrack
+  currentBelt?: $Enums.PromotionRank | null
   currentStripes?: number
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
   organization: Prisma.OrganizationCreateNestedOneWithoutStudentsInput
   user?: Prisma.UserCreateNestedOneWithoutStudentsInput
+  attendanceRecords?: Prisma.AttendanceRecordCreateNestedManyWithoutStudentInput
+  promotionRequests?: Prisma.PromotionRequestCreateNestedManyWithoutStudentInput
 }
 
 export type StudentUncheckedCreateWithoutPrimaryBranchInput = {
@@ -960,11 +1053,14 @@ export type StudentUncheckedCreateWithoutPrimaryBranchInput = {
   status?: $Enums.StudentStatus
   startedBjjAt?: Date | string | null
   joinedOrganizationAt?: Date | string | null
-  currentBelt?: string | null
+  promotionTrack?: $Enums.PromotionTrack
+  currentBelt?: $Enums.PromotionRank | null
   currentStripes?: number
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
+  attendanceRecords?: Prisma.AttendanceRecordUncheckedCreateNestedManyWithoutStudentInput
+  promotionRequests?: Prisma.PromotionRequestUncheckedCreateNestedManyWithoutStudentInput
 }
 
 export type StudentCreateOrConnectWithoutPrimaryBranchInput = {
@@ -993,6 +1089,214 @@ export type StudentUpdateManyWithWhereWithoutPrimaryBranchInput = {
   data: Prisma.XOR<Prisma.StudentUpdateManyMutationInput, Prisma.StudentUncheckedUpdateManyWithoutPrimaryBranchInput>
 }
 
+export type StudentCreateWithoutAttendanceRecordsInput = {
+  id?: string
+  firstName: string
+  lastName: string
+  email?: string | null
+  phone?: string | null
+  dateOfBirth?: Date | string | null
+  status?: $Enums.StudentStatus
+  startedBjjAt?: Date | string | null
+  joinedOrganizationAt?: Date | string | null
+  promotionTrack?: $Enums.PromotionTrack
+  currentBelt?: $Enums.PromotionRank | null
+  currentStripes?: number
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
+  organization: Prisma.OrganizationCreateNestedOneWithoutStudentsInput
+  primaryBranch: Prisma.BranchCreateNestedOneWithoutStudentsInput
+  user?: Prisma.UserCreateNestedOneWithoutStudentsInput
+  promotionRequests?: Prisma.PromotionRequestCreateNestedManyWithoutStudentInput
+}
+
+export type StudentUncheckedCreateWithoutAttendanceRecordsInput = {
+  id?: string
+  organizationId: string
+  primaryBranchId: string
+  userId?: string | null
+  firstName: string
+  lastName: string
+  email?: string | null
+  phone?: string | null
+  dateOfBirth?: Date | string | null
+  status?: $Enums.StudentStatus
+  startedBjjAt?: Date | string | null
+  joinedOrganizationAt?: Date | string | null
+  promotionTrack?: $Enums.PromotionTrack
+  currentBelt?: $Enums.PromotionRank | null
+  currentStripes?: number
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
+  promotionRequests?: Prisma.PromotionRequestUncheckedCreateNestedManyWithoutStudentInput
+}
+
+export type StudentCreateOrConnectWithoutAttendanceRecordsInput = {
+  where: Prisma.StudentWhereUniqueInput
+  create: Prisma.XOR<Prisma.StudentCreateWithoutAttendanceRecordsInput, Prisma.StudentUncheckedCreateWithoutAttendanceRecordsInput>
+}
+
+export type StudentUpsertWithoutAttendanceRecordsInput = {
+  update: Prisma.XOR<Prisma.StudentUpdateWithoutAttendanceRecordsInput, Prisma.StudentUncheckedUpdateWithoutAttendanceRecordsInput>
+  create: Prisma.XOR<Prisma.StudentCreateWithoutAttendanceRecordsInput, Prisma.StudentUncheckedCreateWithoutAttendanceRecordsInput>
+  where?: Prisma.StudentWhereInput
+}
+
+export type StudentUpdateToOneWithWhereWithoutAttendanceRecordsInput = {
+  where?: Prisma.StudentWhereInput
+  data: Prisma.XOR<Prisma.StudentUpdateWithoutAttendanceRecordsInput, Prisma.StudentUncheckedUpdateWithoutAttendanceRecordsInput>
+}
+
+export type StudentUpdateWithoutAttendanceRecordsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.StringFieldUpdateOperationsInput | string
+  lastName?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dateOfBirth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  status?: Prisma.EnumStudentStatusFieldUpdateOperationsInput | $Enums.StudentStatus
+  startedBjjAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  joinedOrganizationAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  promotionTrack?: Prisma.EnumPromotionTrackFieldUpdateOperationsInput | $Enums.PromotionTrack
+  currentBelt?: Prisma.NullableEnumPromotionRankFieldUpdateOperationsInput | $Enums.PromotionRank | null
+  currentStripes?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  organization?: Prisma.OrganizationUpdateOneRequiredWithoutStudentsNestedInput
+  primaryBranch?: Prisma.BranchUpdateOneRequiredWithoutStudentsNestedInput
+  user?: Prisma.UserUpdateOneWithoutStudentsNestedInput
+  promotionRequests?: Prisma.PromotionRequestUpdateManyWithoutStudentNestedInput
+}
+
+export type StudentUncheckedUpdateWithoutAttendanceRecordsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  organizationId?: Prisma.StringFieldUpdateOperationsInput | string
+  primaryBranchId?: Prisma.StringFieldUpdateOperationsInput | string
+  userId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firstName?: Prisma.StringFieldUpdateOperationsInput | string
+  lastName?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dateOfBirth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  status?: Prisma.EnumStudentStatusFieldUpdateOperationsInput | $Enums.StudentStatus
+  startedBjjAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  joinedOrganizationAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  promotionTrack?: Prisma.EnumPromotionTrackFieldUpdateOperationsInput | $Enums.PromotionTrack
+  currentBelt?: Prisma.NullableEnumPromotionRankFieldUpdateOperationsInput | $Enums.PromotionRank | null
+  currentStripes?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  promotionRequests?: Prisma.PromotionRequestUncheckedUpdateManyWithoutStudentNestedInput
+}
+
+export type StudentCreateWithoutPromotionRequestsInput = {
+  id?: string
+  firstName: string
+  lastName: string
+  email?: string | null
+  phone?: string | null
+  dateOfBirth?: Date | string | null
+  status?: $Enums.StudentStatus
+  startedBjjAt?: Date | string | null
+  joinedOrganizationAt?: Date | string | null
+  promotionTrack?: $Enums.PromotionTrack
+  currentBelt?: $Enums.PromotionRank | null
+  currentStripes?: number
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
+  organization: Prisma.OrganizationCreateNestedOneWithoutStudentsInput
+  primaryBranch: Prisma.BranchCreateNestedOneWithoutStudentsInput
+  user?: Prisma.UserCreateNestedOneWithoutStudentsInput
+  attendanceRecords?: Prisma.AttendanceRecordCreateNestedManyWithoutStudentInput
+}
+
+export type StudentUncheckedCreateWithoutPromotionRequestsInput = {
+  id?: string
+  organizationId: string
+  primaryBranchId: string
+  userId?: string | null
+  firstName: string
+  lastName: string
+  email?: string | null
+  phone?: string | null
+  dateOfBirth?: Date | string | null
+  status?: $Enums.StudentStatus
+  startedBjjAt?: Date | string | null
+  joinedOrganizationAt?: Date | string | null
+  promotionTrack?: $Enums.PromotionTrack
+  currentBelt?: $Enums.PromotionRank | null
+  currentStripes?: number
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
+  attendanceRecords?: Prisma.AttendanceRecordUncheckedCreateNestedManyWithoutStudentInput
+}
+
+export type StudentCreateOrConnectWithoutPromotionRequestsInput = {
+  where: Prisma.StudentWhereUniqueInput
+  create: Prisma.XOR<Prisma.StudentCreateWithoutPromotionRequestsInput, Prisma.StudentUncheckedCreateWithoutPromotionRequestsInput>
+}
+
+export type StudentUpsertWithoutPromotionRequestsInput = {
+  update: Prisma.XOR<Prisma.StudentUpdateWithoutPromotionRequestsInput, Prisma.StudentUncheckedUpdateWithoutPromotionRequestsInput>
+  create: Prisma.XOR<Prisma.StudentCreateWithoutPromotionRequestsInput, Prisma.StudentUncheckedCreateWithoutPromotionRequestsInput>
+  where?: Prisma.StudentWhereInput
+}
+
+export type StudentUpdateToOneWithWhereWithoutPromotionRequestsInput = {
+  where?: Prisma.StudentWhereInput
+  data: Prisma.XOR<Prisma.StudentUpdateWithoutPromotionRequestsInput, Prisma.StudentUncheckedUpdateWithoutPromotionRequestsInput>
+}
+
+export type StudentUpdateWithoutPromotionRequestsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.StringFieldUpdateOperationsInput | string
+  lastName?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dateOfBirth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  status?: Prisma.EnumStudentStatusFieldUpdateOperationsInput | $Enums.StudentStatus
+  startedBjjAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  joinedOrganizationAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  promotionTrack?: Prisma.EnumPromotionTrackFieldUpdateOperationsInput | $Enums.PromotionTrack
+  currentBelt?: Prisma.NullableEnumPromotionRankFieldUpdateOperationsInput | $Enums.PromotionRank | null
+  currentStripes?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  organization?: Prisma.OrganizationUpdateOneRequiredWithoutStudentsNestedInput
+  primaryBranch?: Prisma.BranchUpdateOneRequiredWithoutStudentsNestedInput
+  user?: Prisma.UserUpdateOneWithoutStudentsNestedInput
+  attendanceRecords?: Prisma.AttendanceRecordUpdateManyWithoutStudentNestedInput
+}
+
+export type StudentUncheckedUpdateWithoutPromotionRequestsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  organizationId?: Prisma.StringFieldUpdateOperationsInput | string
+  primaryBranchId?: Prisma.StringFieldUpdateOperationsInput | string
+  userId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firstName?: Prisma.StringFieldUpdateOperationsInput | string
+  lastName?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dateOfBirth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  status?: Prisma.EnumStudentStatusFieldUpdateOperationsInput | $Enums.StudentStatus
+  startedBjjAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  joinedOrganizationAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  promotionTrack?: Prisma.EnumPromotionTrackFieldUpdateOperationsInput | $Enums.PromotionTrack
+  currentBelt?: Prisma.NullableEnumPromotionRankFieldUpdateOperationsInput | $Enums.PromotionRank | null
+  currentStripes?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  attendanceRecords?: Prisma.AttendanceRecordUncheckedUpdateManyWithoutStudentNestedInput
+}
+
 export type StudentCreateManyUserInput = {
   id?: string
   organizationId: string
@@ -1005,7 +1309,8 @@ export type StudentCreateManyUserInput = {
   status?: $Enums.StudentStatus
   startedBjjAt?: Date | string | null
   joinedOrganizationAt?: Date | string | null
-  currentBelt?: string | null
+  promotionTrack?: $Enums.PromotionTrack
+  currentBelt?: $Enums.PromotionRank | null
   currentStripes?: number
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -1022,13 +1327,16 @@ export type StudentUpdateWithoutUserInput = {
   status?: Prisma.EnumStudentStatusFieldUpdateOperationsInput | $Enums.StudentStatus
   startedBjjAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   joinedOrganizationAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  currentBelt?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  promotionTrack?: Prisma.EnumPromotionTrackFieldUpdateOperationsInput | $Enums.PromotionTrack
+  currentBelt?: Prisma.NullableEnumPromotionRankFieldUpdateOperationsInput | $Enums.PromotionRank | null
   currentStripes?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   organization?: Prisma.OrganizationUpdateOneRequiredWithoutStudentsNestedInput
   primaryBranch?: Prisma.BranchUpdateOneRequiredWithoutStudentsNestedInput
+  attendanceRecords?: Prisma.AttendanceRecordUpdateManyWithoutStudentNestedInput
+  promotionRequests?: Prisma.PromotionRequestUpdateManyWithoutStudentNestedInput
 }
 
 export type StudentUncheckedUpdateWithoutUserInput = {
@@ -1043,11 +1351,14 @@ export type StudentUncheckedUpdateWithoutUserInput = {
   status?: Prisma.EnumStudentStatusFieldUpdateOperationsInput | $Enums.StudentStatus
   startedBjjAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   joinedOrganizationAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  currentBelt?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  promotionTrack?: Prisma.EnumPromotionTrackFieldUpdateOperationsInput | $Enums.PromotionTrack
+  currentBelt?: Prisma.NullableEnumPromotionRankFieldUpdateOperationsInput | $Enums.PromotionRank | null
   currentStripes?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  attendanceRecords?: Prisma.AttendanceRecordUncheckedUpdateManyWithoutStudentNestedInput
+  promotionRequests?: Prisma.PromotionRequestUncheckedUpdateManyWithoutStudentNestedInput
 }
 
 export type StudentUncheckedUpdateManyWithoutUserInput = {
@@ -1062,7 +1373,8 @@ export type StudentUncheckedUpdateManyWithoutUserInput = {
   status?: Prisma.EnumStudentStatusFieldUpdateOperationsInput | $Enums.StudentStatus
   startedBjjAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   joinedOrganizationAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  currentBelt?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  promotionTrack?: Prisma.EnumPromotionTrackFieldUpdateOperationsInput | $Enums.PromotionTrack
+  currentBelt?: Prisma.NullableEnumPromotionRankFieldUpdateOperationsInput | $Enums.PromotionRank | null
   currentStripes?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1081,7 +1393,8 @@ export type StudentCreateManyOrganizationInput = {
   status?: $Enums.StudentStatus
   startedBjjAt?: Date | string | null
   joinedOrganizationAt?: Date | string | null
-  currentBelt?: string | null
+  promotionTrack?: $Enums.PromotionTrack
+  currentBelt?: $Enums.PromotionRank | null
   currentStripes?: number
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -1098,13 +1411,16 @@ export type StudentUpdateWithoutOrganizationInput = {
   status?: Prisma.EnumStudentStatusFieldUpdateOperationsInput | $Enums.StudentStatus
   startedBjjAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   joinedOrganizationAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  currentBelt?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  promotionTrack?: Prisma.EnumPromotionTrackFieldUpdateOperationsInput | $Enums.PromotionTrack
+  currentBelt?: Prisma.NullableEnumPromotionRankFieldUpdateOperationsInput | $Enums.PromotionRank | null
   currentStripes?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   primaryBranch?: Prisma.BranchUpdateOneRequiredWithoutStudentsNestedInput
   user?: Prisma.UserUpdateOneWithoutStudentsNestedInput
+  attendanceRecords?: Prisma.AttendanceRecordUpdateManyWithoutStudentNestedInput
+  promotionRequests?: Prisma.PromotionRequestUpdateManyWithoutStudentNestedInput
 }
 
 export type StudentUncheckedUpdateWithoutOrganizationInput = {
@@ -1119,11 +1435,14 @@ export type StudentUncheckedUpdateWithoutOrganizationInput = {
   status?: Prisma.EnumStudentStatusFieldUpdateOperationsInput | $Enums.StudentStatus
   startedBjjAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   joinedOrganizationAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  currentBelt?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  promotionTrack?: Prisma.EnumPromotionTrackFieldUpdateOperationsInput | $Enums.PromotionTrack
+  currentBelt?: Prisma.NullableEnumPromotionRankFieldUpdateOperationsInput | $Enums.PromotionRank | null
   currentStripes?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  attendanceRecords?: Prisma.AttendanceRecordUncheckedUpdateManyWithoutStudentNestedInput
+  promotionRequests?: Prisma.PromotionRequestUncheckedUpdateManyWithoutStudentNestedInput
 }
 
 export type StudentUncheckedUpdateManyWithoutOrganizationInput = {
@@ -1138,7 +1457,8 @@ export type StudentUncheckedUpdateManyWithoutOrganizationInput = {
   status?: Prisma.EnumStudentStatusFieldUpdateOperationsInput | $Enums.StudentStatus
   startedBjjAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   joinedOrganizationAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  currentBelt?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  promotionTrack?: Prisma.EnumPromotionTrackFieldUpdateOperationsInput | $Enums.PromotionTrack
+  currentBelt?: Prisma.NullableEnumPromotionRankFieldUpdateOperationsInput | $Enums.PromotionRank | null
   currentStripes?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1156,7 +1476,8 @@ export type StudentCreateManyPrimaryBranchInput = {
   status?: $Enums.StudentStatus
   startedBjjAt?: Date | string | null
   joinedOrganizationAt?: Date | string | null
-  currentBelt?: string | null
+  promotionTrack?: $Enums.PromotionTrack
+  currentBelt?: $Enums.PromotionRank | null
   currentStripes?: number
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -1173,13 +1494,16 @@ export type StudentUpdateWithoutPrimaryBranchInput = {
   status?: Prisma.EnumStudentStatusFieldUpdateOperationsInput | $Enums.StudentStatus
   startedBjjAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   joinedOrganizationAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  currentBelt?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  promotionTrack?: Prisma.EnumPromotionTrackFieldUpdateOperationsInput | $Enums.PromotionTrack
+  currentBelt?: Prisma.NullableEnumPromotionRankFieldUpdateOperationsInput | $Enums.PromotionRank | null
   currentStripes?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   organization?: Prisma.OrganizationUpdateOneRequiredWithoutStudentsNestedInput
   user?: Prisma.UserUpdateOneWithoutStudentsNestedInput
+  attendanceRecords?: Prisma.AttendanceRecordUpdateManyWithoutStudentNestedInput
+  promotionRequests?: Prisma.PromotionRequestUpdateManyWithoutStudentNestedInput
 }
 
 export type StudentUncheckedUpdateWithoutPrimaryBranchInput = {
@@ -1193,11 +1517,14 @@ export type StudentUncheckedUpdateWithoutPrimaryBranchInput = {
   status?: Prisma.EnumStudentStatusFieldUpdateOperationsInput | $Enums.StudentStatus
   startedBjjAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   joinedOrganizationAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  currentBelt?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  promotionTrack?: Prisma.EnumPromotionTrackFieldUpdateOperationsInput | $Enums.PromotionTrack
+  currentBelt?: Prisma.NullableEnumPromotionRankFieldUpdateOperationsInput | $Enums.PromotionRank | null
   currentStripes?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  attendanceRecords?: Prisma.AttendanceRecordUncheckedUpdateManyWithoutStudentNestedInput
+  promotionRequests?: Prisma.PromotionRequestUncheckedUpdateManyWithoutStudentNestedInput
 }
 
 export type StudentUncheckedUpdateManyWithoutPrimaryBranchInput = {
@@ -1211,13 +1538,52 @@ export type StudentUncheckedUpdateManyWithoutPrimaryBranchInput = {
   status?: Prisma.EnumStudentStatusFieldUpdateOperationsInput | $Enums.StudentStatus
   startedBjjAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   joinedOrganizationAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  currentBelt?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  promotionTrack?: Prisma.EnumPromotionTrackFieldUpdateOperationsInput | $Enums.PromotionTrack
+  currentBelt?: Prisma.NullableEnumPromotionRankFieldUpdateOperationsInput | $Enums.PromotionRank | null
   currentStripes?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
+
+/**
+ * Count Type StudentCountOutputType
+ */
+
+export type StudentCountOutputType = {
+  attendanceRecords: number
+  promotionRequests: number
+}
+
+export type StudentCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  attendanceRecords?: boolean | StudentCountOutputTypeCountAttendanceRecordsArgs
+  promotionRequests?: boolean | StudentCountOutputTypeCountPromotionRequestsArgs
+}
+
+/**
+ * StudentCountOutputType without action
+ */
+export type StudentCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the StudentCountOutputType
+   */
+  select?: Prisma.StudentCountOutputTypeSelect<ExtArgs> | null
+}
+
+/**
+ * StudentCountOutputType without action
+ */
+export type StudentCountOutputTypeCountAttendanceRecordsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.AttendanceRecordWhereInput
+}
+
+/**
+ * StudentCountOutputType without action
+ */
+export type StudentCountOutputTypeCountPromotionRequestsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.PromotionRequestWhereInput
+}
 
 
 export type StudentSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -1233,6 +1599,7 @@ export type StudentSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   status?: boolean
   startedBjjAt?: boolean
   joinedOrganizationAt?: boolean
+  promotionTrack?: boolean
   currentBelt?: boolean
   currentStripes?: boolean
   createdAt?: boolean
@@ -1241,6 +1608,9 @@ export type StudentSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   organization?: boolean | Prisma.OrganizationDefaultArgs<ExtArgs>
   primaryBranch?: boolean | Prisma.BranchDefaultArgs<ExtArgs>
   user?: boolean | Prisma.Student$userArgs<ExtArgs>
+  attendanceRecords?: boolean | Prisma.Student$attendanceRecordsArgs<ExtArgs>
+  promotionRequests?: boolean | Prisma.Student$promotionRequestsArgs<ExtArgs>
+  _count?: boolean | Prisma.StudentCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["student"]>
 
 export type StudentSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -1256,6 +1626,7 @@ export type StudentSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exten
   status?: boolean
   startedBjjAt?: boolean
   joinedOrganizationAt?: boolean
+  promotionTrack?: boolean
   currentBelt?: boolean
   currentStripes?: boolean
   createdAt?: boolean
@@ -1279,6 +1650,7 @@ export type StudentSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exten
   status?: boolean
   startedBjjAt?: boolean
   joinedOrganizationAt?: boolean
+  promotionTrack?: boolean
   currentBelt?: boolean
   currentStripes?: boolean
   createdAt?: boolean
@@ -1302,6 +1674,7 @@ export type StudentSelectScalar = {
   status?: boolean
   startedBjjAt?: boolean
   joinedOrganizationAt?: boolean
+  promotionTrack?: boolean
   currentBelt?: boolean
   currentStripes?: boolean
   createdAt?: boolean
@@ -1309,11 +1682,14 @@ export type StudentSelectScalar = {
   deletedAt?: boolean
 }
 
-export type StudentOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "organizationId" | "primaryBranchId" | "userId" | "firstName" | "lastName" | "email" | "phone" | "dateOfBirth" | "status" | "startedBjjAt" | "joinedOrganizationAt" | "currentBelt" | "currentStripes" | "createdAt" | "updatedAt" | "deletedAt", ExtArgs["result"]["student"]>
+export type StudentOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "organizationId" | "primaryBranchId" | "userId" | "firstName" | "lastName" | "email" | "phone" | "dateOfBirth" | "status" | "startedBjjAt" | "joinedOrganizationAt" | "promotionTrack" | "currentBelt" | "currentStripes" | "createdAt" | "updatedAt" | "deletedAt", ExtArgs["result"]["student"]>
 export type StudentInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   organization?: boolean | Prisma.OrganizationDefaultArgs<ExtArgs>
   primaryBranch?: boolean | Prisma.BranchDefaultArgs<ExtArgs>
   user?: boolean | Prisma.Student$userArgs<ExtArgs>
+  attendanceRecords?: boolean | Prisma.Student$attendanceRecordsArgs<ExtArgs>
+  promotionRequests?: boolean | Prisma.Student$promotionRequestsArgs<ExtArgs>
+  _count?: boolean | Prisma.StudentCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type StudentIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   organization?: boolean | Prisma.OrganizationDefaultArgs<ExtArgs>
@@ -1332,6 +1708,8 @@ export type $StudentPayload<ExtArgs extends runtime.Types.Extensions.InternalArg
     organization: Prisma.$OrganizationPayload<ExtArgs>
     primaryBranch: Prisma.$BranchPayload<ExtArgs>
     user: Prisma.$UserPayload<ExtArgs> | null
+    attendanceRecords: Prisma.$AttendanceRecordPayload<ExtArgs>[]
+    promotionRequests: Prisma.$PromotionRequestPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1346,7 +1724,8 @@ export type $StudentPayload<ExtArgs extends runtime.Types.Extensions.InternalArg
     status: $Enums.StudentStatus
     startedBjjAt: Date | null
     joinedOrganizationAt: Date | null
-    currentBelt: string | null
+    promotionTrack: $Enums.PromotionTrack
+    currentBelt: $Enums.PromotionRank | null
     currentStripes: number
     createdAt: Date
     updatedAt: Date
@@ -1748,6 +2127,8 @@ export interface Prisma__StudentClient<T, Null = never, ExtArgs extends runtime.
   organization<T extends Prisma.OrganizationDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.OrganizationDefaultArgs<ExtArgs>>): Prisma.Prisma__OrganizationClient<runtime.Types.Result.GetResult<Prisma.$OrganizationPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   primaryBranch<T extends Prisma.BranchDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.BranchDefaultArgs<ExtArgs>>): Prisma.Prisma__BranchClient<runtime.Types.Result.GetResult<Prisma.$BranchPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   user<T extends Prisma.Student$userArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Student$userArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  attendanceRecords<T extends Prisma.Student$attendanceRecordsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Student$attendanceRecordsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AttendanceRecordPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  promotionRequests<T extends Prisma.Student$promotionRequestsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Student$promotionRequestsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PromotionRequestPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1789,7 +2170,8 @@ export interface StudentFieldRefs {
   readonly status: Prisma.FieldRef<"Student", 'StudentStatus'>
   readonly startedBjjAt: Prisma.FieldRef<"Student", 'DateTime'>
   readonly joinedOrganizationAt: Prisma.FieldRef<"Student", 'DateTime'>
-  readonly currentBelt: Prisma.FieldRef<"Student", 'String'>
+  readonly promotionTrack: Prisma.FieldRef<"Student", 'PromotionTrack'>
+  readonly currentBelt: Prisma.FieldRef<"Student", 'PromotionRank'>
   readonly currentStripes: Prisma.FieldRef<"Student", 'Int'>
   readonly createdAt: Prisma.FieldRef<"Student", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"Student", 'DateTime'>
@@ -2211,6 +2593,54 @@ export type Student$userArgs<ExtArgs extends runtime.Types.Extensions.InternalAr
    */
   include?: Prisma.UserInclude<ExtArgs> | null
   where?: Prisma.UserWhereInput
+}
+
+/**
+ * Student.attendanceRecords
+ */
+export type Student$attendanceRecordsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the AttendanceRecord
+   */
+  select?: Prisma.AttendanceRecordSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the AttendanceRecord
+   */
+  omit?: Prisma.AttendanceRecordOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.AttendanceRecordInclude<ExtArgs> | null
+  where?: Prisma.AttendanceRecordWhereInput
+  orderBy?: Prisma.AttendanceRecordOrderByWithRelationInput | Prisma.AttendanceRecordOrderByWithRelationInput[]
+  cursor?: Prisma.AttendanceRecordWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.AttendanceRecordScalarFieldEnum | Prisma.AttendanceRecordScalarFieldEnum[]
+}
+
+/**
+ * Student.promotionRequests
+ */
+export type Student$promotionRequestsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the PromotionRequest
+   */
+  select?: Prisma.PromotionRequestSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the PromotionRequest
+   */
+  omit?: Prisma.PromotionRequestOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.PromotionRequestInclude<ExtArgs> | null
+  where?: Prisma.PromotionRequestWhereInput
+  orderBy?: Prisma.PromotionRequestOrderByWithRelationInput | Prisma.PromotionRequestOrderByWithRelationInput[]
+  cursor?: Prisma.PromotionRequestWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.PromotionRequestScalarFieldEnum | Prisma.PromotionRequestScalarFieldEnum[]
 }
 
 /**

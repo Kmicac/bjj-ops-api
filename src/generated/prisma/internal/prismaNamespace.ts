@@ -392,6 +392,11 @@ export const ModelName = {
   MembershipRoleAssignment: 'MembershipRoleAssignment',
   MembershipBranchScope: 'MembershipBranchScope',
   Student: 'Student',
+  ClassSchedule: 'ClassSchedule',
+  ClassSession: 'ClassSession',
+  AttendanceRecord: 'AttendanceRecord',
+  PromotionRequest: 'PromotionRequest',
+  PromotionEvaluation: 'PromotionEvaluation',
   AuditLog: 'AuditLog'
 } as const
 
@@ -408,7 +413,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "organization" | "branch" | "branchPublicProfile" | "organizationMembership" | "membershipRoleAssignment" | "membershipBranchScope" | "student" | "auditLog"
+    modelProps: "user" | "organization" | "branch" | "branchPublicProfile" | "organizationMembership" | "membershipRoleAssignment" | "membershipBranchScope" | "student" | "classSchedule" | "classSession" | "attendanceRecord" | "promotionRequest" | "promotionEvaluation" | "auditLog"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -1004,6 +1009,376 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    ClassSchedule: {
+      payload: Prisma.$ClassSchedulePayload<ExtArgs>
+      fields: Prisma.ClassScheduleFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.ClassScheduleFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ClassSchedulePayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.ClassScheduleFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ClassSchedulePayload>
+        }
+        findFirst: {
+          args: Prisma.ClassScheduleFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ClassSchedulePayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.ClassScheduleFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ClassSchedulePayload>
+        }
+        findMany: {
+          args: Prisma.ClassScheduleFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ClassSchedulePayload>[]
+        }
+        create: {
+          args: Prisma.ClassScheduleCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ClassSchedulePayload>
+        }
+        createMany: {
+          args: Prisma.ClassScheduleCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.ClassScheduleCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ClassSchedulePayload>[]
+        }
+        delete: {
+          args: Prisma.ClassScheduleDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ClassSchedulePayload>
+        }
+        update: {
+          args: Prisma.ClassScheduleUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ClassSchedulePayload>
+        }
+        deleteMany: {
+          args: Prisma.ClassScheduleDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.ClassScheduleUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.ClassScheduleUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ClassSchedulePayload>[]
+        }
+        upsert: {
+          args: Prisma.ClassScheduleUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ClassSchedulePayload>
+        }
+        aggregate: {
+          args: Prisma.ClassScheduleAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateClassSchedule>
+        }
+        groupBy: {
+          args: Prisma.ClassScheduleGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ClassScheduleGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.ClassScheduleCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ClassScheduleCountAggregateOutputType> | number
+        }
+      }
+    }
+    ClassSession: {
+      payload: Prisma.$ClassSessionPayload<ExtArgs>
+      fields: Prisma.ClassSessionFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.ClassSessionFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ClassSessionPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.ClassSessionFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ClassSessionPayload>
+        }
+        findFirst: {
+          args: Prisma.ClassSessionFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ClassSessionPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.ClassSessionFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ClassSessionPayload>
+        }
+        findMany: {
+          args: Prisma.ClassSessionFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ClassSessionPayload>[]
+        }
+        create: {
+          args: Prisma.ClassSessionCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ClassSessionPayload>
+        }
+        createMany: {
+          args: Prisma.ClassSessionCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.ClassSessionCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ClassSessionPayload>[]
+        }
+        delete: {
+          args: Prisma.ClassSessionDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ClassSessionPayload>
+        }
+        update: {
+          args: Prisma.ClassSessionUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ClassSessionPayload>
+        }
+        deleteMany: {
+          args: Prisma.ClassSessionDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.ClassSessionUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.ClassSessionUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ClassSessionPayload>[]
+        }
+        upsert: {
+          args: Prisma.ClassSessionUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ClassSessionPayload>
+        }
+        aggregate: {
+          args: Prisma.ClassSessionAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateClassSession>
+        }
+        groupBy: {
+          args: Prisma.ClassSessionGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ClassSessionGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.ClassSessionCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ClassSessionCountAggregateOutputType> | number
+        }
+      }
+    }
+    AttendanceRecord: {
+      payload: Prisma.$AttendanceRecordPayload<ExtArgs>
+      fields: Prisma.AttendanceRecordFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.AttendanceRecordFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AttendanceRecordPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.AttendanceRecordFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AttendanceRecordPayload>
+        }
+        findFirst: {
+          args: Prisma.AttendanceRecordFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AttendanceRecordPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.AttendanceRecordFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AttendanceRecordPayload>
+        }
+        findMany: {
+          args: Prisma.AttendanceRecordFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AttendanceRecordPayload>[]
+        }
+        create: {
+          args: Prisma.AttendanceRecordCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AttendanceRecordPayload>
+        }
+        createMany: {
+          args: Prisma.AttendanceRecordCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.AttendanceRecordCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AttendanceRecordPayload>[]
+        }
+        delete: {
+          args: Prisma.AttendanceRecordDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AttendanceRecordPayload>
+        }
+        update: {
+          args: Prisma.AttendanceRecordUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AttendanceRecordPayload>
+        }
+        deleteMany: {
+          args: Prisma.AttendanceRecordDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.AttendanceRecordUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.AttendanceRecordUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AttendanceRecordPayload>[]
+        }
+        upsert: {
+          args: Prisma.AttendanceRecordUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AttendanceRecordPayload>
+        }
+        aggregate: {
+          args: Prisma.AttendanceRecordAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateAttendanceRecord>
+        }
+        groupBy: {
+          args: Prisma.AttendanceRecordGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AttendanceRecordGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.AttendanceRecordCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AttendanceRecordCountAggregateOutputType> | number
+        }
+      }
+    }
+    PromotionRequest: {
+      payload: Prisma.$PromotionRequestPayload<ExtArgs>
+      fields: Prisma.PromotionRequestFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.PromotionRequestFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PromotionRequestPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.PromotionRequestFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PromotionRequestPayload>
+        }
+        findFirst: {
+          args: Prisma.PromotionRequestFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PromotionRequestPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.PromotionRequestFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PromotionRequestPayload>
+        }
+        findMany: {
+          args: Prisma.PromotionRequestFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PromotionRequestPayload>[]
+        }
+        create: {
+          args: Prisma.PromotionRequestCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PromotionRequestPayload>
+        }
+        createMany: {
+          args: Prisma.PromotionRequestCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.PromotionRequestCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PromotionRequestPayload>[]
+        }
+        delete: {
+          args: Prisma.PromotionRequestDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PromotionRequestPayload>
+        }
+        update: {
+          args: Prisma.PromotionRequestUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PromotionRequestPayload>
+        }
+        deleteMany: {
+          args: Prisma.PromotionRequestDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.PromotionRequestUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.PromotionRequestUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PromotionRequestPayload>[]
+        }
+        upsert: {
+          args: Prisma.PromotionRequestUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PromotionRequestPayload>
+        }
+        aggregate: {
+          args: Prisma.PromotionRequestAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregatePromotionRequest>
+        }
+        groupBy: {
+          args: Prisma.PromotionRequestGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.PromotionRequestGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.PromotionRequestCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.PromotionRequestCountAggregateOutputType> | number
+        }
+      }
+    }
+    PromotionEvaluation: {
+      payload: Prisma.$PromotionEvaluationPayload<ExtArgs>
+      fields: Prisma.PromotionEvaluationFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.PromotionEvaluationFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PromotionEvaluationPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.PromotionEvaluationFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PromotionEvaluationPayload>
+        }
+        findFirst: {
+          args: Prisma.PromotionEvaluationFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PromotionEvaluationPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.PromotionEvaluationFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PromotionEvaluationPayload>
+        }
+        findMany: {
+          args: Prisma.PromotionEvaluationFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PromotionEvaluationPayload>[]
+        }
+        create: {
+          args: Prisma.PromotionEvaluationCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PromotionEvaluationPayload>
+        }
+        createMany: {
+          args: Prisma.PromotionEvaluationCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.PromotionEvaluationCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PromotionEvaluationPayload>[]
+        }
+        delete: {
+          args: Prisma.PromotionEvaluationDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PromotionEvaluationPayload>
+        }
+        update: {
+          args: Prisma.PromotionEvaluationUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PromotionEvaluationPayload>
+        }
+        deleteMany: {
+          args: Prisma.PromotionEvaluationDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.PromotionEvaluationUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.PromotionEvaluationUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PromotionEvaluationPayload>[]
+        }
+        upsert: {
+          args: Prisma.PromotionEvaluationUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PromotionEvaluationPayload>
+        }
+        aggregate: {
+          args: Prisma.PromotionEvaluationAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregatePromotionEvaluation>
+        }
+        groupBy: {
+          args: Prisma.PromotionEvaluationGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.PromotionEvaluationGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.PromotionEvaluationCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.PromotionEvaluationCountAggregateOutputType> | number
+        }
+      }
+    }
     AuditLog: {
       payload: Prisma.$AuditLogPayload<ExtArgs>
       fields: Prisma.AuditLogFieldRefs
@@ -1244,6 +1619,7 @@ export const StudentScalarFieldEnum = {
   status: 'status',
   startedBjjAt: 'startedBjjAt',
   joinedOrganizationAt: 'joinedOrganizationAt',
+  promotionTrack: 'promotionTrack',
   currentBelt: 'currentBelt',
   currentStripes: 'currentStripes',
   createdAt: 'createdAt',
@@ -1252,6 +1628,121 @@ export const StudentScalarFieldEnum = {
 } as const
 
 export type StudentScalarFieldEnum = (typeof StudentScalarFieldEnum)[keyof typeof StudentScalarFieldEnum]
+
+
+export const ClassScheduleScalarFieldEnum = {
+  id: 'id',
+  organizationId: 'organizationId',
+  branchId: 'branchId',
+  instructorMembershipId: 'instructorMembershipId',
+  title: 'title',
+  classType: 'classType',
+  description: 'description',
+  weekday: 'weekday',
+  startTime: 'startTime',
+  endTime: 'endTime',
+  timezone: 'timezone',
+  capacity: 'capacity',
+  isActive: 'isActive',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  deletedAt: 'deletedAt'
+} as const
+
+export type ClassScheduleScalarFieldEnum = (typeof ClassScheduleScalarFieldEnum)[keyof typeof ClassScheduleScalarFieldEnum]
+
+
+export const ClassSessionScalarFieldEnum = {
+  id: 'id',
+  organizationId: 'organizationId',
+  branchId: 'branchId',
+  classScheduleId: 'classScheduleId',
+  instructorMembershipId: 'instructorMembershipId',
+  title: 'title',
+  classType: 'classType',
+  scheduledDate: 'scheduledDate',
+  startAt: 'startAt',
+  endAt: 'endAt',
+  capacity: 'capacity',
+  status: 'status',
+  cancellationReason: 'cancellationReason',
+  notes: 'notes',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  deletedAt: 'deletedAt'
+} as const
+
+export type ClassSessionScalarFieldEnum = (typeof ClassSessionScalarFieldEnum)[keyof typeof ClassSessionScalarFieldEnum]
+
+
+export const AttendanceRecordScalarFieldEnum = {
+  id: 'id',
+  organizationId: 'organizationId',
+  branchId: 'branchId',
+  classSessionId: 'classSessionId',
+  studentId: 'studentId',
+  status: 'status',
+  notes: 'notes',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type AttendanceRecordScalarFieldEnum = (typeof AttendanceRecordScalarFieldEnum)[keyof typeof AttendanceRecordScalarFieldEnum]
+
+
+export const PromotionRequestScalarFieldEnum = {
+  id: 'id',
+  organizationId: 'organizationId',
+  branchId: 'branchId',
+  studentId: 'studentId',
+  proposedByMembershipId: 'proposedByMembershipId',
+  reviewedByMembershipId: 'reviewedByMembershipId',
+  type: 'type',
+  status: 'status',
+  trackSnapshot: 'trackSnapshot',
+  currentBeltSnapshot: 'currentBeltSnapshot',
+  currentStripesSnapshot: 'currentStripesSnapshot',
+  targetBelt: 'targetBelt',
+  targetStripes: 'targetStripes',
+  proposalNotes: 'proposalNotes',
+  decisionNotes: 'decisionNotes',
+  rejectionReason: 'rejectionReason',
+  effectiveDate: 'effectiveDate',
+  decisionAt: 'decisionAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type PromotionRequestScalarFieldEnum = (typeof PromotionRequestScalarFieldEnum)[keyof typeof PromotionRequestScalarFieldEnum]
+
+
+export const PromotionEvaluationScalarFieldEnum = {
+  id: 'id',
+  organizationId: 'organizationId',
+  promotionRequestId: 'promotionRequestId',
+  updatedByMembershipId: 'updatedByMembershipId',
+  classesSinceLastPromotion: 'classesSinceLastPromotion',
+  attendanceLast30Days: 'attendanceLast30Days',
+  attendanceLast90Days: 'attendanceLast90Days',
+  daysSinceLastPromotion: 'daysSinceLastPromotion',
+  approvedPromotionCount: 'approvedPromotionCount',
+  guardScore: 'guardScore',
+  passingScore: 'passingScore',
+  controlScore: 'controlScore',
+  escapesDefenseScore: 'escapesDefenseScore',
+  submissionsScore: 'submissionsScore',
+  tacticalUnderstandingScore: 'tacticalUnderstandingScore',
+  attitudeDisciplineScore: 'attitudeDisciplineScore',
+  commitmentConsistencyScore: 'commitmentConsistencyScore',
+  teamworkRespectScore: 'teamworkRespectScore',
+  coachNotes: 'coachNotes',
+  recommendation: 'recommendation',
+  signalsComputedAt: 'signalsComputedAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type PromotionEvaluationScalarFieldEnum = (typeof PromotionEvaluationScalarFieldEnum)[keyof typeof PromotionEvaluationScalarFieldEnum]
 
 
 export const AuditLogScalarFieldEnum = {
@@ -1454,6 +1945,34 @@ export type ListEnumStudentStatusFieldRefInput<$PrismaModel> = FieldRefInputType
 
 
 /**
+ * Reference to a field of type 'PromotionTrack'
+ */
+export type EnumPromotionTrackFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'PromotionTrack'>
+    
+
+
+/**
+ * Reference to a field of type 'PromotionTrack[]'
+ */
+export type ListEnumPromotionTrackFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'PromotionTrack[]'>
+    
+
+
+/**
+ * Reference to a field of type 'PromotionRank'
+ */
+export type EnumPromotionRankFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'PromotionRank'>
+    
+
+
+/**
+ * Reference to a field of type 'PromotionRank[]'
+ */
+export type ListEnumPromotionRankFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'PromotionRank[]'>
+    
+
+
+/**
  * Reference to a field of type 'Int'
  */
 export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int'>
@@ -1464,6 +1983,104 @@ export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'In
  * Reference to a field of type 'Int[]'
  */
 export type ListIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int[]'>
+    
+
+
+/**
+ * Reference to a field of type 'ClassType'
+ */
+export type EnumClassTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ClassType'>
+    
+
+
+/**
+ * Reference to a field of type 'ClassType[]'
+ */
+export type ListEnumClassTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ClassType[]'>
+    
+
+
+/**
+ * Reference to a field of type 'Weekday'
+ */
+export type EnumWeekdayFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Weekday'>
+    
+
+
+/**
+ * Reference to a field of type 'Weekday[]'
+ */
+export type ListEnumWeekdayFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Weekday[]'>
+    
+
+
+/**
+ * Reference to a field of type 'ClassSessionStatus'
+ */
+export type EnumClassSessionStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ClassSessionStatus'>
+    
+
+
+/**
+ * Reference to a field of type 'ClassSessionStatus[]'
+ */
+export type ListEnumClassSessionStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ClassSessionStatus[]'>
+    
+
+
+/**
+ * Reference to a field of type 'AttendanceStatus'
+ */
+export type EnumAttendanceStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'AttendanceStatus'>
+    
+
+
+/**
+ * Reference to a field of type 'AttendanceStatus[]'
+ */
+export type ListEnumAttendanceStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'AttendanceStatus[]'>
+    
+
+
+/**
+ * Reference to a field of type 'PromotionType'
+ */
+export type EnumPromotionTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'PromotionType'>
+    
+
+
+/**
+ * Reference to a field of type 'PromotionType[]'
+ */
+export type ListEnumPromotionTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'PromotionType[]'>
+    
+
+
+/**
+ * Reference to a field of type 'PromotionRequestStatus'
+ */
+export type EnumPromotionRequestStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'PromotionRequestStatus'>
+    
+
+
+/**
+ * Reference to a field of type 'PromotionRequestStatus[]'
+ */
+export type ListEnumPromotionRequestStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'PromotionRequestStatus[]'>
+    
+
+
+/**
+ * Reference to a field of type 'PromotionRecommendation'
+ */
+export type EnumPromotionRecommendationFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'PromotionRecommendation'>
+    
+
+
+/**
+ * Reference to a field of type 'PromotionRecommendation[]'
+ */
+export type ListEnumPromotionRecommendationFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'PromotionRecommendation[]'>
     
 
 
@@ -1597,6 +2214,11 @@ export type GlobalOmitConfig = {
   membershipRoleAssignment?: Prisma.MembershipRoleAssignmentOmit
   membershipBranchScope?: Prisma.MembershipBranchScopeOmit
   student?: Prisma.StudentOmit
+  classSchedule?: Prisma.ClassScheduleOmit
+  classSession?: Prisma.ClassSessionOmit
+  attendanceRecord?: Prisma.AttendanceRecordOmit
+  promotionRequest?: Prisma.PromotionRequestOmit
+  promotionEvaluation?: Prisma.PromotionEvaluationOmit
   auditLog?: Prisma.AuditLogOmit
 }
 

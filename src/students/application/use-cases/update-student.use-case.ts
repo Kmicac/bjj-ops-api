@@ -59,7 +59,8 @@ export class UpdateStudentUseCase {
       joinedOrganizationAt: dto.joinedOrganizationAt
         ? new Date(dto.joinedOrganizationAt)
         : undefined,
-      currentBelt: dto.currentBelt?.trim(),
+      promotionTrack: dto.promotionTrack,
+      currentBelt: dto.currentBelt,
       currentStripes: dto.currentStripes,
     });
 

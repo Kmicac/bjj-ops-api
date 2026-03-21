@@ -282,6 +282,10 @@ export type BranchWhereInput = {
   headCoachMembership?: Prisma.XOR<Prisma.OrganizationMembershipNullableScalarRelationFilter, Prisma.OrganizationMembershipWhereInput> | null
   publicProfile?: Prisma.XOR<Prisma.BranchPublicProfileNullableScalarRelationFilter, Prisma.BranchPublicProfileWhereInput> | null
   students?: Prisma.StudentListRelationFilter
+  classSchedules?: Prisma.ClassScheduleListRelationFilter
+  classSessions?: Prisma.ClassSessionListRelationFilter
+  attendanceRecords?: Prisma.AttendanceRecordListRelationFilter
+  promotionRequests?: Prisma.PromotionRequestListRelationFilter
   primaryMemberships?: Prisma.OrganizationMembershipListRelationFilter
   membershipScopes?: Prisma.MembershipBranchScopeListRelationFilter
   auditLogs?: Prisma.AuditLogListRelationFilter
@@ -309,6 +313,10 @@ export type BranchOrderByWithRelationInput = {
   headCoachMembership?: Prisma.OrganizationMembershipOrderByWithRelationInput
   publicProfile?: Prisma.BranchPublicProfileOrderByWithRelationInput
   students?: Prisma.StudentOrderByRelationAggregateInput
+  classSchedules?: Prisma.ClassScheduleOrderByRelationAggregateInput
+  classSessions?: Prisma.ClassSessionOrderByRelationAggregateInput
+  attendanceRecords?: Prisma.AttendanceRecordOrderByRelationAggregateInput
+  promotionRequests?: Prisma.PromotionRequestOrderByRelationAggregateInput
   primaryMemberships?: Prisma.OrganizationMembershipOrderByRelationAggregateInput
   membershipScopes?: Prisma.MembershipBranchScopeOrderByRelationAggregateInput
   auditLogs?: Prisma.AuditLogOrderByRelationAggregateInput
@@ -341,6 +349,10 @@ export type BranchWhereUniqueInput = Prisma.AtLeast<{
   headCoachMembership?: Prisma.XOR<Prisma.OrganizationMembershipNullableScalarRelationFilter, Prisma.OrganizationMembershipWhereInput> | null
   publicProfile?: Prisma.XOR<Prisma.BranchPublicProfileNullableScalarRelationFilter, Prisma.BranchPublicProfileWhereInput> | null
   students?: Prisma.StudentListRelationFilter
+  classSchedules?: Prisma.ClassScheduleListRelationFilter
+  classSessions?: Prisma.ClassSessionListRelationFilter
+  attendanceRecords?: Prisma.AttendanceRecordListRelationFilter
+  promotionRequests?: Prisma.PromotionRequestListRelationFilter
   primaryMemberships?: Prisma.OrganizationMembershipListRelationFilter
   membershipScopes?: Prisma.MembershipBranchScopeListRelationFilter
   auditLogs?: Prisma.AuditLogListRelationFilter
@@ -412,6 +424,10 @@ export type BranchCreateInput = {
   headCoachMembership?: Prisma.OrganizationMembershipCreateNestedOneWithoutHeadCoachOfBranchesInput
   publicProfile?: Prisma.BranchPublicProfileCreateNestedOneWithoutBranchInput
   students?: Prisma.StudentCreateNestedManyWithoutPrimaryBranchInput
+  classSchedules?: Prisma.ClassScheduleCreateNestedManyWithoutBranchInput
+  classSessions?: Prisma.ClassSessionCreateNestedManyWithoutBranchInput
+  attendanceRecords?: Prisma.AttendanceRecordCreateNestedManyWithoutBranchInput
+  promotionRequests?: Prisma.PromotionRequestCreateNestedManyWithoutBranchInput
   primaryMemberships?: Prisma.OrganizationMembershipCreateNestedManyWithoutPrimaryBranchInput
   membershipScopes?: Prisma.MembershipBranchScopeCreateNestedManyWithoutBranchInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutBranchInput
@@ -437,6 +453,10 @@ export type BranchUncheckedCreateInput = {
   deletedAt?: Date | string | null
   publicProfile?: Prisma.BranchPublicProfileUncheckedCreateNestedOneWithoutBranchInput
   students?: Prisma.StudentUncheckedCreateNestedManyWithoutPrimaryBranchInput
+  classSchedules?: Prisma.ClassScheduleUncheckedCreateNestedManyWithoutBranchInput
+  classSessions?: Prisma.ClassSessionUncheckedCreateNestedManyWithoutBranchInput
+  attendanceRecords?: Prisma.AttendanceRecordUncheckedCreateNestedManyWithoutBranchInput
+  promotionRequests?: Prisma.PromotionRequestUncheckedCreateNestedManyWithoutBranchInput
   primaryMemberships?: Prisma.OrganizationMembershipUncheckedCreateNestedManyWithoutPrimaryBranchInput
   membershipScopes?: Prisma.MembershipBranchScopeUncheckedCreateNestedManyWithoutBranchInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutBranchInput
@@ -462,6 +482,10 @@ export type BranchUpdateInput = {
   headCoachMembership?: Prisma.OrganizationMembershipUpdateOneWithoutHeadCoachOfBranchesNestedInput
   publicProfile?: Prisma.BranchPublicProfileUpdateOneWithoutBranchNestedInput
   students?: Prisma.StudentUpdateManyWithoutPrimaryBranchNestedInput
+  classSchedules?: Prisma.ClassScheduleUpdateManyWithoutBranchNestedInput
+  classSessions?: Prisma.ClassSessionUpdateManyWithoutBranchNestedInput
+  attendanceRecords?: Prisma.AttendanceRecordUpdateManyWithoutBranchNestedInput
+  promotionRequests?: Prisma.PromotionRequestUpdateManyWithoutBranchNestedInput
   primaryMemberships?: Prisma.OrganizationMembershipUpdateManyWithoutPrimaryBranchNestedInput
   membershipScopes?: Prisma.MembershipBranchScopeUpdateManyWithoutBranchNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutBranchNestedInput
@@ -487,6 +511,10 @@ export type BranchUncheckedUpdateInput = {
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   publicProfile?: Prisma.BranchPublicProfileUncheckedUpdateOneWithoutBranchNestedInput
   students?: Prisma.StudentUncheckedUpdateManyWithoutPrimaryBranchNestedInput
+  classSchedules?: Prisma.ClassScheduleUncheckedUpdateManyWithoutBranchNestedInput
+  classSessions?: Prisma.ClassSessionUncheckedUpdateManyWithoutBranchNestedInput
+  attendanceRecords?: Prisma.AttendanceRecordUncheckedUpdateManyWithoutBranchNestedInput
+  promotionRequests?: Prisma.PromotionRequestUncheckedUpdateManyWithoutBranchNestedInput
   primaryMemberships?: Prisma.OrganizationMembershipUncheckedUpdateManyWithoutPrimaryBranchNestedInput
   membershipScopes?: Prisma.MembershipBranchScopeUncheckedUpdateManyWithoutBranchNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutBranchNestedInput
@@ -790,6 +818,62 @@ export type BranchUpdateOneRequiredWithoutStudentsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.BranchUpdateToOneWithWhereWithoutStudentsInput, Prisma.BranchUpdateWithoutStudentsInput>, Prisma.BranchUncheckedUpdateWithoutStudentsInput>
 }
 
+export type BranchCreateNestedOneWithoutClassSchedulesInput = {
+  create?: Prisma.XOR<Prisma.BranchCreateWithoutClassSchedulesInput, Prisma.BranchUncheckedCreateWithoutClassSchedulesInput>
+  connectOrCreate?: Prisma.BranchCreateOrConnectWithoutClassSchedulesInput
+  connect?: Prisma.BranchWhereUniqueInput
+}
+
+export type BranchUpdateOneRequiredWithoutClassSchedulesNestedInput = {
+  create?: Prisma.XOR<Prisma.BranchCreateWithoutClassSchedulesInput, Prisma.BranchUncheckedCreateWithoutClassSchedulesInput>
+  connectOrCreate?: Prisma.BranchCreateOrConnectWithoutClassSchedulesInput
+  upsert?: Prisma.BranchUpsertWithoutClassSchedulesInput
+  connect?: Prisma.BranchWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.BranchUpdateToOneWithWhereWithoutClassSchedulesInput, Prisma.BranchUpdateWithoutClassSchedulesInput>, Prisma.BranchUncheckedUpdateWithoutClassSchedulesInput>
+}
+
+export type BranchCreateNestedOneWithoutClassSessionsInput = {
+  create?: Prisma.XOR<Prisma.BranchCreateWithoutClassSessionsInput, Prisma.BranchUncheckedCreateWithoutClassSessionsInput>
+  connectOrCreate?: Prisma.BranchCreateOrConnectWithoutClassSessionsInput
+  connect?: Prisma.BranchWhereUniqueInput
+}
+
+export type BranchUpdateOneRequiredWithoutClassSessionsNestedInput = {
+  create?: Prisma.XOR<Prisma.BranchCreateWithoutClassSessionsInput, Prisma.BranchUncheckedCreateWithoutClassSessionsInput>
+  connectOrCreate?: Prisma.BranchCreateOrConnectWithoutClassSessionsInput
+  upsert?: Prisma.BranchUpsertWithoutClassSessionsInput
+  connect?: Prisma.BranchWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.BranchUpdateToOneWithWhereWithoutClassSessionsInput, Prisma.BranchUpdateWithoutClassSessionsInput>, Prisma.BranchUncheckedUpdateWithoutClassSessionsInput>
+}
+
+export type BranchCreateNestedOneWithoutAttendanceRecordsInput = {
+  create?: Prisma.XOR<Prisma.BranchCreateWithoutAttendanceRecordsInput, Prisma.BranchUncheckedCreateWithoutAttendanceRecordsInput>
+  connectOrCreate?: Prisma.BranchCreateOrConnectWithoutAttendanceRecordsInput
+  connect?: Prisma.BranchWhereUniqueInput
+}
+
+export type BranchUpdateOneRequiredWithoutAttendanceRecordsNestedInput = {
+  create?: Prisma.XOR<Prisma.BranchCreateWithoutAttendanceRecordsInput, Prisma.BranchUncheckedCreateWithoutAttendanceRecordsInput>
+  connectOrCreate?: Prisma.BranchCreateOrConnectWithoutAttendanceRecordsInput
+  upsert?: Prisma.BranchUpsertWithoutAttendanceRecordsInput
+  connect?: Prisma.BranchWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.BranchUpdateToOneWithWhereWithoutAttendanceRecordsInput, Prisma.BranchUpdateWithoutAttendanceRecordsInput>, Prisma.BranchUncheckedUpdateWithoutAttendanceRecordsInput>
+}
+
+export type BranchCreateNestedOneWithoutPromotionRequestsInput = {
+  create?: Prisma.XOR<Prisma.BranchCreateWithoutPromotionRequestsInput, Prisma.BranchUncheckedCreateWithoutPromotionRequestsInput>
+  connectOrCreate?: Prisma.BranchCreateOrConnectWithoutPromotionRequestsInput
+  connect?: Prisma.BranchWhereUniqueInput
+}
+
+export type BranchUpdateOneRequiredWithoutPromotionRequestsNestedInput = {
+  create?: Prisma.XOR<Prisma.BranchCreateWithoutPromotionRequestsInput, Prisma.BranchUncheckedCreateWithoutPromotionRequestsInput>
+  connectOrCreate?: Prisma.BranchCreateOrConnectWithoutPromotionRequestsInput
+  upsert?: Prisma.BranchUpsertWithoutPromotionRequestsInput
+  connect?: Prisma.BranchWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.BranchUpdateToOneWithWhereWithoutPromotionRequestsInput, Prisma.BranchUpdateWithoutPromotionRequestsInput>, Prisma.BranchUncheckedUpdateWithoutPromotionRequestsInput>
+}
+
 export type BranchCreateNestedOneWithoutAuditLogsInput = {
   create?: Prisma.XOR<Prisma.BranchCreateWithoutAuditLogsInput, Prisma.BranchUncheckedCreateWithoutAuditLogsInput>
   connectOrCreate?: Prisma.BranchCreateOrConnectWithoutAuditLogsInput
@@ -825,6 +909,10 @@ export type BranchCreateWithoutOrganizationInput = {
   headCoachMembership?: Prisma.OrganizationMembershipCreateNestedOneWithoutHeadCoachOfBranchesInput
   publicProfile?: Prisma.BranchPublicProfileCreateNestedOneWithoutBranchInput
   students?: Prisma.StudentCreateNestedManyWithoutPrimaryBranchInput
+  classSchedules?: Prisma.ClassScheduleCreateNestedManyWithoutBranchInput
+  classSessions?: Prisma.ClassSessionCreateNestedManyWithoutBranchInput
+  attendanceRecords?: Prisma.AttendanceRecordCreateNestedManyWithoutBranchInput
+  promotionRequests?: Prisma.PromotionRequestCreateNestedManyWithoutBranchInput
   primaryMemberships?: Prisma.OrganizationMembershipCreateNestedManyWithoutPrimaryBranchInput
   membershipScopes?: Prisma.MembershipBranchScopeCreateNestedManyWithoutBranchInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutBranchInput
@@ -849,6 +937,10 @@ export type BranchUncheckedCreateWithoutOrganizationInput = {
   deletedAt?: Date | string | null
   publicProfile?: Prisma.BranchPublicProfileUncheckedCreateNestedOneWithoutBranchInput
   students?: Prisma.StudentUncheckedCreateNestedManyWithoutPrimaryBranchInput
+  classSchedules?: Prisma.ClassScheduleUncheckedCreateNestedManyWithoutBranchInput
+  classSessions?: Prisma.ClassSessionUncheckedCreateNestedManyWithoutBranchInput
+  attendanceRecords?: Prisma.AttendanceRecordUncheckedCreateNestedManyWithoutBranchInput
+  promotionRequests?: Prisma.PromotionRequestUncheckedCreateNestedManyWithoutBranchInput
   primaryMemberships?: Prisma.OrganizationMembershipUncheckedCreateNestedManyWithoutPrimaryBranchInput
   membershipScopes?: Prisma.MembershipBranchScopeUncheckedCreateNestedManyWithoutBranchInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutBranchInput
@@ -922,6 +1014,10 @@ export type BranchCreateWithoutPublicProfileInput = {
   organization: Prisma.OrganizationCreateNestedOneWithoutBranchesInput
   headCoachMembership?: Prisma.OrganizationMembershipCreateNestedOneWithoutHeadCoachOfBranchesInput
   students?: Prisma.StudentCreateNestedManyWithoutPrimaryBranchInput
+  classSchedules?: Prisma.ClassScheduleCreateNestedManyWithoutBranchInput
+  classSessions?: Prisma.ClassSessionCreateNestedManyWithoutBranchInput
+  attendanceRecords?: Prisma.AttendanceRecordCreateNestedManyWithoutBranchInput
+  promotionRequests?: Prisma.PromotionRequestCreateNestedManyWithoutBranchInput
   primaryMemberships?: Prisma.OrganizationMembershipCreateNestedManyWithoutPrimaryBranchInput
   membershipScopes?: Prisma.MembershipBranchScopeCreateNestedManyWithoutBranchInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutBranchInput
@@ -946,6 +1042,10 @@ export type BranchUncheckedCreateWithoutPublicProfileInput = {
   updatedAt?: Date | string
   deletedAt?: Date | string | null
   students?: Prisma.StudentUncheckedCreateNestedManyWithoutPrimaryBranchInput
+  classSchedules?: Prisma.ClassScheduleUncheckedCreateNestedManyWithoutBranchInput
+  classSessions?: Prisma.ClassSessionUncheckedCreateNestedManyWithoutBranchInput
+  attendanceRecords?: Prisma.AttendanceRecordUncheckedCreateNestedManyWithoutBranchInput
+  promotionRequests?: Prisma.PromotionRequestUncheckedCreateNestedManyWithoutBranchInput
   primaryMemberships?: Prisma.OrganizationMembershipUncheckedCreateNestedManyWithoutPrimaryBranchInput
   membershipScopes?: Prisma.MembershipBranchScopeUncheckedCreateNestedManyWithoutBranchInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutBranchInput
@@ -986,6 +1086,10 @@ export type BranchUpdateWithoutPublicProfileInput = {
   organization?: Prisma.OrganizationUpdateOneRequiredWithoutBranchesNestedInput
   headCoachMembership?: Prisma.OrganizationMembershipUpdateOneWithoutHeadCoachOfBranchesNestedInput
   students?: Prisma.StudentUpdateManyWithoutPrimaryBranchNestedInput
+  classSchedules?: Prisma.ClassScheduleUpdateManyWithoutBranchNestedInput
+  classSessions?: Prisma.ClassSessionUpdateManyWithoutBranchNestedInput
+  attendanceRecords?: Prisma.AttendanceRecordUpdateManyWithoutBranchNestedInput
+  promotionRequests?: Prisma.PromotionRequestUpdateManyWithoutBranchNestedInput
   primaryMemberships?: Prisma.OrganizationMembershipUpdateManyWithoutPrimaryBranchNestedInput
   membershipScopes?: Prisma.MembershipBranchScopeUpdateManyWithoutBranchNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutBranchNestedInput
@@ -1010,6 +1114,10 @@ export type BranchUncheckedUpdateWithoutPublicProfileInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   students?: Prisma.StudentUncheckedUpdateManyWithoutPrimaryBranchNestedInput
+  classSchedules?: Prisma.ClassScheduleUncheckedUpdateManyWithoutBranchNestedInput
+  classSessions?: Prisma.ClassSessionUncheckedUpdateManyWithoutBranchNestedInput
+  attendanceRecords?: Prisma.AttendanceRecordUncheckedUpdateManyWithoutBranchNestedInput
+  promotionRequests?: Prisma.PromotionRequestUncheckedUpdateManyWithoutBranchNestedInput
   primaryMemberships?: Prisma.OrganizationMembershipUncheckedUpdateManyWithoutPrimaryBranchNestedInput
   membershipScopes?: Prisma.MembershipBranchScopeUncheckedUpdateManyWithoutBranchNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutBranchNestedInput
@@ -1035,6 +1143,10 @@ export type BranchCreateWithoutPrimaryMembershipsInput = {
   headCoachMembership?: Prisma.OrganizationMembershipCreateNestedOneWithoutHeadCoachOfBranchesInput
   publicProfile?: Prisma.BranchPublicProfileCreateNestedOneWithoutBranchInput
   students?: Prisma.StudentCreateNestedManyWithoutPrimaryBranchInput
+  classSchedules?: Prisma.ClassScheduleCreateNestedManyWithoutBranchInput
+  classSessions?: Prisma.ClassSessionCreateNestedManyWithoutBranchInput
+  attendanceRecords?: Prisma.AttendanceRecordCreateNestedManyWithoutBranchInput
+  promotionRequests?: Prisma.PromotionRequestCreateNestedManyWithoutBranchInput
   membershipScopes?: Prisma.MembershipBranchScopeCreateNestedManyWithoutBranchInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutBranchInput
 }
@@ -1059,6 +1171,10 @@ export type BranchUncheckedCreateWithoutPrimaryMembershipsInput = {
   deletedAt?: Date | string | null
   publicProfile?: Prisma.BranchPublicProfileUncheckedCreateNestedOneWithoutBranchInput
   students?: Prisma.StudentUncheckedCreateNestedManyWithoutPrimaryBranchInput
+  classSchedules?: Prisma.ClassScheduleUncheckedCreateNestedManyWithoutBranchInput
+  classSessions?: Prisma.ClassSessionUncheckedCreateNestedManyWithoutBranchInput
+  attendanceRecords?: Prisma.AttendanceRecordUncheckedCreateNestedManyWithoutBranchInput
+  promotionRequests?: Prisma.PromotionRequestUncheckedCreateNestedManyWithoutBranchInput
   membershipScopes?: Prisma.MembershipBranchScopeUncheckedCreateNestedManyWithoutBranchInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutBranchInput
 }
@@ -1087,6 +1203,10 @@ export type BranchCreateWithoutHeadCoachMembershipInput = {
   organization: Prisma.OrganizationCreateNestedOneWithoutBranchesInput
   publicProfile?: Prisma.BranchPublicProfileCreateNestedOneWithoutBranchInput
   students?: Prisma.StudentCreateNestedManyWithoutPrimaryBranchInput
+  classSchedules?: Prisma.ClassScheduleCreateNestedManyWithoutBranchInput
+  classSessions?: Prisma.ClassSessionCreateNestedManyWithoutBranchInput
+  attendanceRecords?: Prisma.AttendanceRecordCreateNestedManyWithoutBranchInput
+  promotionRequests?: Prisma.PromotionRequestCreateNestedManyWithoutBranchInput
   primaryMemberships?: Prisma.OrganizationMembershipCreateNestedManyWithoutPrimaryBranchInput
   membershipScopes?: Prisma.MembershipBranchScopeCreateNestedManyWithoutBranchInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutBranchInput
@@ -1110,6 +1230,10 @@ export type BranchUncheckedCreateWithoutHeadCoachMembershipInput = {
   deletedAt?: Date | string | null
   publicProfile?: Prisma.BranchPublicProfileUncheckedCreateNestedOneWithoutBranchInput
   students?: Prisma.StudentUncheckedCreateNestedManyWithoutPrimaryBranchInput
+  classSchedules?: Prisma.ClassScheduleUncheckedCreateNestedManyWithoutBranchInput
+  classSessions?: Prisma.ClassSessionUncheckedCreateNestedManyWithoutBranchInput
+  attendanceRecords?: Prisma.AttendanceRecordUncheckedCreateNestedManyWithoutBranchInput
+  promotionRequests?: Prisma.PromotionRequestUncheckedCreateNestedManyWithoutBranchInput
   primaryMemberships?: Prisma.OrganizationMembershipUncheckedCreateNestedManyWithoutPrimaryBranchInput
   membershipScopes?: Prisma.MembershipBranchScopeUncheckedCreateNestedManyWithoutBranchInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutBranchInput
@@ -1156,6 +1280,10 @@ export type BranchUpdateWithoutPrimaryMembershipsInput = {
   headCoachMembership?: Prisma.OrganizationMembershipUpdateOneWithoutHeadCoachOfBranchesNestedInput
   publicProfile?: Prisma.BranchPublicProfileUpdateOneWithoutBranchNestedInput
   students?: Prisma.StudentUpdateManyWithoutPrimaryBranchNestedInput
+  classSchedules?: Prisma.ClassScheduleUpdateManyWithoutBranchNestedInput
+  classSessions?: Prisma.ClassSessionUpdateManyWithoutBranchNestedInput
+  attendanceRecords?: Prisma.AttendanceRecordUpdateManyWithoutBranchNestedInput
+  promotionRequests?: Prisma.PromotionRequestUpdateManyWithoutBranchNestedInput
   membershipScopes?: Prisma.MembershipBranchScopeUpdateManyWithoutBranchNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutBranchNestedInput
 }
@@ -1180,6 +1308,10 @@ export type BranchUncheckedUpdateWithoutPrimaryMembershipsInput = {
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   publicProfile?: Prisma.BranchPublicProfileUncheckedUpdateOneWithoutBranchNestedInput
   students?: Prisma.StudentUncheckedUpdateManyWithoutPrimaryBranchNestedInput
+  classSchedules?: Prisma.ClassScheduleUncheckedUpdateManyWithoutBranchNestedInput
+  classSessions?: Prisma.ClassSessionUncheckedUpdateManyWithoutBranchNestedInput
+  attendanceRecords?: Prisma.AttendanceRecordUncheckedUpdateManyWithoutBranchNestedInput
+  promotionRequests?: Prisma.PromotionRequestUncheckedUpdateManyWithoutBranchNestedInput
   membershipScopes?: Prisma.MembershipBranchScopeUncheckedUpdateManyWithoutBranchNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutBranchNestedInput
 }
@@ -1220,6 +1352,10 @@ export type BranchCreateWithoutMembershipScopesInput = {
   headCoachMembership?: Prisma.OrganizationMembershipCreateNestedOneWithoutHeadCoachOfBranchesInput
   publicProfile?: Prisma.BranchPublicProfileCreateNestedOneWithoutBranchInput
   students?: Prisma.StudentCreateNestedManyWithoutPrimaryBranchInput
+  classSchedules?: Prisma.ClassScheduleCreateNestedManyWithoutBranchInput
+  classSessions?: Prisma.ClassSessionCreateNestedManyWithoutBranchInput
+  attendanceRecords?: Prisma.AttendanceRecordCreateNestedManyWithoutBranchInput
+  promotionRequests?: Prisma.PromotionRequestCreateNestedManyWithoutBranchInput
   primaryMemberships?: Prisma.OrganizationMembershipCreateNestedManyWithoutPrimaryBranchInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutBranchInput
 }
@@ -1244,6 +1380,10 @@ export type BranchUncheckedCreateWithoutMembershipScopesInput = {
   deletedAt?: Date | string | null
   publicProfile?: Prisma.BranchPublicProfileUncheckedCreateNestedOneWithoutBranchInput
   students?: Prisma.StudentUncheckedCreateNestedManyWithoutPrimaryBranchInput
+  classSchedules?: Prisma.ClassScheduleUncheckedCreateNestedManyWithoutBranchInput
+  classSessions?: Prisma.ClassSessionUncheckedCreateNestedManyWithoutBranchInput
+  attendanceRecords?: Prisma.AttendanceRecordUncheckedCreateNestedManyWithoutBranchInput
+  promotionRequests?: Prisma.PromotionRequestUncheckedCreateNestedManyWithoutBranchInput
   primaryMemberships?: Prisma.OrganizationMembershipUncheckedCreateNestedManyWithoutPrimaryBranchInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutBranchInput
 }
@@ -1284,6 +1424,10 @@ export type BranchUpdateWithoutMembershipScopesInput = {
   headCoachMembership?: Prisma.OrganizationMembershipUpdateOneWithoutHeadCoachOfBranchesNestedInput
   publicProfile?: Prisma.BranchPublicProfileUpdateOneWithoutBranchNestedInput
   students?: Prisma.StudentUpdateManyWithoutPrimaryBranchNestedInput
+  classSchedules?: Prisma.ClassScheduleUpdateManyWithoutBranchNestedInput
+  classSessions?: Prisma.ClassSessionUpdateManyWithoutBranchNestedInput
+  attendanceRecords?: Prisma.AttendanceRecordUpdateManyWithoutBranchNestedInput
+  promotionRequests?: Prisma.PromotionRequestUpdateManyWithoutBranchNestedInput
   primaryMemberships?: Prisma.OrganizationMembershipUpdateManyWithoutPrimaryBranchNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutBranchNestedInput
 }
@@ -1308,6 +1452,10 @@ export type BranchUncheckedUpdateWithoutMembershipScopesInput = {
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   publicProfile?: Prisma.BranchPublicProfileUncheckedUpdateOneWithoutBranchNestedInput
   students?: Prisma.StudentUncheckedUpdateManyWithoutPrimaryBranchNestedInput
+  classSchedules?: Prisma.ClassScheduleUncheckedUpdateManyWithoutBranchNestedInput
+  classSessions?: Prisma.ClassSessionUncheckedUpdateManyWithoutBranchNestedInput
+  attendanceRecords?: Prisma.AttendanceRecordUncheckedUpdateManyWithoutBranchNestedInput
+  promotionRequests?: Prisma.PromotionRequestUncheckedUpdateManyWithoutBranchNestedInput
   primaryMemberships?: Prisma.OrganizationMembershipUncheckedUpdateManyWithoutPrimaryBranchNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutBranchNestedInput
 }
@@ -1331,6 +1479,10 @@ export type BranchCreateWithoutStudentsInput = {
   organization: Prisma.OrganizationCreateNestedOneWithoutBranchesInput
   headCoachMembership?: Prisma.OrganizationMembershipCreateNestedOneWithoutHeadCoachOfBranchesInput
   publicProfile?: Prisma.BranchPublicProfileCreateNestedOneWithoutBranchInput
+  classSchedules?: Prisma.ClassScheduleCreateNestedManyWithoutBranchInput
+  classSessions?: Prisma.ClassSessionCreateNestedManyWithoutBranchInput
+  attendanceRecords?: Prisma.AttendanceRecordCreateNestedManyWithoutBranchInput
+  promotionRequests?: Prisma.PromotionRequestCreateNestedManyWithoutBranchInput
   primaryMemberships?: Prisma.OrganizationMembershipCreateNestedManyWithoutPrimaryBranchInput
   membershipScopes?: Prisma.MembershipBranchScopeCreateNestedManyWithoutBranchInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutBranchInput
@@ -1355,6 +1507,10 @@ export type BranchUncheckedCreateWithoutStudentsInput = {
   updatedAt?: Date | string
   deletedAt?: Date | string | null
   publicProfile?: Prisma.BranchPublicProfileUncheckedCreateNestedOneWithoutBranchInput
+  classSchedules?: Prisma.ClassScheduleUncheckedCreateNestedManyWithoutBranchInput
+  classSessions?: Prisma.ClassSessionUncheckedCreateNestedManyWithoutBranchInput
+  attendanceRecords?: Prisma.AttendanceRecordUncheckedCreateNestedManyWithoutBranchInput
+  promotionRequests?: Prisma.PromotionRequestUncheckedCreateNestedManyWithoutBranchInput
   primaryMemberships?: Prisma.OrganizationMembershipUncheckedCreateNestedManyWithoutPrimaryBranchInput
   membershipScopes?: Prisma.MembershipBranchScopeUncheckedCreateNestedManyWithoutBranchInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutBranchInput
@@ -1395,6 +1551,10 @@ export type BranchUpdateWithoutStudentsInput = {
   organization?: Prisma.OrganizationUpdateOneRequiredWithoutBranchesNestedInput
   headCoachMembership?: Prisma.OrganizationMembershipUpdateOneWithoutHeadCoachOfBranchesNestedInput
   publicProfile?: Prisma.BranchPublicProfileUpdateOneWithoutBranchNestedInput
+  classSchedules?: Prisma.ClassScheduleUpdateManyWithoutBranchNestedInput
+  classSessions?: Prisma.ClassSessionUpdateManyWithoutBranchNestedInput
+  attendanceRecords?: Prisma.AttendanceRecordUpdateManyWithoutBranchNestedInput
+  promotionRequests?: Prisma.PromotionRequestUpdateManyWithoutBranchNestedInput
   primaryMemberships?: Prisma.OrganizationMembershipUpdateManyWithoutPrimaryBranchNestedInput
   membershipScopes?: Prisma.MembershipBranchScopeUpdateManyWithoutBranchNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutBranchNestedInput
@@ -1419,6 +1579,522 @@ export type BranchUncheckedUpdateWithoutStudentsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   publicProfile?: Prisma.BranchPublicProfileUncheckedUpdateOneWithoutBranchNestedInput
+  classSchedules?: Prisma.ClassScheduleUncheckedUpdateManyWithoutBranchNestedInput
+  classSessions?: Prisma.ClassSessionUncheckedUpdateManyWithoutBranchNestedInput
+  attendanceRecords?: Prisma.AttendanceRecordUncheckedUpdateManyWithoutBranchNestedInput
+  promotionRequests?: Prisma.PromotionRequestUncheckedUpdateManyWithoutBranchNestedInput
+  primaryMemberships?: Prisma.OrganizationMembershipUncheckedUpdateManyWithoutPrimaryBranchNestedInput
+  membershipScopes?: Prisma.MembershipBranchScopeUncheckedUpdateManyWithoutBranchNestedInput
+  auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutBranchNestedInput
+}
+
+export type BranchCreateWithoutClassSchedulesInput = {
+  id?: string
+  name: string
+  slug: string
+  countryCode: string
+  region?: string | null
+  city: string
+  addressLine1?: string | null
+  addressLine2?: string | null
+  postalCode?: string | null
+  timezone: string
+  status?: $Enums.BranchStatus
+  isPublicListed?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
+  organization: Prisma.OrganizationCreateNestedOneWithoutBranchesInput
+  headCoachMembership?: Prisma.OrganizationMembershipCreateNestedOneWithoutHeadCoachOfBranchesInput
+  publicProfile?: Prisma.BranchPublicProfileCreateNestedOneWithoutBranchInput
+  students?: Prisma.StudentCreateNestedManyWithoutPrimaryBranchInput
+  classSessions?: Prisma.ClassSessionCreateNestedManyWithoutBranchInput
+  attendanceRecords?: Prisma.AttendanceRecordCreateNestedManyWithoutBranchInput
+  promotionRequests?: Prisma.PromotionRequestCreateNestedManyWithoutBranchInput
+  primaryMemberships?: Prisma.OrganizationMembershipCreateNestedManyWithoutPrimaryBranchInput
+  membershipScopes?: Prisma.MembershipBranchScopeCreateNestedManyWithoutBranchInput
+  auditLogs?: Prisma.AuditLogCreateNestedManyWithoutBranchInput
+}
+
+export type BranchUncheckedCreateWithoutClassSchedulesInput = {
+  id?: string
+  organizationId: string
+  name: string
+  slug: string
+  countryCode: string
+  region?: string | null
+  city: string
+  addressLine1?: string | null
+  addressLine2?: string | null
+  postalCode?: string | null
+  timezone: string
+  headCoachMembershipId?: string | null
+  status?: $Enums.BranchStatus
+  isPublicListed?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
+  publicProfile?: Prisma.BranchPublicProfileUncheckedCreateNestedOneWithoutBranchInput
+  students?: Prisma.StudentUncheckedCreateNestedManyWithoutPrimaryBranchInput
+  classSessions?: Prisma.ClassSessionUncheckedCreateNestedManyWithoutBranchInput
+  attendanceRecords?: Prisma.AttendanceRecordUncheckedCreateNestedManyWithoutBranchInput
+  promotionRequests?: Prisma.PromotionRequestUncheckedCreateNestedManyWithoutBranchInput
+  primaryMemberships?: Prisma.OrganizationMembershipUncheckedCreateNestedManyWithoutPrimaryBranchInput
+  membershipScopes?: Prisma.MembershipBranchScopeUncheckedCreateNestedManyWithoutBranchInput
+  auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutBranchInput
+}
+
+export type BranchCreateOrConnectWithoutClassSchedulesInput = {
+  where: Prisma.BranchWhereUniqueInput
+  create: Prisma.XOR<Prisma.BranchCreateWithoutClassSchedulesInput, Prisma.BranchUncheckedCreateWithoutClassSchedulesInput>
+}
+
+export type BranchUpsertWithoutClassSchedulesInput = {
+  update: Prisma.XOR<Prisma.BranchUpdateWithoutClassSchedulesInput, Prisma.BranchUncheckedUpdateWithoutClassSchedulesInput>
+  create: Prisma.XOR<Prisma.BranchCreateWithoutClassSchedulesInput, Prisma.BranchUncheckedCreateWithoutClassSchedulesInput>
+  where?: Prisma.BranchWhereInput
+}
+
+export type BranchUpdateToOneWithWhereWithoutClassSchedulesInput = {
+  where?: Prisma.BranchWhereInput
+  data: Prisma.XOR<Prisma.BranchUpdateWithoutClassSchedulesInput, Prisma.BranchUncheckedUpdateWithoutClassSchedulesInput>
+}
+
+export type BranchUpdateWithoutClassSchedulesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  countryCode?: Prisma.StringFieldUpdateOperationsInput | string
+  region?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.StringFieldUpdateOperationsInput | string
+  addressLine1?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  addressLine2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  timezone?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumBranchStatusFieldUpdateOperationsInput | $Enums.BranchStatus
+  isPublicListed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  organization?: Prisma.OrganizationUpdateOneRequiredWithoutBranchesNestedInput
+  headCoachMembership?: Prisma.OrganizationMembershipUpdateOneWithoutHeadCoachOfBranchesNestedInput
+  publicProfile?: Prisma.BranchPublicProfileUpdateOneWithoutBranchNestedInput
+  students?: Prisma.StudentUpdateManyWithoutPrimaryBranchNestedInput
+  classSessions?: Prisma.ClassSessionUpdateManyWithoutBranchNestedInput
+  attendanceRecords?: Prisma.AttendanceRecordUpdateManyWithoutBranchNestedInput
+  promotionRequests?: Prisma.PromotionRequestUpdateManyWithoutBranchNestedInput
+  primaryMemberships?: Prisma.OrganizationMembershipUpdateManyWithoutPrimaryBranchNestedInput
+  membershipScopes?: Prisma.MembershipBranchScopeUpdateManyWithoutBranchNestedInput
+  auditLogs?: Prisma.AuditLogUpdateManyWithoutBranchNestedInput
+}
+
+export type BranchUncheckedUpdateWithoutClassSchedulesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  organizationId?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  countryCode?: Prisma.StringFieldUpdateOperationsInput | string
+  region?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.StringFieldUpdateOperationsInput | string
+  addressLine1?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  addressLine2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  timezone?: Prisma.StringFieldUpdateOperationsInput | string
+  headCoachMembershipId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumBranchStatusFieldUpdateOperationsInput | $Enums.BranchStatus
+  isPublicListed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  publicProfile?: Prisma.BranchPublicProfileUncheckedUpdateOneWithoutBranchNestedInput
+  students?: Prisma.StudentUncheckedUpdateManyWithoutPrimaryBranchNestedInput
+  classSessions?: Prisma.ClassSessionUncheckedUpdateManyWithoutBranchNestedInput
+  attendanceRecords?: Prisma.AttendanceRecordUncheckedUpdateManyWithoutBranchNestedInput
+  promotionRequests?: Prisma.PromotionRequestUncheckedUpdateManyWithoutBranchNestedInput
+  primaryMemberships?: Prisma.OrganizationMembershipUncheckedUpdateManyWithoutPrimaryBranchNestedInput
+  membershipScopes?: Prisma.MembershipBranchScopeUncheckedUpdateManyWithoutBranchNestedInput
+  auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutBranchNestedInput
+}
+
+export type BranchCreateWithoutClassSessionsInput = {
+  id?: string
+  name: string
+  slug: string
+  countryCode: string
+  region?: string | null
+  city: string
+  addressLine1?: string | null
+  addressLine2?: string | null
+  postalCode?: string | null
+  timezone: string
+  status?: $Enums.BranchStatus
+  isPublicListed?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
+  organization: Prisma.OrganizationCreateNestedOneWithoutBranchesInput
+  headCoachMembership?: Prisma.OrganizationMembershipCreateNestedOneWithoutHeadCoachOfBranchesInput
+  publicProfile?: Prisma.BranchPublicProfileCreateNestedOneWithoutBranchInput
+  students?: Prisma.StudentCreateNestedManyWithoutPrimaryBranchInput
+  classSchedules?: Prisma.ClassScheduleCreateNestedManyWithoutBranchInput
+  attendanceRecords?: Prisma.AttendanceRecordCreateNestedManyWithoutBranchInput
+  promotionRequests?: Prisma.PromotionRequestCreateNestedManyWithoutBranchInput
+  primaryMemberships?: Prisma.OrganizationMembershipCreateNestedManyWithoutPrimaryBranchInput
+  membershipScopes?: Prisma.MembershipBranchScopeCreateNestedManyWithoutBranchInput
+  auditLogs?: Prisma.AuditLogCreateNestedManyWithoutBranchInput
+}
+
+export type BranchUncheckedCreateWithoutClassSessionsInput = {
+  id?: string
+  organizationId: string
+  name: string
+  slug: string
+  countryCode: string
+  region?: string | null
+  city: string
+  addressLine1?: string | null
+  addressLine2?: string | null
+  postalCode?: string | null
+  timezone: string
+  headCoachMembershipId?: string | null
+  status?: $Enums.BranchStatus
+  isPublicListed?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
+  publicProfile?: Prisma.BranchPublicProfileUncheckedCreateNestedOneWithoutBranchInput
+  students?: Prisma.StudentUncheckedCreateNestedManyWithoutPrimaryBranchInput
+  classSchedules?: Prisma.ClassScheduleUncheckedCreateNestedManyWithoutBranchInput
+  attendanceRecords?: Prisma.AttendanceRecordUncheckedCreateNestedManyWithoutBranchInput
+  promotionRequests?: Prisma.PromotionRequestUncheckedCreateNestedManyWithoutBranchInput
+  primaryMemberships?: Prisma.OrganizationMembershipUncheckedCreateNestedManyWithoutPrimaryBranchInput
+  membershipScopes?: Prisma.MembershipBranchScopeUncheckedCreateNestedManyWithoutBranchInput
+  auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutBranchInput
+}
+
+export type BranchCreateOrConnectWithoutClassSessionsInput = {
+  where: Prisma.BranchWhereUniqueInput
+  create: Prisma.XOR<Prisma.BranchCreateWithoutClassSessionsInput, Prisma.BranchUncheckedCreateWithoutClassSessionsInput>
+}
+
+export type BranchUpsertWithoutClassSessionsInput = {
+  update: Prisma.XOR<Prisma.BranchUpdateWithoutClassSessionsInput, Prisma.BranchUncheckedUpdateWithoutClassSessionsInput>
+  create: Prisma.XOR<Prisma.BranchCreateWithoutClassSessionsInput, Prisma.BranchUncheckedCreateWithoutClassSessionsInput>
+  where?: Prisma.BranchWhereInput
+}
+
+export type BranchUpdateToOneWithWhereWithoutClassSessionsInput = {
+  where?: Prisma.BranchWhereInput
+  data: Prisma.XOR<Prisma.BranchUpdateWithoutClassSessionsInput, Prisma.BranchUncheckedUpdateWithoutClassSessionsInput>
+}
+
+export type BranchUpdateWithoutClassSessionsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  countryCode?: Prisma.StringFieldUpdateOperationsInput | string
+  region?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.StringFieldUpdateOperationsInput | string
+  addressLine1?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  addressLine2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  timezone?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumBranchStatusFieldUpdateOperationsInput | $Enums.BranchStatus
+  isPublicListed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  organization?: Prisma.OrganizationUpdateOneRequiredWithoutBranchesNestedInput
+  headCoachMembership?: Prisma.OrganizationMembershipUpdateOneWithoutHeadCoachOfBranchesNestedInput
+  publicProfile?: Prisma.BranchPublicProfileUpdateOneWithoutBranchNestedInput
+  students?: Prisma.StudentUpdateManyWithoutPrimaryBranchNestedInput
+  classSchedules?: Prisma.ClassScheduleUpdateManyWithoutBranchNestedInput
+  attendanceRecords?: Prisma.AttendanceRecordUpdateManyWithoutBranchNestedInput
+  promotionRequests?: Prisma.PromotionRequestUpdateManyWithoutBranchNestedInput
+  primaryMemberships?: Prisma.OrganizationMembershipUpdateManyWithoutPrimaryBranchNestedInput
+  membershipScopes?: Prisma.MembershipBranchScopeUpdateManyWithoutBranchNestedInput
+  auditLogs?: Prisma.AuditLogUpdateManyWithoutBranchNestedInput
+}
+
+export type BranchUncheckedUpdateWithoutClassSessionsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  organizationId?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  countryCode?: Prisma.StringFieldUpdateOperationsInput | string
+  region?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.StringFieldUpdateOperationsInput | string
+  addressLine1?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  addressLine2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  timezone?: Prisma.StringFieldUpdateOperationsInput | string
+  headCoachMembershipId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumBranchStatusFieldUpdateOperationsInput | $Enums.BranchStatus
+  isPublicListed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  publicProfile?: Prisma.BranchPublicProfileUncheckedUpdateOneWithoutBranchNestedInput
+  students?: Prisma.StudentUncheckedUpdateManyWithoutPrimaryBranchNestedInput
+  classSchedules?: Prisma.ClassScheduleUncheckedUpdateManyWithoutBranchNestedInput
+  attendanceRecords?: Prisma.AttendanceRecordUncheckedUpdateManyWithoutBranchNestedInput
+  promotionRequests?: Prisma.PromotionRequestUncheckedUpdateManyWithoutBranchNestedInput
+  primaryMemberships?: Prisma.OrganizationMembershipUncheckedUpdateManyWithoutPrimaryBranchNestedInput
+  membershipScopes?: Prisma.MembershipBranchScopeUncheckedUpdateManyWithoutBranchNestedInput
+  auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutBranchNestedInput
+}
+
+export type BranchCreateWithoutAttendanceRecordsInput = {
+  id?: string
+  name: string
+  slug: string
+  countryCode: string
+  region?: string | null
+  city: string
+  addressLine1?: string | null
+  addressLine2?: string | null
+  postalCode?: string | null
+  timezone: string
+  status?: $Enums.BranchStatus
+  isPublicListed?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
+  organization: Prisma.OrganizationCreateNestedOneWithoutBranchesInput
+  headCoachMembership?: Prisma.OrganizationMembershipCreateNestedOneWithoutHeadCoachOfBranchesInput
+  publicProfile?: Prisma.BranchPublicProfileCreateNestedOneWithoutBranchInput
+  students?: Prisma.StudentCreateNestedManyWithoutPrimaryBranchInput
+  classSchedules?: Prisma.ClassScheduleCreateNestedManyWithoutBranchInput
+  classSessions?: Prisma.ClassSessionCreateNestedManyWithoutBranchInput
+  promotionRequests?: Prisma.PromotionRequestCreateNestedManyWithoutBranchInput
+  primaryMemberships?: Prisma.OrganizationMembershipCreateNestedManyWithoutPrimaryBranchInput
+  membershipScopes?: Prisma.MembershipBranchScopeCreateNestedManyWithoutBranchInput
+  auditLogs?: Prisma.AuditLogCreateNestedManyWithoutBranchInput
+}
+
+export type BranchUncheckedCreateWithoutAttendanceRecordsInput = {
+  id?: string
+  organizationId: string
+  name: string
+  slug: string
+  countryCode: string
+  region?: string | null
+  city: string
+  addressLine1?: string | null
+  addressLine2?: string | null
+  postalCode?: string | null
+  timezone: string
+  headCoachMembershipId?: string | null
+  status?: $Enums.BranchStatus
+  isPublicListed?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
+  publicProfile?: Prisma.BranchPublicProfileUncheckedCreateNestedOneWithoutBranchInput
+  students?: Prisma.StudentUncheckedCreateNestedManyWithoutPrimaryBranchInput
+  classSchedules?: Prisma.ClassScheduleUncheckedCreateNestedManyWithoutBranchInput
+  classSessions?: Prisma.ClassSessionUncheckedCreateNestedManyWithoutBranchInput
+  promotionRequests?: Prisma.PromotionRequestUncheckedCreateNestedManyWithoutBranchInput
+  primaryMemberships?: Prisma.OrganizationMembershipUncheckedCreateNestedManyWithoutPrimaryBranchInput
+  membershipScopes?: Prisma.MembershipBranchScopeUncheckedCreateNestedManyWithoutBranchInput
+  auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutBranchInput
+}
+
+export type BranchCreateOrConnectWithoutAttendanceRecordsInput = {
+  where: Prisma.BranchWhereUniqueInput
+  create: Prisma.XOR<Prisma.BranchCreateWithoutAttendanceRecordsInput, Prisma.BranchUncheckedCreateWithoutAttendanceRecordsInput>
+}
+
+export type BranchUpsertWithoutAttendanceRecordsInput = {
+  update: Prisma.XOR<Prisma.BranchUpdateWithoutAttendanceRecordsInput, Prisma.BranchUncheckedUpdateWithoutAttendanceRecordsInput>
+  create: Prisma.XOR<Prisma.BranchCreateWithoutAttendanceRecordsInput, Prisma.BranchUncheckedCreateWithoutAttendanceRecordsInput>
+  where?: Prisma.BranchWhereInput
+}
+
+export type BranchUpdateToOneWithWhereWithoutAttendanceRecordsInput = {
+  where?: Prisma.BranchWhereInput
+  data: Prisma.XOR<Prisma.BranchUpdateWithoutAttendanceRecordsInput, Prisma.BranchUncheckedUpdateWithoutAttendanceRecordsInput>
+}
+
+export type BranchUpdateWithoutAttendanceRecordsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  countryCode?: Prisma.StringFieldUpdateOperationsInput | string
+  region?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.StringFieldUpdateOperationsInput | string
+  addressLine1?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  addressLine2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  timezone?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumBranchStatusFieldUpdateOperationsInput | $Enums.BranchStatus
+  isPublicListed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  organization?: Prisma.OrganizationUpdateOneRequiredWithoutBranchesNestedInput
+  headCoachMembership?: Prisma.OrganizationMembershipUpdateOneWithoutHeadCoachOfBranchesNestedInput
+  publicProfile?: Prisma.BranchPublicProfileUpdateOneWithoutBranchNestedInput
+  students?: Prisma.StudentUpdateManyWithoutPrimaryBranchNestedInput
+  classSchedules?: Prisma.ClassScheduleUpdateManyWithoutBranchNestedInput
+  classSessions?: Prisma.ClassSessionUpdateManyWithoutBranchNestedInput
+  promotionRequests?: Prisma.PromotionRequestUpdateManyWithoutBranchNestedInput
+  primaryMemberships?: Prisma.OrganizationMembershipUpdateManyWithoutPrimaryBranchNestedInput
+  membershipScopes?: Prisma.MembershipBranchScopeUpdateManyWithoutBranchNestedInput
+  auditLogs?: Prisma.AuditLogUpdateManyWithoutBranchNestedInput
+}
+
+export type BranchUncheckedUpdateWithoutAttendanceRecordsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  organizationId?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  countryCode?: Prisma.StringFieldUpdateOperationsInput | string
+  region?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.StringFieldUpdateOperationsInput | string
+  addressLine1?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  addressLine2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  timezone?: Prisma.StringFieldUpdateOperationsInput | string
+  headCoachMembershipId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumBranchStatusFieldUpdateOperationsInput | $Enums.BranchStatus
+  isPublicListed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  publicProfile?: Prisma.BranchPublicProfileUncheckedUpdateOneWithoutBranchNestedInput
+  students?: Prisma.StudentUncheckedUpdateManyWithoutPrimaryBranchNestedInput
+  classSchedules?: Prisma.ClassScheduleUncheckedUpdateManyWithoutBranchNestedInput
+  classSessions?: Prisma.ClassSessionUncheckedUpdateManyWithoutBranchNestedInput
+  promotionRequests?: Prisma.PromotionRequestUncheckedUpdateManyWithoutBranchNestedInput
+  primaryMemberships?: Prisma.OrganizationMembershipUncheckedUpdateManyWithoutPrimaryBranchNestedInput
+  membershipScopes?: Prisma.MembershipBranchScopeUncheckedUpdateManyWithoutBranchNestedInput
+  auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutBranchNestedInput
+}
+
+export type BranchCreateWithoutPromotionRequestsInput = {
+  id?: string
+  name: string
+  slug: string
+  countryCode: string
+  region?: string | null
+  city: string
+  addressLine1?: string | null
+  addressLine2?: string | null
+  postalCode?: string | null
+  timezone: string
+  status?: $Enums.BranchStatus
+  isPublicListed?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
+  organization: Prisma.OrganizationCreateNestedOneWithoutBranchesInput
+  headCoachMembership?: Prisma.OrganizationMembershipCreateNestedOneWithoutHeadCoachOfBranchesInput
+  publicProfile?: Prisma.BranchPublicProfileCreateNestedOneWithoutBranchInput
+  students?: Prisma.StudentCreateNestedManyWithoutPrimaryBranchInput
+  classSchedules?: Prisma.ClassScheduleCreateNestedManyWithoutBranchInput
+  classSessions?: Prisma.ClassSessionCreateNestedManyWithoutBranchInput
+  attendanceRecords?: Prisma.AttendanceRecordCreateNestedManyWithoutBranchInput
+  primaryMemberships?: Prisma.OrganizationMembershipCreateNestedManyWithoutPrimaryBranchInput
+  membershipScopes?: Prisma.MembershipBranchScopeCreateNestedManyWithoutBranchInput
+  auditLogs?: Prisma.AuditLogCreateNestedManyWithoutBranchInput
+}
+
+export type BranchUncheckedCreateWithoutPromotionRequestsInput = {
+  id?: string
+  organizationId: string
+  name: string
+  slug: string
+  countryCode: string
+  region?: string | null
+  city: string
+  addressLine1?: string | null
+  addressLine2?: string | null
+  postalCode?: string | null
+  timezone: string
+  headCoachMembershipId?: string | null
+  status?: $Enums.BranchStatus
+  isPublicListed?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
+  publicProfile?: Prisma.BranchPublicProfileUncheckedCreateNestedOneWithoutBranchInput
+  students?: Prisma.StudentUncheckedCreateNestedManyWithoutPrimaryBranchInput
+  classSchedules?: Prisma.ClassScheduleUncheckedCreateNestedManyWithoutBranchInput
+  classSessions?: Prisma.ClassSessionUncheckedCreateNestedManyWithoutBranchInput
+  attendanceRecords?: Prisma.AttendanceRecordUncheckedCreateNestedManyWithoutBranchInput
+  primaryMemberships?: Prisma.OrganizationMembershipUncheckedCreateNestedManyWithoutPrimaryBranchInput
+  membershipScopes?: Prisma.MembershipBranchScopeUncheckedCreateNestedManyWithoutBranchInput
+  auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutBranchInput
+}
+
+export type BranchCreateOrConnectWithoutPromotionRequestsInput = {
+  where: Prisma.BranchWhereUniqueInput
+  create: Prisma.XOR<Prisma.BranchCreateWithoutPromotionRequestsInput, Prisma.BranchUncheckedCreateWithoutPromotionRequestsInput>
+}
+
+export type BranchUpsertWithoutPromotionRequestsInput = {
+  update: Prisma.XOR<Prisma.BranchUpdateWithoutPromotionRequestsInput, Prisma.BranchUncheckedUpdateWithoutPromotionRequestsInput>
+  create: Prisma.XOR<Prisma.BranchCreateWithoutPromotionRequestsInput, Prisma.BranchUncheckedCreateWithoutPromotionRequestsInput>
+  where?: Prisma.BranchWhereInput
+}
+
+export type BranchUpdateToOneWithWhereWithoutPromotionRequestsInput = {
+  where?: Prisma.BranchWhereInput
+  data: Prisma.XOR<Prisma.BranchUpdateWithoutPromotionRequestsInput, Prisma.BranchUncheckedUpdateWithoutPromotionRequestsInput>
+}
+
+export type BranchUpdateWithoutPromotionRequestsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  countryCode?: Prisma.StringFieldUpdateOperationsInput | string
+  region?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.StringFieldUpdateOperationsInput | string
+  addressLine1?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  addressLine2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  timezone?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumBranchStatusFieldUpdateOperationsInput | $Enums.BranchStatus
+  isPublicListed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  organization?: Prisma.OrganizationUpdateOneRequiredWithoutBranchesNestedInput
+  headCoachMembership?: Prisma.OrganizationMembershipUpdateOneWithoutHeadCoachOfBranchesNestedInput
+  publicProfile?: Prisma.BranchPublicProfileUpdateOneWithoutBranchNestedInput
+  students?: Prisma.StudentUpdateManyWithoutPrimaryBranchNestedInput
+  classSchedules?: Prisma.ClassScheduleUpdateManyWithoutBranchNestedInput
+  classSessions?: Prisma.ClassSessionUpdateManyWithoutBranchNestedInput
+  attendanceRecords?: Prisma.AttendanceRecordUpdateManyWithoutBranchNestedInput
+  primaryMemberships?: Prisma.OrganizationMembershipUpdateManyWithoutPrimaryBranchNestedInput
+  membershipScopes?: Prisma.MembershipBranchScopeUpdateManyWithoutBranchNestedInput
+  auditLogs?: Prisma.AuditLogUpdateManyWithoutBranchNestedInput
+}
+
+export type BranchUncheckedUpdateWithoutPromotionRequestsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  organizationId?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  countryCode?: Prisma.StringFieldUpdateOperationsInput | string
+  region?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.StringFieldUpdateOperationsInput | string
+  addressLine1?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  addressLine2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  timezone?: Prisma.StringFieldUpdateOperationsInput | string
+  headCoachMembershipId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumBranchStatusFieldUpdateOperationsInput | $Enums.BranchStatus
+  isPublicListed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  publicProfile?: Prisma.BranchPublicProfileUncheckedUpdateOneWithoutBranchNestedInput
+  students?: Prisma.StudentUncheckedUpdateManyWithoutPrimaryBranchNestedInput
+  classSchedules?: Prisma.ClassScheduleUncheckedUpdateManyWithoutBranchNestedInput
+  classSessions?: Prisma.ClassSessionUncheckedUpdateManyWithoutBranchNestedInput
+  attendanceRecords?: Prisma.AttendanceRecordUncheckedUpdateManyWithoutBranchNestedInput
   primaryMemberships?: Prisma.OrganizationMembershipUncheckedUpdateManyWithoutPrimaryBranchNestedInput
   membershipScopes?: Prisma.MembershipBranchScopeUncheckedUpdateManyWithoutBranchNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutBranchNestedInput
@@ -1444,6 +2120,10 @@ export type BranchCreateWithoutAuditLogsInput = {
   headCoachMembership?: Prisma.OrganizationMembershipCreateNestedOneWithoutHeadCoachOfBranchesInput
   publicProfile?: Prisma.BranchPublicProfileCreateNestedOneWithoutBranchInput
   students?: Prisma.StudentCreateNestedManyWithoutPrimaryBranchInput
+  classSchedules?: Prisma.ClassScheduleCreateNestedManyWithoutBranchInput
+  classSessions?: Prisma.ClassSessionCreateNestedManyWithoutBranchInput
+  attendanceRecords?: Prisma.AttendanceRecordCreateNestedManyWithoutBranchInput
+  promotionRequests?: Prisma.PromotionRequestCreateNestedManyWithoutBranchInput
   primaryMemberships?: Prisma.OrganizationMembershipCreateNestedManyWithoutPrimaryBranchInput
   membershipScopes?: Prisma.MembershipBranchScopeCreateNestedManyWithoutBranchInput
 }
@@ -1468,6 +2148,10 @@ export type BranchUncheckedCreateWithoutAuditLogsInput = {
   deletedAt?: Date | string | null
   publicProfile?: Prisma.BranchPublicProfileUncheckedCreateNestedOneWithoutBranchInput
   students?: Prisma.StudentUncheckedCreateNestedManyWithoutPrimaryBranchInput
+  classSchedules?: Prisma.ClassScheduleUncheckedCreateNestedManyWithoutBranchInput
+  classSessions?: Prisma.ClassSessionUncheckedCreateNestedManyWithoutBranchInput
+  attendanceRecords?: Prisma.AttendanceRecordUncheckedCreateNestedManyWithoutBranchInput
+  promotionRequests?: Prisma.PromotionRequestUncheckedCreateNestedManyWithoutBranchInput
   primaryMemberships?: Prisma.OrganizationMembershipUncheckedCreateNestedManyWithoutPrimaryBranchInput
   membershipScopes?: Prisma.MembershipBranchScopeUncheckedCreateNestedManyWithoutBranchInput
 }
@@ -1508,6 +2192,10 @@ export type BranchUpdateWithoutAuditLogsInput = {
   headCoachMembership?: Prisma.OrganizationMembershipUpdateOneWithoutHeadCoachOfBranchesNestedInput
   publicProfile?: Prisma.BranchPublicProfileUpdateOneWithoutBranchNestedInput
   students?: Prisma.StudentUpdateManyWithoutPrimaryBranchNestedInput
+  classSchedules?: Prisma.ClassScheduleUpdateManyWithoutBranchNestedInput
+  classSessions?: Prisma.ClassSessionUpdateManyWithoutBranchNestedInput
+  attendanceRecords?: Prisma.AttendanceRecordUpdateManyWithoutBranchNestedInput
+  promotionRequests?: Prisma.PromotionRequestUpdateManyWithoutBranchNestedInput
   primaryMemberships?: Prisma.OrganizationMembershipUpdateManyWithoutPrimaryBranchNestedInput
   membershipScopes?: Prisma.MembershipBranchScopeUpdateManyWithoutBranchNestedInput
 }
@@ -1532,6 +2220,10 @@ export type BranchUncheckedUpdateWithoutAuditLogsInput = {
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   publicProfile?: Prisma.BranchPublicProfileUncheckedUpdateOneWithoutBranchNestedInput
   students?: Prisma.StudentUncheckedUpdateManyWithoutPrimaryBranchNestedInput
+  classSchedules?: Prisma.ClassScheduleUncheckedUpdateManyWithoutBranchNestedInput
+  classSessions?: Prisma.ClassSessionUncheckedUpdateManyWithoutBranchNestedInput
+  attendanceRecords?: Prisma.AttendanceRecordUncheckedUpdateManyWithoutBranchNestedInput
+  promotionRequests?: Prisma.PromotionRequestUncheckedUpdateManyWithoutBranchNestedInput
   primaryMemberships?: Prisma.OrganizationMembershipUncheckedUpdateManyWithoutPrimaryBranchNestedInput
   membershipScopes?: Prisma.MembershipBranchScopeUncheckedUpdateManyWithoutBranchNestedInput
 }
@@ -1574,6 +2266,10 @@ export type BranchUpdateWithoutOrganizationInput = {
   headCoachMembership?: Prisma.OrganizationMembershipUpdateOneWithoutHeadCoachOfBranchesNestedInput
   publicProfile?: Prisma.BranchPublicProfileUpdateOneWithoutBranchNestedInput
   students?: Prisma.StudentUpdateManyWithoutPrimaryBranchNestedInput
+  classSchedules?: Prisma.ClassScheduleUpdateManyWithoutBranchNestedInput
+  classSessions?: Prisma.ClassSessionUpdateManyWithoutBranchNestedInput
+  attendanceRecords?: Prisma.AttendanceRecordUpdateManyWithoutBranchNestedInput
+  promotionRequests?: Prisma.PromotionRequestUpdateManyWithoutBranchNestedInput
   primaryMemberships?: Prisma.OrganizationMembershipUpdateManyWithoutPrimaryBranchNestedInput
   membershipScopes?: Prisma.MembershipBranchScopeUpdateManyWithoutBranchNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutBranchNestedInput
@@ -1598,6 +2294,10 @@ export type BranchUncheckedUpdateWithoutOrganizationInput = {
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   publicProfile?: Prisma.BranchPublicProfileUncheckedUpdateOneWithoutBranchNestedInput
   students?: Prisma.StudentUncheckedUpdateManyWithoutPrimaryBranchNestedInput
+  classSchedules?: Prisma.ClassScheduleUncheckedUpdateManyWithoutBranchNestedInput
+  classSessions?: Prisma.ClassSessionUncheckedUpdateManyWithoutBranchNestedInput
+  attendanceRecords?: Prisma.AttendanceRecordUncheckedUpdateManyWithoutBranchNestedInput
+  promotionRequests?: Prisma.PromotionRequestUncheckedUpdateManyWithoutBranchNestedInput
   primaryMemberships?: Prisma.OrganizationMembershipUncheckedUpdateManyWithoutPrimaryBranchNestedInput
   membershipScopes?: Prisma.MembershipBranchScopeUncheckedUpdateManyWithoutBranchNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutBranchNestedInput
@@ -1659,6 +2359,10 @@ export type BranchUpdateWithoutHeadCoachMembershipInput = {
   organization?: Prisma.OrganizationUpdateOneRequiredWithoutBranchesNestedInput
   publicProfile?: Prisma.BranchPublicProfileUpdateOneWithoutBranchNestedInput
   students?: Prisma.StudentUpdateManyWithoutPrimaryBranchNestedInput
+  classSchedules?: Prisma.ClassScheduleUpdateManyWithoutBranchNestedInput
+  classSessions?: Prisma.ClassSessionUpdateManyWithoutBranchNestedInput
+  attendanceRecords?: Prisma.AttendanceRecordUpdateManyWithoutBranchNestedInput
+  promotionRequests?: Prisma.PromotionRequestUpdateManyWithoutBranchNestedInput
   primaryMemberships?: Prisma.OrganizationMembershipUpdateManyWithoutPrimaryBranchNestedInput
   membershipScopes?: Prisma.MembershipBranchScopeUpdateManyWithoutBranchNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutBranchNestedInput
@@ -1682,6 +2386,10 @@ export type BranchUncheckedUpdateWithoutHeadCoachMembershipInput = {
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   publicProfile?: Prisma.BranchPublicProfileUncheckedUpdateOneWithoutBranchNestedInput
   students?: Prisma.StudentUncheckedUpdateManyWithoutPrimaryBranchNestedInput
+  classSchedules?: Prisma.ClassScheduleUncheckedUpdateManyWithoutBranchNestedInput
+  classSessions?: Prisma.ClassSessionUncheckedUpdateManyWithoutBranchNestedInput
+  attendanceRecords?: Prisma.AttendanceRecordUncheckedUpdateManyWithoutBranchNestedInput
+  promotionRequests?: Prisma.PromotionRequestUncheckedUpdateManyWithoutBranchNestedInput
   primaryMemberships?: Prisma.OrganizationMembershipUncheckedUpdateManyWithoutPrimaryBranchNestedInput
   membershipScopes?: Prisma.MembershipBranchScopeUncheckedUpdateManyWithoutBranchNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutBranchNestedInput
@@ -1712,6 +2420,10 @@ export type BranchUncheckedUpdateManyWithoutHeadCoachMembershipInput = {
 
 export type BranchCountOutputType = {
   students: number
+  classSchedules: number
+  classSessions: number
+  attendanceRecords: number
+  promotionRequests: number
   primaryMemberships: number
   membershipScopes: number
   auditLogs: number
@@ -1719,6 +2431,10 @@ export type BranchCountOutputType = {
 
 export type BranchCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   students?: boolean | BranchCountOutputTypeCountStudentsArgs
+  classSchedules?: boolean | BranchCountOutputTypeCountClassSchedulesArgs
+  classSessions?: boolean | BranchCountOutputTypeCountClassSessionsArgs
+  attendanceRecords?: boolean | BranchCountOutputTypeCountAttendanceRecordsArgs
+  promotionRequests?: boolean | BranchCountOutputTypeCountPromotionRequestsArgs
   primaryMemberships?: boolean | BranchCountOutputTypeCountPrimaryMembershipsArgs
   membershipScopes?: boolean | BranchCountOutputTypeCountMembershipScopesArgs
   auditLogs?: boolean | BranchCountOutputTypeCountAuditLogsArgs
@@ -1739,6 +2455,34 @@ export type BranchCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Exten
  */
 export type BranchCountOutputTypeCountStudentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.StudentWhereInput
+}
+
+/**
+ * BranchCountOutputType without action
+ */
+export type BranchCountOutputTypeCountClassSchedulesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ClassScheduleWhereInput
+}
+
+/**
+ * BranchCountOutputType without action
+ */
+export type BranchCountOutputTypeCountClassSessionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ClassSessionWhereInput
+}
+
+/**
+ * BranchCountOutputType without action
+ */
+export type BranchCountOutputTypeCountAttendanceRecordsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.AttendanceRecordWhereInput
+}
+
+/**
+ * BranchCountOutputType without action
+ */
+export type BranchCountOutputTypeCountPromotionRequestsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.PromotionRequestWhereInput
 }
 
 /**
@@ -1785,6 +2529,10 @@ export type BranchSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   headCoachMembership?: boolean | Prisma.Branch$headCoachMembershipArgs<ExtArgs>
   publicProfile?: boolean | Prisma.Branch$publicProfileArgs<ExtArgs>
   students?: boolean | Prisma.Branch$studentsArgs<ExtArgs>
+  classSchedules?: boolean | Prisma.Branch$classSchedulesArgs<ExtArgs>
+  classSessions?: boolean | Prisma.Branch$classSessionsArgs<ExtArgs>
+  attendanceRecords?: boolean | Prisma.Branch$attendanceRecordsArgs<ExtArgs>
+  promotionRequests?: boolean | Prisma.Branch$promotionRequestsArgs<ExtArgs>
   primaryMemberships?: boolean | Prisma.Branch$primaryMembershipsArgs<ExtArgs>
   membershipScopes?: boolean | Prisma.Branch$membershipScopesArgs<ExtArgs>
   auditLogs?: boolean | Prisma.Branch$auditLogsArgs<ExtArgs>
@@ -1861,6 +2609,10 @@ export type BranchInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   headCoachMembership?: boolean | Prisma.Branch$headCoachMembershipArgs<ExtArgs>
   publicProfile?: boolean | Prisma.Branch$publicProfileArgs<ExtArgs>
   students?: boolean | Prisma.Branch$studentsArgs<ExtArgs>
+  classSchedules?: boolean | Prisma.Branch$classSchedulesArgs<ExtArgs>
+  classSessions?: boolean | Prisma.Branch$classSessionsArgs<ExtArgs>
+  attendanceRecords?: boolean | Prisma.Branch$attendanceRecordsArgs<ExtArgs>
+  promotionRequests?: boolean | Prisma.Branch$promotionRequestsArgs<ExtArgs>
   primaryMemberships?: boolean | Prisma.Branch$primaryMembershipsArgs<ExtArgs>
   membershipScopes?: boolean | Prisma.Branch$membershipScopesArgs<ExtArgs>
   auditLogs?: boolean | Prisma.Branch$auditLogsArgs<ExtArgs>
@@ -1882,6 +2634,10 @@ export type $BranchPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs
     headCoachMembership: Prisma.$OrganizationMembershipPayload<ExtArgs> | null
     publicProfile: Prisma.$BranchPublicProfilePayload<ExtArgs> | null
     students: Prisma.$StudentPayload<ExtArgs>[]
+    classSchedules: Prisma.$ClassSchedulePayload<ExtArgs>[]
+    classSessions: Prisma.$ClassSessionPayload<ExtArgs>[]
+    attendanceRecords: Prisma.$AttendanceRecordPayload<ExtArgs>[]
+    promotionRequests: Prisma.$PromotionRequestPayload<ExtArgs>[]
     primaryMemberships: Prisma.$OrganizationMembershipPayload<ExtArgs>[]
     membershipScopes: Prisma.$MembershipBranchScopePayload<ExtArgs>[]
     auditLogs: Prisma.$AuditLogPayload<ExtArgs>[]
@@ -2302,6 +3058,10 @@ export interface Prisma__BranchClient<T, Null = never, ExtArgs extends runtime.T
   headCoachMembership<T extends Prisma.Branch$headCoachMembershipArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Branch$headCoachMembershipArgs<ExtArgs>>): Prisma.Prisma__OrganizationMembershipClient<runtime.Types.Result.GetResult<Prisma.$OrganizationMembershipPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   publicProfile<T extends Prisma.Branch$publicProfileArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Branch$publicProfileArgs<ExtArgs>>): Prisma.Prisma__BranchPublicProfileClient<runtime.Types.Result.GetResult<Prisma.$BranchPublicProfilePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   students<T extends Prisma.Branch$studentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Branch$studentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$StudentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  classSchedules<T extends Prisma.Branch$classSchedulesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Branch$classSchedulesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ClassSchedulePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  classSessions<T extends Prisma.Branch$classSessionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Branch$classSessionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ClassSessionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  attendanceRecords<T extends Prisma.Branch$attendanceRecordsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Branch$attendanceRecordsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AttendanceRecordPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  promotionRequests<T extends Prisma.Branch$promotionRequestsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Branch$promotionRequestsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PromotionRequestPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   primaryMemberships<T extends Prisma.Branch$primaryMembershipsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Branch$primaryMembershipsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$OrganizationMembershipPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   membershipScopes<T extends Prisma.Branch$membershipScopesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Branch$membershipScopesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MembershipBranchScopePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   auditLogs<T extends Prisma.Branch$auditLogsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Branch$auditLogsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AuditLogPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
@@ -2811,6 +3571,102 @@ export type Branch$studentsArgs<ExtArgs extends runtime.Types.Extensions.Interna
   take?: number
   skip?: number
   distinct?: Prisma.StudentScalarFieldEnum | Prisma.StudentScalarFieldEnum[]
+}
+
+/**
+ * Branch.classSchedules
+ */
+export type Branch$classSchedulesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the ClassSchedule
+   */
+  select?: Prisma.ClassScheduleSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the ClassSchedule
+   */
+  omit?: Prisma.ClassScheduleOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ClassScheduleInclude<ExtArgs> | null
+  where?: Prisma.ClassScheduleWhereInput
+  orderBy?: Prisma.ClassScheduleOrderByWithRelationInput | Prisma.ClassScheduleOrderByWithRelationInput[]
+  cursor?: Prisma.ClassScheduleWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.ClassScheduleScalarFieldEnum | Prisma.ClassScheduleScalarFieldEnum[]
+}
+
+/**
+ * Branch.classSessions
+ */
+export type Branch$classSessionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the ClassSession
+   */
+  select?: Prisma.ClassSessionSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the ClassSession
+   */
+  omit?: Prisma.ClassSessionOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ClassSessionInclude<ExtArgs> | null
+  where?: Prisma.ClassSessionWhereInput
+  orderBy?: Prisma.ClassSessionOrderByWithRelationInput | Prisma.ClassSessionOrderByWithRelationInput[]
+  cursor?: Prisma.ClassSessionWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.ClassSessionScalarFieldEnum | Prisma.ClassSessionScalarFieldEnum[]
+}
+
+/**
+ * Branch.attendanceRecords
+ */
+export type Branch$attendanceRecordsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the AttendanceRecord
+   */
+  select?: Prisma.AttendanceRecordSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the AttendanceRecord
+   */
+  omit?: Prisma.AttendanceRecordOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.AttendanceRecordInclude<ExtArgs> | null
+  where?: Prisma.AttendanceRecordWhereInput
+  orderBy?: Prisma.AttendanceRecordOrderByWithRelationInput | Prisma.AttendanceRecordOrderByWithRelationInput[]
+  cursor?: Prisma.AttendanceRecordWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.AttendanceRecordScalarFieldEnum | Prisma.AttendanceRecordScalarFieldEnum[]
+}
+
+/**
+ * Branch.promotionRequests
+ */
+export type Branch$promotionRequestsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the PromotionRequest
+   */
+  select?: Prisma.PromotionRequestSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the PromotionRequest
+   */
+  omit?: Prisma.PromotionRequestOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.PromotionRequestInclude<ExtArgs> | null
+  where?: Prisma.PromotionRequestWhereInput
+  orderBy?: Prisma.PromotionRequestOrderByWithRelationInput | Prisma.PromotionRequestOrderByWithRelationInput[]
+  cursor?: Prisma.PromotionRequestWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.PromotionRequestScalarFieldEnum | Prisma.PromotionRequestScalarFieldEnum[]
 }
 
 /**

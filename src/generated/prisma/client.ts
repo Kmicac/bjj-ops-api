@@ -80,6 +80,31 @@ export type MembershipBranchScope = Prisma.MembershipBranchScopeModel
  */
 export type Student = Prisma.StudentModel
 /**
+ * Model ClassSchedule
+ * 
+ */
+export type ClassSchedule = Prisma.ClassScheduleModel
+/**
+ * Model ClassSession
+ * 
+ */
+export type ClassSession = Prisma.ClassSessionModel
+/**
+ * Model AttendanceRecord
+ * 
+ */
+export type AttendanceRecord = Prisma.AttendanceRecordModel
+/**
+ * Model PromotionRequest
+ * 
+ */
+export type PromotionRequest = Prisma.PromotionRequestModel
+/**
+ * Model PromotionEvaluation
+ * 
+ */
+export type PromotionEvaluation = Prisma.PromotionEvaluationModel
+/**
  * Model AuditLog
  * 
  */

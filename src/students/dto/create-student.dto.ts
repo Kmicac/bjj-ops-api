@@ -1,5 +1,6 @@
 import {
   IsDateString,
+  IsEnum,
   IsInt,
   IsOptional,
   IsString,
@@ -7,6 +8,7 @@ import {
   Min,
   MinLength,
 } from 'class-validator';
+import { PromotionRank, PromotionTrack } from '../../generated/prisma/enums';
 
 export class CreateStudentDto {
   @IsString()
@@ -45,8 +47,12 @@ export class CreateStudentDto {
   joinedOrganizationAt?: string;
 
   @IsOptional()
-  @IsString()
-  currentBelt?: string;
+  @IsEnum(PromotionTrack)
+  promotionTrack?: PromotionTrack;
+
+  @IsOptional()
+  @IsEnum(PromotionRank)
+  currentBelt?: PromotionRank;
 
   @IsOptional()
   @IsInt()

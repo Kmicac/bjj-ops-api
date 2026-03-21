@@ -63,6 +63,85 @@ enum StudentStatus {
   INACTIVE
 }
 
+enum Weekday {
+  MONDAY
+  TUESDAY
+  WEDNESDAY
+  THURSDAY
+  FRIDAY
+  SATURDAY
+  SUNDAY
+}
+
+enum ClassType {
+  GI
+  NO_GI
+  FUNDAMENTALS
+  ADVANCED
+  KIDS
+  COMPETITION
+  OPEN_MAT
+  SEMINAR
+  PRIVATE
+}
+
+enum ClassSessionStatus {
+  SCHEDULED
+  COMPLETED
+  CANCELED
+}
+
+enum AttendanceStatus {
+  PRESENT
+  LATE
+  ABSENT
+  EXCUSED
+}
+
+enum PromotionType {
+  BELT
+  STRIPE
+}
+
+enum PromotionRequestStatus {
+  PENDING_REVIEW
+  APPROVED
+  REJECTED
+}
+
+enum PromotionRecommendation {
+  DO_NOT_RECOMMEND
+  NEEDS_MORE_TIME
+  RECOMMEND
+  STRONGLY_RECOMMEND
+}
+
+enum PromotionTrack {
+  KIDS
+  ADULT
+}
+
+enum PromotionRank {
+  KIDS_WHITE
+  KIDS_GREY_WHITE
+  KIDS_GREY
+  KIDS_GREY_BLACK
+  KIDS_YELLOW_WHITE
+  KIDS_YELLOW
+  KIDS_YELLOW_BLACK
+  KIDS_ORANGE_WHITE
+  KIDS_ORANGE
+  KIDS_ORANGE_BLACK
+  KIDS_GREEN_WHITE
+  KIDS_GREEN
+  KIDS_GREEN_BLACK
+  ADULT_WHITE
+  ADULT_BLUE
+  ADULT_PURPLE
+  ADULT_BROWN
+  ADULT_BLACK
+}
+
 model User {
   id              String                   @id @default(cuid())
   email           String                   @unique
@@ -97,6 +176,11 @@ model Organization {
   branches        Branch[]
   memberships     OrganizationMembership[]
   students        Student[]
+  classSchedules  ClassSchedule[]
+  classSessions   ClassSession[]
+  attendanceRecords AttendanceRecord[]
+  promotionRequests PromotionRequest[]
+  promotionEvaluations PromotionEvaluation[]
   publicProfiles  BranchPublicProfile[]
   auditLogs       AuditLog[]
 
@@ -126,6 +210,10 @@ model Branch {
   headCoachMembership OrganizationMembership? @relation("BranchHeadCoachMembership", fields: [headCoachMembershipId, organizationId], references: [id, organizationId], onDelete: Restrict)
   publicProfile      BranchPublicProfile?
   students           Student[]
+  classSchedules     ClassSchedule[]
+  classSessions      ClassSession[]
+  attendanceRecords  AttendanceRecord[]
+  promotionRequests   PromotionRequest[]
   primaryMemberships OrganizationMembership[] @relation("MembershipPrimaryBranch")
   membershipScopes   MembershipBranchScope[]
   auditLogs          AuditLog[]
@@ -176,6 +264,11 @@ model OrganizationMembership {
   user            User                    @relation(fields: [userId], references: [id], onDelete: Restrict)
   primaryBranch   Branch?                 @relation("MembershipPrimaryBranch", fields: [primaryBranchId, organizationId], references: [id, organizationId], onDelete: Restrict)
   headCoachOfBranches Branch[]            @relation("BranchHeadCoachMembership")
+  instructedClassSchedules ClassSchedule[] @relation("ClassScheduleInstructorMembership")
+  instructedClassSessions  ClassSession[]  @relation("ClassSessionInstructorMembership")
+  proposedPromotionRequests PromotionRequest[] @relation("PromotionProposedByMembership")
+  reviewedPromotionRequests PromotionRequest[] @relation("PromotionReviewedByMembership")
+  updatedPromotionEvaluations PromotionEvaluation[] @relation("PromotionEvaluationUpdatedByMembership")
   branchScopes    MembershipBranchScope[]
   roles           MembershipRoleAssignment[]
   auditLogs       AuditLog[]              @relation("AuditActorMembership")
@@ -226,7 +319,8 @@ model Student {
   status               StudentStatus @default(ACTIVE)
   startedBjjAt         DateTime?     @db.Date
   joinedOrganizationAt DateTime?     @db.Date
-  currentBelt          String?
+  promotionTrack       PromotionTrack @default(ADULT)
+  currentBelt          PromotionRank?
   currentStripes       Int           @default(0)
   createdAt            DateTime      @default(now()) @db.Timestamptz(3)
   updatedAt            DateTime      @updatedAt @db.Timestamptz(3)
@@ -235,11 +329,164 @@ model Student {
   organization         Organization  @relation(fields: [organizationId], references: [id], onDelete: Restrict)
   primaryBranch        Branch        @relation(fields: [primaryBranchId, organizationId], references: [id, organizationId], onDelete: Restrict)
   user                 User?         @relation(fields: [userId], references: [id], onDelete: SetNull)
+  attendanceRecords    AttendanceRecord[]
+  promotionRequests    PromotionRequest[]
 
   @@unique([id, organizationId])
   @@unique([organizationId, userId])
   @@index([organizationId, status])
   @@index([primaryBranchId, status])
+}
+
+model ClassSchedule {
+  id                     String                 @id @default(cuid())
+  organizationId         String
+  branchId               String
+  instructorMembershipId String
+  title                  String
+  classType              ClassType
+  description            String?
+  weekday                Weekday
+  startTime              String                 @db.VarChar(5)
+  endTime                String                 @db.VarChar(5)
+  timezone               String
+  capacity               Int?
+  isActive               Boolean                @default(true)
+  createdAt              DateTime               @default(now()) @db.Timestamptz(3)
+  updatedAt              DateTime               @updatedAt @db.Timestamptz(3)
+  deletedAt              DateTime?              @db.Timestamptz(3)
+
+  organization           Organization           @relation(fields: [organizationId], references: [id], onDelete: Restrict)
+  branch                 Branch                 @relation(fields: [branchId, organizationId], references: [id, organizationId], onDelete: Restrict)
+  instructorMembership   OrganizationMembership @relation("ClassScheduleInstructorMembership", fields: [instructorMembershipId, organizationId], references: [id, organizationId], onDelete: Restrict)
+  sessions               ClassSession[]
+
+  @@unique([id, organizationId])
+  @@index([organizationId, branchId, weekday, isActive])
+  @@index([branchId, isActive])
+}
+
+model ClassSession {
+  id                     String                 @id @default(cuid())
+  organizationId         String
+  branchId               String
+  classScheduleId        String?
+  instructorMembershipId String
+  title                  String
+  classType              ClassType
+  scheduledDate          DateTime               @db.Date
+  startAt                DateTime               @db.Timestamptz(3)
+  endAt                  DateTime               @db.Timestamptz(3)
+  capacity               Int?
+  status                 ClassSessionStatus     @default(SCHEDULED)
+  cancellationReason     String?
+  notes                  String?
+  createdAt              DateTime               @default(now()) @db.Timestamptz(3)
+  updatedAt              DateTime               @updatedAt @db.Timestamptz(3)
+  deletedAt              DateTime?              @db.Timestamptz(3)
+
+  organization           Organization           @relation(fields: [organizationId], references: [id], onDelete: Restrict)
+  branch                 Branch                 @relation(fields: [branchId, organizationId], references: [id, organizationId], onDelete: Restrict)
+  classSchedule          ClassSchedule?         @relation(fields: [classScheduleId, organizationId], references: [id, organizationId], onDelete: Restrict)
+  instructorMembership   OrganizationMembership @relation("ClassSessionInstructorMembership", fields: [instructorMembershipId, organizationId], references: [id, organizationId], onDelete: Restrict)
+  attendanceRecords      AttendanceRecord[]
+
+  @@unique([id, organizationId])
+  @@index([organizationId, branchId, scheduledDate])
+  @@index([branchId, startAt, status])
+  @@index([classScheduleId, scheduledDate])
+}
+
+model AttendanceRecord {
+  id             String           @id @default(cuid())
+  organizationId String
+  branchId       String
+  classSessionId String
+  studentId      String
+  status         AttendanceStatus @default(PRESENT)
+  notes          String?
+  createdAt      DateTime         @default(now()) @db.Timestamptz(3)
+  updatedAt      DateTime         @updatedAt @db.Timestamptz(3)
+
+  organization   Organization     @relation(fields: [organizationId], references: [id], onDelete: Restrict)
+  branch         Branch           @relation(fields: [branchId, organizationId], references: [id, organizationId], onDelete: Restrict)
+  classSession   ClassSession     @relation(fields: [classSessionId, organizationId], references: [id, organizationId], onDelete: Restrict)
+  student        Student          @relation(fields: [studentId, organizationId], references: [id, organizationId], onDelete: Restrict)
+
+  @@unique([id, organizationId])
+  @@unique([classSessionId, studentId])
+  @@index([organizationId, branchId, classSessionId])
+  @@index([classSessionId, status])
+  @@index([studentId, createdAt])
+}
+
+model PromotionRequest {
+  id                   String                 @id @default(cuid())
+  organizationId       String
+  branchId             String
+  studentId            String
+  proposedByMembershipId String
+  reviewedByMembershipId String?
+  type                 PromotionType
+  status               PromotionRequestStatus @default(PENDING_REVIEW)
+  trackSnapshot        PromotionTrack
+  currentBeltSnapshot  PromotionRank?
+  currentStripesSnapshot Int
+  targetBelt           PromotionRank?
+  targetStripes        Int?
+  proposalNotes        String?
+  decisionNotes        String?
+  rejectionReason      String?
+  effectiveDate        DateTime?              @db.Date
+  decisionAt           DateTime?              @db.Timestamptz(3)
+  createdAt            DateTime               @default(now()) @db.Timestamptz(3)
+  updatedAt            DateTime               @updatedAt @db.Timestamptz(3)
+
+  organization         Organization           @relation(fields: [organizationId], references: [id], onDelete: Restrict)
+  branch               Branch                 @relation(fields: [branchId, organizationId], references: [id, organizationId], onDelete: Restrict)
+  student              Student                @relation(fields: [studentId, organizationId], references: [id, organizationId], onDelete: Restrict)
+  proposedByMembership OrganizationMembership @relation("PromotionProposedByMembership", fields: [proposedByMembershipId, organizationId], references: [id, organizationId], onDelete: Restrict)
+  reviewedByMembership OrganizationMembership? @relation("PromotionReviewedByMembership", fields: [reviewedByMembershipId, organizationId], references: [id, organizationId], onDelete: Restrict)
+  evaluation           PromotionEvaluation?
+
+  @@unique([id, organizationId])
+  @@index([organizationId, branchId, status])
+  @@index([studentId, status])
+  @@index([proposedByMembershipId, createdAt])
+}
+
+model PromotionEvaluation {
+  id                           String                  @id @default(cuid())
+  organizationId               String
+  promotionRequestId           String
+  updatedByMembershipId        String?
+  classesSinceLastPromotion    Int?
+  attendanceLast30Days         Int?
+  attendanceLast90Days         Int?
+  daysSinceLastPromotion       Int?
+  approvedPromotionCount       Int?
+  guardScore                   Int?
+  passingScore                 Int?
+  controlScore                 Int?
+  escapesDefenseScore          Int?
+  submissionsScore             Int?
+  tacticalUnderstandingScore   Int?
+  attitudeDisciplineScore      Int?
+  commitmentConsistencyScore   Int?
+  teamworkRespectScore         Int?
+  coachNotes                   String?
+  recommendation               PromotionRecommendation?
+  signalsComputedAt            DateTime?               @db.Timestamptz(3)
+  createdAt                    DateTime                @default(now()) @db.Timestamptz(3)
+  updatedAt                    DateTime                @updatedAt @db.Timestamptz(3)
+
+  organization                 Organization            @relation(fields: [organizationId], references: [id], onDelete: Restrict)
+  promotionRequest             PromotionRequest        @relation(fields: [promotionRequestId, organizationId], references: [id, organizationId], onDelete: Cascade)
+  updatedByMembership          OrganizationMembership? @relation("PromotionEvaluationUpdatedByMembership", fields: [updatedByMembershipId, organizationId], references: [id, organizationId], onDelete: Restrict)
+
+  @@unique([promotionRequestId])
+  @@unique([promotionRequestId, organizationId])
+  @@index([organizationId, recommendation])
 }
 
 model AuditLog {

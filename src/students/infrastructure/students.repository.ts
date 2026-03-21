@@ -1,6 +1,11 @@
 import { ConflictException, Injectable, NotFoundException } from '@nestjs/common';
 import type { Prisma } from '../../generated/prisma/client';
-import { MembershipStatus, StudentStatus } from '../../generated/prisma/enums';
+import {
+  MembershipStatus,
+  PromotionRank,
+  PromotionTrack,
+  StudentStatus,
+} from '../../generated/prisma/enums';
 import { PrismaService } from '../../prisma/prisma.service';
 
 const studentMutationSelect = {
@@ -14,6 +19,7 @@ const studentMutationSelect = {
   phone: true,
   dateOfBirth: true,
   status: true,
+  promotionTrack: true,
   startedBjjAt: true,
   joinedOrganizationAt: true,
   currentBelt: true,
@@ -31,6 +37,7 @@ const studentListSelect = {
   email: true,
   phone: true,
   status: true,
+  promotionTrack: true,
   currentBelt: true,
   currentStripes: true,
   createdAt: true,
@@ -97,7 +104,8 @@ export class StudentsRepository {
     dateOfBirth?: Date;
     startedBjjAt?: Date;
     joinedOrganizationAt?: Date;
-    currentBelt?: string;
+    promotionTrack: PromotionTrack;
+    currentBelt?: PromotionRank;
     currentStripes: number;
   }) {
     try {
@@ -113,6 +121,7 @@ export class StudentsRepository {
           dateOfBirth: params.dateOfBirth,
           startedBjjAt: params.startedBjjAt,
           joinedOrganizationAt: params.joinedOrganizationAt,
+          promotionTrack: params.promotionTrack,
           currentBelt: params.currentBelt,
           currentStripes: params.currentStripes,
           status: StudentStatus.ACTIVE,
@@ -200,7 +209,8 @@ export class StudentsRepository {
     dateOfBirth?: Date;
     startedBjjAt?: Date;
     joinedOrganizationAt?: Date;
-    currentBelt?: string;
+    promotionTrack?: PromotionTrack;
+    currentBelt?: PromotionRank;
     currentStripes?: number;
   }) {
     try {
@@ -218,6 +228,7 @@ export class StudentsRepository {
           dateOfBirth: params.dateOfBirth,
           startedBjjAt: params.startedBjjAt,
           joinedOrganizationAt: params.joinedOrganizationAt,
+          promotionTrack: params.promotionTrack,
           currentBelt: params.currentBelt,
           currentStripes: params.currentStripes,
         },

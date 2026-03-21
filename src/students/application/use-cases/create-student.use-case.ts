@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import type { AuthenticatedPrincipal } from '../../../auth/authenticated-principal.interface';
 import { AuditService } from '../../../audit/audit.service';
+import { PromotionTrack } from '../../../generated/prisma/enums';
 import { CreateStudentDto } from '../../dto/create-student.dto';
 import { StudentsPolicy } from '../../domain/students.policy';
 import { StudentsRepository } from '../../infrastructure/students.repository';
@@ -44,7 +45,8 @@ export class CreateStudentUseCase {
       joinedOrganizationAt: dto.joinedOrganizationAt
         ? new Date(dto.joinedOrganizationAt)
         : undefined,
-      currentBelt: dto.currentBelt?.trim(),
+      promotionTrack: dto.promotionTrack ?? PromotionTrack.ADULT,
+      currentBelt: dto.currentBelt,
       currentStripes: dto.currentStripes ?? 0,
     });
 

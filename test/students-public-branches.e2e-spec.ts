@@ -24,7 +24,7 @@ describe('Students And Public Branches (e2e)', () => {
   });
 
   it('enforces branch visibility for students and exposes only published public branches', async () => {
-    const server = app.getHttpAdapter().getInstance();
+    const server = app.getHttpServer();
     const bootstrap = await request(server)
       .post('/api/v1/auth/bootstrap')
       .send({

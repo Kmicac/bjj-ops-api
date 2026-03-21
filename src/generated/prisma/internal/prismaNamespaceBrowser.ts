@@ -59,6 +59,11 @@ export const ModelName = {
   MembershipRoleAssignment: 'MembershipRoleAssignment',
   MembershipBranchScope: 'MembershipBranchScope',
   Student: 'Student',
+  ClassSchedule: 'ClassSchedule',
+  ClassSession: 'ClassSession',
+  AttendanceRecord: 'AttendanceRecord',
+  PromotionRequest: 'PromotionRequest',
+  PromotionEvaluation: 'PromotionEvaluation',
   AuditLog: 'AuditLog'
 } as const
 
@@ -205,6 +210,7 @@ export const StudentScalarFieldEnum = {
   status: 'status',
   startedBjjAt: 'startedBjjAt',
   joinedOrganizationAt: 'joinedOrganizationAt',
+  promotionTrack: 'promotionTrack',
   currentBelt: 'currentBelt',
   currentStripes: 'currentStripes',
   createdAt: 'createdAt',
@@ -213,6 +219,121 @@ export const StudentScalarFieldEnum = {
 } as const
 
 export type StudentScalarFieldEnum = (typeof StudentScalarFieldEnum)[keyof typeof StudentScalarFieldEnum]
+
+
+export const ClassScheduleScalarFieldEnum = {
+  id: 'id',
+  organizationId: 'organizationId',
+  branchId: 'branchId',
+  instructorMembershipId: 'instructorMembershipId',
+  title: 'title',
+  classType: 'classType',
+  description: 'description',
+  weekday: 'weekday',
+  startTime: 'startTime',
+  endTime: 'endTime',
+  timezone: 'timezone',
+  capacity: 'capacity',
+  isActive: 'isActive',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  deletedAt: 'deletedAt'
+} as const
+
+export type ClassScheduleScalarFieldEnum = (typeof ClassScheduleScalarFieldEnum)[keyof typeof ClassScheduleScalarFieldEnum]
+
+
+export const ClassSessionScalarFieldEnum = {
+  id: 'id',
+  organizationId: 'organizationId',
+  branchId: 'branchId',
+  classScheduleId: 'classScheduleId',
+  instructorMembershipId: 'instructorMembershipId',
+  title: 'title',
+  classType: 'classType',
+  scheduledDate: 'scheduledDate',
+  startAt: 'startAt',
+  endAt: 'endAt',
+  capacity: 'capacity',
+  status: 'status',
+  cancellationReason: 'cancellationReason',
+  notes: 'notes',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  deletedAt: 'deletedAt'
+} as const
+
+export type ClassSessionScalarFieldEnum = (typeof ClassSessionScalarFieldEnum)[keyof typeof ClassSessionScalarFieldEnum]
+
+
+export const AttendanceRecordScalarFieldEnum = {
+  id: 'id',
+  organizationId: 'organizationId',
+  branchId: 'branchId',
+  classSessionId: 'classSessionId',
+  studentId: 'studentId',
+  status: 'status',
+  notes: 'notes',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type AttendanceRecordScalarFieldEnum = (typeof AttendanceRecordScalarFieldEnum)[keyof typeof AttendanceRecordScalarFieldEnum]
+
+
+export const PromotionRequestScalarFieldEnum = {
+  id: 'id',
+  organizationId: 'organizationId',
+  branchId: 'branchId',
+  studentId: 'studentId',
+  proposedByMembershipId: 'proposedByMembershipId',
+  reviewedByMembershipId: 'reviewedByMembershipId',
+  type: 'type',
+  status: 'status',
+  trackSnapshot: 'trackSnapshot',
+  currentBeltSnapshot: 'currentBeltSnapshot',
+  currentStripesSnapshot: 'currentStripesSnapshot',
+  targetBelt: 'targetBelt',
+  targetStripes: 'targetStripes',
+  proposalNotes: 'proposalNotes',
+  decisionNotes: 'decisionNotes',
+  rejectionReason: 'rejectionReason',
+  effectiveDate: 'effectiveDate',
+  decisionAt: 'decisionAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type PromotionRequestScalarFieldEnum = (typeof PromotionRequestScalarFieldEnum)[keyof typeof PromotionRequestScalarFieldEnum]
+
+
+export const PromotionEvaluationScalarFieldEnum = {
+  id: 'id',
+  organizationId: 'organizationId',
+  promotionRequestId: 'promotionRequestId',
+  updatedByMembershipId: 'updatedByMembershipId',
+  classesSinceLastPromotion: 'classesSinceLastPromotion',
+  attendanceLast30Days: 'attendanceLast30Days',
+  attendanceLast90Days: 'attendanceLast90Days',
+  daysSinceLastPromotion: 'daysSinceLastPromotion',
+  approvedPromotionCount: 'approvedPromotionCount',
+  guardScore: 'guardScore',
+  passingScore: 'passingScore',
+  controlScore: 'controlScore',
+  escapesDefenseScore: 'escapesDefenseScore',
+  submissionsScore: 'submissionsScore',
+  tacticalUnderstandingScore: 'tacticalUnderstandingScore',
+  attitudeDisciplineScore: 'attitudeDisciplineScore',
+  commitmentConsistencyScore: 'commitmentConsistencyScore',
+  teamworkRespectScore: 'teamworkRespectScore',
+  coachNotes: 'coachNotes',
+  recommendation: 'recommendation',
+  signalsComputedAt: 'signalsComputedAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type PromotionEvaluationScalarFieldEnum = (typeof PromotionEvaluationScalarFieldEnum)[keyof typeof PromotionEvaluationScalarFieldEnum]
 
 
 export const AuditLogScalarFieldEnum = {

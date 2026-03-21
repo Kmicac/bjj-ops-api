@@ -82,3 +82,109 @@ export const StudentStatus = {
 } as const
 
 export type StudentStatus = (typeof StudentStatus)[keyof typeof StudentStatus]
+
+
+export const Weekday = {
+  MONDAY: 'MONDAY',
+  TUESDAY: 'TUESDAY',
+  WEDNESDAY: 'WEDNESDAY',
+  THURSDAY: 'THURSDAY',
+  FRIDAY: 'FRIDAY',
+  SATURDAY: 'SATURDAY',
+  SUNDAY: 'SUNDAY'
+} as const
+
+export type Weekday = (typeof Weekday)[keyof typeof Weekday]
+
+
+export const ClassType = {
+  GI: 'GI',
+  NO_GI: 'NO_GI',
+  FUNDAMENTALS: 'FUNDAMENTALS',
+  ADVANCED: 'ADVANCED',
+  KIDS: 'KIDS',
+  COMPETITION: 'COMPETITION',
+  OPEN_MAT: 'OPEN_MAT',
+  SEMINAR: 'SEMINAR',
+  PRIVATE: 'PRIVATE'
+} as const
+
+export type ClassType = (typeof ClassType)[keyof typeof ClassType]
+
+
+export const ClassSessionStatus = {
+  SCHEDULED: 'SCHEDULED',
+  COMPLETED: 'COMPLETED',
+  CANCELED: 'CANCELED'
+} as const
+
+export type ClassSessionStatus = (typeof ClassSessionStatus)[keyof typeof ClassSessionStatus]
+
+
+export const AttendanceStatus = {
+  PRESENT: 'PRESENT',
+  LATE: 'LATE',
+  ABSENT: 'ABSENT',
+  EXCUSED: 'EXCUSED'
+} as const
+
+export type AttendanceStatus = (typeof AttendanceStatus)[keyof typeof AttendanceStatus]
+
+
+export const PromotionType = {
+  BELT: 'BELT',
+  STRIPE: 'STRIPE'
+} as const
+
+export type PromotionType = (typeof PromotionType)[keyof typeof PromotionType]
+
+
+export const PromotionRequestStatus = {
+  PENDING_REVIEW: 'PENDING_REVIEW',
+  APPROVED: 'APPROVED',
+  REJECTED: 'REJECTED'
+} as const
+
+export type PromotionRequestStatus = (typeof PromotionRequestStatus)[keyof typeof PromotionRequestStatus]
+
+
+export const PromotionRecommendation = {
+  DO_NOT_RECOMMEND: 'DO_NOT_RECOMMEND',
+  NEEDS_MORE_TIME: 'NEEDS_MORE_TIME',
+  RECOMMEND: 'RECOMMEND',
+  STRONGLY_RECOMMEND: 'STRONGLY_RECOMMEND'
+} as const
+
+export type PromotionRecommendation = (typeof PromotionRecommendation)[keyof typeof PromotionRecommendation]
+
+
+export const PromotionTrack = {
+  KIDS: 'KIDS',
+  ADULT: 'ADULT'
+} as const
+
+export type PromotionTrack = (typeof PromotionTrack)[keyof typeof PromotionTrack]
+
+
+export const PromotionRank = {
+  KIDS_WHITE: 'KIDS_WHITE',
+  KIDS_GREY_WHITE: 'KIDS_GREY_WHITE',
+  KIDS_GREY: 'KIDS_GREY',
+  KIDS_GREY_BLACK: 'KIDS_GREY_BLACK',
+  KIDS_YELLOW_WHITE: 'KIDS_YELLOW_WHITE',
+  KIDS_YELLOW: 'KIDS_YELLOW',
+  KIDS_YELLOW_BLACK: 'KIDS_YELLOW_BLACK',
+  KIDS_ORANGE_WHITE: 'KIDS_ORANGE_WHITE',
+  KIDS_ORANGE: 'KIDS_ORANGE',
+  KIDS_ORANGE_BLACK: 'KIDS_ORANGE_BLACK',
+  KIDS_GREEN_WHITE: 'KIDS_GREEN_WHITE',
+  KIDS_GREEN: 'KIDS_GREEN',
+  KIDS_GREEN_BLACK: 'KIDS_GREEN_BLACK',
+  ADULT_WHITE: 'ADULT_WHITE',
+  ADULT_BLUE: 'ADULT_BLUE',
+  ADULT_PURPLE: 'ADULT_PURPLE',
+  ADULT_BROWN: 'ADULT_BROWN',
+  ADULT_BLACK: 'ADULT_BLACK'
+} as const
+
+export type PromotionRank = (typeof PromotionRank)[keyof typeof PromotionRank]

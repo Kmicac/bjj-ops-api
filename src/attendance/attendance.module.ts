@@ -1,9 +1,20 @@
 import { Module } from '@nestjs/common';
-import { AttendanceService } from './attendance.service';
+import { AuditModule } from '../audit/audit.module';
+import { AuthModule } from '../auth/auth.module';
+import { ListSessionAttendanceUseCase } from './application/use-cases/list-session-attendance.use-case';
+import { RecordSessionAttendanceUseCase } from './application/use-cases/record-session-attendance.use-case';
 import { AttendanceController } from './attendance.controller';
+import { AttendancePolicy } from './domain/attendance.policy';
+import { AttendanceRepository } from './infrastructure/attendance.repository';
 
 @Module({
-  providers: [AttendanceService],
-  controllers: [AttendanceController]
+  imports: [AuthModule, AuditModule],
+  controllers: [AttendanceController],
+  providers: [
+    AttendanceRepository,
+    AttendancePolicy,
+    ListSessionAttendanceUseCase,
+    RecordSessionAttendanceUseCase,
+  ],
 })
 export class AttendanceModule {}

@@ -13,6 +13,11 @@ type PromotionRankSpec = {
   maxStripes: number;
 };
 
+const TRACK_LABELS: Record<PromotionTrack, string> = {
+  [PromotionTrack.KIDS]: 'Kids',
+  [PromotionTrack.ADULT]: 'Adult / Juvenile',
+};
+
 const PROMOTION_RANK_SPECS: PromotionRankSpec[] = [
   {
     code: PromotionRank.KIDS_WHITE,
@@ -151,12 +156,20 @@ const INITIAL_RANK_BY_TRACK: Record<PromotionTrack, PromotionRank> = {
   [PromotionTrack.ADULT]: PromotionRank.ADULT_WHITE,
 };
 
+export function getPromotionTrackLabel(track: PromotionTrack) {
+  return TRACK_LABELS[track];
+}
+
 export function getPromotionRankSpec(rank: PromotionRank) {
   return RANK_SPEC_BY_CODE.get(rank) ?? null;
 }
 
 export function getPromotionTrackForRank(rank: PromotionRank) {
   return getPromotionRankSpec(rank)?.track ?? null;
+}
+
+export function getPromotionRankLabel(rank: PromotionRank) {
+  return getPromotionRankSpec(rank)?.label ?? null;
 }
 
 export function getInitialPromotionRank(track: PromotionTrack) {
@@ -180,6 +193,30 @@ export function getNextPromotionRank(rank: PromotionRank) {
 
 export function getMaxStripesForRank(rank: PromotionRank) {
   return getPromotionRankSpec(rank)?.maxStripes ?? 0;
+}
+
+export function listPromotionTrackCatalog() {
+  return Object.values(PromotionTrack).map((track) => ({
+    code: track,
+    label: TRACK_LABELS[track],
+    initialRank: getInitialPromotionRank(track),
+    minAgeYears: track === PromotionTrack.ADULT ? ADULT_TRACK_MIN_AGE : null,
+    maxAgeYears: track === PromotionTrack.KIDS ? ADULT_TRACK_MIN_AGE - 1 : null,
+  }));
+}
+
+export function listPromotionRankCatalog() {
+  return PROMOTION_RANK_SPECS.map((rank) => ({
+    code: rank.code,
+    label: rank.label,
+    track: rank.track,
+    trackLabel: TRACK_LABELS[rank.track],
+    maxStripes: rank.maxStripes,
+    order: rank.order,
+    isInitialRank: getInitialPromotionRank(rank.track) === rank.code,
+    isTerminalRank: getNextPromotionRank(rank.code) === null,
+    nextValidRank: getNextPromotionRank(rank.code),
+  }));
 }
 
 export function getAgeInYearsOnDate(

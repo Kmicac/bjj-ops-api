@@ -79,6 +79,9 @@ const classScheduleSnapshotSelect = {
   timezone: true,
   capacity: true,
   isActive: true,
+  instructorMembership: {
+    select: scheduleInstructorSelect,
+  },
 } satisfies Prisma.ClassScheduleSelect;
 
 type CreateClassScheduleInput = {
@@ -122,6 +125,18 @@ type CreateClassSessionInput = {
   endAt: Date;
   capacity?: number;
   notes?: string;
+};
+
+type GenerateClassSessionCandidateInput = {
+  classScheduleId: string;
+  instructorMembershipId: string;
+  title: string;
+  classType: ClassType;
+  scheduledDateIso: string;
+  scheduledDate: Date;
+  startAt: Date;
+  endAt: Date;
+  capacity?: number;
 };
 
 type UpdateClassSessionInput = {
@@ -291,6 +306,22 @@ export class ClassesRepository {
     ]);
 
     return { items, total };
+  }
+
+  async listActiveClassScheduleSnapshots(
+    organizationId: string,
+    branchId: string,
+  ) {
+    return this.prisma.classSchedule.findMany({
+      where: {
+        organizationId,
+        branchId,
+        isActive: true,
+        deletedAt: null,
+      },
+      orderBy: [{ weekday: 'asc' }, { startTime: 'asc' }, { title: 'asc' }],
+      select: classScheduleSnapshotSelect,
+    });
   }
 
   async updateClassSchedule(input: UpdateClassScheduleInput) {
@@ -481,6 +512,99 @@ export class ClassesRepository {
     });
   }
 
+  // This is the strongest guarantee we have in this phase:
+  // app writers are serialized with a branch advisory lock and sorted instructor locks
+  // inside a serializable transaction. It protects concurrent writers using this app,
+  // but it is not a DB-wide exclusion constraint for external writers bypassing the app.
+  async generateClassSessionsFromSchedules(params: {
+    organizationId: string;
+    branchId: string;
+    candidates: GenerateClassSessionCandidateInput[];
+  }) {
+    if (!params.candidates.length) {
+      return {
+        generatedCount: 0,
+        skippedExistingCount: 0,
+        skippedConflictCount: 0,
+      };
+    }
+
+    return this.prisma.$transaction(
+      async (tx) => {
+        await this.acquireBranchSessionLock(tx, {
+          organizationId: params.organizationId,
+          branchId: params.branchId,
+        });
+        await this.acquireInstructorSessionLocks(
+          tx,
+          params.organizationId,
+          params.candidates.map((candidate) => candidate.instructorMembershipId),
+        );
+
+        let generatedCount = 0;
+        let skippedExistingCount = 0;
+        let skippedConflictCount = 0;
+
+        for (const candidate of params.candidates) {
+          const existingSession = await this.findSessionForScheduleOnDateTx(tx, {
+            organizationId: params.organizationId,
+            branchId: params.branchId,
+            scheduleId: candidate.classScheduleId,
+            scheduledDateIso: candidate.scheduledDateIso,
+          });
+
+          if (existingSession) {
+            skippedExistingCount += 1;
+            continue;
+          }
+
+          const overlaps = await this.findSessionOverlapsTx(tx, {
+            organizationId: params.organizationId,
+            branchId: params.branchId,
+            instructorMembershipId: candidate.instructorMembershipId,
+            startAt: candidate.startAt,
+            endAt: candidate.endAt,
+          });
+
+          if (
+            overlaps.branchConflicts.length > 0 ||
+            overlaps.instructorConflicts.length > 0
+          ) {
+            skippedConflictCount += 1;
+            continue;
+          }
+
+          await tx.classSession.create({
+            data: {
+              organizationId: params.organizationId,
+              branchId: params.branchId,
+              classScheduleId: candidate.classScheduleId,
+              instructorMembershipId: candidate.instructorMembershipId,
+              title: candidate.title,
+              classType: candidate.classType,
+              scheduledDate: candidate.scheduledDate,
+              startAt: candidate.startAt,
+              endAt: candidate.endAt,
+              capacity: candidate.capacity,
+              status: ClassSessionStatus.SCHEDULED,
+            },
+          });
+
+          generatedCount += 1;
+        }
+
+        return {
+          generatedCount,
+          skippedExistingCount,
+          skippedConflictCount,
+        };
+      },
+      {
+        isolationLevel: Prisma.TransactionIsolationLevel.Serializable,
+      },
+    );
+  }
+
   async findSessionForScheduleOnDate(
     organizationId: string,
     branchId: string,
@@ -641,11 +765,38 @@ export class ClassesRepository {
       instructorMembershipId: string;
     },
   ) {
+    await this.acquireBranchSessionLock(tx, {
+      organizationId: params.organizationId,
+      branchId: params.branchId,
+    });
+    await this.acquireInstructorSessionLocks(tx, params.organizationId, [
+      params.instructorMembershipId,
+    ]);
+  }
+
+  private async acquireBranchSessionLock(
+    tx: TxClient,
+    params: {
+      organizationId: string;
+      branchId: string;
+    },
+  ) {
     const branchLockKey = `org:${params.organizationId}:branch:${params.branchId}`;
-    const instructorLockKey = `org:${params.organizationId}:instructor:${params.instructorMembershipId}`;
 
     await tx.$queryRaw`SELECT pg_advisory_xact_lock(${SESSION_BRANCH_LOCK_NAMESPACE}, hashtext(${branchLockKey}))`;
-    await tx.$queryRaw`SELECT pg_advisory_xact_lock(${SESSION_INSTRUCTOR_LOCK_NAMESPACE}, hashtext(${instructorLockKey}))`;
+  }
+
+  private async acquireInstructorSessionLocks(
+    tx: TxClient,
+    organizationId: string,
+    instructorMembershipIds: string[],
+  ) {
+    const uniqueInstructorIds = [...new Set(instructorMembershipIds)].sort();
+
+    for (const instructorMembershipId of uniqueInstructorIds) {
+      const instructorLockKey = `org:${organizationId}:instructor:${instructorMembershipId}`;
+      await tx.$queryRaw`SELECT pg_advisory_xact_lock(${SESSION_INSTRUCTOR_LOCK_NAMESPACE}, hashtext(${instructorLockKey}))`;
+    }
   }
 
   private async findSessionForScheduleOnDateTx(

@@ -14,6 +14,8 @@ import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 import { ApprovePromotionUseCase } from './application/use-cases/approve-promotion.use-case';
 import { CreatePromotionRequestUseCase } from './application/use-cases/create-promotion-request.use-case';
 import { GetPromotionDetailUseCase } from './application/use-cases/get-promotion-detail.use-case';
+import { GetPromotionCatalogUseCase } from './application/use-cases/get-promotion-catalog.use-case';
+import { GetStudentPromotionContextUseCase } from './application/use-cases/get-student-promotion-context.use-case';
 import { ListPromotionsUseCase } from './application/use-cases/list-promotions.use-case';
 import { RejectPromotionUseCase } from './application/use-cases/reject-promotion.use-case';
 import { UpsertPromotionEvaluationUseCase } from './application/use-cases/upsert-promotion-evaluation.use-case';
@@ -28,8 +30,10 @@ import { UpsertPromotionEvaluationDto } from './dto/upsert-promotion-evaluation.
 export class PromotionsController {
   constructor(
     private readonly createPromotionRequestUseCase: CreatePromotionRequestUseCase,
+    private readonly getPromotionCatalogUseCase: GetPromotionCatalogUseCase,
     private readonly listPromotionsUseCase: ListPromotionsUseCase,
     private readonly getPromotionDetailUseCase: GetPromotionDetailUseCase,
+    private readonly getStudentPromotionContextUseCase: GetStudentPromotionContextUseCase,
     private readonly upsertPromotionEvaluationUseCase: UpsertPromotionEvaluationUseCase,
     private readonly approvePromotionUseCase: ApprovePromotionUseCase,
     private readonly rejectPromotionUseCase: RejectPromotionUseCase,
@@ -48,6 +52,14 @@ export class PromotionsController {
       studentId,
       dto,
     );
+  }
+
+  @Get('promotions/catalog')
+  getCatalog(
+    @CurrentPrincipal() principal: AuthenticatedPrincipal,
+    @Param('organizationId') organizationId: string,
+  ) {
+    return this.getPromotionCatalogUseCase.execute(principal, organizationId);
   }
 
   @Get('promotions')
@@ -69,6 +81,19 @@ export class PromotionsController {
       principal,
       organizationId,
       promotionId,
+    );
+  }
+
+  @Get('students/:studentId/promotion-context')
+  getStudentPromotionContext(
+    @CurrentPrincipal() principal: AuthenticatedPrincipal,
+    @Param('organizationId') organizationId: string,
+    @Param('studentId') studentId: string,
+  ) {
+    return this.getStudentPromotionContextUseCase.execute(
+      principal,
+      organizationId,
+      studentId,
     );
   }
 

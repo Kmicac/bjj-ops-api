@@ -148,6 +148,44 @@ const promotionDetailSelect = {
   },
 } satisfies Prisma.PromotionRequestSelect;
 
+const promotionHistorySummarySelect = {
+  id: true,
+  branchId: true,
+  studentId: true,
+  type: true,
+  status: true,
+  trackSnapshot: true,
+  currentBeltSnapshot: true,
+  currentStripesSnapshot: true,
+  targetBelt: true,
+  targetStripes: true,
+  effectiveDate: true,
+  decisionAt: true,
+  createdAt: true,
+  proposedByMembershipId: true,
+  reviewedByMembershipId: true,
+} satisfies Prisma.PromotionRequestSelect;
+
+const pendingPromotionContextSelect = {
+  ...promotionHistorySummarySelect,
+  evaluation: {
+    select: {
+      recommendation: true,
+      coachNotes: true,
+      guardScore: true,
+      passingScore: true,
+      controlScore: true,
+      escapesDefenseScore: true,
+      submissionsScore: true,
+      tacticalUnderstandingScore: true,
+      attitudeDisciplineScore: true,
+      commitmentConsistencyScore: true,
+      teamworkRespectScore: true,
+      updatedAt: true,
+    },
+  },
+} satisfies Prisma.PromotionRequestSelect;
+
 type TxClient = Prisma.TransactionClient;
 
 type PromotionSignals = {
@@ -393,6 +431,13 @@ export class PromotionsRepository {
     status?: PromotionRequestStatus;
     studentId?: string;
     branchIds?: string[];
+    type?: PromotionType;
+    track?: PromotionTrack;
+    targetBelt?: PromotionRank;
+    proposedByMembershipId?: string;
+    reviewedByMembershipId?: string;
+    dateFrom?: string;
+    dateTo?: string;
     skip: number;
     take: number;
   }) {
@@ -400,6 +445,22 @@ export class PromotionsRepository {
       organizationId: params.organizationId,
       status: params.status,
       studentId: params.studentId,
+      type: params.type,
+      trackSnapshot: params.track,
+      targetBelt: params.targetBelt,
+      proposedByMembershipId: params.proposedByMembershipId,
+      reviewedByMembershipId: params.reviewedByMembershipId,
+      createdAt:
+        params.dateFrom || params.dateTo
+          ? {
+              gte: params.dateFrom
+                ? new Date(`${params.dateFrom}T00:00:00.000Z`)
+                : undefined,
+              lte: params.dateTo
+                ? new Date(`${params.dateTo}T23:59:59.999Z`)
+                : undefined,
+            }
+          : undefined,
       branchId: params.branchIds?.length
         ? {
             in: params.branchIds,
@@ -419,6 +480,93 @@ export class PromotionsRepository {
     ]);
 
     return { items, total };
+  }
+
+  async getPromotionContextForStudent(
+    organizationId: string,
+    studentId: string,
+  ) {
+    const student = await this.prisma.student.findFirst({
+      where: {
+        id: studentId,
+        organizationId,
+        deletedAt: null,
+      },
+      select: {
+        id: true,
+        organizationId: true,
+        primaryBranchId: true,
+        firstName: true,
+        lastName: true,
+        promotionTrack: true,
+        currentBelt: true,
+        currentStripes: true,
+        startedBjjAt: true,
+        joinedOrganizationAt: true,
+        primaryBranch: {
+          select: {
+            id: true,
+            organizationId: true,
+            name: true,
+            headCoachMembershipId: true,
+          },
+        },
+      },
+    });
+
+    if (!student) {
+      throw new NotFoundException('Student not found');
+    }
+
+    const [
+      lastApprovedPromotion,
+      totalApprovedPromotions,
+      currentPendingRequest,
+      recentHistory,
+    ] = await Promise.all([
+      this.prisma.promotionRequest.findFirst({
+        where: {
+          organizationId,
+          studentId,
+          status: PromotionRequestStatus.APPROVED,
+        },
+        orderBy: [{ effectiveDate: 'desc' }, { createdAt: 'desc' }],
+        select: promotionHistorySummarySelect,
+      }),
+      this.prisma.promotionRequest.count({
+        where: {
+          organizationId,
+          studentId,
+          status: PromotionRequestStatus.APPROVED,
+        },
+      }),
+      this.prisma.promotionRequest.findFirst({
+        where: {
+          organizationId,
+          studentId,
+          status: PromotionRequestStatus.PENDING_REVIEW,
+        },
+        orderBy: [{ createdAt: 'desc' }],
+        select: pendingPromotionContextSelect,
+      }),
+      this.prisma.promotionRequest.findMany({
+        where: {
+          organizationId,
+          studentId,
+        },
+        orderBy: [{ createdAt: 'desc' }],
+        take: 5,
+        select: promotionHistorySummarySelect,
+      }),
+    ]);
+
+    return {
+      student,
+      lastApprovedPromotion,
+      totalApprovedPromotions,
+      currentPendingRequest,
+      recentHistory,
+    };
   }
 
   async getPromotionDetailForAccess(

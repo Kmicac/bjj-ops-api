@@ -1,6 +1,11 @@
-import { IsEnum, IsOptional, IsString } from 'class-validator';
+import { IsDateString, IsEnum, IsOptional, IsString } from 'class-validator';
 import { PaginationQueryDto } from '../../common/dto/pagination-query.dto';
-import { PromotionRequestStatus } from '../../generated/prisma/enums';
+import {
+  PromotionRank,
+  PromotionRequestStatus,
+  PromotionTrack,
+  PromotionType,
+} from '../../generated/prisma/enums';
 
 export class ListPromotionsQueryDto extends PaginationQueryDto {
   @IsOptional()
@@ -14,4 +19,32 @@ export class ListPromotionsQueryDto extends PaginationQueryDto {
   @IsOptional()
   @IsString()
   branchId?: string;
+
+  @IsOptional()
+  @IsEnum(PromotionType)
+  type?: PromotionType;
+
+  @IsOptional()
+  @IsEnum(PromotionTrack)
+  track?: PromotionTrack;
+
+  @IsOptional()
+  @IsEnum(PromotionRank)
+  targetBelt?: PromotionRank;
+
+  @IsOptional()
+  @IsString()
+  proposedByMembershipId?: string;
+
+  @IsOptional()
+  @IsString()
+  reviewedByMembershipId?: string;
+
+  @IsOptional()
+  @IsDateString()
+  dateFrom?: string;
+
+  @IsOptional()
+  @IsDateString()
+  dateTo?: string;
 }

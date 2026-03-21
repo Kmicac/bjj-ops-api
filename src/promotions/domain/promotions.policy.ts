@@ -93,12 +93,34 @@ export class PromotionsPolicy {
     }
   }
 
+  ensureCanViewCatalog(
+    principal: AuthenticatedPrincipal,
+    organizationId: string,
+  ) {
+    this.accessControl.ensureOrganizationAccess(principal, organizationId);
+
+    if (
+      this.getHighestAssignedRoleRank(principal.assignedRoles) <
+      ROLE_RANK[MembershipRole.INSTRUCTOR]
+    ) {
+      throw new ForbiddenException('Insufficient organization role');
+    }
+  }
+
   ensureCanRead(
     principal: AuthenticatedPrincipal,
     organizationId: string,
     promotion: PromotionAccessTarget,
   ) {
     this.ensureInstructorBranchAccess(principal, organizationId, promotion.branch);
+  }
+
+  ensureCanViewStudentContext(
+    principal: AuthenticatedPrincipal,
+    organizationId: string,
+    branch: BranchAccessTarget,
+  ) {
+    this.ensureInstructorBranchAccess(principal, organizationId, branch);
   }
 
   ensureCanEditEvaluation(

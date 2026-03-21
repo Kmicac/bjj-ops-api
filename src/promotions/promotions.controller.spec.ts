@@ -2,6 +2,8 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { ApprovePromotionUseCase } from './application/use-cases/approve-promotion.use-case';
 import { CreatePromotionRequestUseCase } from './application/use-cases/create-promotion-request.use-case';
 import { GetPromotionDetailUseCase } from './application/use-cases/get-promotion-detail.use-case';
+import { GetPromotionCatalogUseCase } from './application/use-cases/get-promotion-catalog.use-case';
+import { GetStudentPromotionContextUseCase } from './application/use-cases/get-student-promotion-context.use-case';
 import { ListPromotionsUseCase } from './application/use-cases/list-promotions.use-case';
 import { RejectPromotionUseCase } from './application/use-cases/reject-promotion.use-case';
 import { UpsertPromotionEvaluationUseCase } from './application/use-cases/upsert-promotion-evaluation.use-case';
@@ -15,8 +17,10 @@ describe('PromotionsController', () => {
       controllers: [PromotionsController],
       providers: [
         { provide: CreatePromotionRequestUseCase, useValue: {} },
+        { provide: GetPromotionCatalogUseCase, useValue: {} },
         { provide: ListPromotionsUseCase, useValue: {} },
         { provide: GetPromotionDetailUseCase, useValue: {} },
+        { provide: GetStudentPromotionContextUseCase, useValue: {} },
         { provide: UpsertPromotionEvaluationUseCase, useValue: {} },
         { provide: ApprovePromotionUseCase, useValue: {} },
         { provide: RejectPromotionUseCase, useValue: {} },

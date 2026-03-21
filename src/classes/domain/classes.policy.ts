@@ -34,6 +34,7 @@ const ALLOWED_INSTRUCTOR_ROLES = new Set<MembershipRole>([
   MembershipRole.ACADEMY_MANAGER,
   MembershipRole.INSTRUCTOR,
 ]);
+const MAX_SESSION_GENERATION_RANGE_DAYS = 42;
 
 @Injectable()
 export class ClassesPolicy {
@@ -71,7 +72,23 @@ export class ClassesPolicy {
     this.ensureStaffBranchAccess(principal, organizationId, branch);
   }
 
+  ensureCanGenerateSessions(
+    principal: AuthenticatedPrincipal,
+    organizationId: string,
+    branch: BranchAccessTarget,
+  ) {
+    this.ensureHeadCoachBranchAccess(principal, organizationId, branch);
+  }
+
   ensureCanListSessions(
+    principal: AuthenticatedPrincipal,
+    organizationId: string,
+    branch: BranchAccessTarget,
+  ) {
+    this.ensureStaffBranchAccess(principal, organizationId, branch);
+  }
+
+  ensureCanViewSessionGaps(
     principal: AuthenticatedPrincipal,
     organizationId: string,
     branch: BranchAccessTarget,
@@ -157,6 +174,25 @@ export class ClassesPolicy {
     }
   }
 
+  ensureValidGenerationDateRange(fromDate: string, toDate: string) {
+    this.ensureValidSessionDateRange(fromDate, toDate);
+
+    const start = this.parseIsoDate(fromDate);
+    const end = this.parseIsoDate(toDate);
+    const totalDays =
+      Math.floor((end.getTime() - start.getTime()) / 86400000) + 1;
+
+    if (totalDays > MAX_SESSION_GENERATION_RANGE_DAYS) {
+      throw new ConflictException(
+        `Generation range cannot exceed ${MAX_SESSION_GENERATION_RANGE_DAYS} days`,
+      );
+    }
+  }
+
+  ensureValidSessionGapRange(fromDate: string, toDate: string) {
+    this.ensureValidGenerationDateRange(fromDate, toDate);
+  }
+
   ensureScheduledDateMatchesWeekday(scheduledDate: string, weekday: Weekday) {
     if (this.getWeekdayForIsoDate(scheduledDate) !== weekday) {
       throw new ConflictException(
@@ -181,6 +217,30 @@ export class ClassesPolicy {
       toDate: days[days.length - 1],
       days,
     };
+  }
+
+  listScheduledDatesForWeekdayInRange(params: {
+    fromDate: string;
+    toDate: string;
+    weekday: Weekday;
+  }) {
+    const start = this.parseIsoDate(params.fromDate);
+    const end = this.parseIsoDate(params.toDate);
+    const dates: string[] = [];
+
+    for (
+      let cursor = start;
+      cursor.getTime() <= end.getTime();
+      cursor = this.addDays(cursor, 1)
+    ) {
+      const isoDate = this.formatIsoDate(cursor);
+
+      if (this.getWeekdayForIsoDate(isoDate) === params.weekday) {
+        dates.push(isoDate);
+      }
+    }
+
+    return dates;
   }
 
   buildSessionTimestampFromSchedule(params: {

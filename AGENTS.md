@@ -42,6 +42,26 @@ This backend exists to support:
 - future competitive history
 - future athlete intelligence
 
+## Product business focus that must never be ignored
+
+This product is built around two intentionally different operational layers:
+
+### 1. Organizational communication
+This may operate across branches and across the organizational hierarchy.
+It includes:
+- institutional communication
+- event announcements
+- campaigns
+- apparel/product notices
+- team-wide engagement communication
+
+### 2. Financial management
+This must remain local/internal to each academy or branch.
+Do not design cross-branch financial visibility by default.
+This is a trust-critical product rule.
+
+If a change risks mixing these two layers incorrectly, stop and review the business rules before proceeding.
+
 ## Mandatory stack
 - Node 22
 - TypeScript
@@ -150,6 +170,17 @@ The application must distinguish clearly between:
 Communication may flow from central organization to branches and teams.
 Finance must remain isolated inside each academy/branch context.
 
+## Trust and adoption rule
+
+Trust between branches and leadership is a product requirement.
+
+Avoid features that would reduce trust, especially:
+- cross-branch financial exposure
+- ambiguous role powers
+- hidden authority escalation
+- informal promotion logic
+- brittle attendance models that do not match real academy life
+
 ## Attendance domain principle
 Attendance is hybrid by design:
 - student may express intent to attend
@@ -157,6 +188,17 @@ Attendance is hybrid by design:
 - manual correction must always exist
 
 Do not force a rigid reservation-only model unless explicitly requested.
+
+## Product realism rule
+
+This platform must model real academy operation.
+
+Do not over-design for theoretical purity if it harms daily usability.
+Examples:
+- attendance must remain flexible and correctable
+- promotion workflows must remain formal but usable
+- finance must remain private at branch level
+- communication must support organizational top-down flow
 
 ## Promotions domain principle
 Promotions must support:
@@ -187,6 +229,34 @@ Current domain rule:
 - therefore overlapping `ClassSession` entries in the same branch are not allowed in the current version
 
 Do not add room/mat/area unless explicitly requested and documented as a domain decision.
+
+## Business-model awareness
+
+The platform is intended to become a sustainable SaaS.
+Architecture and module design must support:
+- single-academy usage
+- multi-branch organizations
+- tiered pricing later
+- branch-local billing visibility
+- future platform-level subscriptions
+
+Do not build assumptions that force a single-academy-only model.
+
+## Analytics and professionalization focus
+
+This product is not only administrative software.
+It is also a professionalization platform.
+
+Future-facing value includes:
+- retention analysis
+- churn analysis
+- class occupancy analysis
+- academy health indicators
+- attendance and engagement insights
+- operational summaries
+- future AI-assisted reporting
+
+When implementing domains, prefer structures that can support analytics later without rewriting core history.
 
 ## Sensitive modules
 These modules/files must not be changed casually:

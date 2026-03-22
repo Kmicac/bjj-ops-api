@@ -1,7 +1,3 @@
----
-
-# `docs/business-rules.md`
-
 # Business Rules
 
 ## Purpose
@@ -26,6 +22,10 @@ The platform supports:
 The product is not only a management tool.
 It is intended to professionalize academy and organization operations.
 
+The platform must be useful both for:
+- a standalone academy
+- a multi-branch team with centralized governance and local branch autonomy
+
 ---
 
 ## Core separation of concerns
@@ -39,6 +39,10 @@ Examples:
 - product/apparel communication
 - team-wide notices
 - engagement messages across branches
+- operational reminders
+- campaign and community messages
+
+The platform must support top-down communication across the organizational hierarchy.
 
 ### Finance and payments
 Financial visibility is local/internal to each branch or academy.
@@ -47,7 +51,9 @@ Rules:
 - no cross-branch financial visibility
 - one academy must not see the finances of another academy
 - economic data must not be centralized in a way that creates resistance or mistrust
-- the platform may manage payments, statuses, and branch-level administrative finance, but not expose private branch accounting across the organization
+- the platform may manage payments, statuses, and branch-level administrative finance, but must not expose private branch accounting across the organization
+
+This separation between communication and finance is a product trust requirement.
 
 ---
 
@@ -66,10 +72,21 @@ A branch may have:
 - public profile data
 - local staff
 - local students
+- local classes
 - local financial operations
+- local billing policies
+- local administrative workflows
 
 ### Public profile
 A branch may publish selected public-facing information, but public data must remain separate from internal branch data.
+
+Public branch profile may include, depending on policy:
+- academy identity
+- bios of professors
+- contact information
+- public schedules
+- social media
+- public location details
 
 ---
 
@@ -85,32 +102,89 @@ Current business roles:
 - STUDENT
 
 ### Semantics
+
 #### MESTRE
 Highest central authority in the organization.
 
+Typical powers:
+- global organizational visibility
+- central approval authority for sensitive promotions
+- branch oversight
+- strategic organizational metrics
+- institutional governance
+
 #### ORG_ADMIN
 Organization-wide administrative authority with broad internal powers.
+
+Typical powers:
+- organization configuration
+- branch administration
+- internal operational governance
+- permissions and administrative control within organization policy
 
 #### HEAD_COACH
 Operational and technical leadership role with branch-sensitive meaning.
 This is not just a generic title.
 
+Typical powers:
+- review of academy operation
+- class and training oversight
+- promotion review and approval where policy allows
+- broad operational visibility according to scope
+- no automatic visibility into private finance of unrelated branches
+
 #### ACADEMY_MANAGER
 Operational and administrative responsible person for an academy.
 This role is not merely clerical. It may combine administrative and operational responsibility.
 
+Typical powers:
+- local academy administration
+- local operational control
+- attendance oversight
+- branch-level workflows
+- local billing-related actions according to policy
+- promotion initiation/review where policy allows
+
 #### INSTRUCTOR
 Operational role focused on training execution and local class-level actions.
+
+Typical powers:
+- attendance handling
+- class execution
+- operational tasks
+- promotion proposal where policy allows
+
+Typical limitations:
+- no broad strategic visibility
+- no cross-branch finance visibility
+- no authority beyond defined scope
 
 #### STAFF
 Administrative/operational support role with limited permissions.
 
+Typical powers:
+- selected attendance tasks
+- selected billing/admin tasks
+- local operational support according to policy
+
 #### STUDENT
 End user/student role with self-service and personal-profile interactions only.
+
+Typical powers:
+- manage personal profile data where allowed
+- express attendance intent
+- see own information and allowed public branch/team information
+- selected self-service actions
 
 ### Important rule
 One person may have multiple responsibilities.
 The system must not assume a simplistic single-role identity.
+
+The permission model must support:
+- one person with multiple functional roles
+- scoped access
+- branch-specific and organization-wide differences
+without collapsing clarity or security
 
 ---
 
@@ -129,6 +203,7 @@ Permissions are evaluated using:
 - special branch leadership semantics where applicable
 
 ### Data visibility
+
 #### Students
 A user must not see students outside allowed branch/organization scope.
 
@@ -137,6 +212,38 @@ Finance must remain isolated within branch-local/internal boundaries.
 
 #### Public branch data
 Public branch information may be visible externally, but private branch internals may not be exposed.
+
+#### Operational metrics
+Non-financial metrics may be visible more broadly than finance if policy allows, for example:
+- student counts
+- attendance patterns
+- growth
+- retention
+- class utilization
+
+This is allowed because the founders explicitly consider centralized non-financial insight valuable.
+
+---
+
+## Communication rules
+
+The platform must support top-down communication across the organization.
+
+Possible recipients:
+- academy leaders
+- instructors
+- staff
+- selected student audiences where appropriate
+
+Communication must support:
+- general announcements
+- events
+- institutional notices
+- product/apparel communication
+- team engagement
+- branch coordination
+
+The platform should support selecting relevant audiences rather than broadcasting every message to every role.
 
 ---
 
@@ -154,6 +261,12 @@ Attendance is a hybrid process.
 - late attendance self-marking should be restricted after class start
 - weekly planning may exist
 - teachers/staff must be able to fix attendance mistakes afterward
+
+### Practical attendance modes the product should support
+- manual confirmation by instructor
+- student self-registration via QR
+- student self-registration via code / kiosk / tablet
+- hybrid attendance where students self-register and instructor corrects or completes the record
 
 ### Current modeling rule
 Attendance is recorded against `ClassSession`, not against `ClassSchedule`.
@@ -176,6 +289,18 @@ This rule may change in the future if room/mat/area is modeled explicitly.
 ### Instructor assignment
 Classes and sessions must be tied to an instructor through membership-aware identity, not loose unscoped identity.
 
+### Class types
+The platform should support configurable or controlled class types such as:
+- BJJ Gi
+- BJJ No-Gi
+- Fundamentals
+- Advanced
+- Kids
+- Competition
+- Open Mat
+
+Future additions should not break the core model.
+
 ---
 
 ## Promotions rules
@@ -190,6 +315,7 @@ The platform may:
 - enforce authorization
 - keep history
 - generate traceability
+- help the reviewer decide better
 
 The platform must not:
 - auto-promote students
@@ -217,6 +343,20 @@ Promotion evaluation must include:
 - approval authority depends on promotion type and organizational hierarchy
 - central authority remains required for sensitive approvals
 
+### Belt promotions vs stripes
+The founders explicitly distinguish:
+- local or lower-level grade/stripe progression
+- formal belt promotion workflow
+
+The system must support formal workflow and traceability for belt promotions.
+
+### Certificates and diplomas
+The platform should support:
+- promotion request flow
+- authorization linkage
+- certificate/diploma generation
+- historical traceability of the decision
+
 ### History
 Promotion history must never be lost.
 Approval updates the student’s current state in the current domain model.
@@ -224,6 +364,7 @@ Approval updates the student’s current state in the current domain model.
 ---
 
 ## Federation rule reference
+
 Promotion and graduation logic must follow the reference defined in `docs/federation-reference.md`.
 
 No one may invent:
@@ -232,6 +373,8 @@ No one may invent:
 - belt progressions
 - kids/adult transitions
 without grounding them in the chosen reference.
+
+The federation reference acts as a consistency baseline, not as an automation engine.
 
 ---
 
@@ -253,28 +396,22 @@ When a student changes primary branch:
 ### Temporary visits
 Cross-branch participation within the same organization may exist in operations, but formal visit modeling may be introduced later.
 
----
-
-## Communication rules
-
-The platform must support top-down communication across the organization.
-
-Possible recipients:
-- academy leaders
-- instructors
-- staff
-- selected student audiences where appropriate
-
-Communication must support:
-- general announcements
-- events
-- institutional notices
-- product/apparel communication
-- team engagement
+### Student profile expectations
+The student domain should support:
+- personal data
+- BJJ start date
+- current rank/track/stripes
+- promotion history
+- attendance history
+- technical notes
+- future competition history
+- billing/membership status
+- pause/freeze states
+- parent/tutor support for kids where required
 
 ---
 
-## Payments and access rules
+## Billing, payments, and access rules
 
 ### Payment infrastructure
 The platform may coexist with:
@@ -282,12 +419,34 @@ The platform may coexist with:
 - external payment platforms
 - integrated payment flows in the future
 
-### Access control by payment state
-A business policy may restrict app usage if a person or academy is not up to date according to the selected billing model.
+Expected future integrations include:
+- Mercado Pago
+- Takenos
+
+### Financial separation rule
+The app must not become a tool for exposing private branch accounting across the organization.
+
+### Local branch finance
+Billing and student payment administration are branch-local/internal concerns by default.
 
 ### Platform charging model
 The product must be sustainable as a SaaS.
 The platform’s own charging model is separate from internal academy cash handling.
+
+The founders explicitly want the platform to support:
+- academy-level/platform-level charging
+- notifications of overdue payments
+- possible restriction or limitation of service when payment policy is violated
+
+### Access control by payment state
+A business policy may restrict app usage if a person or academy is not up to date according to the selected billing model.
+
+This may include restricting:
+- attendance registration
+- active use of selected platform features
+- selected operational flows
+
+This must be implemented explicitly, not inferred casually.
 
 ---
 
@@ -303,8 +462,37 @@ Potential metrics:
 - class engagement
 - branch activity
 - operational health
+- growth trends
+- class occupancy
+- academy health indicators
 
 These metrics must not violate financial privacy boundaries between branches.
+
+### Strategic value
+The founders explicitly want the platform to evolve beyond administration and support:
+- summaries
+- reports
+- strategic visibility
+- future AI-assisted recommendations and analysis
+
+---
+
+## Benchmark and positioning
+
+The product is intentionally positioned beyond small single-academy tools.
+
+Compared to simpler academy apps, this platform aims to support:
+- full academies
+- branch networks
+- centralized communication
+- stronger operational governance
+- richer progression and analytics
+- future product/store and organizational intelligence layers
+
+The product must remain viable for:
+- small academies
+- large organizations
+- mixed growth stages
 
 ---
 
@@ -317,12 +505,14 @@ Examples:
 - hidden authority changes
 - unclear promotion authority
 - opaque attendance overrides
+- brittle workflows that do not match real academy operation
 
 Operational trust is a product requirement.
 
 ---
 
 ## Roadmap priority rules
+
 When in doubt, prioritize:
 1. security and isolation
 2. business-rule correctness

@@ -9,6 +9,7 @@ import {
   PromotionType,
 } from '../../generated/prisma/enums';
 import { PrismaService } from '../../prisma/prisma.service';
+import { PromotionListSortBy } from '../application/promotion-listing';
 
 const PROMOTION_STUDENT_LOCK_NAMESPACE = 83001;
 
@@ -436,11 +437,32 @@ export class PromotionsRepository {
     targetBelt?: PromotionRank;
     proposedByMembershipId?: string;
     reviewedByMembershipId?: string;
+    snapshotOutOfDate?: boolean;
+    recommendation?: PromotionRecommendation;
+    pendingOlderThanDays?: number;
+    sortBy?: PromotionListSortBy;
     dateFrom?: string;
     dateTo?: string;
     skip: number;
     take: number;
   }) {
+    if (params.branchIds && params.branchIds.length === 0) {
+      return {
+        items: [],
+        total: 0,
+      };
+    }
+
+    const hasOperationalFilters =
+      params.snapshotOutOfDate !== undefined ||
+      params.recommendation !== undefined ||
+      params.pendingOlderThanDays !== undefined ||
+      params.sortBy !== undefined;
+
+    if (hasOperationalFilters) {
+      return this.listPromotionsWithOperationalFilters(params);
+    }
+
     const where = {
       organizationId: params.organizationId,
       status: params.status,
@@ -480,6 +502,182 @@ export class PromotionsRepository {
     ]);
 
     return { items, total };
+  }
+
+  private async listPromotionsWithOperationalFilters(params: {
+    organizationId: string;
+    status?: PromotionRequestStatus;
+    studentId?: string;
+    branchIds?: string[];
+    type?: PromotionType;
+    track?: PromotionTrack;
+    targetBelt?: PromotionRank;
+    proposedByMembershipId?: string;
+    reviewedByMembershipId?: string;
+    snapshotOutOfDate?: boolean;
+    recommendation?: PromotionRecommendation;
+    pendingOlderThanDays?: number;
+    sortBy?: PromotionListSortBy;
+    dateFrom?: string;
+    dateTo?: string;
+    skip: number;
+    take: number;
+  }) {
+    const snapshotOutOfDateExpression = Prisma.sql`(
+      pr."trackSnapshot"::text <> s."promotionTrack"::text
+      OR COALESCE(pr."currentBeltSnapshot"::text, '') <> COALESCE(s."currentBelt"::text, '')
+      OR pr."currentStripesSnapshot" <> s."currentStripes"
+    )`;
+
+    const whereClauses = [
+      Prisma.sql`pr."organizationId" = ${params.organizationId}`,
+      params.status
+        ? Prisma.sql`pr."status"::text = ${params.status}`
+        : undefined,
+      params.studentId
+        ? Prisma.sql`pr."studentId" = ${params.studentId}`
+        : undefined,
+      params.type ? Prisma.sql`pr."type"::text = ${params.type}` : undefined,
+      params.track
+        ? Prisma.sql`pr."trackSnapshot"::text = ${params.track}`
+        : undefined,
+      params.targetBelt
+        ? Prisma.sql`pr."targetBelt"::text = ${params.targetBelt}`
+        : undefined,
+      params.proposedByMembershipId
+        ? Prisma.sql`pr."proposedByMembershipId" = ${params.proposedByMembershipId}`
+        : undefined,
+      params.reviewedByMembershipId
+        ? Prisma.sql`pr."reviewedByMembershipId" = ${params.reviewedByMembershipId}`
+        : undefined,
+      params.dateFrom
+        ? Prisma.sql`pr."createdAt" >= ${new Date(`${params.dateFrom}T00:00:00.000Z`)}`
+        : undefined,
+      params.dateTo
+        ? Prisma.sql`pr."createdAt" <= ${new Date(`${params.dateTo}T23:59:59.999Z`)}`
+        : undefined,
+      params.pendingOlderThanDays !== undefined
+        ? Prisma.sql`pr."createdAt" <= ${this.buildPendingOlderThanDate(
+            params.pendingOlderThanDays,
+          )}`
+        : undefined,
+      params.branchIds?.length
+        ? Prisma.sql`pr."branchId" IN (${Prisma.join(params.branchIds)})`
+        : undefined,
+      params.recommendation
+        ? Prisma.sql`pe."recommendation"::text = ${params.recommendation}`
+        : undefined,
+      params.snapshotOutOfDate !== undefined
+        ? params.snapshotOutOfDate
+          ? snapshotOutOfDateExpression
+          : Prisma.sql`NOT ${snapshotOutOfDateExpression}`
+        : undefined,
+    ].filter((clause): clause is Prisma.Sql => clause !== undefined);
+
+    const whereClause =
+      whereClauses.length > 0
+        ? Prisma.sql`WHERE ${Prisma.join(whereClauses, ' AND ')}`
+        : Prisma.empty;
+
+    const orderByClause = this.buildOperationalListOrderBy(
+      params.sortBy,
+      snapshotOutOfDateExpression,
+    );
+
+    const idRows = await this.prisma.$queryRaw<Array<{ id: string }>>(Prisma.sql`
+      SELECT pr."id"
+      FROM "PromotionRequest" pr
+      INNER JOIN "Student" s
+        ON s."id" = pr."studentId"
+       AND s."organizationId" = pr."organizationId"
+      LEFT JOIN "PromotionEvaluation" pe
+        ON pe."promotionRequestId" = pr."id"
+       AND pe."organizationId" = pr."organizationId"
+      ${whereClause}
+      ORDER BY ${orderByClause}
+      OFFSET ${params.skip}
+      LIMIT ${params.take}
+    `);
+
+    const countRows = await this.prisma.$queryRaw<Array<{ total: bigint }>>(Prisma.sql`
+      SELECT COUNT(*)::bigint AS "total"
+      FROM "PromotionRequest" pr
+      INNER JOIN "Student" s
+        ON s."id" = pr."studentId"
+       AND s."organizationId" = pr."organizationId"
+      LEFT JOIN "PromotionEvaluation" pe
+        ON pe."promotionRequestId" = pr."id"
+       AND pe."organizationId" = pr."organizationId"
+      ${whereClause}
+    `);
+
+    if (idRows.length === 0) {
+      return {
+        items: [],
+        total: Number(countRows[0]?.total ?? 0),
+      };
+    }
+
+    const items = await this.prisma.promotionRequest.findMany({
+      where: {
+        organizationId: params.organizationId,
+        id: {
+          in: idRows.map((row) => row.id),
+        },
+      },
+      select: promotionListSelect,
+    });
+
+    const itemOrder = new Map(idRows.map((row, index) => [row.id, index]));
+
+    items.sort((left, right) => {
+      return (itemOrder.get(left.id) ?? 0) - (itemOrder.get(right.id) ?? 0);
+    });
+
+    return {
+      items,
+      total: Number(countRows[0]?.total ?? 0),
+    };
+  }
+
+  private buildPendingOlderThanDate(days: number) {
+    const cutoff = new Date();
+    cutoff.setUTCDate(cutoff.getUTCDate() - days);
+    return cutoff;
+  }
+
+  private buildOperationalListOrderBy(
+    sortBy: PromotionListSortBy | undefined,
+    snapshotOutOfDateExpression: Prisma.Sql,
+  ) {
+    switch (sortBy) {
+      case PromotionListSortBy.OLDEST_FIRST:
+        return Prisma.sql`pr."createdAt" ASC, pr."id" ASC`;
+      case PromotionListSortBy.SNAPSHOT_OUT_OF_DATE_FIRST:
+        return Prisma.sql`
+          CASE
+            WHEN ${snapshotOutOfDateExpression} THEN 0
+            ELSE 1
+          END ASC,
+          pr."createdAt" ASC,
+          pr."id" ASC
+        `;
+      case PromotionListSortBy.STRONGEST_RECOMMENDATION_FIRST:
+        return Prisma.sql`
+          CASE pe."recommendation"::text
+            WHEN 'STRONGLY_RECOMMEND' THEN 0
+            WHEN 'RECOMMEND' THEN 1
+            WHEN 'NEEDS_MORE_TIME' THEN 2
+            WHEN 'DO_NOT_RECOMMEND' THEN 3
+            ELSE 4
+          END ASC,
+          pr."createdAt" ASC,
+          pr."id" ASC
+        `;
+      case PromotionListSortBy.NEWEST_FIRST:
+      default:
+        return Prisma.sql`pr."createdAt" DESC, pr."id" DESC`;
+    }
   }
 
   async getPromotionContextForStudent(

@@ -1,11 +1,15 @@
+import { BadRequestException } from '@nestjs/common';
 import { Test, TestingModule } from '@nestjs/testing';
 import {
   MembershipScopeType,
   PromotionRank,
+  PromotionRecommendation,
   PromotionRequestStatus,
   PromotionTrack,
   PromotionType,
 } from '../../../generated/prisma/enums';
+import { ListPromotionsQueryDto } from '../../dto/list-promotions.query.dto';
+import { PromotionListSortBy } from '../promotion-listing';
 import { PromotionsPolicy } from '../../domain/promotions.policy';
 import { PromotionsRepository } from '../../infrastructure/promotions.repository';
 import { ListPromotionsUseCase } from './list-promotions.use-case';
@@ -40,20 +44,22 @@ describe('ListPromotionsUseCase', () => {
     useCase = module.get<ListPromotionsUseCase>(ListPromotionsUseCase);
   });
 
+  const principal = {
+    sub: 'user_1',
+    membershipId: 'mem_1',
+    organizationId: 'org_1',
+    scopeType: MembershipScopeType.ORGANIZATION_WIDE,
+    branchIds: [],
+    assignedRoles: [],
+    effectiveRoles: [],
+  } as any;
+
   it('should be defined', () => {
     expect(useCase).toBeDefined();
   });
 
   it('adds a comparison summary for pending promotions only', async () => {
-    const principal = {
-      sub: 'user_1',
-      membershipId: 'mem_1',
-      organizationId: 'org_1',
-      scopeType: MembershipScopeType.ORGANIZATION_WIDE,
-      branchIds: [],
-      assignedRoles: [],
-      effectiveRoles: [],
-    } as any;
+    const query = new ListPromotionsQueryDto();
 
     promotionsRepository.listPromotions.mockResolvedValue({
       items: [
@@ -115,7 +121,7 @@ describe('ListPromotionsUseCase', () => {
       total: 2,
     });
 
-    const result = await useCase.execute(principal, 'org_1', {});
+    const result = await useCase.execute(principal, 'org_1', query);
 
     expect(promotionsPolicy.ensureCanList).toHaveBeenCalledWith(
       principal,
@@ -159,5 +165,43 @@ describe('ListPromotionsUseCase', () => {
       },
     });
     expect(result.items[1].comparisonSummary).toBeNull();
+  });
+
+  it('defaults pending operational filters to pending review status', async () => {
+    const query = new ListPromotionsQueryDto();
+    query.snapshotOutOfDate = true;
+    query.recommendation = PromotionRecommendation.RECOMMEND;
+    query.pendingOlderThanDays = 21;
+    query.sortBy = PromotionListSortBy.SNAPSHOT_OUT_OF_DATE_FIRST;
+
+    promotionsRepository.listPromotions.mockResolvedValue({
+      items: [],
+      total: 0,
+    });
+
+    await useCase.execute(principal, 'org_1', query);
+
+    expect(promotionsRepository.listPromotions).toHaveBeenCalledWith(
+      expect.objectContaining({
+        organizationId: 'org_1',
+        status: PromotionRequestStatus.PENDING_REVIEW,
+        snapshotOutOfDate: true,
+        recommendation: PromotionRecommendation.RECOMMEND,
+        pendingOlderThanDays: 21,
+        sortBy: PromotionListSortBy.SNAPSHOT_OUT_OF_DATE_FIRST,
+      }),
+    );
+  });
+
+  it('rejects pending-only operational filters for non-pending statuses', async () => {
+    const query = new ListPromotionsQueryDto();
+    query.status = PromotionRequestStatus.APPROVED;
+    query.pendingOlderThanDays = 14;
+
+    await expect(
+      useCase.execute(principal, 'org_1', query),
+    ).rejects.toBeInstanceOf(BadRequestException);
+
+    expect(promotionsRepository.listPromotions).not.toHaveBeenCalled();
   });
 });

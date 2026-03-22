@@ -1,333 +1,392 @@
----
-
-# `docs/business-rules.md`
-
-# Business Rules
+# Domain Decisions
 
 ## Purpose
-This document defines the current business rules for the BJJ Ops platform.
+This file records explicit decisions already taken for the current version of the product.
 
-If a rule is not written here or in `docs/domain-decisions.md`, it must not be invented casually by code changes.
-
----
-
-## Product scope
-
-The platform supports:
-- single academies
-- organizations/teams with multiple branches
-- centralized organizational communication
-- branch-local financial management
-- student progression workflows
-- class operations
-- attendance
-- future competitive and analytical layers
-
-The product is not only a management tool.
-It is intended to professionalize academy and organization operations.
+If a future change conflicts with one of these decisions, the change must first update this file and explain why.
 
 ---
 
-## Core separation of concerns
+## Governance decisions
 
-### Organizational communication
-Communication is centralizable and can flow from the top of the structure toward academies, instructors, staff, and in some cases students.
+### DD-001 — Organization is the tenant boundary
+Status: accepted
 
-Examples:
-- event announcements
-- institutional communication
-- product/apparel communication
-- team-wide notices
-- engagement messages across branches
+Reason:
+All critical security and visibility decisions depend on tenant isolation.
 
-### Finance and payments
-Financial visibility is local/internal to each branch or academy.
-
-Rules:
-- no cross-branch financial visibility
-- one academy must not see the finances of another academy
-- economic data must not be centralized in a way that creates resistance or mistrust
-- the platform may manage payments, statuses, and branch-level administrative finance, but not expose private branch accounting across the organization
+Implication:
+No module may leak data across organizations.
 
 ---
 
-## Organization model
+### DD-002 — Branch is a subordinate operational scope
+Status: accepted
 
-### Organization
-An `Organization` is the tenant boundary.
+Reason:
+The platform serves multisede organizations and single academies alike.
 
-Every account exists inside an organization, even if the organization has only one branch.
-
-### Branch
-A `Branch` belongs to exactly one `Organization`.
-
-A branch may have:
-- internal operational data
-- public profile data
-- local staff
-- local students
-- local financial operations
-
-### Public profile
-A branch may publish selected public-facing information, but public data must remain separate from internal branch data.
+Implication:
+Branch-level access is enforced inside an organization.
 
 ---
 
-## Hierarchy and roles
+### DD-003 — Public branch data is separate from internal branch data
+Status: accepted
 
-Current business roles:
-- MESTRE
-- ORG_ADMIN
-- HEAD_COACH
-- ACADEMY_MANAGER
-- INSTRUCTOR
-- STAFF
-- STUDENT
+Reason:
+Public visibility and internal operation have different exposure requirements.
 
-### Semantics
-#### MESTRE
-Highest central authority in the organization.
-
-#### ORG_ADMIN
-Organization-wide administrative authority with broad internal powers.
-
-#### HEAD_COACH
-Operational and technical leadership role with branch-sensitive meaning.
-This is not just a generic title.
-
-#### ACADEMY_MANAGER
-Operational and administrative responsible person for an academy.
-This role is not merely clerical. It may combine administrative and operational responsibility.
-
-#### INSTRUCTOR
-Operational role focused on training execution and local class-level actions.
-
-#### STAFF
-Administrative/operational support role with limited permissions.
-
-#### STUDENT
-End user/student role with self-service and personal-profile interactions only.
-
-### Important rule
-One person may have multiple responsibilities.
-The system must not assume a simplistic single-role identity.
+Implication:
+Public profile information must be modeled separately from internal operational branch state.
 
 ---
 
-## Permissions and visibility
+## Role and hierarchy decisions
 
-### General rule
-All permissions are backend-enforced.
+### DD-004 — Official role naming uses HEAD_COACH and ACADEMY_MANAGER
+Status: accepted
 
-### Scope model
-Permissions are evaluated using:
-- organization
-- membership
-- assigned roles
-- scope type
-- branch access
-- special branch leadership semantics where applicable
+Reason:
+These are the official role names already established in the codebase and product semantics.
+Alternative naming ideas discussed externally do not replace the current official domain language.
 
-### Data visibility
-#### Students
-A user must not see students outside allowed branch/organization scope.
-
-#### Finance
-Finance must remain isolated within branch-local/internal boundaries.
-
-#### Public branch data
-Public branch information may be visible externally, but private branch internals may not be exposed.
+Implication:
+Use `HEAD_COACH` and `ACADEMY_MANAGER` consistently in code, docs, permissions, and product design.
 
 ---
 
-## Attendance rules
+### DD-005 — A person may hold multiple functional responsibilities
+Status: accepted
 
-Attendance is a hybrid process.
+Reason:
+Real academy operations do not map cleanly to one simplistic role per human.
 
-### Current principle
-- a student may indicate attendance intent
-- teaching/admin staff have the final say on actual presence
-- manual correction must always exist
-
-### Operational expectations
-- students should not be able to bulk-mark attendance for an entire month at once
-- late attendance self-marking should be restricted after class start
-- weekly planning may exist
-- teachers/staff must be able to fix attendance mistakes afterward
-
-### Current modeling rule
-Attendance is recorded against `ClassSession`, not against `ClassSchedule`.
+Implication:
+Do not hardcode an overly rigid one-person/one-role mental model.
 
 ---
 
-## Classes rules
+### DD-006 — HEAD_COACH is not a generic freely assignable semantic
+Status: accepted
 
-### Schedule vs session
-- `ClassSchedule` = recurring schedule definition
-- `ClassSession` = actual concrete class occurrence
+Reason:
+HEAD_COACH has specific branch-leadership meaning and broader technical/operational significance.
 
-### Branch operation rule
-In the current version:
-- a branch is treated as a single simultaneous operational unit
-- overlapping class sessions in the same branch are not allowed
-
-This rule may change in the future if room/mat/area is modeled explicitly.
-
-### Instructor assignment
-Classes and sessions must be tied to an instructor through membership-aware identity, not loose unscoped identity.
+Implication:
+Do not flatten HEAD_COACH into a generic org-level label with no branch semantics.
 
 ---
 
-## Promotions rules
+### DD-007 — ACADEMY_MANAGER is an operational and administrative leadership role
+Status: accepted
 
-### Core principle
-Promotions are not automated.
+Reason:
+The role is intended to represent the responsible leader of an academy, not a merely clerical admin position.
 
-The platform may:
-- gather signals
-- structure evaluation
-- validate consistency
-- enforce authorization
-- keep history
-- generate traceability
-
-The platform must not:
-- auto-promote students
-- replace human decision making
-
-### Promotion workflow
-A promotion must support:
-- proposal
-- evaluation
-- approval
-- rejection
-- history
-- audit trail
-
-### Evaluation
-Promotion evaluation must include:
-- automatic signals already available in the system
-- technical assessment
-- attitude/discipline assessment
-- coach notes
-- recommendation
-
-### Authority
-- proposal can begin at local operational levels according to policy
-- approval authority depends on promotion type and organizational hierarchy
-- central authority remains required for sensitive approvals
-
-### History
-Promotion history must never be lost.
-Approval updates the student’s current state in the current domain model.
+Implication:
+ACADEMY_MANAGER may participate in academy operations, administration, and review workflows according to policy.
 
 ---
 
-## Federation rule reference
-Promotion and graduation logic must follow the reference defined in `docs/federation-reference.md`.
+## Communication and finance decisions
 
-No one may invent:
-- rank transitions
-- equivalences
-- belt progressions
-- kids/adult transitions
-without grounding them in the chosen reference.
+### DD-008 — Communication and finance are intentionally separate product domains
+Status: accepted
 
----
+Reason:
+Organizational communication benefits from centralized flow across branches.
+Financial visibility across branches would reduce trust and adoption.
 
-## Student rules
-
-### Identity
-A student is a first-class domain entity.
-A student may or may not be linked to a login user.
-
-### Branch membership
-A student belongs to an organization and has a primary branch.
-
-### History preservation
-When a student changes primary branch:
-- the student remains the same entity
-- history must be preserved
-- context snapshots should preserve historical visibility where needed
-
-### Temporary visits
-Cross-branch participation within the same organization may exist in operations, but formal visit modeling may be introduced later.
+Implication:
+The platform may centralize communication, but financial management must remain local/internal by branch unless a future explicitly designed feature states otherwise.
 
 ---
 
-## Communication rules
+### DD-009 — Communication may flow top-down through the organizational pyramid
+Status: accepted
 
-The platform must support top-down communication across the organization.
+Reason:
+The founders explicitly want a pyramid-like communication model:
+academy/dojo → branch network → central leadership.
 
-Possible recipients:
-- academy leaders
+Implication:
+The product must support centralized communication flowing downward to:
+- head coaches
+- academy managers
 - instructors
 - staff
 - selected student audiences where appropriate
 
-Communication must support:
-- general announcements
-- events
-- institutional notices
-- product/apparel communication
-- team engagement
+---
+
+### DD-010 — Financial visibility remains branch-local by default
+Status: accepted
+
+Reason:
+Cross-branch financial exposure would create distrust and harm adoption.
+
+Implication:
+Future billing and financial modules must preserve branch-local visibility unless a feature is explicitly and safely designed otherwise.
 
 ---
 
-## Payments and access rules
+## Student decisions
 
-### Payment infrastructure
-The platform may coexist with:
-- manual payments
-- external payment platforms
-- integrated payment flows in the future
+### DD-011 — Student is a core domain entity, not merely a profile
+Status: accepted
 
-### Access control by payment state
-A business policy may restrict app usage if a person or academy is not up to date according to the selected billing model.
+Reason:
+The student is central to classes, attendance, promotions, and future competition history.
 
-### Platform charging model
-The product must be sustainable as a SaaS.
-The platform’s own charging model is separate from internal academy cash handling.
+Implication:
+Student remains a first-class business object even when linked to a user account.
 
 ---
 
-## Metrics and professionalization
+### DD-012 — Changing primary branch does not create a new student
+Status: accepted
 
-The platform should help academies and organizations professionalize operations.
+Reason:
+The person and their history remain continuous.
 
-Potential metrics:
-- student retention
-- student churn
-- attendance patterns
-- beginner drop-off
-- class engagement
-- branch activity
-- operational health
-
-These metrics must not violate financial privacy boundaries between branches.
+Implication:
+Branch changes must preserve student identity and history.
 
 ---
 
-## Adoption and trust rule
+### DD-013 — Temporary cross-branch participation may exist before formal visit modeling
+Status: accepted
 
-Any feature that risks reducing trust between branches or leaders must be treated cautiously.
+Reason:
+Real academy/team operation may involve students training temporarily in another branch.
 
-Examples:
-- cross-branch finance exposure
-- hidden authority changes
-- unclear promotion authority
-- opaque attendance overrides
-
-Operational trust is a product requirement.
+Implication:
+The domain may temporarily allow limited cross-branch operational participation while a formal visit model is still pending.
 
 ---
 
-## Roadmap priority rules
-When in doubt, prioritize:
-1. security and isolation
-2. business-rule correctness
-3. operational usability
-4. maintainability
-5. product polish
+## Classes and attendance decisions
 
-Do not trade away trust or domain clarity for feature speed.
+### DD-014 — One branch is currently treated as a single simultaneous operational unit
+Status: accepted
+
+Reason:
+This keeps scheduling, attendance, and future operational logic simple and safe for the current version.
+
+Implication:
+Overlapping `ClassSession` entries in the same branch are invalid in the current version.
+
+Future:
+If multi-mat or multi-room is needed, introduce an explicit entity such as `BranchRoom`, `TrainingArea`, or equivalent.
+
+---
+
+### DD-015 — Attendance is recorded against ClassSession, not ClassSchedule
+Status: accepted
+
+Reason:
+Recurring schedule is not the same as actual attendance-bearing class execution.
+
+Implication:
+Attendance must always point to a real session instance.
+
+---
+
+### DD-016 — Attendance remains a hybrid validation model
+Status: accepted
+
+Reason:
+Real academy operation requires flexibility and correction.
+A rigid reservation-only model was rejected.
+
+Implication:
+Students may express attendance intent, but final attendance validity belongs to authorized staff/instructors, and manual correction must always exist.
+
+---
+
+### DD-017 — Attendance is currently consolidated attendance, not real-time check-in events
+Status: accepted
+
+Reason:
+The current product need is reliable recorded attendance.
+Real-time check-in is a future concern.
+
+Implication:
+If real-time check-in is added later, it must be modeled explicitly and not silently overloaded into AttendanceRecord.
+
+---
+
+## Promotions decisions
+
+### DD-018 — Promotions are human-decided workflows
+Status: accepted
+
+Reason:
+The platform should assist and structure the decision, not replace the instructor/head coach/mestre.
+
+Implication:
+Never auto-promote students.
+
+---
+
+### DD-019 — Belt promotions require formal workflow and traceability
+Status: accepted
+
+Reason:
+Promotions must not remain informal or happen without historical record and authorization trace.
+
+Implication:
+Promotion request, evaluation, approval/rejection, and certificate/diploma generation must remain part of the formal domain flow.
+
+---
+
+### DD-020 — Promotion history must remain durable and auditable
+Status: accepted
+
+Reason:
+Promotions are institutionally meaningful and must not become informal or untraceable.
+
+Implication:
+Proposal, evaluation, approval, rejection, and historical snapshots must remain recorded.
+
+---
+
+### DD-021 — Approved promotions update the student’s current state in the same transaction
+Status: accepted
+
+Reason:
+Separating approved history from current state would create operational inconsistency in the current version.
+
+Implication:
+Promotion approval must atomically update workflow history and current student rank/stripe state.
+
+---
+
+### DD-022 — Promotion rules must follow the chosen federation reference
+Status: accepted
+
+Reason:
+The system must not invent transitions or graduation semantics.
+
+Implication:
+Promotion code must follow `docs/federation-reference.md`.
+
+---
+
+### DD-023 — Promotion evaluation must remain assistive, not bureaucratic
+Status: accepted
+
+Reason:
+The goal is to help professor/head coach/mestre decide better, not create a rigid scoring bureaucracy.
+
+Implication:
+Evaluation sheets may structure context and signals, but final promotion remains a human decision.
+
+---
+
+## Billing and platform access decisions
+
+### DD-024 — Billing and student collections are separate concerns from platform charging
+Status: accepted
+
+Reason:
+The SaaS business model and the academy’s own cash flow are not the same thing.
+
+Implication:
+The platform may support branch-local student billing while also supporting separate platform subscription logic for academies/organizations.
+
+---
+
+### DD-025 — Payment status may limit platform functionality according to policy
+Status: accepted
+
+Reason:
+The founders want the product to support a stricter access policy tied to payment status where appropriate.
+
+Implication:
+Future billing policy may limit selected functionality for unpaid students or academies, but this must be implemented explicitly and safely.
+
+---
+
+## Analytics and strategy decisions
+
+### DD-026 — Platform value includes professionalization through analytics
+Status: accepted
+
+Reason:
+The platform is intended to provide management intelligence, not only record keeping.
+
+Implication:
+Retention, attendance, academy health, churn, and operational metrics are first-class product goals, as long as privacy boundaries are preserved.
+
+---
+
+### DD-027 — The product is designed for both single academies and large branch organizations from the start
+Status: accepted
+
+Reason:
+The platform must serve both isolated academies and large structured teams without rethinking the core model later.
+
+Implication:
+Organization, branch, permissions, communication, promotions, classes, billing, and analytics must all be modeled with both use cases in mind.
+
+---
+
+## Architecture decisions
+
+### DD-028 — The repository architecture standard is mandatory
+Status: accepted
+
+Reason:
+The codebase must remain readable, maintainable, and migration-friendly.
+
+Implication:
+Modules must follow:
+- controller
+- application/use-cases
+- domain/policies
+- infrastructure/repositories
+- dto
+- module
+
+---
+
+### DD-029 — Repositories may own transaction boundaries, but not domain-rule ownership
+Status: accepted
+
+Reason:
+Write integrity often requires transaction and locking logic close to persistence.
+Business rules still belong in use cases and policies.
+
+Implication:
+Avoid moving domain semantics into repositories under the excuse of persistence.
+
+---
+
+### DD-030 — Do not invent undocumented business rules in code
+Status: accepted
+
+Reason:
+The project suffered from prompt drift and inferred rules.
+The repo must become the source of truth.
+
+Implication:
+If a rule is unclear, document uncertainty and stop. Do not guess.
+
+---
+
+## Future decisions intentionally left open
+
+These are intentionally not closed yet:
+- room/mat/area modeling
+- real-time attendance check-in model
+- formal temporary visits model
+- advanced competition record model
+- Smoothcomp integration strategy and competition import workflow
+- organization-specific configurable graduation variants
+- advanced billing integrations
+- shop checkout online
+- multi-service extraction plan
+
+These should not be implemented casually.

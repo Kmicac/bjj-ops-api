@@ -215,6 +215,7 @@ export type OrganizationMembershipWhereInput = {
   proposedPromotionRequests?: Prisma.PromotionRequestListRelationFilter
   reviewedPromotionRequests?: Prisma.PromotionRequestListRelationFilter
   updatedPromotionEvaluations?: Prisma.PromotionEvaluationListRelationFilter
+  recordedPayments?: Prisma.PaymentRecordListRelationFilter
   branchScopes?: Prisma.MembershipBranchScopeListRelationFilter
   roles?: Prisma.MembershipRoleAssignmentListRelationFilter
   auditLogs?: Prisma.AuditLogListRelationFilter
@@ -238,6 +239,7 @@ export type OrganizationMembershipOrderByWithRelationInput = {
   proposedPromotionRequests?: Prisma.PromotionRequestOrderByRelationAggregateInput
   reviewedPromotionRequests?: Prisma.PromotionRequestOrderByRelationAggregateInput
   updatedPromotionEvaluations?: Prisma.PromotionEvaluationOrderByRelationAggregateInput
+  recordedPayments?: Prisma.PaymentRecordOrderByRelationAggregateInput
   branchScopes?: Prisma.MembershipBranchScopeOrderByRelationAggregateInput
   roles?: Prisma.MembershipRoleAssignmentOrderByRelationAggregateInput
   auditLogs?: Prisma.AuditLogOrderByRelationAggregateInput
@@ -266,6 +268,7 @@ export type OrganizationMembershipWhereUniqueInput = Prisma.AtLeast<{
   proposedPromotionRequests?: Prisma.PromotionRequestListRelationFilter
   reviewedPromotionRequests?: Prisma.PromotionRequestListRelationFilter
   updatedPromotionEvaluations?: Prisma.PromotionEvaluationListRelationFilter
+  recordedPayments?: Prisma.PaymentRecordListRelationFilter
   branchScopes?: Prisma.MembershipBranchScopeListRelationFilter
   roles?: Prisma.MembershipRoleAssignmentListRelationFilter
   auditLogs?: Prisma.AuditLogListRelationFilter
@@ -314,6 +317,7 @@ export type OrganizationMembershipCreateInput = {
   proposedPromotionRequests?: Prisma.PromotionRequestCreateNestedManyWithoutProposedByMembershipInput
   reviewedPromotionRequests?: Prisma.PromotionRequestCreateNestedManyWithoutReviewedByMembershipInput
   updatedPromotionEvaluations?: Prisma.PromotionEvaluationCreateNestedManyWithoutUpdatedByMembershipInput
+  recordedPayments?: Prisma.PaymentRecordCreateNestedManyWithoutRecordedByMembershipInput
   branchScopes?: Prisma.MembershipBranchScopeCreateNestedManyWithoutMembershipInput
   roles?: Prisma.MembershipRoleAssignmentCreateNestedManyWithoutMembershipInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutActorMembershipInput
@@ -334,6 +338,7 @@ export type OrganizationMembershipUncheckedCreateInput = {
   proposedPromotionRequests?: Prisma.PromotionRequestUncheckedCreateNestedManyWithoutProposedByMembershipInput
   reviewedPromotionRequests?: Prisma.PromotionRequestUncheckedCreateNestedManyWithoutReviewedByMembershipInput
   updatedPromotionEvaluations?: Prisma.PromotionEvaluationUncheckedCreateNestedManyWithoutUpdatedByMembershipInput
+  recordedPayments?: Prisma.PaymentRecordUncheckedCreateNestedManyWithoutRecordedByMembershipInput
   branchScopes?: Prisma.MembershipBranchScopeUncheckedCreateNestedManyWithoutMembershipInput
   roles?: Prisma.MembershipRoleAssignmentUncheckedCreateNestedManyWithoutMembershipInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutActorMembershipInput
@@ -354,6 +359,7 @@ export type OrganizationMembershipUpdateInput = {
   proposedPromotionRequests?: Prisma.PromotionRequestUpdateManyWithoutProposedByMembershipNestedInput
   reviewedPromotionRequests?: Prisma.PromotionRequestUpdateManyWithoutReviewedByMembershipNestedInput
   updatedPromotionEvaluations?: Prisma.PromotionEvaluationUpdateManyWithoutUpdatedByMembershipNestedInput
+  recordedPayments?: Prisma.PaymentRecordUpdateManyWithoutRecordedByMembershipNestedInput
   branchScopes?: Prisma.MembershipBranchScopeUpdateManyWithoutMembershipNestedInput
   roles?: Prisma.MembershipRoleAssignmentUpdateManyWithoutMembershipNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutActorMembershipNestedInput
@@ -374,6 +380,7 @@ export type OrganizationMembershipUncheckedUpdateInput = {
   proposedPromotionRequests?: Prisma.PromotionRequestUncheckedUpdateManyWithoutProposedByMembershipNestedInput
   reviewedPromotionRequests?: Prisma.PromotionRequestUncheckedUpdateManyWithoutReviewedByMembershipNestedInput
   updatedPromotionEvaluations?: Prisma.PromotionEvaluationUncheckedUpdateManyWithoutUpdatedByMembershipNestedInput
+  recordedPayments?: Prisma.PaymentRecordUncheckedUpdateManyWithoutRecordedByMembershipNestedInput
   branchScopes?: Prisma.MembershipBranchScopeUncheckedUpdateManyWithoutMembershipNestedInput
   roles?: Prisma.MembershipRoleAssignmentUncheckedUpdateManyWithoutMembershipNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutActorMembershipNestedInput
@@ -650,6 +657,20 @@ export type OrganizationMembershipUpdateOneRequiredWithoutBranchScopesNestedInpu
   update?: Prisma.XOR<Prisma.XOR<Prisma.OrganizationMembershipUpdateToOneWithWhereWithoutBranchScopesInput, Prisma.OrganizationMembershipUpdateWithoutBranchScopesInput>, Prisma.OrganizationMembershipUncheckedUpdateWithoutBranchScopesInput>
 }
 
+export type OrganizationMembershipCreateNestedOneWithoutRecordedPaymentsInput = {
+  create?: Prisma.XOR<Prisma.OrganizationMembershipCreateWithoutRecordedPaymentsInput, Prisma.OrganizationMembershipUncheckedCreateWithoutRecordedPaymentsInput>
+  connectOrCreate?: Prisma.OrganizationMembershipCreateOrConnectWithoutRecordedPaymentsInput
+  connect?: Prisma.OrganizationMembershipWhereUniqueInput
+}
+
+export type OrganizationMembershipUpdateOneRequiredWithoutRecordedPaymentsNestedInput = {
+  create?: Prisma.XOR<Prisma.OrganizationMembershipCreateWithoutRecordedPaymentsInput, Prisma.OrganizationMembershipUncheckedCreateWithoutRecordedPaymentsInput>
+  connectOrCreate?: Prisma.OrganizationMembershipCreateOrConnectWithoutRecordedPaymentsInput
+  upsert?: Prisma.OrganizationMembershipUpsertWithoutRecordedPaymentsInput
+  connect?: Prisma.OrganizationMembershipWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.OrganizationMembershipUpdateToOneWithWhereWithoutRecordedPaymentsInput, Prisma.OrganizationMembershipUpdateWithoutRecordedPaymentsInput>, Prisma.OrganizationMembershipUncheckedUpdateWithoutRecordedPaymentsInput>
+}
+
 export type OrganizationMembershipCreateNestedOneWithoutInstructedClassSchedulesInput = {
   create?: Prisma.XOR<Prisma.OrganizationMembershipCreateWithoutInstructedClassSchedulesInput, Prisma.OrganizationMembershipUncheckedCreateWithoutInstructedClassSchedulesInput>
   connectOrCreate?: Prisma.OrganizationMembershipCreateOrConnectWithoutInstructedClassSchedulesInput
@@ -754,6 +775,7 @@ export type OrganizationMembershipCreateWithoutUserInput = {
   proposedPromotionRequests?: Prisma.PromotionRequestCreateNestedManyWithoutProposedByMembershipInput
   reviewedPromotionRequests?: Prisma.PromotionRequestCreateNestedManyWithoutReviewedByMembershipInput
   updatedPromotionEvaluations?: Prisma.PromotionEvaluationCreateNestedManyWithoutUpdatedByMembershipInput
+  recordedPayments?: Prisma.PaymentRecordCreateNestedManyWithoutRecordedByMembershipInput
   branchScopes?: Prisma.MembershipBranchScopeCreateNestedManyWithoutMembershipInput
   roles?: Prisma.MembershipRoleAssignmentCreateNestedManyWithoutMembershipInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutActorMembershipInput
@@ -773,6 +795,7 @@ export type OrganizationMembershipUncheckedCreateWithoutUserInput = {
   proposedPromotionRequests?: Prisma.PromotionRequestUncheckedCreateNestedManyWithoutProposedByMembershipInput
   reviewedPromotionRequests?: Prisma.PromotionRequestUncheckedCreateNestedManyWithoutReviewedByMembershipInput
   updatedPromotionEvaluations?: Prisma.PromotionEvaluationUncheckedCreateNestedManyWithoutUpdatedByMembershipInput
+  recordedPayments?: Prisma.PaymentRecordUncheckedCreateNestedManyWithoutRecordedByMembershipInput
   branchScopes?: Prisma.MembershipBranchScopeUncheckedCreateNestedManyWithoutMembershipInput
   roles?: Prisma.MembershipRoleAssignmentUncheckedCreateNestedManyWithoutMembershipInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutActorMembershipInput
@@ -832,6 +855,7 @@ export type OrganizationMembershipCreateWithoutOrganizationInput = {
   proposedPromotionRequests?: Prisma.PromotionRequestCreateNestedManyWithoutProposedByMembershipInput
   reviewedPromotionRequests?: Prisma.PromotionRequestCreateNestedManyWithoutReviewedByMembershipInput
   updatedPromotionEvaluations?: Prisma.PromotionEvaluationCreateNestedManyWithoutUpdatedByMembershipInput
+  recordedPayments?: Prisma.PaymentRecordCreateNestedManyWithoutRecordedByMembershipInput
   branchScopes?: Prisma.MembershipBranchScopeCreateNestedManyWithoutMembershipInput
   roles?: Prisma.MembershipRoleAssignmentCreateNestedManyWithoutMembershipInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutActorMembershipInput
@@ -851,6 +875,7 @@ export type OrganizationMembershipUncheckedCreateWithoutOrganizationInput = {
   proposedPromotionRequests?: Prisma.PromotionRequestUncheckedCreateNestedManyWithoutProposedByMembershipInput
   reviewedPromotionRequests?: Prisma.PromotionRequestUncheckedCreateNestedManyWithoutReviewedByMembershipInput
   updatedPromotionEvaluations?: Prisma.PromotionEvaluationUncheckedCreateNestedManyWithoutUpdatedByMembershipInput
+  recordedPayments?: Prisma.PaymentRecordUncheckedCreateNestedManyWithoutRecordedByMembershipInput
   branchScopes?: Prisma.MembershipBranchScopeUncheckedCreateNestedManyWithoutMembershipInput
   roles?: Prisma.MembershipRoleAssignmentUncheckedCreateNestedManyWithoutMembershipInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutActorMembershipInput
@@ -896,6 +921,7 @@ export type OrganizationMembershipCreateWithoutHeadCoachOfBranchesInput = {
   proposedPromotionRequests?: Prisma.PromotionRequestCreateNestedManyWithoutProposedByMembershipInput
   reviewedPromotionRequests?: Prisma.PromotionRequestCreateNestedManyWithoutReviewedByMembershipInput
   updatedPromotionEvaluations?: Prisma.PromotionEvaluationCreateNestedManyWithoutUpdatedByMembershipInput
+  recordedPayments?: Prisma.PaymentRecordCreateNestedManyWithoutRecordedByMembershipInput
   branchScopes?: Prisma.MembershipBranchScopeCreateNestedManyWithoutMembershipInput
   roles?: Prisma.MembershipRoleAssignmentCreateNestedManyWithoutMembershipInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutActorMembershipInput
@@ -915,6 +941,7 @@ export type OrganizationMembershipUncheckedCreateWithoutHeadCoachOfBranchesInput
   proposedPromotionRequests?: Prisma.PromotionRequestUncheckedCreateNestedManyWithoutProposedByMembershipInput
   reviewedPromotionRequests?: Prisma.PromotionRequestUncheckedCreateNestedManyWithoutReviewedByMembershipInput
   updatedPromotionEvaluations?: Prisma.PromotionEvaluationUncheckedCreateNestedManyWithoutUpdatedByMembershipInput
+  recordedPayments?: Prisma.PaymentRecordUncheckedCreateNestedManyWithoutRecordedByMembershipInput
   branchScopes?: Prisma.MembershipBranchScopeUncheckedCreateNestedManyWithoutMembershipInput
   roles?: Prisma.MembershipRoleAssignmentUncheckedCreateNestedManyWithoutMembershipInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutActorMembershipInput
@@ -939,6 +966,7 @@ export type OrganizationMembershipCreateWithoutPrimaryBranchInput = {
   proposedPromotionRequests?: Prisma.PromotionRequestCreateNestedManyWithoutProposedByMembershipInput
   reviewedPromotionRequests?: Prisma.PromotionRequestCreateNestedManyWithoutReviewedByMembershipInput
   updatedPromotionEvaluations?: Prisma.PromotionEvaluationCreateNestedManyWithoutUpdatedByMembershipInput
+  recordedPayments?: Prisma.PaymentRecordCreateNestedManyWithoutRecordedByMembershipInput
   branchScopes?: Prisma.MembershipBranchScopeCreateNestedManyWithoutMembershipInput
   roles?: Prisma.MembershipRoleAssignmentCreateNestedManyWithoutMembershipInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutActorMembershipInput
@@ -957,6 +985,7 @@ export type OrganizationMembershipUncheckedCreateWithoutPrimaryBranchInput = {
   proposedPromotionRequests?: Prisma.PromotionRequestUncheckedCreateNestedManyWithoutProposedByMembershipInput
   reviewedPromotionRequests?: Prisma.PromotionRequestUncheckedCreateNestedManyWithoutReviewedByMembershipInput
   updatedPromotionEvaluations?: Prisma.PromotionEvaluationUncheckedCreateNestedManyWithoutUpdatedByMembershipInput
+  recordedPayments?: Prisma.PaymentRecordUncheckedCreateNestedManyWithoutRecordedByMembershipInput
   branchScopes?: Prisma.MembershipBranchScopeUncheckedCreateNestedManyWithoutMembershipInput
   roles?: Prisma.MembershipRoleAssignmentUncheckedCreateNestedManyWithoutMembershipInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutActorMembershipInput
@@ -997,6 +1026,7 @@ export type OrganizationMembershipUpdateWithoutHeadCoachOfBranchesInput = {
   proposedPromotionRequests?: Prisma.PromotionRequestUpdateManyWithoutProposedByMembershipNestedInput
   reviewedPromotionRequests?: Prisma.PromotionRequestUpdateManyWithoutReviewedByMembershipNestedInput
   updatedPromotionEvaluations?: Prisma.PromotionEvaluationUpdateManyWithoutUpdatedByMembershipNestedInput
+  recordedPayments?: Prisma.PaymentRecordUpdateManyWithoutRecordedByMembershipNestedInput
   branchScopes?: Prisma.MembershipBranchScopeUpdateManyWithoutMembershipNestedInput
   roles?: Prisma.MembershipRoleAssignmentUpdateManyWithoutMembershipNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutActorMembershipNestedInput
@@ -1016,6 +1046,7 @@ export type OrganizationMembershipUncheckedUpdateWithoutHeadCoachOfBranchesInput
   proposedPromotionRequests?: Prisma.PromotionRequestUncheckedUpdateManyWithoutProposedByMembershipNestedInput
   reviewedPromotionRequests?: Prisma.PromotionRequestUncheckedUpdateManyWithoutReviewedByMembershipNestedInput
   updatedPromotionEvaluations?: Prisma.PromotionEvaluationUncheckedUpdateManyWithoutUpdatedByMembershipNestedInput
+  recordedPayments?: Prisma.PaymentRecordUncheckedUpdateManyWithoutRecordedByMembershipNestedInput
   branchScopes?: Prisma.MembershipBranchScopeUncheckedUpdateManyWithoutMembershipNestedInput
   roles?: Prisma.MembershipRoleAssignmentUncheckedUpdateManyWithoutMembershipNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutActorMembershipNestedInput
@@ -1052,6 +1083,7 @@ export type OrganizationMembershipCreateWithoutRolesInput = {
   proposedPromotionRequests?: Prisma.PromotionRequestCreateNestedManyWithoutProposedByMembershipInput
   reviewedPromotionRequests?: Prisma.PromotionRequestCreateNestedManyWithoutReviewedByMembershipInput
   updatedPromotionEvaluations?: Prisma.PromotionEvaluationCreateNestedManyWithoutUpdatedByMembershipInput
+  recordedPayments?: Prisma.PaymentRecordCreateNestedManyWithoutRecordedByMembershipInput
   branchScopes?: Prisma.MembershipBranchScopeCreateNestedManyWithoutMembershipInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutActorMembershipInput
 }
@@ -1071,6 +1103,7 @@ export type OrganizationMembershipUncheckedCreateWithoutRolesInput = {
   proposedPromotionRequests?: Prisma.PromotionRequestUncheckedCreateNestedManyWithoutProposedByMembershipInput
   reviewedPromotionRequests?: Prisma.PromotionRequestUncheckedCreateNestedManyWithoutReviewedByMembershipInput
   updatedPromotionEvaluations?: Prisma.PromotionEvaluationUncheckedCreateNestedManyWithoutUpdatedByMembershipInput
+  recordedPayments?: Prisma.PaymentRecordUncheckedCreateNestedManyWithoutRecordedByMembershipInput
   branchScopes?: Prisma.MembershipBranchScopeUncheckedCreateNestedManyWithoutMembershipInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutActorMembershipInput
 }
@@ -1106,6 +1139,7 @@ export type OrganizationMembershipUpdateWithoutRolesInput = {
   proposedPromotionRequests?: Prisma.PromotionRequestUpdateManyWithoutProposedByMembershipNestedInput
   reviewedPromotionRequests?: Prisma.PromotionRequestUpdateManyWithoutReviewedByMembershipNestedInput
   updatedPromotionEvaluations?: Prisma.PromotionEvaluationUpdateManyWithoutUpdatedByMembershipNestedInput
+  recordedPayments?: Prisma.PaymentRecordUpdateManyWithoutRecordedByMembershipNestedInput
   branchScopes?: Prisma.MembershipBranchScopeUpdateManyWithoutMembershipNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutActorMembershipNestedInput
 }
@@ -1125,6 +1159,7 @@ export type OrganizationMembershipUncheckedUpdateWithoutRolesInput = {
   proposedPromotionRequests?: Prisma.PromotionRequestUncheckedUpdateManyWithoutProposedByMembershipNestedInput
   reviewedPromotionRequests?: Prisma.PromotionRequestUncheckedUpdateManyWithoutReviewedByMembershipNestedInput
   updatedPromotionEvaluations?: Prisma.PromotionEvaluationUncheckedUpdateManyWithoutUpdatedByMembershipNestedInput
+  recordedPayments?: Prisma.PaymentRecordUncheckedUpdateManyWithoutRecordedByMembershipNestedInput
   branchScopes?: Prisma.MembershipBranchScopeUncheckedUpdateManyWithoutMembershipNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutActorMembershipNestedInput
 }
@@ -1144,6 +1179,7 @@ export type OrganizationMembershipCreateWithoutBranchScopesInput = {
   proposedPromotionRequests?: Prisma.PromotionRequestCreateNestedManyWithoutProposedByMembershipInput
   reviewedPromotionRequests?: Prisma.PromotionRequestCreateNestedManyWithoutReviewedByMembershipInput
   updatedPromotionEvaluations?: Prisma.PromotionEvaluationCreateNestedManyWithoutUpdatedByMembershipInput
+  recordedPayments?: Prisma.PaymentRecordCreateNestedManyWithoutRecordedByMembershipInput
   roles?: Prisma.MembershipRoleAssignmentCreateNestedManyWithoutMembershipInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutActorMembershipInput
 }
@@ -1163,6 +1199,7 @@ export type OrganizationMembershipUncheckedCreateWithoutBranchScopesInput = {
   proposedPromotionRequests?: Prisma.PromotionRequestUncheckedCreateNestedManyWithoutProposedByMembershipInput
   reviewedPromotionRequests?: Prisma.PromotionRequestUncheckedCreateNestedManyWithoutReviewedByMembershipInput
   updatedPromotionEvaluations?: Prisma.PromotionEvaluationUncheckedCreateNestedManyWithoutUpdatedByMembershipInput
+  recordedPayments?: Prisma.PaymentRecordUncheckedCreateNestedManyWithoutRecordedByMembershipInput
   roles?: Prisma.MembershipRoleAssignmentUncheckedCreateNestedManyWithoutMembershipInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutActorMembershipInput
 }
@@ -1198,6 +1235,7 @@ export type OrganizationMembershipUpdateWithoutBranchScopesInput = {
   proposedPromotionRequests?: Prisma.PromotionRequestUpdateManyWithoutProposedByMembershipNestedInput
   reviewedPromotionRequests?: Prisma.PromotionRequestUpdateManyWithoutReviewedByMembershipNestedInput
   updatedPromotionEvaluations?: Prisma.PromotionEvaluationUpdateManyWithoutUpdatedByMembershipNestedInput
+  recordedPayments?: Prisma.PaymentRecordUpdateManyWithoutRecordedByMembershipNestedInput
   roles?: Prisma.MembershipRoleAssignmentUpdateManyWithoutMembershipNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutActorMembershipNestedInput
 }
@@ -1217,6 +1255,103 @@ export type OrganizationMembershipUncheckedUpdateWithoutBranchScopesInput = {
   proposedPromotionRequests?: Prisma.PromotionRequestUncheckedUpdateManyWithoutProposedByMembershipNestedInput
   reviewedPromotionRequests?: Prisma.PromotionRequestUncheckedUpdateManyWithoutReviewedByMembershipNestedInput
   updatedPromotionEvaluations?: Prisma.PromotionEvaluationUncheckedUpdateManyWithoutUpdatedByMembershipNestedInput
+  recordedPayments?: Prisma.PaymentRecordUncheckedUpdateManyWithoutRecordedByMembershipNestedInput
+  roles?: Prisma.MembershipRoleAssignmentUncheckedUpdateManyWithoutMembershipNestedInput
+  auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutActorMembershipNestedInput
+}
+
+export type OrganizationMembershipCreateWithoutRecordedPaymentsInput = {
+  id?: string
+  status?: $Enums.MembershipStatus
+  scopeType?: $Enums.MembershipScopeType
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  organization: Prisma.OrganizationCreateNestedOneWithoutMembershipsInput
+  user: Prisma.UserCreateNestedOneWithoutMembershipsInput
+  primaryBranch?: Prisma.BranchCreateNestedOneWithoutPrimaryMembershipsInput
+  headCoachOfBranches?: Prisma.BranchCreateNestedManyWithoutHeadCoachMembershipInput
+  instructedClassSchedules?: Prisma.ClassScheduleCreateNestedManyWithoutInstructorMembershipInput
+  instructedClassSessions?: Prisma.ClassSessionCreateNestedManyWithoutInstructorMembershipInput
+  proposedPromotionRequests?: Prisma.PromotionRequestCreateNestedManyWithoutProposedByMembershipInput
+  reviewedPromotionRequests?: Prisma.PromotionRequestCreateNestedManyWithoutReviewedByMembershipInput
+  updatedPromotionEvaluations?: Prisma.PromotionEvaluationCreateNestedManyWithoutUpdatedByMembershipInput
+  branchScopes?: Prisma.MembershipBranchScopeCreateNestedManyWithoutMembershipInput
+  roles?: Prisma.MembershipRoleAssignmentCreateNestedManyWithoutMembershipInput
+  auditLogs?: Prisma.AuditLogCreateNestedManyWithoutActorMembershipInput
+}
+
+export type OrganizationMembershipUncheckedCreateWithoutRecordedPaymentsInput = {
+  id?: string
+  organizationId: string
+  userId: string
+  status?: $Enums.MembershipStatus
+  scopeType?: $Enums.MembershipScopeType
+  primaryBranchId?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  headCoachOfBranches?: Prisma.BranchUncheckedCreateNestedManyWithoutHeadCoachMembershipInput
+  instructedClassSchedules?: Prisma.ClassScheduleUncheckedCreateNestedManyWithoutInstructorMembershipInput
+  instructedClassSessions?: Prisma.ClassSessionUncheckedCreateNestedManyWithoutInstructorMembershipInput
+  proposedPromotionRequests?: Prisma.PromotionRequestUncheckedCreateNestedManyWithoutProposedByMembershipInput
+  reviewedPromotionRequests?: Prisma.PromotionRequestUncheckedCreateNestedManyWithoutReviewedByMembershipInput
+  updatedPromotionEvaluations?: Prisma.PromotionEvaluationUncheckedCreateNestedManyWithoutUpdatedByMembershipInput
+  branchScopes?: Prisma.MembershipBranchScopeUncheckedCreateNestedManyWithoutMembershipInput
+  roles?: Prisma.MembershipRoleAssignmentUncheckedCreateNestedManyWithoutMembershipInput
+  auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutActorMembershipInput
+}
+
+export type OrganizationMembershipCreateOrConnectWithoutRecordedPaymentsInput = {
+  where: Prisma.OrganizationMembershipWhereUniqueInput
+  create: Prisma.XOR<Prisma.OrganizationMembershipCreateWithoutRecordedPaymentsInput, Prisma.OrganizationMembershipUncheckedCreateWithoutRecordedPaymentsInput>
+}
+
+export type OrganizationMembershipUpsertWithoutRecordedPaymentsInput = {
+  update: Prisma.XOR<Prisma.OrganizationMembershipUpdateWithoutRecordedPaymentsInput, Prisma.OrganizationMembershipUncheckedUpdateWithoutRecordedPaymentsInput>
+  create: Prisma.XOR<Prisma.OrganizationMembershipCreateWithoutRecordedPaymentsInput, Prisma.OrganizationMembershipUncheckedCreateWithoutRecordedPaymentsInput>
+  where?: Prisma.OrganizationMembershipWhereInput
+}
+
+export type OrganizationMembershipUpdateToOneWithWhereWithoutRecordedPaymentsInput = {
+  where?: Prisma.OrganizationMembershipWhereInput
+  data: Prisma.XOR<Prisma.OrganizationMembershipUpdateWithoutRecordedPaymentsInput, Prisma.OrganizationMembershipUncheckedUpdateWithoutRecordedPaymentsInput>
+}
+
+export type OrganizationMembershipUpdateWithoutRecordedPaymentsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumMembershipStatusFieldUpdateOperationsInput | $Enums.MembershipStatus
+  scopeType?: Prisma.EnumMembershipScopeTypeFieldUpdateOperationsInput | $Enums.MembershipScopeType
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  organization?: Prisma.OrganizationUpdateOneRequiredWithoutMembershipsNestedInput
+  user?: Prisma.UserUpdateOneRequiredWithoutMembershipsNestedInput
+  primaryBranch?: Prisma.BranchUpdateOneWithoutPrimaryMembershipsNestedInput
+  headCoachOfBranches?: Prisma.BranchUpdateManyWithoutHeadCoachMembershipNestedInput
+  instructedClassSchedules?: Prisma.ClassScheduleUpdateManyWithoutInstructorMembershipNestedInput
+  instructedClassSessions?: Prisma.ClassSessionUpdateManyWithoutInstructorMembershipNestedInput
+  proposedPromotionRequests?: Prisma.PromotionRequestUpdateManyWithoutProposedByMembershipNestedInput
+  reviewedPromotionRequests?: Prisma.PromotionRequestUpdateManyWithoutReviewedByMembershipNestedInput
+  updatedPromotionEvaluations?: Prisma.PromotionEvaluationUpdateManyWithoutUpdatedByMembershipNestedInput
+  branchScopes?: Prisma.MembershipBranchScopeUpdateManyWithoutMembershipNestedInput
+  roles?: Prisma.MembershipRoleAssignmentUpdateManyWithoutMembershipNestedInput
+  auditLogs?: Prisma.AuditLogUpdateManyWithoutActorMembershipNestedInput
+}
+
+export type OrganizationMembershipUncheckedUpdateWithoutRecordedPaymentsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  organizationId?: Prisma.StringFieldUpdateOperationsInput | string
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumMembershipStatusFieldUpdateOperationsInput | $Enums.MembershipStatus
+  scopeType?: Prisma.EnumMembershipScopeTypeFieldUpdateOperationsInput | $Enums.MembershipScopeType
+  primaryBranchId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  headCoachOfBranches?: Prisma.BranchUncheckedUpdateManyWithoutHeadCoachMembershipNestedInput
+  instructedClassSchedules?: Prisma.ClassScheduleUncheckedUpdateManyWithoutInstructorMembershipNestedInput
+  instructedClassSessions?: Prisma.ClassSessionUncheckedUpdateManyWithoutInstructorMembershipNestedInput
+  proposedPromotionRequests?: Prisma.PromotionRequestUncheckedUpdateManyWithoutProposedByMembershipNestedInput
+  reviewedPromotionRequests?: Prisma.PromotionRequestUncheckedUpdateManyWithoutReviewedByMembershipNestedInput
+  updatedPromotionEvaluations?: Prisma.PromotionEvaluationUncheckedUpdateManyWithoutUpdatedByMembershipNestedInput
+  branchScopes?: Prisma.MembershipBranchScopeUncheckedUpdateManyWithoutMembershipNestedInput
   roles?: Prisma.MembershipRoleAssignmentUncheckedUpdateManyWithoutMembershipNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutActorMembershipNestedInput
 }
@@ -1235,6 +1370,7 @@ export type OrganizationMembershipCreateWithoutInstructedClassSchedulesInput = {
   proposedPromotionRequests?: Prisma.PromotionRequestCreateNestedManyWithoutProposedByMembershipInput
   reviewedPromotionRequests?: Prisma.PromotionRequestCreateNestedManyWithoutReviewedByMembershipInput
   updatedPromotionEvaluations?: Prisma.PromotionEvaluationCreateNestedManyWithoutUpdatedByMembershipInput
+  recordedPayments?: Prisma.PaymentRecordCreateNestedManyWithoutRecordedByMembershipInput
   branchScopes?: Prisma.MembershipBranchScopeCreateNestedManyWithoutMembershipInput
   roles?: Prisma.MembershipRoleAssignmentCreateNestedManyWithoutMembershipInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutActorMembershipInput
@@ -1254,6 +1390,7 @@ export type OrganizationMembershipUncheckedCreateWithoutInstructedClassSchedules
   proposedPromotionRequests?: Prisma.PromotionRequestUncheckedCreateNestedManyWithoutProposedByMembershipInput
   reviewedPromotionRequests?: Prisma.PromotionRequestUncheckedCreateNestedManyWithoutReviewedByMembershipInput
   updatedPromotionEvaluations?: Prisma.PromotionEvaluationUncheckedCreateNestedManyWithoutUpdatedByMembershipInput
+  recordedPayments?: Prisma.PaymentRecordUncheckedCreateNestedManyWithoutRecordedByMembershipInput
   branchScopes?: Prisma.MembershipBranchScopeUncheckedCreateNestedManyWithoutMembershipInput
   roles?: Prisma.MembershipRoleAssignmentUncheckedCreateNestedManyWithoutMembershipInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutActorMembershipInput
@@ -1289,6 +1426,7 @@ export type OrganizationMembershipUpdateWithoutInstructedClassSchedulesInput = {
   proposedPromotionRequests?: Prisma.PromotionRequestUpdateManyWithoutProposedByMembershipNestedInput
   reviewedPromotionRequests?: Prisma.PromotionRequestUpdateManyWithoutReviewedByMembershipNestedInput
   updatedPromotionEvaluations?: Prisma.PromotionEvaluationUpdateManyWithoutUpdatedByMembershipNestedInput
+  recordedPayments?: Prisma.PaymentRecordUpdateManyWithoutRecordedByMembershipNestedInput
   branchScopes?: Prisma.MembershipBranchScopeUpdateManyWithoutMembershipNestedInput
   roles?: Prisma.MembershipRoleAssignmentUpdateManyWithoutMembershipNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutActorMembershipNestedInput
@@ -1308,6 +1446,7 @@ export type OrganizationMembershipUncheckedUpdateWithoutInstructedClassSchedules
   proposedPromotionRequests?: Prisma.PromotionRequestUncheckedUpdateManyWithoutProposedByMembershipNestedInput
   reviewedPromotionRequests?: Prisma.PromotionRequestUncheckedUpdateManyWithoutReviewedByMembershipNestedInput
   updatedPromotionEvaluations?: Prisma.PromotionEvaluationUncheckedUpdateManyWithoutUpdatedByMembershipNestedInput
+  recordedPayments?: Prisma.PaymentRecordUncheckedUpdateManyWithoutRecordedByMembershipNestedInput
   branchScopes?: Prisma.MembershipBranchScopeUncheckedUpdateManyWithoutMembershipNestedInput
   roles?: Prisma.MembershipRoleAssignmentUncheckedUpdateManyWithoutMembershipNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutActorMembershipNestedInput
@@ -1327,6 +1466,7 @@ export type OrganizationMembershipCreateWithoutInstructedClassSessionsInput = {
   proposedPromotionRequests?: Prisma.PromotionRequestCreateNestedManyWithoutProposedByMembershipInput
   reviewedPromotionRequests?: Prisma.PromotionRequestCreateNestedManyWithoutReviewedByMembershipInput
   updatedPromotionEvaluations?: Prisma.PromotionEvaluationCreateNestedManyWithoutUpdatedByMembershipInput
+  recordedPayments?: Prisma.PaymentRecordCreateNestedManyWithoutRecordedByMembershipInput
   branchScopes?: Prisma.MembershipBranchScopeCreateNestedManyWithoutMembershipInput
   roles?: Prisma.MembershipRoleAssignmentCreateNestedManyWithoutMembershipInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutActorMembershipInput
@@ -1346,6 +1486,7 @@ export type OrganizationMembershipUncheckedCreateWithoutInstructedClassSessionsI
   proposedPromotionRequests?: Prisma.PromotionRequestUncheckedCreateNestedManyWithoutProposedByMembershipInput
   reviewedPromotionRequests?: Prisma.PromotionRequestUncheckedCreateNestedManyWithoutReviewedByMembershipInput
   updatedPromotionEvaluations?: Prisma.PromotionEvaluationUncheckedCreateNestedManyWithoutUpdatedByMembershipInput
+  recordedPayments?: Prisma.PaymentRecordUncheckedCreateNestedManyWithoutRecordedByMembershipInput
   branchScopes?: Prisma.MembershipBranchScopeUncheckedCreateNestedManyWithoutMembershipInput
   roles?: Prisma.MembershipRoleAssignmentUncheckedCreateNestedManyWithoutMembershipInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutActorMembershipInput
@@ -1381,6 +1522,7 @@ export type OrganizationMembershipUpdateWithoutInstructedClassSessionsInput = {
   proposedPromotionRequests?: Prisma.PromotionRequestUpdateManyWithoutProposedByMembershipNestedInput
   reviewedPromotionRequests?: Prisma.PromotionRequestUpdateManyWithoutReviewedByMembershipNestedInput
   updatedPromotionEvaluations?: Prisma.PromotionEvaluationUpdateManyWithoutUpdatedByMembershipNestedInput
+  recordedPayments?: Prisma.PaymentRecordUpdateManyWithoutRecordedByMembershipNestedInput
   branchScopes?: Prisma.MembershipBranchScopeUpdateManyWithoutMembershipNestedInput
   roles?: Prisma.MembershipRoleAssignmentUpdateManyWithoutMembershipNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutActorMembershipNestedInput
@@ -1400,6 +1542,7 @@ export type OrganizationMembershipUncheckedUpdateWithoutInstructedClassSessionsI
   proposedPromotionRequests?: Prisma.PromotionRequestUncheckedUpdateManyWithoutProposedByMembershipNestedInput
   reviewedPromotionRequests?: Prisma.PromotionRequestUncheckedUpdateManyWithoutReviewedByMembershipNestedInput
   updatedPromotionEvaluations?: Prisma.PromotionEvaluationUncheckedUpdateManyWithoutUpdatedByMembershipNestedInput
+  recordedPayments?: Prisma.PaymentRecordUncheckedUpdateManyWithoutRecordedByMembershipNestedInput
   branchScopes?: Prisma.MembershipBranchScopeUncheckedUpdateManyWithoutMembershipNestedInput
   roles?: Prisma.MembershipRoleAssignmentUncheckedUpdateManyWithoutMembershipNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutActorMembershipNestedInput
@@ -1419,6 +1562,7 @@ export type OrganizationMembershipCreateWithoutProposedPromotionRequestsInput = 
   instructedClassSessions?: Prisma.ClassSessionCreateNestedManyWithoutInstructorMembershipInput
   reviewedPromotionRequests?: Prisma.PromotionRequestCreateNestedManyWithoutReviewedByMembershipInput
   updatedPromotionEvaluations?: Prisma.PromotionEvaluationCreateNestedManyWithoutUpdatedByMembershipInput
+  recordedPayments?: Prisma.PaymentRecordCreateNestedManyWithoutRecordedByMembershipInput
   branchScopes?: Prisma.MembershipBranchScopeCreateNestedManyWithoutMembershipInput
   roles?: Prisma.MembershipRoleAssignmentCreateNestedManyWithoutMembershipInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutActorMembershipInput
@@ -1438,6 +1582,7 @@ export type OrganizationMembershipUncheckedCreateWithoutProposedPromotionRequest
   instructedClassSessions?: Prisma.ClassSessionUncheckedCreateNestedManyWithoutInstructorMembershipInput
   reviewedPromotionRequests?: Prisma.PromotionRequestUncheckedCreateNestedManyWithoutReviewedByMembershipInput
   updatedPromotionEvaluations?: Prisma.PromotionEvaluationUncheckedCreateNestedManyWithoutUpdatedByMembershipInput
+  recordedPayments?: Prisma.PaymentRecordUncheckedCreateNestedManyWithoutRecordedByMembershipInput
   branchScopes?: Prisma.MembershipBranchScopeUncheckedCreateNestedManyWithoutMembershipInput
   roles?: Prisma.MembershipRoleAssignmentUncheckedCreateNestedManyWithoutMembershipInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutActorMembershipInput
@@ -1462,6 +1607,7 @@ export type OrganizationMembershipCreateWithoutReviewedPromotionRequestsInput = 
   instructedClassSessions?: Prisma.ClassSessionCreateNestedManyWithoutInstructorMembershipInput
   proposedPromotionRequests?: Prisma.PromotionRequestCreateNestedManyWithoutProposedByMembershipInput
   updatedPromotionEvaluations?: Prisma.PromotionEvaluationCreateNestedManyWithoutUpdatedByMembershipInput
+  recordedPayments?: Prisma.PaymentRecordCreateNestedManyWithoutRecordedByMembershipInput
   branchScopes?: Prisma.MembershipBranchScopeCreateNestedManyWithoutMembershipInput
   roles?: Prisma.MembershipRoleAssignmentCreateNestedManyWithoutMembershipInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutActorMembershipInput
@@ -1481,6 +1627,7 @@ export type OrganizationMembershipUncheckedCreateWithoutReviewedPromotionRequest
   instructedClassSessions?: Prisma.ClassSessionUncheckedCreateNestedManyWithoutInstructorMembershipInput
   proposedPromotionRequests?: Prisma.PromotionRequestUncheckedCreateNestedManyWithoutProposedByMembershipInput
   updatedPromotionEvaluations?: Prisma.PromotionEvaluationUncheckedCreateNestedManyWithoutUpdatedByMembershipInput
+  recordedPayments?: Prisma.PaymentRecordUncheckedCreateNestedManyWithoutRecordedByMembershipInput
   branchScopes?: Prisma.MembershipBranchScopeUncheckedCreateNestedManyWithoutMembershipInput
   roles?: Prisma.MembershipRoleAssignmentUncheckedCreateNestedManyWithoutMembershipInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutActorMembershipInput
@@ -1516,6 +1663,7 @@ export type OrganizationMembershipUpdateWithoutProposedPromotionRequestsInput = 
   instructedClassSessions?: Prisma.ClassSessionUpdateManyWithoutInstructorMembershipNestedInput
   reviewedPromotionRequests?: Prisma.PromotionRequestUpdateManyWithoutReviewedByMembershipNestedInput
   updatedPromotionEvaluations?: Prisma.PromotionEvaluationUpdateManyWithoutUpdatedByMembershipNestedInput
+  recordedPayments?: Prisma.PaymentRecordUpdateManyWithoutRecordedByMembershipNestedInput
   branchScopes?: Prisma.MembershipBranchScopeUpdateManyWithoutMembershipNestedInput
   roles?: Prisma.MembershipRoleAssignmentUpdateManyWithoutMembershipNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutActorMembershipNestedInput
@@ -1535,6 +1683,7 @@ export type OrganizationMembershipUncheckedUpdateWithoutProposedPromotionRequest
   instructedClassSessions?: Prisma.ClassSessionUncheckedUpdateManyWithoutInstructorMembershipNestedInput
   reviewedPromotionRequests?: Prisma.PromotionRequestUncheckedUpdateManyWithoutReviewedByMembershipNestedInput
   updatedPromotionEvaluations?: Prisma.PromotionEvaluationUncheckedUpdateManyWithoutUpdatedByMembershipNestedInput
+  recordedPayments?: Prisma.PaymentRecordUncheckedUpdateManyWithoutRecordedByMembershipNestedInput
   branchScopes?: Prisma.MembershipBranchScopeUncheckedUpdateManyWithoutMembershipNestedInput
   roles?: Prisma.MembershipRoleAssignmentUncheckedUpdateManyWithoutMembershipNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutActorMembershipNestedInput
@@ -1565,6 +1714,7 @@ export type OrganizationMembershipUpdateWithoutReviewedPromotionRequestsInput = 
   instructedClassSessions?: Prisma.ClassSessionUpdateManyWithoutInstructorMembershipNestedInput
   proposedPromotionRequests?: Prisma.PromotionRequestUpdateManyWithoutProposedByMembershipNestedInput
   updatedPromotionEvaluations?: Prisma.PromotionEvaluationUpdateManyWithoutUpdatedByMembershipNestedInput
+  recordedPayments?: Prisma.PaymentRecordUpdateManyWithoutRecordedByMembershipNestedInput
   branchScopes?: Prisma.MembershipBranchScopeUpdateManyWithoutMembershipNestedInput
   roles?: Prisma.MembershipRoleAssignmentUpdateManyWithoutMembershipNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutActorMembershipNestedInput
@@ -1584,6 +1734,7 @@ export type OrganizationMembershipUncheckedUpdateWithoutReviewedPromotionRequest
   instructedClassSessions?: Prisma.ClassSessionUncheckedUpdateManyWithoutInstructorMembershipNestedInput
   proposedPromotionRequests?: Prisma.PromotionRequestUncheckedUpdateManyWithoutProposedByMembershipNestedInput
   updatedPromotionEvaluations?: Prisma.PromotionEvaluationUncheckedUpdateManyWithoutUpdatedByMembershipNestedInput
+  recordedPayments?: Prisma.PaymentRecordUncheckedUpdateManyWithoutRecordedByMembershipNestedInput
   branchScopes?: Prisma.MembershipBranchScopeUncheckedUpdateManyWithoutMembershipNestedInput
   roles?: Prisma.MembershipRoleAssignmentUncheckedUpdateManyWithoutMembershipNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutActorMembershipNestedInput
@@ -1603,6 +1754,7 @@ export type OrganizationMembershipCreateWithoutUpdatedPromotionEvaluationsInput 
   instructedClassSessions?: Prisma.ClassSessionCreateNestedManyWithoutInstructorMembershipInput
   proposedPromotionRequests?: Prisma.PromotionRequestCreateNestedManyWithoutProposedByMembershipInput
   reviewedPromotionRequests?: Prisma.PromotionRequestCreateNestedManyWithoutReviewedByMembershipInput
+  recordedPayments?: Prisma.PaymentRecordCreateNestedManyWithoutRecordedByMembershipInput
   branchScopes?: Prisma.MembershipBranchScopeCreateNestedManyWithoutMembershipInput
   roles?: Prisma.MembershipRoleAssignmentCreateNestedManyWithoutMembershipInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutActorMembershipInput
@@ -1622,6 +1774,7 @@ export type OrganizationMembershipUncheckedCreateWithoutUpdatedPromotionEvaluati
   instructedClassSessions?: Prisma.ClassSessionUncheckedCreateNestedManyWithoutInstructorMembershipInput
   proposedPromotionRequests?: Prisma.PromotionRequestUncheckedCreateNestedManyWithoutProposedByMembershipInput
   reviewedPromotionRequests?: Prisma.PromotionRequestUncheckedCreateNestedManyWithoutReviewedByMembershipInput
+  recordedPayments?: Prisma.PaymentRecordUncheckedCreateNestedManyWithoutRecordedByMembershipInput
   branchScopes?: Prisma.MembershipBranchScopeUncheckedCreateNestedManyWithoutMembershipInput
   roles?: Prisma.MembershipRoleAssignmentUncheckedCreateNestedManyWithoutMembershipInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutActorMembershipInput
@@ -1657,6 +1810,7 @@ export type OrganizationMembershipUpdateWithoutUpdatedPromotionEvaluationsInput 
   instructedClassSessions?: Prisma.ClassSessionUpdateManyWithoutInstructorMembershipNestedInput
   proposedPromotionRequests?: Prisma.PromotionRequestUpdateManyWithoutProposedByMembershipNestedInput
   reviewedPromotionRequests?: Prisma.PromotionRequestUpdateManyWithoutReviewedByMembershipNestedInput
+  recordedPayments?: Prisma.PaymentRecordUpdateManyWithoutRecordedByMembershipNestedInput
   branchScopes?: Prisma.MembershipBranchScopeUpdateManyWithoutMembershipNestedInput
   roles?: Prisma.MembershipRoleAssignmentUpdateManyWithoutMembershipNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutActorMembershipNestedInput
@@ -1676,6 +1830,7 @@ export type OrganizationMembershipUncheckedUpdateWithoutUpdatedPromotionEvaluati
   instructedClassSessions?: Prisma.ClassSessionUncheckedUpdateManyWithoutInstructorMembershipNestedInput
   proposedPromotionRequests?: Prisma.PromotionRequestUncheckedUpdateManyWithoutProposedByMembershipNestedInput
   reviewedPromotionRequests?: Prisma.PromotionRequestUncheckedUpdateManyWithoutReviewedByMembershipNestedInput
+  recordedPayments?: Prisma.PaymentRecordUncheckedUpdateManyWithoutRecordedByMembershipNestedInput
   branchScopes?: Prisma.MembershipBranchScopeUncheckedUpdateManyWithoutMembershipNestedInput
   roles?: Prisma.MembershipRoleAssignmentUncheckedUpdateManyWithoutMembershipNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutActorMembershipNestedInput
@@ -1696,6 +1851,7 @@ export type OrganizationMembershipCreateWithoutAuditLogsInput = {
   proposedPromotionRequests?: Prisma.PromotionRequestCreateNestedManyWithoutProposedByMembershipInput
   reviewedPromotionRequests?: Prisma.PromotionRequestCreateNestedManyWithoutReviewedByMembershipInput
   updatedPromotionEvaluations?: Prisma.PromotionEvaluationCreateNestedManyWithoutUpdatedByMembershipInput
+  recordedPayments?: Prisma.PaymentRecordCreateNestedManyWithoutRecordedByMembershipInput
   branchScopes?: Prisma.MembershipBranchScopeCreateNestedManyWithoutMembershipInput
   roles?: Prisma.MembershipRoleAssignmentCreateNestedManyWithoutMembershipInput
 }
@@ -1715,6 +1871,7 @@ export type OrganizationMembershipUncheckedCreateWithoutAuditLogsInput = {
   proposedPromotionRequests?: Prisma.PromotionRequestUncheckedCreateNestedManyWithoutProposedByMembershipInput
   reviewedPromotionRequests?: Prisma.PromotionRequestUncheckedCreateNestedManyWithoutReviewedByMembershipInput
   updatedPromotionEvaluations?: Prisma.PromotionEvaluationUncheckedCreateNestedManyWithoutUpdatedByMembershipInput
+  recordedPayments?: Prisma.PaymentRecordUncheckedCreateNestedManyWithoutRecordedByMembershipInput
   branchScopes?: Prisma.MembershipBranchScopeUncheckedCreateNestedManyWithoutMembershipInput
   roles?: Prisma.MembershipRoleAssignmentUncheckedCreateNestedManyWithoutMembershipInput
 }
@@ -1750,6 +1907,7 @@ export type OrganizationMembershipUpdateWithoutAuditLogsInput = {
   proposedPromotionRequests?: Prisma.PromotionRequestUpdateManyWithoutProposedByMembershipNestedInput
   reviewedPromotionRequests?: Prisma.PromotionRequestUpdateManyWithoutReviewedByMembershipNestedInput
   updatedPromotionEvaluations?: Prisma.PromotionEvaluationUpdateManyWithoutUpdatedByMembershipNestedInput
+  recordedPayments?: Prisma.PaymentRecordUpdateManyWithoutRecordedByMembershipNestedInput
   branchScopes?: Prisma.MembershipBranchScopeUpdateManyWithoutMembershipNestedInput
   roles?: Prisma.MembershipRoleAssignmentUpdateManyWithoutMembershipNestedInput
 }
@@ -1769,6 +1927,7 @@ export type OrganizationMembershipUncheckedUpdateWithoutAuditLogsInput = {
   proposedPromotionRequests?: Prisma.PromotionRequestUncheckedUpdateManyWithoutProposedByMembershipNestedInput
   reviewedPromotionRequests?: Prisma.PromotionRequestUncheckedUpdateManyWithoutReviewedByMembershipNestedInput
   updatedPromotionEvaluations?: Prisma.PromotionEvaluationUncheckedUpdateManyWithoutUpdatedByMembershipNestedInput
+  recordedPayments?: Prisma.PaymentRecordUncheckedUpdateManyWithoutRecordedByMembershipNestedInput
   branchScopes?: Prisma.MembershipBranchScopeUncheckedUpdateManyWithoutMembershipNestedInput
   roles?: Prisma.MembershipRoleAssignmentUncheckedUpdateManyWithoutMembershipNestedInput
 }
@@ -1797,6 +1956,7 @@ export type OrganizationMembershipUpdateWithoutUserInput = {
   proposedPromotionRequests?: Prisma.PromotionRequestUpdateManyWithoutProposedByMembershipNestedInput
   reviewedPromotionRequests?: Prisma.PromotionRequestUpdateManyWithoutReviewedByMembershipNestedInput
   updatedPromotionEvaluations?: Prisma.PromotionEvaluationUpdateManyWithoutUpdatedByMembershipNestedInput
+  recordedPayments?: Prisma.PaymentRecordUpdateManyWithoutRecordedByMembershipNestedInput
   branchScopes?: Prisma.MembershipBranchScopeUpdateManyWithoutMembershipNestedInput
   roles?: Prisma.MembershipRoleAssignmentUpdateManyWithoutMembershipNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutActorMembershipNestedInput
@@ -1816,6 +1976,7 @@ export type OrganizationMembershipUncheckedUpdateWithoutUserInput = {
   proposedPromotionRequests?: Prisma.PromotionRequestUncheckedUpdateManyWithoutProposedByMembershipNestedInput
   reviewedPromotionRequests?: Prisma.PromotionRequestUncheckedUpdateManyWithoutReviewedByMembershipNestedInput
   updatedPromotionEvaluations?: Prisma.PromotionEvaluationUncheckedUpdateManyWithoutUpdatedByMembershipNestedInput
+  recordedPayments?: Prisma.PaymentRecordUncheckedUpdateManyWithoutRecordedByMembershipNestedInput
   branchScopes?: Prisma.MembershipBranchScopeUncheckedUpdateManyWithoutMembershipNestedInput
   roles?: Prisma.MembershipRoleAssignmentUncheckedUpdateManyWithoutMembershipNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutActorMembershipNestedInput
@@ -1855,6 +2016,7 @@ export type OrganizationMembershipUpdateWithoutOrganizationInput = {
   proposedPromotionRequests?: Prisma.PromotionRequestUpdateManyWithoutProposedByMembershipNestedInput
   reviewedPromotionRequests?: Prisma.PromotionRequestUpdateManyWithoutReviewedByMembershipNestedInput
   updatedPromotionEvaluations?: Prisma.PromotionEvaluationUpdateManyWithoutUpdatedByMembershipNestedInput
+  recordedPayments?: Prisma.PaymentRecordUpdateManyWithoutRecordedByMembershipNestedInput
   branchScopes?: Prisma.MembershipBranchScopeUpdateManyWithoutMembershipNestedInput
   roles?: Prisma.MembershipRoleAssignmentUpdateManyWithoutMembershipNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutActorMembershipNestedInput
@@ -1874,6 +2036,7 @@ export type OrganizationMembershipUncheckedUpdateWithoutOrganizationInput = {
   proposedPromotionRequests?: Prisma.PromotionRequestUncheckedUpdateManyWithoutProposedByMembershipNestedInput
   reviewedPromotionRequests?: Prisma.PromotionRequestUncheckedUpdateManyWithoutReviewedByMembershipNestedInput
   updatedPromotionEvaluations?: Prisma.PromotionEvaluationUncheckedUpdateManyWithoutUpdatedByMembershipNestedInput
+  recordedPayments?: Prisma.PaymentRecordUncheckedUpdateManyWithoutRecordedByMembershipNestedInput
   branchScopes?: Prisma.MembershipBranchScopeUncheckedUpdateManyWithoutMembershipNestedInput
   roles?: Prisma.MembershipRoleAssignmentUncheckedUpdateManyWithoutMembershipNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutActorMembershipNestedInput
@@ -1912,6 +2075,7 @@ export type OrganizationMembershipUpdateWithoutPrimaryBranchInput = {
   proposedPromotionRequests?: Prisma.PromotionRequestUpdateManyWithoutProposedByMembershipNestedInput
   reviewedPromotionRequests?: Prisma.PromotionRequestUpdateManyWithoutReviewedByMembershipNestedInput
   updatedPromotionEvaluations?: Prisma.PromotionEvaluationUpdateManyWithoutUpdatedByMembershipNestedInput
+  recordedPayments?: Prisma.PaymentRecordUpdateManyWithoutRecordedByMembershipNestedInput
   branchScopes?: Prisma.MembershipBranchScopeUpdateManyWithoutMembershipNestedInput
   roles?: Prisma.MembershipRoleAssignmentUpdateManyWithoutMembershipNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutActorMembershipNestedInput
@@ -1930,6 +2094,7 @@ export type OrganizationMembershipUncheckedUpdateWithoutPrimaryBranchInput = {
   proposedPromotionRequests?: Prisma.PromotionRequestUncheckedUpdateManyWithoutProposedByMembershipNestedInput
   reviewedPromotionRequests?: Prisma.PromotionRequestUncheckedUpdateManyWithoutReviewedByMembershipNestedInput
   updatedPromotionEvaluations?: Prisma.PromotionEvaluationUncheckedUpdateManyWithoutUpdatedByMembershipNestedInput
+  recordedPayments?: Prisma.PaymentRecordUncheckedUpdateManyWithoutRecordedByMembershipNestedInput
   branchScopes?: Prisma.MembershipBranchScopeUncheckedUpdateManyWithoutMembershipNestedInput
   roles?: Prisma.MembershipRoleAssignmentUncheckedUpdateManyWithoutMembershipNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutActorMembershipNestedInput
@@ -1956,6 +2121,7 @@ export type OrganizationMembershipCountOutputType = {
   proposedPromotionRequests: number
   reviewedPromotionRequests: number
   updatedPromotionEvaluations: number
+  recordedPayments: number
   branchScopes: number
   roles: number
   auditLogs: number
@@ -1968,6 +2134,7 @@ export type OrganizationMembershipCountOutputTypeSelect<ExtArgs extends runtime.
   proposedPromotionRequests?: boolean | OrganizationMembershipCountOutputTypeCountProposedPromotionRequestsArgs
   reviewedPromotionRequests?: boolean | OrganizationMembershipCountOutputTypeCountReviewedPromotionRequestsArgs
   updatedPromotionEvaluations?: boolean | OrganizationMembershipCountOutputTypeCountUpdatedPromotionEvaluationsArgs
+  recordedPayments?: boolean | OrganizationMembershipCountOutputTypeCountRecordedPaymentsArgs
   branchScopes?: boolean | OrganizationMembershipCountOutputTypeCountBranchScopesArgs
   roles?: boolean | OrganizationMembershipCountOutputTypeCountRolesArgs
   auditLogs?: boolean | OrganizationMembershipCountOutputTypeCountAuditLogsArgs
@@ -2028,6 +2195,13 @@ export type OrganizationMembershipCountOutputTypeCountUpdatedPromotionEvaluation
 /**
  * OrganizationMembershipCountOutputType without action
  */
+export type OrganizationMembershipCountOutputTypeCountRecordedPaymentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.PaymentRecordWhereInput
+}
+
+/**
+ * OrganizationMembershipCountOutputType without action
+ */
 export type OrganizationMembershipCountOutputTypeCountBranchScopesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.MembershipBranchScopeWhereInput
 }
@@ -2065,6 +2239,7 @@ export type OrganizationMembershipSelect<ExtArgs extends runtime.Types.Extension
   proposedPromotionRequests?: boolean | Prisma.OrganizationMembership$proposedPromotionRequestsArgs<ExtArgs>
   reviewedPromotionRequests?: boolean | Prisma.OrganizationMembership$reviewedPromotionRequestsArgs<ExtArgs>
   updatedPromotionEvaluations?: boolean | Prisma.OrganizationMembership$updatedPromotionEvaluationsArgs<ExtArgs>
+  recordedPayments?: boolean | Prisma.OrganizationMembership$recordedPaymentsArgs<ExtArgs>
   branchScopes?: boolean | Prisma.OrganizationMembership$branchScopesArgs<ExtArgs>
   roles?: boolean | Prisma.OrganizationMembership$rolesArgs<ExtArgs>
   auditLogs?: boolean | Prisma.OrganizationMembership$auditLogsArgs<ExtArgs>
@@ -2121,6 +2296,7 @@ export type OrganizationMembershipInclude<ExtArgs extends runtime.Types.Extensio
   proposedPromotionRequests?: boolean | Prisma.OrganizationMembership$proposedPromotionRequestsArgs<ExtArgs>
   reviewedPromotionRequests?: boolean | Prisma.OrganizationMembership$reviewedPromotionRequestsArgs<ExtArgs>
   updatedPromotionEvaluations?: boolean | Prisma.OrganizationMembership$updatedPromotionEvaluationsArgs<ExtArgs>
+  recordedPayments?: boolean | Prisma.OrganizationMembership$recordedPaymentsArgs<ExtArgs>
   branchScopes?: boolean | Prisma.OrganizationMembership$branchScopesArgs<ExtArgs>
   roles?: boolean | Prisma.OrganizationMembership$rolesArgs<ExtArgs>
   auditLogs?: boolean | Prisma.OrganizationMembership$auditLogsArgs<ExtArgs>
@@ -2149,6 +2325,7 @@ export type $OrganizationMembershipPayload<ExtArgs extends runtime.Types.Extensi
     proposedPromotionRequests: Prisma.$PromotionRequestPayload<ExtArgs>[]
     reviewedPromotionRequests: Prisma.$PromotionRequestPayload<ExtArgs>[]
     updatedPromotionEvaluations: Prisma.$PromotionEvaluationPayload<ExtArgs>[]
+    recordedPayments: Prisma.$PaymentRecordPayload<ExtArgs>[]
     branchScopes: Prisma.$MembershipBranchScopePayload<ExtArgs>[]
     roles: Prisma.$MembershipRoleAssignmentPayload<ExtArgs>[]
     auditLogs: Prisma.$AuditLogPayload<ExtArgs>[]
@@ -2565,6 +2742,7 @@ export interface Prisma__OrganizationMembershipClient<T, Null = never, ExtArgs e
   proposedPromotionRequests<T extends Prisma.OrganizationMembership$proposedPromotionRequestsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.OrganizationMembership$proposedPromotionRequestsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PromotionRequestPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   reviewedPromotionRequests<T extends Prisma.OrganizationMembership$reviewedPromotionRequestsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.OrganizationMembership$reviewedPromotionRequestsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PromotionRequestPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   updatedPromotionEvaluations<T extends Prisma.OrganizationMembership$updatedPromotionEvaluationsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.OrganizationMembership$updatedPromotionEvaluationsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PromotionEvaluationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  recordedPayments<T extends Prisma.OrganizationMembership$recordedPaymentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.OrganizationMembership$recordedPaymentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PaymentRecordPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   branchScopes<T extends Prisma.OrganizationMembership$branchScopesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.OrganizationMembership$branchScopesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MembershipBranchScopePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   roles<T extends Prisma.OrganizationMembership$rolesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.OrganizationMembership$rolesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MembershipRoleAssignmentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   auditLogs<T extends Prisma.OrganizationMembership$auditLogsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.OrganizationMembership$auditLogsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AuditLogPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
@@ -3166,6 +3344,30 @@ export type OrganizationMembership$updatedPromotionEvaluationsArgs<ExtArgs exten
   take?: number
   skip?: number
   distinct?: Prisma.PromotionEvaluationScalarFieldEnum | Prisma.PromotionEvaluationScalarFieldEnum[]
+}
+
+/**
+ * OrganizationMembership.recordedPayments
+ */
+export type OrganizationMembership$recordedPaymentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the PaymentRecord
+   */
+  select?: Prisma.PaymentRecordSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the PaymentRecord
+   */
+  omit?: Prisma.PaymentRecordOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.PaymentRecordInclude<ExtArgs> | null
+  where?: Prisma.PaymentRecordWhereInput
+  orderBy?: Prisma.PaymentRecordOrderByWithRelationInput | Prisma.PaymentRecordOrderByWithRelationInput[]
+  cursor?: Prisma.PaymentRecordWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.PaymentRecordScalarFieldEnum | Prisma.PaymentRecordScalarFieldEnum[]
 }
 
 /**

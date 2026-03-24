@@ -1,7 +1,10 @@
 import { ConflictException, Injectable } from '@nestjs/common';
 import { AccessControlService } from '../../auth/access-control.service';
 import type { AuthenticatedPrincipal } from '../../auth/authenticated-principal.interface';
-import { ClassSessionStatus, MembershipRole } from '../../generated/prisma/enums';
+import {
+  ClassSessionStatus,
+  MembershipRole,
+} from '../../generated/prisma/enums';
 import { SessionAttendanceEntryDto } from '../dto/session-attendance-entry.dto';
 
 type BranchAccessTarget = {
@@ -15,6 +18,16 @@ type SessionAttendanceTarget = {
   organizationId: string;
   branchId: string;
   status: ClassSessionStatus;
+};
+
+type AttendanceRestrictionTarget = {
+  student: {
+    firstName: string;
+    lastName: string;
+  };
+  activeRestrictionFlags: {
+    attendanceRestricted: boolean;
+  };
 };
 
 @Injectable()
@@ -52,7 +65,9 @@ export class AttendancePolicy {
       notes: record.notes?.trim() || null,
     }));
 
-    const uniqueStudentIds = new Set(normalized.map((record) => record.studentId));
+    const uniqueStudentIds = new Set(
+      normalized.map((record) => record.studentId),
+    );
 
     if (uniqueStudentIds.size !== normalized.length) {
       throw new ConflictException(
@@ -63,12 +78,39 @@ export class AttendancePolicy {
     return normalized;
   }
 
+  ensureStudentsCanRecordAttendance(
+    financialViews: AttendanceRestrictionTarget[],
+  ) {
+    const restrictedStudents = financialViews.filter(
+      (view) => view.activeRestrictionFlags.attendanceRestricted,
+    );
+
+    if (!restrictedStudents.length) {
+      return;
+    }
+
+    const studentNames = restrictedStudents.map((view) =>
+      `${view.student.firstName} ${view.student.lastName}`.trim(),
+    );
+    const listedStudents = studentNames.slice(0, 3).join(', ');
+    const suffix =
+      studentNames.length > 3 ? ` and ${studentNames.length - 3} more` : '';
+
+    throw new ConflictException(
+      `Attendance is restricted by branch billing policy for student(s): ${listedStudents}${suffix}`,
+    );
+  }
+
   private ensureStaffBranchAccess(
     principal: AuthenticatedPrincipal,
     organizationId: string,
     branch: BranchAccessTarget,
   ) {
     this.accessControl.ensureOrganizationAccess(principal, organizationId);
-    this.accessControl.ensureBranchAccess(principal, branch, MembershipRole.STAFF);
+    this.accessControl.ensureBranchAccess(
+      principal,
+      branch,
+      MembershipRole.STAFF,
+    );
   }
 }

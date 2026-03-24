@@ -1,6 +1,7 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import type { AuthenticatedPrincipal } from '../../../auth/authenticated-principal.interface';
 import { AuditService } from '../../../audit/audit.service';
+import { BillingAttendanceEnforcementService } from '../../../billing/application/billing-attendance-enforcement.service';
 import { AttendanceStatus } from '../../../generated/prisma/enums';
 import { RecordSessionAttendanceDto } from '../../dto/record-session-attendance.dto';
 import { AttendancePolicy } from '../../domain/attendance.policy';
@@ -11,6 +12,7 @@ export class RecordSessionAttendanceUseCase {
   constructor(
     private readonly attendancePolicy: AttendancePolicy,
     private readonly attendanceRepository: AttendanceRepository,
+    private readonly billingAttendanceEnforcement: BillingAttendanceEnforcementService,
     private readonly auditService: AuditService,
   ) {}
 
@@ -52,6 +54,18 @@ export class RecordSessionAttendanceUseCase {
         'One or more students were not found in the organization',
       );
     }
+
+    const studentFinancialViews =
+      await this.billingAttendanceEnforcement.getStudentAttendanceRestrictionStates(
+        {
+          organizationId,
+          branchId,
+          students,
+        },
+      );
+    this.attendancePolicy.ensureStudentsCanRecordAttendance(
+      studentFinancialViews,
+    );
 
     const items = await this.attendanceRepository.upsertSessionAttendance({
       organizationId,

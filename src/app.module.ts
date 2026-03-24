@@ -1,4 +1,9 @@
-import { MiddlewareConsumer, Module, NestModule, RequestMethod } from '@nestjs/common';
+import {
+  MiddlewareConsumer,
+  Module,
+  NestModule,
+  RequestMethod,
+} from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { APP_FILTER, APP_GUARD } from '@nestjs/core';
 import { ThrottlerGuard, ThrottlerModule } from '@nestjs/throttler';
@@ -20,6 +25,7 @@ import { AuditModule } from './audit/audit.module';
 import { ClassesModule } from './classes/classes.module';
 import { AttendanceModule } from './attendance/attendance.module';
 import { PromotionsModule } from './promotions/promotions.module';
+import { BillingModule } from './billing/billing.module';
 
 @Module({
   imports: [
@@ -46,6 +52,7 @@ import { PromotionsModule } from './promotions/promotions.module';
     PublicBranchesModule,
     MembershipsModule,
     StudentsModule,
+    BillingModule,
     ClassesModule,
     AttendanceModule,
     PromotionsModule,

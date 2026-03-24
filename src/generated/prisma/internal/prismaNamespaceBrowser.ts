@@ -59,6 +59,11 @@ export const ModelName = {
   MembershipRoleAssignment: 'MembershipRoleAssignment',
   MembershipBranchScope: 'MembershipBranchScope',
   Student: 'Student',
+  BillingPlan: 'BillingPlan',
+  StudentMembership: 'StudentMembership',
+  BillingCharge: 'BillingCharge',
+  PaymentRecord: 'PaymentRecord',
+  BillingPolicy: 'BillingPolicy',
   ClassSchedule: 'ClassSchedule',
   ClassSession: 'ClassSession',
   AttendanceRecord: 'AttendanceRecord',
@@ -219,6 +224,117 @@ export const StudentScalarFieldEnum = {
 } as const
 
 export type StudentScalarFieldEnum = (typeof StudentScalarFieldEnum)[keyof typeof StudentScalarFieldEnum]
+
+
+export const BillingPlanScalarFieldEnum = {
+  id: 'id',
+  organizationId: 'organizationId',
+  branchId: 'branchId',
+  name: 'name',
+  description: 'description',
+  billingFrequency: 'billingFrequency',
+  amount: 'amount',
+  currency: 'currency',
+  enrollmentFeeAmount: 'enrollmentFeeAmount',
+  isActive: 'isActive',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  deletedAt: 'deletedAt'
+} as const
+
+export type BillingPlanScalarFieldEnum = (typeof BillingPlanScalarFieldEnum)[keyof typeof BillingPlanScalarFieldEnum]
+
+
+export const StudentMembershipScalarFieldEnum = {
+  id: 'id',
+  organizationId: 'organizationId',
+  branchId: 'branchId',
+  studentId: 'studentId',
+  billingPlanId: 'billingPlanId',
+  status: 'status',
+  startedAt: 'startedAt',
+  endedAt: 'endedAt',
+  nextBillingDate: 'nextBillingDate',
+  freezeStartAt: 'freezeStartAt',
+  freezeEndAt: 'freezeEndAt',
+  discountType: 'discountType',
+  discountValue: 'discountValue',
+  notes: 'notes',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type StudentMembershipScalarFieldEnum = (typeof StudentMembershipScalarFieldEnum)[keyof typeof StudentMembershipScalarFieldEnum]
+
+
+export const BillingChargeScalarFieldEnum = {
+  id: 'id',
+  organizationId: 'organizationId',
+  branchId: 'branchId',
+  studentId: 'studentId',
+  studentMembershipId: 'studentMembershipId',
+  billingPlanId: 'billingPlanId',
+  chargeType: 'chargeType',
+  periodStart: 'periodStart',
+  periodEnd: 'periodEnd',
+  dueDate: 'dueDate',
+  amount: 'amount',
+  amountPaid: 'amountPaid',
+  currency: 'currency',
+  status: 'status',
+  description: 'description',
+  externalProvider: 'externalProvider',
+  externalReference: 'externalReference',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  deletedAt: 'deletedAt'
+} as const
+
+export type BillingChargeScalarFieldEnum = (typeof BillingChargeScalarFieldEnum)[keyof typeof BillingChargeScalarFieldEnum]
+
+
+export const PaymentRecordScalarFieldEnum = {
+  id: 'id',
+  organizationId: 'organizationId',
+  branchId: 'branchId',
+  paymentKind: 'paymentKind',
+  studentId: 'studentId',
+  billingChargeId: 'billingChargeId',
+  grossAmount: 'grossAmount',
+  netAmount: 'netAmount',
+  currency: 'currency',
+  method: 'method',
+  status: 'status',
+  description: 'description',
+  externalProvider: 'externalProvider',
+  externalReference: 'externalReference',
+  recordedByMembershipId: 'recordedByMembershipId',
+  recordedAt: 'recordedAt',
+  notes: 'notes',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  deletedAt: 'deletedAt'
+} as const
+
+export type PaymentRecordScalarFieldEnum = (typeof PaymentRecordScalarFieldEnum)[keyof typeof PaymentRecordScalarFieldEnum]
+
+
+export const BillingPolicyScalarFieldEnum = {
+  id: 'id',
+  organizationId: 'organizationId',
+  branchId: 'branchId',
+  graceDays: 'graceDays',
+  restrictAttendanceWhenOverdue: 'restrictAttendanceWhenOverdue',
+  restrictAppUsageWhenOverdue: 'restrictAppUsageWhenOverdue',
+  allowFreeze: 'allowFreeze',
+  maxFreezeDaysPerYear: 'maxFreezeDaysPerYear',
+  allowManualDiscounts: 'allowManualDiscounts',
+  allowPartialPayments: 'allowPartialPayments',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type BillingPolicyScalarFieldEnum = (typeof BillingPolicyScalarFieldEnum)[keyof typeof BillingPolicyScalarFieldEnum]
 
 
 export const ClassScheduleScalarFieldEnum = {

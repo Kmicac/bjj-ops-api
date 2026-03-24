@@ -1,6 +1,13 @@
-import { ConflictException, Injectable, NotFoundException } from '@nestjs/common';
+import {
+  ConflictException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { Prisma } from '../../generated/prisma/client';
-import { AttendanceStatus, ClassSessionStatus } from '../../generated/prisma/enums';
+import {
+  AttendanceStatus,
+  ClassSessionStatus,
+} from '../../generated/prisma/enums';
 import { PrismaService } from '../../prisma/prisma.service';
 
 const SESSION_ATTENDANCE_LOCK_NAMESPACE = 82001;
@@ -102,6 +109,8 @@ export class AttendanceRepository {
       },
       select: {
         id: true,
+        firstName: true,
+        lastName: true,
       },
     });
   }

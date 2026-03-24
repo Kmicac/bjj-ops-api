@@ -80,6 +80,31 @@ export type MembershipBranchScope = Prisma.MembershipBranchScopeModel
  */
 export type Student = Prisma.StudentModel
 /**
+ * Model BillingPlan
+ * 
+ */
+export type BillingPlan = Prisma.BillingPlanModel
+/**
+ * Model StudentMembership
+ * 
+ */
+export type StudentMembership = Prisma.StudentMembershipModel
+/**
+ * Model BillingCharge
+ * 
+ */
+export type BillingCharge = Prisma.BillingChargeModel
+/**
+ * Model PaymentRecord
+ * 
+ */
+export type PaymentRecord = Prisma.PaymentRecordModel
+/**
+ * Model BillingPolicy
+ * 
+ */
+export type BillingPolicy = Prisma.BillingPolicyModel
+/**
  * Model ClassSchedule
  * 
  */

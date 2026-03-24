@@ -84,6 +84,90 @@ export const StudentStatus = {
 export type StudentStatus = (typeof StudentStatus)[keyof typeof StudentStatus]
 
 
+export const BillingFrequency = {
+  WEEKLY: 'WEEKLY',
+  MONTHLY: 'MONTHLY',
+  QUARTERLY: 'QUARTERLY',
+  YEARLY: 'YEARLY',
+  ONE_TIME: 'ONE_TIME'
+} as const
+
+export type BillingFrequency = (typeof BillingFrequency)[keyof typeof BillingFrequency]
+
+
+export const StudentMembershipStatus = {
+  ACTIVE: 'ACTIVE',
+  PAUSED: 'PAUSED',
+  FROZEN: 'FROZEN',
+  CANCELED: 'CANCELED',
+  ENDED: 'ENDED'
+} as const
+
+export type StudentMembershipStatus = (typeof StudentMembershipStatus)[keyof typeof StudentMembershipStatus]
+
+
+export const DiscountType = {
+  PERCENTAGE: 'PERCENTAGE',
+  FIXED: 'FIXED'
+} as const
+
+export type DiscountType = (typeof DiscountType)[keyof typeof DiscountType]
+
+
+export const BillingChargeType = {
+  MEMBERSHIP: 'MEMBERSHIP',
+  ENROLLMENT: 'ENROLLMENT',
+  ADJUSTMENT: 'ADJUSTMENT',
+  MANUAL: 'MANUAL'
+} as const
+
+export type BillingChargeType = (typeof BillingChargeType)[keyof typeof BillingChargeType]
+
+
+export const BillingChargeStatus = {
+  PENDING: 'PENDING',
+  PARTIALLY_PAID: 'PARTIALLY_PAID',
+  PAID: 'PAID',
+  OVERDUE: 'OVERDUE',
+  CANCELED: 'CANCELED',
+  VOID: 'VOID'
+} as const
+
+export type BillingChargeStatus = (typeof BillingChargeStatus)[keyof typeof BillingChargeStatus]
+
+
+export const PaymentKind = {
+  STUDENT_PAYMENT: 'STUDENT_PAYMENT',
+  GENERAL_INCOME: 'GENERAL_INCOME'
+} as const
+
+export type PaymentKind = (typeof PaymentKind)[keyof typeof PaymentKind]
+
+
+export const PaymentMethod = {
+  CASH: 'CASH',
+  BANK_TRANSFER: 'BANK_TRANSFER',
+  DEBIT_CARD: 'DEBIT_CARD',
+  CREDIT_CARD: 'CREDIT_CARD',
+  MERCADO_PAGO: 'MERCADO_PAGO',
+  TAKENOS: 'TAKENOS',
+  OTHER: 'OTHER'
+} as const
+
+export type PaymentMethod = (typeof PaymentMethod)[keyof typeof PaymentMethod]
+
+
+export const PaymentStatus = {
+  PENDING: 'PENDING',
+  APPROVED: 'APPROVED',
+  REJECTED: 'REJECTED',
+  CANCELED: 'CANCELED',
+  FAILED: 'FAILED'
+} as const
+
+export type PaymentStatus = (typeof PaymentStatus)[keyof typeof PaymentStatus]
+
+
 export const Weekday = {
   MONDAY: 'MONDAY',
   TUESDAY: 'TUESDAY',

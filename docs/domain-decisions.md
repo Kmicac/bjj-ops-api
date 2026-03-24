@@ -1,6 +1,7 @@
 # Domain Decisions
 
 ## Purpose
+
 This file records explicit decisions already taken for the current version of the product.
 
 If a future change conflicts with one of these decisions, the change must first update this file and explain why.
@@ -10,6 +11,7 @@ If a future change conflicts with one of these decisions, the change must first 
 ## Governance decisions
 
 ### DD-001 — Organization is the tenant boundary
+
 Status: accepted
 
 Reason:
@@ -21,6 +23,7 @@ No module may leak data across organizations.
 ---
 
 ### DD-002 — Branch is a subordinate operational scope
+
 Status: accepted
 
 Reason:
@@ -32,6 +35,7 @@ Branch-level access is enforced inside an organization.
 ---
 
 ### DD-003 — Public branch data is separate from internal branch data
+
 Status: accepted
 
 Reason:
@@ -45,6 +49,7 @@ Public profile information must be modeled separately from internal operational 
 ## Role and hierarchy decisions
 
 ### DD-004 — Official role naming uses HEAD_COACH and ACADEMY_MANAGER
+
 Status: accepted
 
 Reason:
@@ -57,6 +62,7 @@ Use `HEAD_COACH` and `ACADEMY_MANAGER` consistently in code, docs, permissions, 
 ---
 
 ### DD-005 — A person may hold multiple functional responsibilities
+
 Status: accepted
 
 Reason:
@@ -68,6 +74,7 @@ Do not hardcode an overly rigid one-person/one-role mental model.
 ---
 
 ### DD-006 — HEAD_COACH is not a generic freely assignable semantic
+
 Status: accepted
 
 Reason:
@@ -79,6 +86,7 @@ Do not flatten HEAD_COACH into a generic org-level label with no branch semantic
 ---
 
 ### DD-007 — ACADEMY_MANAGER is an operational and administrative leadership role
+
 Status: accepted
 
 Reason:
@@ -92,6 +100,7 @@ ACADEMY_MANAGER may participate in academy operations, administration, and revie
 ## Communication and finance decisions
 
 ### DD-008 — Communication and finance are intentionally separate product domains
+
 Status: accepted
 
 Reason:
@@ -104,6 +113,7 @@ The platform may centralize communication, but financial management must remain 
 ---
 
 ### DD-009 — Communication may flow top-down through the organizational pyramid
+
 Status: accepted
 
 Reason:
@@ -112,6 +122,7 @@ academy/dojo → branch network → central leadership.
 
 Implication:
 The product must support centralized communication flowing downward to:
+
 - head coaches
 - academy managers
 - instructors
@@ -121,6 +132,7 @@ The product must support centralized communication flowing downward to:
 ---
 
 ### DD-010 — Financial visibility remains branch-local by default
+
 Status: accepted
 
 Reason:
@@ -134,6 +146,7 @@ Future billing and financial modules must preserve branch-local visibility unles
 ## Student decisions
 
 ### DD-011 — Student is a core domain entity, not merely a profile
+
 Status: accepted
 
 Reason:
@@ -145,6 +158,7 @@ Student remains a first-class business object even when linked to a user account
 ---
 
 ### DD-012 — Changing primary branch does not create a new student
+
 Status: accepted
 
 Reason:
@@ -156,6 +170,7 @@ Branch changes must preserve student identity and history.
 ---
 
 ### DD-013 — Temporary cross-branch participation may exist before formal visit modeling
+
 Status: accepted
 
 Reason:
@@ -169,6 +184,7 @@ The domain may temporarily allow limited cross-branch operational participation 
 ## Classes and attendance decisions
 
 ### DD-014 — One branch is currently treated as a single simultaneous operational unit
+
 Status: accepted
 
 Reason:
@@ -183,6 +199,7 @@ If multi-mat or multi-room is needed, introduce an explicit entity such as `Bran
 ---
 
 ### DD-015 — Attendance is recorded against ClassSession, not ClassSchedule
+
 Status: accepted
 
 Reason:
@@ -194,6 +211,7 @@ Attendance must always point to a real session instance.
 ---
 
 ### DD-016 — Attendance remains a hybrid validation model
+
 Status: accepted
 
 Reason:
@@ -206,6 +224,7 @@ Students may express attendance intent, but final attendance validity belongs to
 ---
 
 ### DD-017 — Attendance is currently consolidated attendance, not real-time check-in events
+
 Status: accepted
 
 Reason:
@@ -220,6 +239,7 @@ If real-time check-in is added later, it must be modeled explicitly and not sile
 ## Promotions decisions
 
 ### DD-018 — Promotions are human-decided workflows
+
 Status: accepted
 
 Reason:
@@ -231,6 +251,7 @@ Never auto-promote students.
 ---
 
 ### DD-019 — Belt promotions require formal workflow and traceability
+
 Status: accepted
 
 Reason:
@@ -242,6 +263,7 @@ Promotion request, evaluation, approval/rejection, and certificate/diploma gener
 ---
 
 ### DD-020 — Promotion history must remain durable and auditable
+
 Status: accepted
 
 Reason:
@@ -253,6 +275,7 @@ Proposal, evaluation, approval, rejection, and historical snapshots must remain 
 ---
 
 ### DD-021 — Approved promotions update the student’s current state in the same transaction
+
 Status: accepted
 
 Reason:
@@ -264,6 +287,7 @@ Promotion approval must atomically update workflow history and current student r
 ---
 
 ### DD-022 — Promotion rules must follow the chosen federation reference
+
 Status: accepted
 
 Reason:
@@ -275,6 +299,7 @@ Promotion code must follow `docs/federation-reference.md`.
 ---
 
 ### DD-023 — Promotion evaluation must remain assistive, not bureaucratic
+
 Status: accepted
 
 Reason:
@@ -288,6 +313,7 @@ Evaluation sheets may structure context and signals, but final promotion remains
 ## Billing and platform access decisions
 
 ### DD-024 — Billing and student collections are separate concerns from platform charging
+
 Status: accepted
 
 Reason:
@@ -299,6 +325,7 @@ The platform may support branch-local student billing while also supporting sepa
 ---
 
 ### DD-025 — Payment status may limit platform functionality according to policy
+
 Status: accepted
 
 Reason:
@@ -312,6 +339,7 @@ Future billing policy may limit selected functionality for unpaid students or ac
 ## Analytics and strategy decisions
 
 ### DD-026 — Platform value includes professionalization through analytics
+
 Status: accepted
 
 Reason:
@@ -323,6 +351,7 @@ Retention, attendance, academy health, churn, and operational metrics are first-
 ---
 
 ### DD-027 — The product is designed for both single academies and large branch organizations from the start
+
 Status: accepted
 
 Reason:
@@ -336,6 +365,7 @@ Organization, branch, permissions, communication, promotions, classes, billing, 
 ## Architecture decisions
 
 ### DD-028 — The repository architecture standard is mandatory
+
 Status: accepted
 
 Reason:
@@ -343,6 +373,7 @@ The codebase must remain readable, maintainable, and migration-friendly.
 
 Implication:
 Modules must follow:
+
 - controller
 - application/use-cases
 - domain/policies
@@ -353,6 +384,7 @@ Modules must follow:
 ---
 
 ### DD-029 — Repositories may own transaction boundaries, but not domain-rule ownership
+
 Status: accepted
 
 Reason:
@@ -365,6 +397,7 @@ Avoid moving domain semantics into repositories under the excuse of persistence.
 ---
 
 ### DD-030 — Do not invent undocumented business rules in code
+
 Status: accepted
 
 Reason:
@@ -376,9 +409,28 @@ If a rule is unclear, document uncertainty and stop. Do not guess.
 
 ---
 
+### DD-031 — Student financial status in billing is a derived branch-local operational state
+
+Status: accepted
+
+Reason:
+Billing phase 2 needs an actionable backend-ready status for overdue handling and operational restrictions without introducing a persisted ledger state machine.
+
+Implication:
+
+- Student financial status remains derived, not persisted.
+- The current derived statuses are `CURRENT`, `DUE_SOON`, `OVERDUE`, `RESTRICTED`, and `FROZEN`.
+- `DUE_SOON` uses a fixed 5-day operational window in the current version.
+- `RESTRICTED` is derived from overdue charges plus active branch billing-policy restriction flags.
+- `FROZEN` reflects a frozen membership only when there is no overdue state taking precedence.
+- This logic remains branch-local and must not become a cross-branch financial view.
+
+---
+
 ## Future decisions intentionally left open
 
 These are intentionally not closed yet:
+
 - room/mat/area modeling
 - real-time attendance check-in model
 - formal temporary visits model

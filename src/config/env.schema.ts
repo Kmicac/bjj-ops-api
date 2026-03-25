@@ -37,6 +37,20 @@ const rawEnvironmentSchema = z.object({
   RATE_LIMIT_TTL_MS: z.coerce.number().int().min(1000).default(60_000),
   RATE_LIMIT_LIMIT: z.coerce.number().int().min(1).default(60),
   TRUST_PROXY: booleanStringSchema,
+  INTEGRATIONS_CONFIG_ENCRYPTION_KEY: z
+    .string()
+    .optional()
+    .refine((value) => {
+      if (!value) {
+        return true;
+      }
+
+      try {
+        return Buffer.from(value, 'base64').length === 32;
+      } catch {
+        return false;
+      }
+    }, 'INTEGRATIONS_CONFIG_ENCRYPTION_KEY must be a base64-encoded 32-byte key'),
   LOG_LEVEL: z
     .enum(['fatal', 'error', 'warn', 'info', 'debug', 'trace', 'silent'])
     .default('info'),

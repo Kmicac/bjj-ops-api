@@ -228,6 +228,9 @@ export type OrganizationWhereInput = {
   billingCharges?: Prisma.BillingChargeListRelationFilter
   paymentRecords?: Prisma.PaymentRecordListRelationFilter
   billingPolicies?: Prisma.BillingPolicyListRelationFilter
+  integrationConnections?: Prisma.IntegrationConnectionListRelationFilter
+  integrationSyncJobs?: Prisma.IntegrationSyncJobListRelationFilter
+  externalEntityLinks?: Prisma.ExternalEntityLinkListRelationFilter
   auditLogs?: Prisma.AuditLogListRelationFilter
 }
 
@@ -255,6 +258,9 @@ export type OrganizationOrderByWithRelationInput = {
   billingCharges?: Prisma.BillingChargeOrderByRelationAggregateInput
   paymentRecords?: Prisma.PaymentRecordOrderByRelationAggregateInput
   billingPolicies?: Prisma.BillingPolicyOrderByRelationAggregateInput
+  integrationConnections?: Prisma.IntegrationConnectionOrderByRelationAggregateInput
+  integrationSyncJobs?: Prisma.IntegrationSyncJobOrderByRelationAggregateInput
+  externalEntityLinks?: Prisma.ExternalEntityLinkOrderByRelationAggregateInput
   auditLogs?: Prisma.AuditLogOrderByRelationAggregateInput
 }
 
@@ -285,6 +291,9 @@ export type OrganizationWhereUniqueInput = Prisma.AtLeast<{
   billingCharges?: Prisma.BillingChargeListRelationFilter
   paymentRecords?: Prisma.PaymentRecordListRelationFilter
   billingPolicies?: Prisma.BillingPolicyListRelationFilter
+  integrationConnections?: Prisma.IntegrationConnectionListRelationFilter
+  integrationSyncJobs?: Prisma.IntegrationSyncJobListRelationFilter
+  externalEntityLinks?: Prisma.ExternalEntityLinkListRelationFilter
   auditLogs?: Prisma.AuditLogListRelationFilter
 }, "id" | "slug">
 
@@ -342,6 +351,9 @@ export type OrganizationCreateInput = {
   billingCharges?: Prisma.BillingChargeCreateNestedManyWithoutOrganizationInput
   paymentRecords?: Prisma.PaymentRecordCreateNestedManyWithoutOrganizationInput
   billingPolicies?: Prisma.BillingPolicyCreateNestedManyWithoutOrganizationInput
+  integrationConnections?: Prisma.IntegrationConnectionCreateNestedManyWithoutOrganizationInput
+  integrationSyncJobs?: Prisma.IntegrationSyncJobCreateNestedManyWithoutOrganizationInput
+  externalEntityLinks?: Prisma.ExternalEntityLinkCreateNestedManyWithoutOrganizationInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutOrganizationInput
 }
 
@@ -369,6 +381,9 @@ export type OrganizationUncheckedCreateInput = {
   billingCharges?: Prisma.BillingChargeUncheckedCreateNestedManyWithoutOrganizationInput
   paymentRecords?: Prisma.PaymentRecordUncheckedCreateNestedManyWithoutOrganizationInput
   billingPolicies?: Prisma.BillingPolicyUncheckedCreateNestedManyWithoutOrganizationInput
+  integrationConnections?: Prisma.IntegrationConnectionUncheckedCreateNestedManyWithoutOrganizationInput
+  integrationSyncJobs?: Prisma.IntegrationSyncJobUncheckedCreateNestedManyWithoutOrganizationInput
+  externalEntityLinks?: Prisma.ExternalEntityLinkUncheckedCreateNestedManyWithoutOrganizationInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutOrganizationInput
 }
 
@@ -396,6 +411,9 @@ export type OrganizationUpdateInput = {
   billingCharges?: Prisma.BillingChargeUpdateManyWithoutOrganizationNestedInput
   paymentRecords?: Prisma.PaymentRecordUpdateManyWithoutOrganizationNestedInput
   billingPolicies?: Prisma.BillingPolicyUpdateManyWithoutOrganizationNestedInput
+  integrationConnections?: Prisma.IntegrationConnectionUpdateManyWithoutOrganizationNestedInput
+  integrationSyncJobs?: Prisma.IntegrationSyncJobUpdateManyWithoutOrganizationNestedInput
+  externalEntityLinks?: Prisma.ExternalEntityLinkUpdateManyWithoutOrganizationNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutOrganizationNestedInput
 }
 
@@ -423,6 +441,9 @@ export type OrganizationUncheckedUpdateInput = {
   billingCharges?: Prisma.BillingChargeUncheckedUpdateManyWithoutOrganizationNestedInput
   paymentRecords?: Prisma.PaymentRecordUncheckedUpdateManyWithoutOrganizationNestedInput
   billingPolicies?: Prisma.BillingPolicyUncheckedUpdateManyWithoutOrganizationNestedInput
+  integrationConnections?: Prisma.IntegrationConnectionUncheckedUpdateManyWithoutOrganizationNestedInput
+  integrationSyncJobs?: Prisma.IntegrationSyncJobUncheckedUpdateManyWithoutOrganizationNestedInput
+  externalEntityLinks?: Prisma.ExternalEntityLinkUncheckedUpdateManyWithoutOrganizationNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutOrganizationNestedInput
 }
 
@@ -619,6 +640,48 @@ export type OrganizationUpdateOneRequiredWithoutPaymentRecordsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.OrganizationUpdateToOneWithWhereWithoutPaymentRecordsInput, Prisma.OrganizationUpdateWithoutPaymentRecordsInput>, Prisma.OrganizationUncheckedUpdateWithoutPaymentRecordsInput>
 }
 
+export type OrganizationCreateNestedOneWithoutIntegrationConnectionsInput = {
+  create?: Prisma.XOR<Prisma.OrganizationCreateWithoutIntegrationConnectionsInput, Prisma.OrganizationUncheckedCreateWithoutIntegrationConnectionsInput>
+  connectOrCreate?: Prisma.OrganizationCreateOrConnectWithoutIntegrationConnectionsInput
+  connect?: Prisma.OrganizationWhereUniqueInput
+}
+
+export type OrganizationUpdateOneRequiredWithoutIntegrationConnectionsNestedInput = {
+  create?: Prisma.XOR<Prisma.OrganizationCreateWithoutIntegrationConnectionsInput, Prisma.OrganizationUncheckedCreateWithoutIntegrationConnectionsInput>
+  connectOrCreate?: Prisma.OrganizationCreateOrConnectWithoutIntegrationConnectionsInput
+  upsert?: Prisma.OrganizationUpsertWithoutIntegrationConnectionsInput
+  connect?: Prisma.OrganizationWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.OrganizationUpdateToOneWithWhereWithoutIntegrationConnectionsInput, Prisma.OrganizationUpdateWithoutIntegrationConnectionsInput>, Prisma.OrganizationUncheckedUpdateWithoutIntegrationConnectionsInput>
+}
+
+export type OrganizationCreateNestedOneWithoutIntegrationSyncJobsInput = {
+  create?: Prisma.XOR<Prisma.OrganizationCreateWithoutIntegrationSyncJobsInput, Prisma.OrganizationUncheckedCreateWithoutIntegrationSyncJobsInput>
+  connectOrCreate?: Prisma.OrganizationCreateOrConnectWithoutIntegrationSyncJobsInput
+  connect?: Prisma.OrganizationWhereUniqueInput
+}
+
+export type OrganizationUpdateOneRequiredWithoutIntegrationSyncJobsNestedInput = {
+  create?: Prisma.XOR<Prisma.OrganizationCreateWithoutIntegrationSyncJobsInput, Prisma.OrganizationUncheckedCreateWithoutIntegrationSyncJobsInput>
+  connectOrCreate?: Prisma.OrganizationCreateOrConnectWithoutIntegrationSyncJobsInput
+  upsert?: Prisma.OrganizationUpsertWithoutIntegrationSyncJobsInput
+  connect?: Prisma.OrganizationWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.OrganizationUpdateToOneWithWhereWithoutIntegrationSyncJobsInput, Prisma.OrganizationUpdateWithoutIntegrationSyncJobsInput>, Prisma.OrganizationUncheckedUpdateWithoutIntegrationSyncJobsInput>
+}
+
+export type OrganizationCreateNestedOneWithoutExternalEntityLinksInput = {
+  create?: Prisma.XOR<Prisma.OrganizationCreateWithoutExternalEntityLinksInput, Prisma.OrganizationUncheckedCreateWithoutExternalEntityLinksInput>
+  connectOrCreate?: Prisma.OrganizationCreateOrConnectWithoutExternalEntityLinksInput
+  connect?: Prisma.OrganizationWhereUniqueInput
+}
+
+export type OrganizationUpdateOneRequiredWithoutExternalEntityLinksNestedInput = {
+  create?: Prisma.XOR<Prisma.OrganizationCreateWithoutExternalEntityLinksInput, Prisma.OrganizationUncheckedCreateWithoutExternalEntityLinksInput>
+  connectOrCreate?: Prisma.OrganizationCreateOrConnectWithoutExternalEntityLinksInput
+  upsert?: Prisma.OrganizationUpsertWithoutExternalEntityLinksInput
+  connect?: Prisma.OrganizationWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.OrganizationUpdateToOneWithWhereWithoutExternalEntityLinksInput, Prisma.OrganizationUpdateWithoutExternalEntityLinksInput>, Prisma.OrganizationUncheckedUpdateWithoutExternalEntityLinksInput>
+}
+
 export type OrganizationCreateNestedOneWithoutBillingPoliciesInput = {
   create?: Prisma.XOR<Prisma.OrganizationCreateWithoutBillingPoliciesInput, Prisma.OrganizationUncheckedCreateWithoutBillingPoliciesInput>
   connectOrCreate?: Prisma.OrganizationCreateOrConnectWithoutBillingPoliciesInput
@@ -740,6 +803,9 @@ export type OrganizationCreateWithoutBranchesInput = {
   billingCharges?: Prisma.BillingChargeCreateNestedManyWithoutOrganizationInput
   paymentRecords?: Prisma.PaymentRecordCreateNestedManyWithoutOrganizationInput
   billingPolicies?: Prisma.BillingPolicyCreateNestedManyWithoutOrganizationInput
+  integrationConnections?: Prisma.IntegrationConnectionCreateNestedManyWithoutOrganizationInput
+  integrationSyncJobs?: Prisma.IntegrationSyncJobCreateNestedManyWithoutOrganizationInput
+  externalEntityLinks?: Prisma.ExternalEntityLinkCreateNestedManyWithoutOrganizationInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutOrganizationInput
 }
 
@@ -766,6 +832,9 @@ export type OrganizationUncheckedCreateWithoutBranchesInput = {
   billingCharges?: Prisma.BillingChargeUncheckedCreateNestedManyWithoutOrganizationInput
   paymentRecords?: Prisma.PaymentRecordUncheckedCreateNestedManyWithoutOrganizationInput
   billingPolicies?: Prisma.BillingPolicyUncheckedCreateNestedManyWithoutOrganizationInput
+  integrationConnections?: Prisma.IntegrationConnectionUncheckedCreateNestedManyWithoutOrganizationInput
+  integrationSyncJobs?: Prisma.IntegrationSyncJobUncheckedCreateNestedManyWithoutOrganizationInput
+  externalEntityLinks?: Prisma.ExternalEntityLinkUncheckedCreateNestedManyWithoutOrganizationInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutOrganizationInput
 }
 
@@ -808,6 +877,9 @@ export type OrganizationUpdateWithoutBranchesInput = {
   billingCharges?: Prisma.BillingChargeUpdateManyWithoutOrganizationNestedInput
   paymentRecords?: Prisma.PaymentRecordUpdateManyWithoutOrganizationNestedInput
   billingPolicies?: Prisma.BillingPolicyUpdateManyWithoutOrganizationNestedInput
+  integrationConnections?: Prisma.IntegrationConnectionUpdateManyWithoutOrganizationNestedInput
+  integrationSyncJobs?: Prisma.IntegrationSyncJobUpdateManyWithoutOrganizationNestedInput
+  externalEntityLinks?: Prisma.ExternalEntityLinkUpdateManyWithoutOrganizationNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutOrganizationNestedInput
 }
 
@@ -834,6 +906,9 @@ export type OrganizationUncheckedUpdateWithoutBranchesInput = {
   billingCharges?: Prisma.BillingChargeUncheckedUpdateManyWithoutOrganizationNestedInput
   paymentRecords?: Prisma.PaymentRecordUncheckedUpdateManyWithoutOrganizationNestedInput
   billingPolicies?: Prisma.BillingPolicyUncheckedUpdateManyWithoutOrganizationNestedInput
+  integrationConnections?: Prisma.IntegrationConnectionUncheckedUpdateManyWithoutOrganizationNestedInput
+  integrationSyncJobs?: Prisma.IntegrationSyncJobUncheckedUpdateManyWithoutOrganizationNestedInput
+  externalEntityLinks?: Prisma.ExternalEntityLinkUncheckedUpdateManyWithoutOrganizationNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutOrganizationNestedInput
 }
 
@@ -860,6 +935,9 @@ export type OrganizationCreateWithoutPublicProfilesInput = {
   billingCharges?: Prisma.BillingChargeCreateNestedManyWithoutOrganizationInput
   paymentRecords?: Prisma.PaymentRecordCreateNestedManyWithoutOrganizationInput
   billingPolicies?: Prisma.BillingPolicyCreateNestedManyWithoutOrganizationInput
+  integrationConnections?: Prisma.IntegrationConnectionCreateNestedManyWithoutOrganizationInput
+  integrationSyncJobs?: Prisma.IntegrationSyncJobCreateNestedManyWithoutOrganizationInput
+  externalEntityLinks?: Prisma.ExternalEntityLinkCreateNestedManyWithoutOrganizationInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutOrganizationInput
 }
 
@@ -886,6 +964,9 @@ export type OrganizationUncheckedCreateWithoutPublicProfilesInput = {
   billingCharges?: Prisma.BillingChargeUncheckedCreateNestedManyWithoutOrganizationInput
   paymentRecords?: Prisma.PaymentRecordUncheckedCreateNestedManyWithoutOrganizationInput
   billingPolicies?: Prisma.BillingPolicyUncheckedCreateNestedManyWithoutOrganizationInput
+  integrationConnections?: Prisma.IntegrationConnectionUncheckedCreateNestedManyWithoutOrganizationInput
+  integrationSyncJobs?: Prisma.IntegrationSyncJobUncheckedCreateNestedManyWithoutOrganizationInput
+  externalEntityLinks?: Prisma.ExternalEntityLinkUncheckedCreateNestedManyWithoutOrganizationInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutOrganizationInput
 }
 
@@ -928,6 +1009,9 @@ export type OrganizationUpdateWithoutPublicProfilesInput = {
   billingCharges?: Prisma.BillingChargeUpdateManyWithoutOrganizationNestedInput
   paymentRecords?: Prisma.PaymentRecordUpdateManyWithoutOrganizationNestedInput
   billingPolicies?: Prisma.BillingPolicyUpdateManyWithoutOrganizationNestedInput
+  integrationConnections?: Prisma.IntegrationConnectionUpdateManyWithoutOrganizationNestedInput
+  integrationSyncJobs?: Prisma.IntegrationSyncJobUpdateManyWithoutOrganizationNestedInput
+  externalEntityLinks?: Prisma.ExternalEntityLinkUpdateManyWithoutOrganizationNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutOrganizationNestedInput
 }
 
@@ -954,6 +1038,9 @@ export type OrganizationUncheckedUpdateWithoutPublicProfilesInput = {
   billingCharges?: Prisma.BillingChargeUncheckedUpdateManyWithoutOrganizationNestedInput
   paymentRecords?: Prisma.PaymentRecordUncheckedUpdateManyWithoutOrganizationNestedInput
   billingPolicies?: Prisma.BillingPolicyUncheckedUpdateManyWithoutOrganizationNestedInput
+  integrationConnections?: Prisma.IntegrationConnectionUncheckedUpdateManyWithoutOrganizationNestedInput
+  integrationSyncJobs?: Prisma.IntegrationSyncJobUncheckedUpdateManyWithoutOrganizationNestedInput
+  externalEntityLinks?: Prisma.ExternalEntityLinkUncheckedUpdateManyWithoutOrganizationNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutOrganizationNestedInput
 }
 
@@ -980,6 +1067,9 @@ export type OrganizationCreateWithoutMembershipsInput = {
   billingCharges?: Prisma.BillingChargeCreateNestedManyWithoutOrganizationInput
   paymentRecords?: Prisma.PaymentRecordCreateNestedManyWithoutOrganizationInput
   billingPolicies?: Prisma.BillingPolicyCreateNestedManyWithoutOrganizationInput
+  integrationConnections?: Prisma.IntegrationConnectionCreateNestedManyWithoutOrganizationInput
+  integrationSyncJobs?: Prisma.IntegrationSyncJobCreateNestedManyWithoutOrganizationInput
+  externalEntityLinks?: Prisma.ExternalEntityLinkCreateNestedManyWithoutOrganizationInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutOrganizationInput
 }
 
@@ -1006,6 +1096,9 @@ export type OrganizationUncheckedCreateWithoutMembershipsInput = {
   billingCharges?: Prisma.BillingChargeUncheckedCreateNestedManyWithoutOrganizationInput
   paymentRecords?: Prisma.PaymentRecordUncheckedCreateNestedManyWithoutOrganizationInput
   billingPolicies?: Prisma.BillingPolicyUncheckedCreateNestedManyWithoutOrganizationInput
+  integrationConnections?: Prisma.IntegrationConnectionUncheckedCreateNestedManyWithoutOrganizationInput
+  integrationSyncJobs?: Prisma.IntegrationSyncJobUncheckedCreateNestedManyWithoutOrganizationInput
+  externalEntityLinks?: Prisma.ExternalEntityLinkUncheckedCreateNestedManyWithoutOrganizationInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutOrganizationInput
 }
 
@@ -1048,6 +1141,9 @@ export type OrganizationUpdateWithoutMembershipsInput = {
   billingCharges?: Prisma.BillingChargeUpdateManyWithoutOrganizationNestedInput
   paymentRecords?: Prisma.PaymentRecordUpdateManyWithoutOrganizationNestedInput
   billingPolicies?: Prisma.BillingPolicyUpdateManyWithoutOrganizationNestedInput
+  integrationConnections?: Prisma.IntegrationConnectionUpdateManyWithoutOrganizationNestedInput
+  integrationSyncJobs?: Prisma.IntegrationSyncJobUpdateManyWithoutOrganizationNestedInput
+  externalEntityLinks?: Prisma.ExternalEntityLinkUpdateManyWithoutOrganizationNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutOrganizationNestedInput
 }
 
@@ -1074,6 +1170,9 @@ export type OrganizationUncheckedUpdateWithoutMembershipsInput = {
   billingCharges?: Prisma.BillingChargeUncheckedUpdateManyWithoutOrganizationNestedInput
   paymentRecords?: Prisma.PaymentRecordUncheckedUpdateManyWithoutOrganizationNestedInput
   billingPolicies?: Prisma.BillingPolicyUncheckedUpdateManyWithoutOrganizationNestedInput
+  integrationConnections?: Prisma.IntegrationConnectionUncheckedUpdateManyWithoutOrganizationNestedInput
+  integrationSyncJobs?: Prisma.IntegrationSyncJobUncheckedUpdateManyWithoutOrganizationNestedInput
+  externalEntityLinks?: Prisma.ExternalEntityLinkUncheckedUpdateManyWithoutOrganizationNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutOrganizationNestedInput
 }
 
@@ -1100,6 +1199,9 @@ export type OrganizationCreateWithoutStudentsInput = {
   billingCharges?: Prisma.BillingChargeCreateNestedManyWithoutOrganizationInput
   paymentRecords?: Prisma.PaymentRecordCreateNestedManyWithoutOrganizationInput
   billingPolicies?: Prisma.BillingPolicyCreateNestedManyWithoutOrganizationInput
+  integrationConnections?: Prisma.IntegrationConnectionCreateNestedManyWithoutOrganizationInput
+  integrationSyncJobs?: Prisma.IntegrationSyncJobCreateNestedManyWithoutOrganizationInput
+  externalEntityLinks?: Prisma.ExternalEntityLinkCreateNestedManyWithoutOrganizationInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutOrganizationInput
 }
 
@@ -1126,6 +1228,9 @@ export type OrganizationUncheckedCreateWithoutStudentsInput = {
   billingCharges?: Prisma.BillingChargeUncheckedCreateNestedManyWithoutOrganizationInput
   paymentRecords?: Prisma.PaymentRecordUncheckedCreateNestedManyWithoutOrganizationInput
   billingPolicies?: Prisma.BillingPolicyUncheckedCreateNestedManyWithoutOrganizationInput
+  integrationConnections?: Prisma.IntegrationConnectionUncheckedCreateNestedManyWithoutOrganizationInput
+  integrationSyncJobs?: Prisma.IntegrationSyncJobUncheckedCreateNestedManyWithoutOrganizationInput
+  externalEntityLinks?: Prisma.ExternalEntityLinkUncheckedCreateNestedManyWithoutOrganizationInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutOrganizationInput
 }
 
@@ -1168,6 +1273,9 @@ export type OrganizationUpdateWithoutStudentsInput = {
   billingCharges?: Prisma.BillingChargeUpdateManyWithoutOrganizationNestedInput
   paymentRecords?: Prisma.PaymentRecordUpdateManyWithoutOrganizationNestedInput
   billingPolicies?: Prisma.BillingPolicyUpdateManyWithoutOrganizationNestedInput
+  integrationConnections?: Prisma.IntegrationConnectionUpdateManyWithoutOrganizationNestedInput
+  integrationSyncJobs?: Prisma.IntegrationSyncJobUpdateManyWithoutOrganizationNestedInput
+  externalEntityLinks?: Prisma.ExternalEntityLinkUpdateManyWithoutOrganizationNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutOrganizationNestedInput
 }
 
@@ -1194,6 +1302,9 @@ export type OrganizationUncheckedUpdateWithoutStudentsInput = {
   billingCharges?: Prisma.BillingChargeUncheckedUpdateManyWithoutOrganizationNestedInput
   paymentRecords?: Prisma.PaymentRecordUncheckedUpdateManyWithoutOrganizationNestedInput
   billingPolicies?: Prisma.BillingPolicyUncheckedUpdateManyWithoutOrganizationNestedInput
+  integrationConnections?: Prisma.IntegrationConnectionUncheckedUpdateManyWithoutOrganizationNestedInput
+  integrationSyncJobs?: Prisma.IntegrationSyncJobUncheckedUpdateManyWithoutOrganizationNestedInput
+  externalEntityLinks?: Prisma.ExternalEntityLinkUncheckedUpdateManyWithoutOrganizationNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutOrganizationNestedInput
 }
 
@@ -1220,6 +1331,9 @@ export type OrganizationCreateWithoutBillingPlansInput = {
   billingCharges?: Prisma.BillingChargeCreateNestedManyWithoutOrganizationInput
   paymentRecords?: Prisma.PaymentRecordCreateNestedManyWithoutOrganizationInput
   billingPolicies?: Prisma.BillingPolicyCreateNestedManyWithoutOrganizationInput
+  integrationConnections?: Prisma.IntegrationConnectionCreateNestedManyWithoutOrganizationInput
+  integrationSyncJobs?: Prisma.IntegrationSyncJobCreateNestedManyWithoutOrganizationInput
+  externalEntityLinks?: Prisma.ExternalEntityLinkCreateNestedManyWithoutOrganizationInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutOrganizationInput
 }
 
@@ -1246,6 +1360,9 @@ export type OrganizationUncheckedCreateWithoutBillingPlansInput = {
   billingCharges?: Prisma.BillingChargeUncheckedCreateNestedManyWithoutOrganizationInput
   paymentRecords?: Prisma.PaymentRecordUncheckedCreateNestedManyWithoutOrganizationInput
   billingPolicies?: Prisma.BillingPolicyUncheckedCreateNestedManyWithoutOrganizationInput
+  integrationConnections?: Prisma.IntegrationConnectionUncheckedCreateNestedManyWithoutOrganizationInput
+  integrationSyncJobs?: Prisma.IntegrationSyncJobUncheckedCreateNestedManyWithoutOrganizationInput
+  externalEntityLinks?: Prisma.ExternalEntityLinkUncheckedCreateNestedManyWithoutOrganizationInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutOrganizationInput
 }
 
@@ -1288,6 +1405,9 @@ export type OrganizationUpdateWithoutBillingPlansInput = {
   billingCharges?: Prisma.BillingChargeUpdateManyWithoutOrganizationNestedInput
   paymentRecords?: Prisma.PaymentRecordUpdateManyWithoutOrganizationNestedInput
   billingPolicies?: Prisma.BillingPolicyUpdateManyWithoutOrganizationNestedInput
+  integrationConnections?: Prisma.IntegrationConnectionUpdateManyWithoutOrganizationNestedInput
+  integrationSyncJobs?: Prisma.IntegrationSyncJobUpdateManyWithoutOrganizationNestedInput
+  externalEntityLinks?: Prisma.ExternalEntityLinkUpdateManyWithoutOrganizationNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutOrganizationNestedInput
 }
 
@@ -1314,6 +1434,9 @@ export type OrganizationUncheckedUpdateWithoutBillingPlansInput = {
   billingCharges?: Prisma.BillingChargeUncheckedUpdateManyWithoutOrganizationNestedInput
   paymentRecords?: Prisma.PaymentRecordUncheckedUpdateManyWithoutOrganizationNestedInput
   billingPolicies?: Prisma.BillingPolicyUncheckedUpdateManyWithoutOrganizationNestedInput
+  integrationConnections?: Prisma.IntegrationConnectionUncheckedUpdateManyWithoutOrganizationNestedInput
+  integrationSyncJobs?: Prisma.IntegrationSyncJobUncheckedUpdateManyWithoutOrganizationNestedInput
+  externalEntityLinks?: Prisma.ExternalEntityLinkUncheckedUpdateManyWithoutOrganizationNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutOrganizationNestedInput
 }
 
@@ -1340,6 +1463,9 @@ export type OrganizationCreateWithoutStudentMembershipsInput = {
   billingCharges?: Prisma.BillingChargeCreateNestedManyWithoutOrganizationInput
   paymentRecords?: Prisma.PaymentRecordCreateNestedManyWithoutOrganizationInput
   billingPolicies?: Prisma.BillingPolicyCreateNestedManyWithoutOrganizationInput
+  integrationConnections?: Prisma.IntegrationConnectionCreateNestedManyWithoutOrganizationInput
+  integrationSyncJobs?: Prisma.IntegrationSyncJobCreateNestedManyWithoutOrganizationInput
+  externalEntityLinks?: Prisma.ExternalEntityLinkCreateNestedManyWithoutOrganizationInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutOrganizationInput
 }
 
@@ -1366,6 +1492,9 @@ export type OrganizationUncheckedCreateWithoutStudentMembershipsInput = {
   billingCharges?: Prisma.BillingChargeUncheckedCreateNestedManyWithoutOrganizationInput
   paymentRecords?: Prisma.PaymentRecordUncheckedCreateNestedManyWithoutOrganizationInput
   billingPolicies?: Prisma.BillingPolicyUncheckedCreateNestedManyWithoutOrganizationInput
+  integrationConnections?: Prisma.IntegrationConnectionUncheckedCreateNestedManyWithoutOrganizationInput
+  integrationSyncJobs?: Prisma.IntegrationSyncJobUncheckedCreateNestedManyWithoutOrganizationInput
+  externalEntityLinks?: Prisma.ExternalEntityLinkUncheckedCreateNestedManyWithoutOrganizationInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutOrganizationInput
 }
 
@@ -1408,6 +1537,9 @@ export type OrganizationUpdateWithoutStudentMembershipsInput = {
   billingCharges?: Prisma.BillingChargeUpdateManyWithoutOrganizationNestedInput
   paymentRecords?: Prisma.PaymentRecordUpdateManyWithoutOrganizationNestedInput
   billingPolicies?: Prisma.BillingPolicyUpdateManyWithoutOrganizationNestedInput
+  integrationConnections?: Prisma.IntegrationConnectionUpdateManyWithoutOrganizationNestedInput
+  integrationSyncJobs?: Prisma.IntegrationSyncJobUpdateManyWithoutOrganizationNestedInput
+  externalEntityLinks?: Prisma.ExternalEntityLinkUpdateManyWithoutOrganizationNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutOrganizationNestedInput
 }
 
@@ -1434,6 +1566,9 @@ export type OrganizationUncheckedUpdateWithoutStudentMembershipsInput = {
   billingCharges?: Prisma.BillingChargeUncheckedUpdateManyWithoutOrganizationNestedInput
   paymentRecords?: Prisma.PaymentRecordUncheckedUpdateManyWithoutOrganizationNestedInput
   billingPolicies?: Prisma.BillingPolicyUncheckedUpdateManyWithoutOrganizationNestedInput
+  integrationConnections?: Prisma.IntegrationConnectionUncheckedUpdateManyWithoutOrganizationNestedInput
+  integrationSyncJobs?: Prisma.IntegrationSyncJobUncheckedUpdateManyWithoutOrganizationNestedInput
+  externalEntityLinks?: Prisma.ExternalEntityLinkUncheckedUpdateManyWithoutOrganizationNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutOrganizationNestedInput
 }
 
@@ -1460,6 +1595,9 @@ export type OrganizationCreateWithoutBillingChargesInput = {
   studentMemberships?: Prisma.StudentMembershipCreateNestedManyWithoutOrganizationInput
   paymentRecords?: Prisma.PaymentRecordCreateNestedManyWithoutOrganizationInput
   billingPolicies?: Prisma.BillingPolicyCreateNestedManyWithoutOrganizationInput
+  integrationConnections?: Prisma.IntegrationConnectionCreateNestedManyWithoutOrganizationInput
+  integrationSyncJobs?: Prisma.IntegrationSyncJobCreateNestedManyWithoutOrganizationInput
+  externalEntityLinks?: Prisma.ExternalEntityLinkCreateNestedManyWithoutOrganizationInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutOrganizationInput
 }
 
@@ -1486,6 +1624,9 @@ export type OrganizationUncheckedCreateWithoutBillingChargesInput = {
   studentMemberships?: Prisma.StudentMembershipUncheckedCreateNestedManyWithoutOrganizationInput
   paymentRecords?: Prisma.PaymentRecordUncheckedCreateNestedManyWithoutOrganizationInput
   billingPolicies?: Prisma.BillingPolicyUncheckedCreateNestedManyWithoutOrganizationInput
+  integrationConnections?: Prisma.IntegrationConnectionUncheckedCreateNestedManyWithoutOrganizationInput
+  integrationSyncJobs?: Prisma.IntegrationSyncJobUncheckedCreateNestedManyWithoutOrganizationInput
+  externalEntityLinks?: Prisma.ExternalEntityLinkUncheckedCreateNestedManyWithoutOrganizationInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutOrganizationInput
 }
 
@@ -1528,6 +1669,9 @@ export type OrganizationUpdateWithoutBillingChargesInput = {
   studentMemberships?: Prisma.StudentMembershipUpdateManyWithoutOrganizationNestedInput
   paymentRecords?: Prisma.PaymentRecordUpdateManyWithoutOrganizationNestedInput
   billingPolicies?: Prisma.BillingPolicyUpdateManyWithoutOrganizationNestedInput
+  integrationConnections?: Prisma.IntegrationConnectionUpdateManyWithoutOrganizationNestedInput
+  integrationSyncJobs?: Prisma.IntegrationSyncJobUpdateManyWithoutOrganizationNestedInput
+  externalEntityLinks?: Prisma.ExternalEntityLinkUpdateManyWithoutOrganizationNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutOrganizationNestedInput
 }
 
@@ -1554,6 +1698,9 @@ export type OrganizationUncheckedUpdateWithoutBillingChargesInput = {
   studentMemberships?: Prisma.StudentMembershipUncheckedUpdateManyWithoutOrganizationNestedInput
   paymentRecords?: Prisma.PaymentRecordUncheckedUpdateManyWithoutOrganizationNestedInput
   billingPolicies?: Prisma.BillingPolicyUncheckedUpdateManyWithoutOrganizationNestedInput
+  integrationConnections?: Prisma.IntegrationConnectionUncheckedUpdateManyWithoutOrganizationNestedInput
+  integrationSyncJobs?: Prisma.IntegrationSyncJobUncheckedUpdateManyWithoutOrganizationNestedInput
+  externalEntityLinks?: Prisma.ExternalEntityLinkUncheckedUpdateManyWithoutOrganizationNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutOrganizationNestedInput
 }
 
@@ -1580,6 +1727,9 @@ export type OrganizationCreateWithoutPaymentRecordsInput = {
   studentMemberships?: Prisma.StudentMembershipCreateNestedManyWithoutOrganizationInput
   billingCharges?: Prisma.BillingChargeCreateNestedManyWithoutOrganizationInput
   billingPolicies?: Prisma.BillingPolicyCreateNestedManyWithoutOrganizationInput
+  integrationConnections?: Prisma.IntegrationConnectionCreateNestedManyWithoutOrganizationInput
+  integrationSyncJobs?: Prisma.IntegrationSyncJobCreateNestedManyWithoutOrganizationInput
+  externalEntityLinks?: Prisma.ExternalEntityLinkCreateNestedManyWithoutOrganizationInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutOrganizationInput
 }
 
@@ -1606,6 +1756,9 @@ export type OrganizationUncheckedCreateWithoutPaymentRecordsInput = {
   studentMemberships?: Prisma.StudentMembershipUncheckedCreateNestedManyWithoutOrganizationInput
   billingCharges?: Prisma.BillingChargeUncheckedCreateNestedManyWithoutOrganizationInput
   billingPolicies?: Prisma.BillingPolicyUncheckedCreateNestedManyWithoutOrganizationInput
+  integrationConnections?: Prisma.IntegrationConnectionUncheckedCreateNestedManyWithoutOrganizationInput
+  integrationSyncJobs?: Prisma.IntegrationSyncJobUncheckedCreateNestedManyWithoutOrganizationInput
+  externalEntityLinks?: Prisma.ExternalEntityLinkUncheckedCreateNestedManyWithoutOrganizationInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutOrganizationInput
 }
 
@@ -1648,6 +1801,9 @@ export type OrganizationUpdateWithoutPaymentRecordsInput = {
   studentMemberships?: Prisma.StudentMembershipUpdateManyWithoutOrganizationNestedInput
   billingCharges?: Prisma.BillingChargeUpdateManyWithoutOrganizationNestedInput
   billingPolicies?: Prisma.BillingPolicyUpdateManyWithoutOrganizationNestedInput
+  integrationConnections?: Prisma.IntegrationConnectionUpdateManyWithoutOrganizationNestedInput
+  integrationSyncJobs?: Prisma.IntegrationSyncJobUpdateManyWithoutOrganizationNestedInput
+  externalEntityLinks?: Prisma.ExternalEntityLinkUpdateManyWithoutOrganizationNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutOrganizationNestedInput
 }
 
@@ -1674,6 +1830,405 @@ export type OrganizationUncheckedUpdateWithoutPaymentRecordsInput = {
   studentMemberships?: Prisma.StudentMembershipUncheckedUpdateManyWithoutOrganizationNestedInput
   billingCharges?: Prisma.BillingChargeUncheckedUpdateManyWithoutOrganizationNestedInput
   billingPolicies?: Prisma.BillingPolicyUncheckedUpdateManyWithoutOrganizationNestedInput
+  integrationConnections?: Prisma.IntegrationConnectionUncheckedUpdateManyWithoutOrganizationNestedInput
+  integrationSyncJobs?: Prisma.IntegrationSyncJobUncheckedUpdateManyWithoutOrganizationNestedInput
+  externalEntityLinks?: Prisma.ExternalEntityLinkUncheckedUpdateManyWithoutOrganizationNestedInput
+  auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutOrganizationNestedInput
+}
+
+export type OrganizationCreateWithoutIntegrationConnectionsInput = {
+  id?: string
+  name: string
+  slug: string
+  description?: string | null
+  defaultTimezone: string
+  status?: $Enums.OrganizationStatus
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
+  branches?: Prisma.BranchCreateNestedManyWithoutOrganizationInput
+  memberships?: Prisma.OrganizationMembershipCreateNestedManyWithoutOrganizationInput
+  students?: Prisma.StudentCreateNestedManyWithoutOrganizationInput
+  classSchedules?: Prisma.ClassScheduleCreateNestedManyWithoutOrganizationInput
+  classSessions?: Prisma.ClassSessionCreateNestedManyWithoutOrganizationInput
+  attendanceRecords?: Prisma.AttendanceRecordCreateNestedManyWithoutOrganizationInput
+  promotionRequests?: Prisma.PromotionRequestCreateNestedManyWithoutOrganizationInput
+  promotionEvaluations?: Prisma.PromotionEvaluationCreateNestedManyWithoutOrganizationInput
+  publicProfiles?: Prisma.BranchPublicProfileCreateNestedManyWithoutOrganizationInput
+  billingPlans?: Prisma.BillingPlanCreateNestedManyWithoutOrganizationInput
+  studentMemberships?: Prisma.StudentMembershipCreateNestedManyWithoutOrganizationInput
+  billingCharges?: Prisma.BillingChargeCreateNestedManyWithoutOrganizationInput
+  paymentRecords?: Prisma.PaymentRecordCreateNestedManyWithoutOrganizationInput
+  billingPolicies?: Prisma.BillingPolicyCreateNestedManyWithoutOrganizationInput
+  integrationSyncJobs?: Prisma.IntegrationSyncJobCreateNestedManyWithoutOrganizationInput
+  externalEntityLinks?: Prisma.ExternalEntityLinkCreateNestedManyWithoutOrganizationInput
+  auditLogs?: Prisma.AuditLogCreateNestedManyWithoutOrganizationInput
+}
+
+export type OrganizationUncheckedCreateWithoutIntegrationConnectionsInput = {
+  id?: string
+  name: string
+  slug: string
+  description?: string | null
+  defaultTimezone: string
+  status?: $Enums.OrganizationStatus
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
+  branches?: Prisma.BranchUncheckedCreateNestedManyWithoutOrganizationInput
+  memberships?: Prisma.OrganizationMembershipUncheckedCreateNestedManyWithoutOrganizationInput
+  students?: Prisma.StudentUncheckedCreateNestedManyWithoutOrganizationInput
+  classSchedules?: Prisma.ClassScheduleUncheckedCreateNestedManyWithoutOrganizationInput
+  classSessions?: Prisma.ClassSessionUncheckedCreateNestedManyWithoutOrganizationInput
+  attendanceRecords?: Prisma.AttendanceRecordUncheckedCreateNestedManyWithoutOrganizationInput
+  promotionRequests?: Prisma.PromotionRequestUncheckedCreateNestedManyWithoutOrganizationInput
+  promotionEvaluations?: Prisma.PromotionEvaluationUncheckedCreateNestedManyWithoutOrganizationInput
+  publicProfiles?: Prisma.BranchPublicProfileUncheckedCreateNestedManyWithoutOrganizationInput
+  billingPlans?: Prisma.BillingPlanUncheckedCreateNestedManyWithoutOrganizationInput
+  studentMemberships?: Prisma.StudentMembershipUncheckedCreateNestedManyWithoutOrganizationInput
+  billingCharges?: Prisma.BillingChargeUncheckedCreateNestedManyWithoutOrganizationInput
+  paymentRecords?: Prisma.PaymentRecordUncheckedCreateNestedManyWithoutOrganizationInput
+  billingPolicies?: Prisma.BillingPolicyUncheckedCreateNestedManyWithoutOrganizationInput
+  integrationSyncJobs?: Prisma.IntegrationSyncJobUncheckedCreateNestedManyWithoutOrganizationInput
+  externalEntityLinks?: Prisma.ExternalEntityLinkUncheckedCreateNestedManyWithoutOrganizationInput
+  auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutOrganizationInput
+}
+
+export type OrganizationCreateOrConnectWithoutIntegrationConnectionsInput = {
+  where: Prisma.OrganizationWhereUniqueInput
+  create: Prisma.XOR<Prisma.OrganizationCreateWithoutIntegrationConnectionsInput, Prisma.OrganizationUncheckedCreateWithoutIntegrationConnectionsInput>
+}
+
+export type OrganizationUpsertWithoutIntegrationConnectionsInput = {
+  update: Prisma.XOR<Prisma.OrganizationUpdateWithoutIntegrationConnectionsInput, Prisma.OrganizationUncheckedUpdateWithoutIntegrationConnectionsInput>
+  create: Prisma.XOR<Prisma.OrganizationCreateWithoutIntegrationConnectionsInput, Prisma.OrganizationUncheckedCreateWithoutIntegrationConnectionsInput>
+  where?: Prisma.OrganizationWhereInput
+}
+
+export type OrganizationUpdateToOneWithWhereWithoutIntegrationConnectionsInput = {
+  where?: Prisma.OrganizationWhereInput
+  data: Prisma.XOR<Prisma.OrganizationUpdateWithoutIntegrationConnectionsInput, Prisma.OrganizationUncheckedUpdateWithoutIntegrationConnectionsInput>
+}
+
+export type OrganizationUpdateWithoutIntegrationConnectionsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  defaultTimezone?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumOrganizationStatusFieldUpdateOperationsInput | $Enums.OrganizationStatus
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  branches?: Prisma.BranchUpdateManyWithoutOrganizationNestedInput
+  memberships?: Prisma.OrganizationMembershipUpdateManyWithoutOrganizationNestedInput
+  students?: Prisma.StudentUpdateManyWithoutOrganizationNestedInput
+  classSchedules?: Prisma.ClassScheduleUpdateManyWithoutOrganizationNestedInput
+  classSessions?: Prisma.ClassSessionUpdateManyWithoutOrganizationNestedInput
+  attendanceRecords?: Prisma.AttendanceRecordUpdateManyWithoutOrganizationNestedInput
+  promotionRequests?: Prisma.PromotionRequestUpdateManyWithoutOrganizationNestedInput
+  promotionEvaluations?: Prisma.PromotionEvaluationUpdateManyWithoutOrganizationNestedInput
+  publicProfiles?: Prisma.BranchPublicProfileUpdateManyWithoutOrganizationNestedInput
+  billingPlans?: Prisma.BillingPlanUpdateManyWithoutOrganizationNestedInput
+  studentMemberships?: Prisma.StudentMembershipUpdateManyWithoutOrganizationNestedInput
+  billingCharges?: Prisma.BillingChargeUpdateManyWithoutOrganizationNestedInput
+  paymentRecords?: Prisma.PaymentRecordUpdateManyWithoutOrganizationNestedInput
+  billingPolicies?: Prisma.BillingPolicyUpdateManyWithoutOrganizationNestedInput
+  integrationSyncJobs?: Prisma.IntegrationSyncJobUpdateManyWithoutOrganizationNestedInput
+  externalEntityLinks?: Prisma.ExternalEntityLinkUpdateManyWithoutOrganizationNestedInput
+  auditLogs?: Prisma.AuditLogUpdateManyWithoutOrganizationNestedInput
+}
+
+export type OrganizationUncheckedUpdateWithoutIntegrationConnectionsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  defaultTimezone?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumOrganizationStatusFieldUpdateOperationsInput | $Enums.OrganizationStatus
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  branches?: Prisma.BranchUncheckedUpdateManyWithoutOrganizationNestedInput
+  memberships?: Prisma.OrganizationMembershipUncheckedUpdateManyWithoutOrganizationNestedInput
+  students?: Prisma.StudentUncheckedUpdateManyWithoutOrganizationNestedInput
+  classSchedules?: Prisma.ClassScheduleUncheckedUpdateManyWithoutOrganizationNestedInput
+  classSessions?: Prisma.ClassSessionUncheckedUpdateManyWithoutOrganizationNestedInput
+  attendanceRecords?: Prisma.AttendanceRecordUncheckedUpdateManyWithoutOrganizationNestedInput
+  promotionRequests?: Prisma.PromotionRequestUncheckedUpdateManyWithoutOrganizationNestedInput
+  promotionEvaluations?: Prisma.PromotionEvaluationUncheckedUpdateManyWithoutOrganizationNestedInput
+  publicProfiles?: Prisma.BranchPublicProfileUncheckedUpdateManyWithoutOrganizationNestedInput
+  billingPlans?: Prisma.BillingPlanUncheckedUpdateManyWithoutOrganizationNestedInput
+  studentMemberships?: Prisma.StudentMembershipUncheckedUpdateManyWithoutOrganizationNestedInput
+  billingCharges?: Prisma.BillingChargeUncheckedUpdateManyWithoutOrganizationNestedInput
+  paymentRecords?: Prisma.PaymentRecordUncheckedUpdateManyWithoutOrganizationNestedInput
+  billingPolicies?: Prisma.BillingPolicyUncheckedUpdateManyWithoutOrganizationNestedInput
+  integrationSyncJobs?: Prisma.IntegrationSyncJobUncheckedUpdateManyWithoutOrganizationNestedInput
+  externalEntityLinks?: Prisma.ExternalEntityLinkUncheckedUpdateManyWithoutOrganizationNestedInput
+  auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutOrganizationNestedInput
+}
+
+export type OrganizationCreateWithoutIntegrationSyncJobsInput = {
+  id?: string
+  name: string
+  slug: string
+  description?: string | null
+  defaultTimezone: string
+  status?: $Enums.OrganizationStatus
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
+  branches?: Prisma.BranchCreateNestedManyWithoutOrganizationInput
+  memberships?: Prisma.OrganizationMembershipCreateNestedManyWithoutOrganizationInput
+  students?: Prisma.StudentCreateNestedManyWithoutOrganizationInput
+  classSchedules?: Prisma.ClassScheduleCreateNestedManyWithoutOrganizationInput
+  classSessions?: Prisma.ClassSessionCreateNestedManyWithoutOrganizationInput
+  attendanceRecords?: Prisma.AttendanceRecordCreateNestedManyWithoutOrganizationInput
+  promotionRequests?: Prisma.PromotionRequestCreateNestedManyWithoutOrganizationInput
+  promotionEvaluations?: Prisma.PromotionEvaluationCreateNestedManyWithoutOrganizationInput
+  publicProfiles?: Prisma.BranchPublicProfileCreateNestedManyWithoutOrganizationInput
+  billingPlans?: Prisma.BillingPlanCreateNestedManyWithoutOrganizationInput
+  studentMemberships?: Prisma.StudentMembershipCreateNestedManyWithoutOrganizationInput
+  billingCharges?: Prisma.BillingChargeCreateNestedManyWithoutOrganizationInput
+  paymentRecords?: Prisma.PaymentRecordCreateNestedManyWithoutOrganizationInput
+  billingPolicies?: Prisma.BillingPolicyCreateNestedManyWithoutOrganizationInput
+  integrationConnections?: Prisma.IntegrationConnectionCreateNestedManyWithoutOrganizationInput
+  externalEntityLinks?: Prisma.ExternalEntityLinkCreateNestedManyWithoutOrganizationInput
+  auditLogs?: Prisma.AuditLogCreateNestedManyWithoutOrganizationInput
+}
+
+export type OrganizationUncheckedCreateWithoutIntegrationSyncJobsInput = {
+  id?: string
+  name: string
+  slug: string
+  description?: string | null
+  defaultTimezone: string
+  status?: $Enums.OrganizationStatus
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
+  branches?: Prisma.BranchUncheckedCreateNestedManyWithoutOrganizationInput
+  memberships?: Prisma.OrganizationMembershipUncheckedCreateNestedManyWithoutOrganizationInput
+  students?: Prisma.StudentUncheckedCreateNestedManyWithoutOrganizationInput
+  classSchedules?: Prisma.ClassScheduleUncheckedCreateNestedManyWithoutOrganizationInput
+  classSessions?: Prisma.ClassSessionUncheckedCreateNestedManyWithoutOrganizationInput
+  attendanceRecords?: Prisma.AttendanceRecordUncheckedCreateNestedManyWithoutOrganizationInput
+  promotionRequests?: Prisma.PromotionRequestUncheckedCreateNestedManyWithoutOrganizationInput
+  promotionEvaluations?: Prisma.PromotionEvaluationUncheckedCreateNestedManyWithoutOrganizationInput
+  publicProfiles?: Prisma.BranchPublicProfileUncheckedCreateNestedManyWithoutOrganizationInput
+  billingPlans?: Prisma.BillingPlanUncheckedCreateNestedManyWithoutOrganizationInput
+  studentMemberships?: Prisma.StudentMembershipUncheckedCreateNestedManyWithoutOrganizationInput
+  billingCharges?: Prisma.BillingChargeUncheckedCreateNestedManyWithoutOrganizationInput
+  paymentRecords?: Prisma.PaymentRecordUncheckedCreateNestedManyWithoutOrganizationInput
+  billingPolicies?: Prisma.BillingPolicyUncheckedCreateNestedManyWithoutOrganizationInput
+  integrationConnections?: Prisma.IntegrationConnectionUncheckedCreateNestedManyWithoutOrganizationInput
+  externalEntityLinks?: Prisma.ExternalEntityLinkUncheckedCreateNestedManyWithoutOrganizationInput
+  auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutOrganizationInput
+}
+
+export type OrganizationCreateOrConnectWithoutIntegrationSyncJobsInput = {
+  where: Prisma.OrganizationWhereUniqueInput
+  create: Prisma.XOR<Prisma.OrganizationCreateWithoutIntegrationSyncJobsInput, Prisma.OrganizationUncheckedCreateWithoutIntegrationSyncJobsInput>
+}
+
+export type OrganizationUpsertWithoutIntegrationSyncJobsInput = {
+  update: Prisma.XOR<Prisma.OrganizationUpdateWithoutIntegrationSyncJobsInput, Prisma.OrganizationUncheckedUpdateWithoutIntegrationSyncJobsInput>
+  create: Prisma.XOR<Prisma.OrganizationCreateWithoutIntegrationSyncJobsInput, Prisma.OrganizationUncheckedCreateWithoutIntegrationSyncJobsInput>
+  where?: Prisma.OrganizationWhereInput
+}
+
+export type OrganizationUpdateToOneWithWhereWithoutIntegrationSyncJobsInput = {
+  where?: Prisma.OrganizationWhereInput
+  data: Prisma.XOR<Prisma.OrganizationUpdateWithoutIntegrationSyncJobsInput, Prisma.OrganizationUncheckedUpdateWithoutIntegrationSyncJobsInput>
+}
+
+export type OrganizationUpdateWithoutIntegrationSyncJobsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  defaultTimezone?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumOrganizationStatusFieldUpdateOperationsInput | $Enums.OrganizationStatus
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  branches?: Prisma.BranchUpdateManyWithoutOrganizationNestedInput
+  memberships?: Prisma.OrganizationMembershipUpdateManyWithoutOrganizationNestedInput
+  students?: Prisma.StudentUpdateManyWithoutOrganizationNestedInput
+  classSchedules?: Prisma.ClassScheduleUpdateManyWithoutOrganizationNestedInput
+  classSessions?: Prisma.ClassSessionUpdateManyWithoutOrganizationNestedInput
+  attendanceRecords?: Prisma.AttendanceRecordUpdateManyWithoutOrganizationNestedInput
+  promotionRequests?: Prisma.PromotionRequestUpdateManyWithoutOrganizationNestedInput
+  promotionEvaluations?: Prisma.PromotionEvaluationUpdateManyWithoutOrganizationNestedInput
+  publicProfiles?: Prisma.BranchPublicProfileUpdateManyWithoutOrganizationNestedInput
+  billingPlans?: Prisma.BillingPlanUpdateManyWithoutOrganizationNestedInput
+  studentMemberships?: Prisma.StudentMembershipUpdateManyWithoutOrganizationNestedInput
+  billingCharges?: Prisma.BillingChargeUpdateManyWithoutOrganizationNestedInput
+  paymentRecords?: Prisma.PaymentRecordUpdateManyWithoutOrganizationNestedInput
+  billingPolicies?: Prisma.BillingPolicyUpdateManyWithoutOrganizationNestedInput
+  integrationConnections?: Prisma.IntegrationConnectionUpdateManyWithoutOrganizationNestedInput
+  externalEntityLinks?: Prisma.ExternalEntityLinkUpdateManyWithoutOrganizationNestedInput
+  auditLogs?: Prisma.AuditLogUpdateManyWithoutOrganizationNestedInput
+}
+
+export type OrganizationUncheckedUpdateWithoutIntegrationSyncJobsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  defaultTimezone?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumOrganizationStatusFieldUpdateOperationsInput | $Enums.OrganizationStatus
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  branches?: Prisma.BranchUncheckedUpdateManyWithoutOrganizationNestedInput
+  memberships?: Prisma.OrganizationMembershipUncheckedUpdateManyWithoutOrganizationNestedInput
+  students?: Prisma.StudentUncheckedUpdateManyWithoutOrganizationNestedInput
+  classSchedules?: Prisma.ClassScheduleUncheckedUpdateManyWithoutOrganizationNestedInput
+  classSessions?: Prisma.ClassSessionUncheckedUpdateManyWithoutOrganizationNestedInput
+  attendanceRecords?: Prisma.AttendanceRecordUncheckedUpdateManyWithoutOrganizationNestedInput
+  promotionRequests?: Prisma.PromotionRequestUncheckedUpdateManyWithoutOrganizationNestedInput
+  promotionEvaluations?: Prisma.PromotionEvaluationUncheckedUpdateManyWithoutOrganizationNestedInput
+  publicProfiles?: Prisma.BranchPublicProfileUncheckedUpdateManyWithoutOrganizationNestedInput
+  billingPlans?: Prisma.BillingPlanUncheckedUpdateManyWithoutOrganizationNestedInput
+  studentMemberships?: Prisma.StudentMembershipUncheckedUpdateManyWithoutOrganizationNestedInput
+  billingCharges?: Prisma.BillingChargeUncheckedUpdateManyWithoutOrganizationNestedInput
+  paymentRecords?: Prisma.PaymentRecordUncheckedUpdateManyWithoutOrganizationNestedInput
+  billingPolicies?: Prisma.BillingPolicyUncheckedUpdateManyWithoutOrganizationNestedInput
+  integrationConnections?: Prisma.IntegrationConnectionUncheckedUpdateManyWithoutOrganizationNestedInput
+  externalEntityLinks?: Prisma.ExternalEntityLinkUncheckedUpdateManyWithoutOrganizationNestedInput
+  auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutOrganizationNestedInput
+}
+
+export type OrganizationCreateWithoutExternalEntityLinksInput = {
+  id?: string
+  name: string
+  slug: string
+  description?: string | null
+  defaultTimezone: string
+  status?: $Enums.OrganizationStatus
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
+  branches?: Prisma.BranchCreateNestedManyWithoutOrganizationInput
+  memberships?: Prisma.OrganizationMembershipCreateNestedManyWithoutOrganizationInput
+  students?: Prisma.StudentCreateNestedManyWithoutOrganizationInput
+  classSchedules?: Prisma.ClassScheduleCreateNestedManyWithoutOrganizationInput
+  classSessions?: Prisma.ClassSessionCreateNestedManyWithoutOrganizationInput
+  attendanceRecords?: Prisma.AttendanceRecordCreateNestedManyWithoutOrganizationInput
+  promotionRequests?: Prisma.PromotionRequestCreateNestedManyWithoutOrganizationInput
+  promotionEvaluations?: Prisma.PromotionEvaluationCreateNestedManyWithoutOrganizationInput
+  publicProfiles?: Prisma.BranchPublicProfileCreateNestedManyWithoutOrganizationInput
+  billingPlans?: Prisma.BillingPlanCreateNestedManyWithoutOrganizationInput
+  studentMemberships?: Prisma.StudentMembershipCreateNestedManyWithoutOrganizationInput
+  billingCharges?: Prisma.BillingChargeCreateNestedManyWithoutOrganizationInput
+  paymentRecords?: Prisma.PaymentRecordCreateNestedManyWithoutOrganizationInput
+  billingPolicies?: Prisma.BillingPolicyCreateNestedManyWithoutOrganizationInput
+  integrationConnections?: Prisma.IntegrationConnectionCreateNestedManyWithoutOrganizationInput
+  integrationSyncJobs?: Prisma.IntegrationSyncJobCreateNestedManyWithoutOrganizationInput
+  auditLogs?: Prisma.AuditLogCreateNestedManyWithoutOrganizationInput
+}
+
+export type OrganizationUncheckedCreateWithoutExternalEntityLinksInput = {
+  id?: string
+  name: string
+  slug: string
+  description?: string | null
+  defaultTimezone: string
+  status?: $Enums.OrganizationStatus
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
+  branches?: Prisma.BranchUncheckedCreateNestedManyWithoutOrganizationInput
+  memberships?: Prisma.OrganizationMembershipUncheckedCreateNestedManyWithoutOrganizationInput
+  students?: Prisma.StudentUncheckedCreateNestedManyWithoutOrganizationInput
+  classSchedules?: Prisma.ClassScheduleUncheckedCreateNestedManyWithoutOrganizationInput
+  classSessions?: Prisma.ClassSessionUncheckedCreateNestedManyWithoutOrganizationInput
+  attendanceRecords?: Prisma.AttendanceRecordUncheckedCreateNestedManyWithoutOrganizationInput
+  promotionRequests?: Prisma.PromotionRequestUncheckedCreateNestedManyWithoutOrganizationInput
+  promotionEvaluations?: Prisma.PromotionEvaluationUncheckedCreateNestedManyWithoutOrganizationInput
+  publicProfiles?: Prisma.BranchPublicProfileUncheckedCreateNestedManyWithoutOrganizationInput
+  billingPlans?: Prisma.BillingPlanUncheckedCreateNestedManyWithoutOrganizationInput
+  studentMemberships?: Prisma.StudentMembershipUncheckedCreateNestedManyWithoutOrganizationInput
+  billingCharges?: Prisma.BillingChargeUncheckedCreateNestedManyWithoutOrganizationInput
+  paymentRecords?: Prisma.PaymentRecordUncheckedCreateNestedManyWithoutOrganizationInput
+  billingPolicies?: Prisma.BillingPolicyUncheckedCreateNestedManyWithoutOrganizationInput
+  integrationConnections?: Prisma.IntegrationConnectionUncheckedCreateNestedManyWithoutOrganizationInput
+  integrationSyncJobs?: Prisma.IntegrationSyncJobUncheckedCreateNestedManyWithoutOrganizationInput
+  auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutOrganizationInput
+}
+
+export type OrganizationCreateOrConnectWithoutExternalEntityLinksInput = {
+  where: Prisma.OrganizationWhereUniqueInput
+  create: Prisma.XOR<Prisma.OrganizationCreateWithoutExternalEntityLinksInput, Prisma.OrganizationUncheckedCreateWithoutExternalEntityLinksInput>
+}
+
+export type OrganizationUpsertWithoutExternalEntityLinksInput = {
+  update: Prisma.XOR<Prisma.OrganizationUpdateWithoutExternalEntityLinksInput, Prisma.OrganizationUncheckedUpdateWithoutExternalEntityLinksInput>
+  create: Prisma.XOR<Prisma.OrganizationCreateWithoutExternalEntityLinksInput, Prisma.OrganizationUncheckedCreateWithoutExternalEntityLinksInput>
+  where?: Prisma.OrganizationWhereInput
+}
+
+export type OrganizationUpdateToOneWithWhereWithoutExternalEntityLinksInput = {
+  where?: Prisma.OrganizationWhereInput
+  data: Prisma.XOR<Prisma.OrganizationUpdateWithoutExternalEntityLinksInput, Prisma.OrganizationUncheckedUpdateWithoutExternalEntityLinksInput>
+}
+
+export type OrganizationUpdateWithoutExternalEntityLinksInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  defaultTimezone?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumOrganizationStatusFieldUpdateOperationsInput | $Enums.OrganizationStatus
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  branches?: Prisma.BranchUpdateManyWithoutOrganizationNestedInput
+  memberships?: Prisma.OrganizationMembershipUpdateManyWithoutOrganizationNestedInput
+  students?: Prisma.StudentUpdateManyWithoutOrganizationNestedInput
+  classSchedules?: Prisma.ClassScheduleUpdateManyWithoutOrganizationNestedInput
+  classSessions?: Prisma.ClassSessionUpdateManyWithoutOrganizationNestedInput
+  attendanceRecords?: Prisma.AttendanceRecordUpdateManyWithoutOrganizationNestedInput
+  promotionRequests?: Prisma.PromotionRequestUpdateManyWithoutOrganizationNestedInput
+  promotionEvaluations?: Prisma.PromotionEvaluationUpdateManyWithoutOrganizationNestedInput
+  publicProfiles?: Prisma.BranchPublicProfileUpdateManyWithoutOrganizationNestedInput
+  billingPlans?: Prisma.BillingPlanUpdateManyWithoutOrganizationNestedInput
+  studentMemberships?: Prisma.StudentMembershipUpdateManyWithoutOrganizationNestedInput
+  billingCharges?: Prisma.BillingChargeUpdateManyWithoutOrganizationNestedInput
+  paymentRecords?: Prisma.PaymentRecordUpdateManyWithoutOrganizationNestedInput
+  billingPolicies?: Prisma.BillingPolicyUpdateManyWithoutOrganizationNestedInput
+  integrationConnections?: Prisma.IntegrationConnectionUpdateManyWithoutOrganizationNestedInput
+  integrationSyncJobs?: Prisma.IntegrationSyncJobUpdateManyWithoutOrganizationNestedInput
+  auditLogs?: Prisma.AuditLogUpdateManyWithoutOrganizationNestedInput
+}
+
+export type OrganizationUncheckedUpdateWithoutExternalEntityLinksInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  defaultTimezone?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumOrganizationStatusFieldUpdateOperationsInput | $Enums.OrganizationStatus
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  branches?: Prisma.BranchUncheckedUpdateManyWithoutOrganizationNestedInput
+  memberships?: Prisma.OrganizationMembershipUncheckedUpdateManyWithoutOrganizationNestedInput
+  students?: Prisma.StudentUncheckedUpdateManyWithoutOrganizationNestedInput
+  classSchedules?: Prisma.ClassScheduleUncheckedUpdateManyWithoutOrganizationNestedInput
+  classSessions?: Prisma.ClassSessionUncheckedUpdateManyWithoutOrganizationNestedInput
+  attendanceRecords?: Prisma.AttendanceRecordUncheckedUpdateManyWithoutOrganizationNestedInput
+  promotionRequests?: Prisma.PromotionRequestUncheckedUpdateManyWithoutOrganizationNestedInput
+  promotionEvaluations?: Prisma.PromotionEvaluationUncheckedUpdateManyWithoutOrganizationNestedInput
+  publicProfiles?: Prisma.BranchPublicProfileUncheckedUpdateManyWithoutOrganizationNestedInput
+  billingPlans?: Prisma.BillingPlanUncheckedUpdateManyWithoutOrganizationNestedInput
+  studentMemberships?: Prisma.StudentMembershipUncheckedUpdateManyWithoutOrganizationNestedInput
+  billingCharges?: Prisma.BillingChargeUncheckedUpdateManyWithoutOrganizationNestedInput
+  paymentRecords?: Prisma.PaymentRecordUncheckedUpdateManyWithoutOrganizationNestedInput
+  billingPolicies?: Prisma.BillingPolicyUncheckedUpdateManyWithoutOrganizationNestedInput
+  integrationConnections?: Prisma.IntegrationConnectionUncheckedUpdateManyWithoutOrganizationNestedInput
+  integrationSyncJobs?: Prisma.IntegrationSyncJobUncheckedUpdateManyWithoutOrganizationNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutOrganizationNestedInput
 }
 
@@ -1700,6 +2255,9 @@ export type OrganizationCreateWithoutBillingPoliciesInput = {
   studentMemberships?: Prisma.StudentMembershipCreateNestedManyWithoutOrganizationInput
   billingCharges?: Prisma.BillingChargeCreateNestedManyWithoutOrganizationInput
   paymentRecords?: Prisma.PaymentRecordCreateNestedManyWithoutOrganizationInput
+  integrationConnections?: Prisma.IntegrationConnectionCreateNestedManyWithoutOrganizationInput
+  integrationSyncJobs?: Prisma.IntegrationSyncJobCreateNestedManyWithoutOrganizationInput
+  externalEntityLinks?: Prisma.ExternalEntityLinkCreateNestedManyWithoutOrganizationInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutOrganizationInput
 }
 
@@ -1726,6 +2284,9 @@ export type OrganizationUncheckedCreateWithoutBillingPoliciesInput = {
   studentMemberships?: Prisma.StudentMembershipUncheckedCreateNestedManyWithoutOrganizationInput
   billingCharges?: Prisma.BillingChargeUncheckedCreateNestedManyWithoutOrganizationInput
   paymentRecords?: Prisma.PaymentRecordUncheckedCreateNestedManyWithoutOrganizationInput
+  integrationConnections?: Prisma.IntegrationConnectionUncheckedCreateNestedManyWithoutOrganizationInput
+  integrationSyncJobs?: Prisma.IntegrationSyncJobUncheckedCreateNestedManyWithoutOrganizationInput
+  externalEntityLinks?: Prisma.ExternalEntityLinkUncheckedCreateNestedManyWithoutOrganizationInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutOrganizationInput
 }
 
@@ -1768,6 +2329,9 @@ export type OrganizationUpdateWithoutBillingPoliciesInput = {
   studentMemberships?: Prisma.StudentMembershipUpdateManyWithoutOrganizationNestedInput
   billingCharges?: Prisma.BillingChargeUpdateManyWithoutOrganizationNestedInput
   paymentRecords?: Prisma.PaymentRecordUpdateManyWithoutOrganizationNestedInput
+  integrationConnections?: Prisma.IntegrationConnectionUpdateManyWithoutOrganizationNestedInput
+  integrationSyncJobs?: Prisma.IntegrationSyncJobUpdateManyWithoutOrganizationNestedInput
+  externalEntityLinks?: Prisma.ExternalEntityLinkUpdateManyWithoutOrganizationNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutOrganizationNestedInput
 }
 
@@ -1794,6 +2358,9 @@ export type OrganizationUncheckedUpdateWithoutBillingPoliciesInput = {
   studentMemberships?: Prisma.StudentMembershipUncheckedUpdateManyWithoutOrganizationNestedInput
   billingCharges?: Prisma.BillingChargeUncheckedUpdateManyWithoutOrganizationNestedInput
   paymentRecords?: Prisma.PaymentRecordUncheckedUpdateManyWithoutOrganizationNestedInput
+  integrationConnections?: Prisma.IntegrationConnectionUncheckedUpdateManyWithoutOrganizationNestedInput
+  integrationSyncJobs?: Prisma.IntegrationSyncJobUncheckedUpdateManyWithoutOrganizationNestedInput
+  externalEntityLinks?: Prisma.ExternalEntityLinkUncheckedUpdateManyWithoutOrganizationNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutOrganizationNestedInput
 }
 
@@ -1820,6 +2387,9 @@ export type OrganizationCreateWithoutClassSchedulesInput = {
   billingCharges?: Prisma.BillingChargeCreateNestedManyWithoutOrganizationInput
   paymentRecords?: Prisma.PaymentRecordCreateNestedManyWithoutOrganizationInput
   billingPolicies?: Prisma.BillingPolicyCreateNestedManyWithoutOrganizationInput
+  integrationConnections?: Prisma.IntegrationConnectionCreateNestedManyWithoutOrganizationInput
+  integrationSyncJobs?: Prisma.IntegrationSyncJobCreateNestedManyWithoutOrganizationInput
+  externalEntityLinks?: Prisma.ExternalEntityLinkCreateNestedManyWithoutOrganizationInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutOrganizationInput
 }
 
@@ -1846,6 +2416,9 @@ export type OrganizationUncheckedCreateWithoutClassSchedulesInput = {
   billingCharges?: Prisma.BillingChargeUncheckedCreateNestedManyWithoutOrganizationInput
   paymentRecords?: Prisma.PaymentRecordUncheckedCreateNestedManyWithoutOrganizationInput
   billingPolicies?: Prisma.BillingPolicyUncheckedCreateNestedManyWithoutOrganizationInput
+  integrationConnections?: Prisma.IntegrationConnectionUncheckedCreateNestedManyWithoutOrganizationInput
+  integrationSyncJobs?: Prisma.IntegrationSyncJobUncheckedCreateNestedManyWithoutOrganizationInput
+  externalEntityLinks?: Prisma.ExternalEntityLinkUncheckedCreateNestedManyWithoutOrganizationInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutOrganizationInput
 }
 
@@ -1888,6 +2461,9 @@ export type OrganizationUpdateWithoutClassSchedulesInput = {
   billingCharges?: Prisma.BillingChargeUpdateManyWithoutOrganizationNestedInput
   paymentRecords?: Prisma.PaymentRecordUpdateManyWithoutOrganizationNestedInput
   billingPolicies?: Prisma.BillingPolicyUpdateManyWithoutOrganizationNestedInput
+  integrationConnections?: Prisma.IntegrationConnectionUpdateManyWithoutOrganizationNestedInput
+  integrationSyncJobs?: Prisma.IntegrationSyncJobUpdateManyWithoutOrganizationNestedInput
+  externalEntityLinks?: Prisma.ExternalEntityLinkUpdateManyWithoutOrganizationNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutOrganizationNestedInput
 }
 
@@ -1914,6 +2490,9 @@ export type OrganizationUncheckedUpdateWithoutClassSchedulesInput = {
   billingCharges?: Prisma.BillingChargeUncheckedUpdateManyWithoutOrganizationNestedInput
   paymentRecords?: Prisma.PaymentRecordUncheckedUpdateManyWithoutOrganizationNestedInput
   billingPolicies?: Prisma.BillingPolicyUncheckedUpdateManyWithoutOrganizationNestedInput
+  integrationConnections?: Prisma.IntegrationConnectionUncheckedUpdateManyWithoutOrganizationNestedInput
+  integrationSyncJobs?: Prisma.IntegrationSyncJobUncheckedUpdateManyWithoutOrganizationNestedInput
+  externalEntityLinks?: Prisma.ExternalEntityLinkUncheckedUpdateManyWithoutOrganizationNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutOrganizationNestedInput
 }
 
@@ -1940,6 +2519,9 @@ export type OrganizationCreateWithoutClassSessionsInput = {
   billingCharges?: Prisma.BillingChargeCreateNestedManyWithoutOrganizationInput
   paymentRecords?: Prisma.PaymentRecordCreateNestedManyWithoutOrganizationInput
   billingPolicies?: Prisma.BillingPolicyCreateNestedManyWithoutOrganizationInput
+  integrationConnections?: Prisma.IntegrationConnectionCreateNestedManyWithoutOrganizationInput
+  integrationSyncJobs?: Prisma.IntegrationSyncJobCreateNestedManyWithoutOrganizationInput
+  externalEntityLinks?: Prisma.ExternalEntityLinkCreateNestedManyWithoutOrganizationInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutOrganizationInput
 }
 
@@ -1966,6 +2548,9 @@ export type OrganizationUncheckedCreateWithoutClassSessionsInput = {
   billingCharges?: Prisma.BillingChargeUncheckedCreateNestedManyWithoutOrganizationInput
   paymentRecords?: Prisma.PaymentRecordUncheckedCreateNestedManyWithoutOrganizationInput
   billingPolicies?: Prisma.BillingPolicyUncheckedCreateNestedManyWithoutOrganizationInput
+  integrationConnections?: Prisma.IntegrationConnectionUncheckedCreateNestedManyWithoutOrganizationInput
+  integrationSyncJobs?: Prisma.IntegrationSyncJobUncheckedCreateNestedManyWithoutOrganizationInput
+  externalEntityLinks?: Prisma.ExternalEntityLinkUncheckedCreateNestedManyWithoutOrganizationInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutOrganizationInput
 }
 
@@ -2008,6 +2593,9 @@ export type OrganizationUpdateWithoutClassSessionsInput = {
   billingCharges?: Prisma.BillingChargeUpdateManyWithoutOrganizationNestedInput
   paymentRecords?: Prisma.PaymentRecordUpdateManyWithoutOrganizationNestedInput
   billingPolicies?: Prisma.BillingPolicyUpdateManyWithoutOrganizationNestedInput
+  integrationConnections?: Prisma.IntegrationConnectionUpdateManyWithoutOrganizationNestedInput
+  integrationSyncJobs?: Prisma.IntegrationSyncJobUpdateManyWithoutOrganizationNestedInput
+  externalEntityLinks?: Prisma.ExternalEntityLinkUpdateManyWithoutOrganizationNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutOrganizationNestedInput
 }
 
@@ -2034,6 +2622,9 @@ export type OrganizationUncheckedUpdateWithoutClassSessionsInput = {
   billingCharges?: Prisma.BillingChargeUncheckedUpdateManyWithoutOrganizationNestedInput
   paymentRecords?: Prisma.PaymentRecordUncheckedUpdateManyWithoutOrganizationNestedInput
   billingPolicies?: Prisma.BillingPolicyUncheckedUpdateManyWithoutOrganizationNestedInput
+  integrationConnections?: Prisma.IntegrationConnectionUncheckedUpdateManyWithoutOrganizationNestedInput
+  integrationSyncJobs?: Prisma.IntegrationSyncJobUncheckedUpdateManyWithoutOrganizationNestedInput
+  externalEntityLinks?: Prisma.ExternalEntityLinkUncheckedUpdateManyWithoutOrganizationNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutOrganizationNestedInput
 }
 
@@ -2060,6 +2651,9 @@ export type OrganizationCreateWithoutAttendanceRecordsInput = {
   billingCharges?: Prisma.BillingChargeCreateNestedManyWithoutOrganizationInput
   paymentRecords?: Prisma.PaymentRecordCreateNestedManyWithoutOrganizationInput
   billingPolicies?: Prisma.BillingPolicyCreateNestedManyWithoutOrganizationInput
+  integrationConnections?: Prisma.IntegrationConnectionCreateNestedManyWithoutOrganizationInput
+  integrationSyncJobs?: Prisma.IntegrationSyncJobCreateNestedManyWithoutOrganizationInput
+  externalEntityLinks?: Prisma.ExternalEntityLinkCreateNestedManyWithoutOrganizationInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutOrganizationInput
 }
 
@@ -2086,6 +2680,9 @@ export type OrganizationUncheckedCreateWithoutAttendanceRecordsInput = {
   billingCharges?: Prisma.BillingChargeUncheckedCreateNestedManyWithoutOrganizationInput
   paymentRecords?: Prisma.PaymentRecordUncheckedCreateNestedManyWithoutOrganizationInput
   billingPolicies?: Prisma.BillingPolicyUncheckedCreateNestedManyWithoutOrganizationInput
+  integrationConnections?: Prisma.IntegrationConnectionUncheckedCreateNestedManyWithoutOrganizationInput
+  integrationSyncJobs?: Prisma.IntegrationSyncJobUncheckedCreateNestedManyWithoutOrganizationInput
+  externalEntityLinks?: Prisma.ExternalEntityLinkUncheckedCreateNestedManyWithoutOrganizationInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutOrganizationInput
 }
 
@@ -2128,6 +2725,9 @@ export type OrganizationUpdateWithoutAttendanceRecordsInput = {
   billingCharges?: Prisma.BillingChargeUpdateManyWithoutOrganizationNestedInput
   paymentRecords?: Prisma.PaymentRecordUpdateManyWithoutOrganizationNestedInput
   billingPolicies?: Prisma.BillingPolicyUpdateManyWithoutOrganizationNestedInput
+  integrationConnections?: Prisma.IntegrationConnectionUpdateManyWithoutOrganizationNestedInput
+  integrationSyncJobs?: Prisma.IntegrationSyncJobUpdateManyWithoutOrganizationNestedInput
+  externalEntityLinks?: Prisma.ExternalEntityLinkUpdateManyWithoutOrganizationNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutOrganizationNestedInput
 }
 
@@ -2154,6 +2754,9 @@ export type OrganizationUncheckedUpdateWithoutAttendanceRecordsInput = {
   billingCharges?: Prisma.BillingChargeUncheckedUpdateManyWithoutOrganizationNestedInput
   paymentRecords?: Prisma.PaymentRecordUncheckedUpdateManyWithoutOrganizationNestedInput
   billingPolicies?: Prisma.BillingPolicyUncheckedUpdateManyWithoutOrganizationNestedInput
+  integrationConnections?: Prisma.IntegrationConnectionUncheckedUpdateManyWithoutOrganizationNestedInput
+  integrationSyncJobs?: Prisma.IntegrationSyncJobUncheckedUpdateManyWithoutOrganizationNestedInput
+  externalEntityLinks?: Prisma.ExternalEntityLinkUncheckedUpdateManyWithoutOrganizationNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutOrganizationNestedInput
 }
 
@@ -2180,6 +2783,9 @@ export type OrganizationCreateWithoutPromotionRequestsInput = {
   billingCharges?: Prisma.BillingChargeCreateNestedManyWithoutOrganizationInput
   paymentRecords?: Prisma.PaymentRecordCreateNestedManyWithoutOrganizationInput
   billingPolicies?: Prisma.BillingPolicyCreateNestedManyWithoutOrganizationInput
+  integrationConnections?: Prisma.IntegrationConnectionCreateNestedManyWithoutOrganizationInput
+  integrationSyncJobs?: Prisma.IntegrationSyncJobCreateNestedManyWithoutOrganizationInput
+  externalEntityLinks?: Prisma.ExternalEntityLinkCreateNestedManyWithoutOrganizationInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutOrganizationInput
 }
 
@@ -2206,6 +2812,9 @@ export type OrganizationUncheckedCreateWithoutPromotionRequestsInput = {
   billingCharges?: Prisma.BillingChargeUncheckedCreateNestedManyWithoutOrganizationInput
   paymentRecords?: Prisma.PaymentRecordUncheckedCreateNestedManyWithoutOrganizationInput
   billingPolicies?: Prisma.BillingPolicyUncheckedCreateNestedManyWithoutOrganizationInput
+  integrationConnections?: Prisma.IntegrationConnectionUncheckedCreateNestedManyWithoutOrganizationInput
+  integrationSyncJobs?: Prisma.IntegrationSyncJobUncheckedCreateNestedManyWithoutOrganizationInput
+  externalEntityLinks?: Prisma.ExternalEntityLinkUncheckedCreateNestedManyWithoutOrganizationInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutOrganizationInput
 }
 
@@ -2248,6 +2857,9 @@ export type OrganizationUpdateWithoutPromotionRequestsInput = {
   billingCharges?: Prisma.BillingChargeUpdateManyWithoutOrganizationNestedInput
   paymentRecords?: Prisma.PaymentRecordUpdateManyWithoutOrganizationNestedInput
   billingPolicies?: Prisma.BillingPolicyUpdateManyWithoutOrganizationNestedInput
+  integrationConnections?: Prisma.IntegrationConnectionUpdateManyWithoutOrganizationNestedInput
+  integrationSyncJobs?: Prisma.IntegrationSyncJobUpdateManyWithoutOrganizationNestedInput
+  externalEntityLinks?: Prisma.ExternalEntityLinkUpdateManyWithoutOrganizationNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutOrganizationNestedInput
 }
 
@@ -2274,6 +2886,9 @@ export type OrganizationUncheckedUpdateWithoutPromotionRequestsInput = {
   billingCharges?: Prisma.BillingChargeUncheckedUpdateManyWithoutOrganizationNestedInput
   paymentRecords?: Prisma.PaymentRecordUncheckedUpdateManyWithoutOrganizationNestedInput
   billingPolicies?: Prisma.BillingPolicyUncheckedUpdateManyWithoutOrganizationNestedInput
+  integrationConnections?: Prisma.IntegrationConnectionUncheckedUpdateManyWithoutOrganizationNestedInput
+  integrationSyncJobs?: Prisma.IntegrationSyncJobUncheckedUpdateManyWithoutOrganizationNestedInput
+  externalEntityLinks?: Prisma.ExternalEntityLinkUncheckedUpdateManyWithoutOrganizationNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutOrganizationNestedInput
 }
 
@@ -2300,6 +2915,9 @@ export type OrganizationCreateWithoutPromotionEvaluationsInput = {
   billingCharges?: Prisma.BillingChargeCreateNestedManyWithoutOrganizationInput
   paymentRecords?: Prisma.PaymentRecordCreateNestedManyWithoutOrganizationInput
   billingPolicies?: Prisma.BillingPolicyCreateNestedManyWithoutOrganizationInput
+  integrationConnections?: Prisma.IntegrationConnectionCreateNestedManyWithoutOrganizationInput
+  integrationSyncJobs?: Prisma.IntegrationSyncJobCreateNestedManyWithoutOrganizationInput
+  externalEntityLinks?: Prisma.ExternalEntityLinkCreateNestedManyWithoutOrganizationInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutOrganizationInput
 }
 
@@ -2326,6 +2944,9 @@ export type OrganizationUncheckedCreateWithoutPromotionEvaluationsInput = {
   billingCharges?: Prisma.BillingChargeUncheckedCreateNestedManyWithoutOrganizationInput
   paymentRecords?: Prisma.PaymentRecordUncheckedCreateNestedManyWithoutOrganizationInput
   billingPolicies?: Prisma.BillingPolicyUncheckedCreateNestedManyWithoutOrganizationInput
+  integrationConnections?: Prisma.IntegrationConnectionUncheckedCreateNestedManyWithoutOrganizationInput
+  integrationSyncJobs?: Prisma.IntegrationSyncJobUncheckedCreateNestedManyWithoutOrganizationInput
+  externalEntityLinks?: Prisma.ExternalEntityLinkUncheckedCreateNestedManyWithoutOrganizationInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutOrganizationInput
 }
 
@@ -2368,6 +2989,9 @@ export type OrganizationUpdateWithoutPromotionEvaluationsInput = {
   billingCharges?: Prisma.BillingChargeUpdateManyWithoutOrganizationNestedInput
   paymentRecords?: Prisma.PaymentRecordUpdateManyWithoutOrganizationNestedInput
   billingPolicies?: Prisma.BillingPolicyUpdateManyWithoutOrganizationNestedInput
+  integrationConnections?: Prisma.IntegrationConnectionUpdateManyWithoutOrganizationNestedInput
+  integrationSyncJobs?: Prisma.IntegrationSyncJobUpdateManyWithoutOrganizationNestedInput
+  externalEntityLinks?: Prisma.ExternalEntityLinkUpdateManyWithoutOrganizationNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutOrganizationNestedInput
 }
 
@@ -2394,6 +3018,9 @@ export type OrganizationUncheckedUpdateWithoutPromotionEvaluationsInput = {
   billingCharges?: Prisma.BillingChargeUncheckedUpdateManyWithoutOrganizationNestedInput
   paymentRecords?: Prisma.PaymentRecordUncheckedUpdateManyWithoutOrganizationNestedInput
   billingPolicies?: Prisma.BillingPolicyUncheckedUpdateManyWithoutOrganizationNestedInput
+  integrationConnections?: Prisma.IntegrationConnectionUncheckedUpdateManyWithoutOrganizationNestedInput
+  integrationSyncJobs?: Prisma.IntegrationSyncJobUncheckedUpdateManyWithoutOrganizationNestedInput
+  externalEntityLinks?: Prisma.ExternalEntityLinkUncheckedUpdateManyWithoutOrganizationNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutOrganizationNestedInput
 }
 
@@ -2421,6 +3048,9 @@ export type OrganizationCreateWithoutAuditLogsInput = {
   billingCharges?: Prisma.BillingChargeCreateNestedManyWithoutOrganizationInput
   paymentRecords?: Prisma.PaymentRecordCreateNestedManyWithoutOrganizationInput
   billingPolicies?: Prisma.BillingPolicyCreateNestedManyWithoutOrganizationInput
+  integrationConnections?: Prisma.IntegrationConnectionCreateNestedManyWithoutOrganizationInput
+  integrationSyncJobs?: Prisma.IntegrationSyncJobCreateNestedManyWithoutOrganizationInput
+  externalEntityLinks?: Prisma.ExternalEntityLinkCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationUncheckedCreateWithoutAuditLogsInput = {
@@ -2447,6 +3077,9 @@ export type OrganizationUncheckedCreateWithoutAuditLogsInput = {
   billingCharges?: Prisma.BillingChargeUncheckedCreateNestedManyWithoutOrganizationInput
   paymentRecords?: Prisma.PaymentRecordUncheckedCreateNestedManyWithoutOrganizationInput
   billingPolicies?: Prisma.BillingPolicyUncheckedCreateNestedManyWithoutOrganizationInput
+  integrationConnections?: Prisma.IntegrationConnectionUncheckedCreateNestedManyWithoutOrganizationInput
+  integrationSyncJobs?: Prisma.IntegrationSyncJobUncheckedCreateNestedManyWithoutOrganizationInput
+  externalEntityLinks?: Prisma.ExternalEntityLinkUncheckedCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationCreateOrConnectWithoutAuditLogsInput = {
@@ -2489,6 +3122,9 @@ export type OrganizationUpdateWithoutAuditLogsInput = {
   billingCharges?: Prisma.BillingChargeUpdateManyWithoutOrganizationNestedInput
   paymentRecords?: Prisma.PaymentRecordUpdateManyWithoutOrganizationNestedInput
   billingPolicies?: Prisma.BillingPolicyUpdateManyWithoutOrganizationNestedInput
+  integrationConnections?: Prisma.IntegrationConnectionUpdateManyWithoutOrganizationNestedInput
+  integrationSyncJobs?: Prisma.IntegrationSyncJobUpdateManyWithoutOrganizationNestedInput
+  externalEntityLinks?: Prisma.ExternalEntityLinkUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationUncheckedUpdateWithoutAuditLogsInput = {
@@ -2515,6 +3151,9 @@ export type OrganizationUncheckedUpdateWithoutAuditLogsInput = {
   billingCharges?: Prisma.BillingChargeUncheckedUpdateManyWithoutOrganizationNestedInput
   paymentRecords?: Prisma.PaymentRecordUncheckedUpdateManyWithoutOrganizationNestedInput
   billingPolicies?: Prisma.BillingPolicyUncheckedUpdateManyWithoutOrganizationNestedInput
+  integrationConnections?: Prisma.IntegrationConnectionUncheckedUpdateManyWithoutOrganizationNestedInput
+  integrationSyncJobs?: Prisma.IntegrationSyncJobUncheckedUpdateManyWithoutOrganizationNestedInput
+  externalEntityLinks?: Prisma.ExternalEntityLinkUncheckedUpdateManyWithoutOrganizationNestedInput
 }
 
 
@@ -2537,6 +3176,9 @@ export type OrganizationCountOutputType = {
   billingCharges: number
   paymentRecords: number
   billingPolicies: number
+  integrationConnections: number
+  integrationSyncJobs: number
+  externalEntityLinks: number
   auditLogs: number
 }
 
@@ -2555,6 +3197,9 @@ export type OrganizationCountOutputTypeSelect<ExtArgs extends runtime.Types.Exte
   billingCharges?: boolean | OrganizationCountOutputTypeCountBillingChargesArgs
   paymentRecords?: boolean | OrganizationCountOutputTypeCountPaymentRecordsArgs
   billingPolicies?: boolean | OrganizationCountOutputTypeCountBillingPoliciesArgs
+  integrationConnections?: boolean | OrganizationCountOutputTypeCountIntegrationConnectionsArgs
+  integrationSyncJobs?: boolean | OrganizationCountOutputTypeCountIntegrationSyncJobsArgs
+  externalEntityLinks?: boolean | OrganizationCountOutputTypeCountExternalEntityLinksArgs
   auditLogs?: boolean | OrganizationCountOutputTypeCountAuditLogsArgs
 }
 
@@ -2669,6 +3314,27 @@ export type OrganizationCountOutputTypeCountBillingPoliciesArgs<ExtArgs extends 
 /**
  * OrganizationCountOutputType without action
  */
+export type OrganizationCountOutputTypeCountIntegrationConnectionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.IntegrationConnectionWhereInput
+}
+
+/**
+ * OrganizationCountOutputType without action
+ */
+export type OrganizationCountOutputTypeCountIntegrationSyncJobsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.IntegrationSyncJobWhereInput
+}
+
+/**
+ * OrganizationCountOutputType without action
+ */
+export type OrganizationCountOutputTypeCountExternalEntityLinksArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ExternalEntityLinkWhereInput
+}
+
+/**
+ * OrganizationCountOutputType without action
+ */
 export type OrganizationCountOutputTypeCountAuditLogsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.AuditLogWhereInput
 }
@@ -2698,6 +3364,9 @@ export type OrganizationSelect<ExtArgs extends runtime.Types.Extensions.Internal
   billingCharges?: boolean | Prisma.Organization$billingChargesArgs<ExtArgs>
   paymentRecords?: boolean | Prisma.Organization$paymentRecordsArgs<ExtArgs>
   billingPolicies?: boolean | Prisma.Organization$billingPoliciesArgs<ExtArgs>
+  integrationConnections?: boolean | Prisma.Organization$integrationConnectionsArgs<ExtArgs>
+  integrationSyncJobs?: boolean | Prisma.Organization$integrationSyncJobsArgs<ExtArgs>
+  externalEntityLinks?: boolean | Prisma.Organization$externalEntityLinksArgs<ExtArgs>
   auditLogs?: boolean | Prisma.Organization$auditLogsArgs<ExtArgs>
   _count?: boolean | Prisma.OrganizationCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["organization"]>
@@ -2754,6 +3423,9 @@ export type OrganizationInclude<ExtArgs extends runtime.Types.Extensions.Interna
   billingCharges?: boolean | Prisma.Organization$billingChargesArgs<ExtArgs>
   paymentRecords?: boolean | Prisma.Organization$paymentRecordsArgs<ExtArgs>
   billingPolicies?: boolean | Prisma.Organization$billingPoliciesArgs<ExtArgs>
+  integrationConnections?: boolean | Prisma.Organization$integrationConnectionsArgs<ExtArgs>
+  integrationSyncJobs?: boolean | Prisma.Organization$integrationSyncJobsArgs<ExtArgs>
+  externalEntityLinks?: boolean | Prisma.Organization$externalEntityLinksArgs<ExtArgs>
   auditLogs?: boolean | Prisma.Organization$auditLogsArgs<ExtArgs>
   _count?: boolean | Prisma.OrganizationCountOutputTypeDefaultArgs<ExtArgs>
 }
@@ -2777,6 +3449,9 @@ export type $OrganizationPayload<ExtArgs extends runtime.Types.Extensions.Intern
     billingCharges: Prisma.$BillingChargePayload<ExtArgs>[]
     paymentRecords: Prisma.$PaymentRecordPayload<ExtArgs>[]
     billingPolicies: Prisma.$BillingPolicyPayload<ExtArgs>[]
+    integrationConnections: Prisma.$IntegrationConnectionPayload<ExtArgs>[]
+    integrationSyncJobs: Prisma.$IntegrationSyncJobPayload<ExtArgs>[]
+    externalEntityLinks: Prisma.$ExternalEntityLinkPayload<ExtArgs>[]
     auditLogs: Prisma.$AuditLogPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
@@ -3197,6 +3872,9 @@ export interface Prisma__OrganizationClient<T, Null = never, ExtArgs extends run
   billingCharges<T extends Prisma.Organization$billingChargesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Organization$billingChargesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$BillingChargePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   paymentRecords<T extends Prisma.Organization$paymentRecordsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Organization$paymentRecordsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PaymentRecordPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   billingPolicies<T extends Prisma.Organization$billingPoliciesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Organization$billingPoliciesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$BillingPolicyPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  integrationConnections<T extends Prisma.Organization$integrationConnectionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Organization$integrationConnectionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$IntegrationConnectionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  integrationSyncJobs<T extends Prisma.Organization$integrationSyncJobsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Organization$integrationSyncJobsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$IntegrationSyncJobPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  externalEntityLinks<T extends Prisma.Organization$externalEntityLinksArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Organization$externalEntityLinksArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ExternalEntityLinkPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   auditLogs<T extends Prisma.Organization$auditLogsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Organization$auditLogsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AuditLogPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -3962,6 +4640,78 @@ export type Organization$billingPoliciesArgs<ExtArgs extends runtime.Types.Exten
   take?: number
   skip?: number
   distinct?: Prisma.BillingPolicyScalarFieldEnum | Prisma.BillingPolicyScalarFieldEnum[]
+}
+
+/**
+ * Organization.integrationConnections
+ */
+export type Organization$integrationConnectionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the IntegrationConnection
+   */
+  select?: Prisma.IntegrationConnectionSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the IntegrationConnection
+   */
+  omit?: Prisma.IntegrationConnectionOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.IntegrationConnectionInclude<ExtArgs> | null
+  where?: Prisma.IntegrationConnectionWhereInput
+  orderBy?: Prisma.IntegrationConnectionOrderByWithRelationInput | Prisma.IntegrationConnectionOrderByWithRelationInput[]
+  cursor?: Prisma.IntegrationConnectionWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.IntegrationConnectionScalarFieldEnum | Prisma.IntegrationConnectionScalarFieldEnum[]
+}
+
+/**
+ * Organization.integrationSyncJobs
+ */
+export type Organization$integrationSyncJobsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the IntegrationSyncJob
+   */
+  select?: Prisma.IntegrationSyncJobSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the IntegrationSyncJob
+   */
+  omit?: Prisma.IntegrationSyncJobOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.IntegrationSyncJobInclude<ExtArgs> | null
+  where?: Prisma.IntegrationSyncJobWhereInput
+  orderBy?: Prisma.IntegrationSyncJobOrderByWithRelationInput | Prisma.IntegrationSyncJobOrderByWithRelationInput[]
+  cursor?: Prisma.IntegrationSyncJobWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.IntegrationSyncJobScalarFieldEnum | Prisma.IntegrationSyncJobScalarFieldEnum[]
+}
+
+/**
+ * Organization.externalEntityLinks
+ */
+export type Organization$externalEntityLinksArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the ExternalEntityLink
+   */
+  select?: Prisma.ExternalEntityLinkSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the ExternalEntityLink
+   */
+  omit?: Prisma.ExternalEntityLinkOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ExternalEntityLinkInclude<ExtArgs> | null
+  where?: Prisma.ExternalEntityLinkWhereInput
+  orderBy?: Prisma.ExternalEntityLinkOrderByWithRelationInput | Prisma.ExternalEntityLinkOrderByWithRelationInput[]
+  cursor?: Prisma.ExternalEntityLinkWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.ExternalEntityLinkScalarFieldEnum | Prisma.ExternalEntityLinkScalarFieldEnum[]
 }
 
 /**

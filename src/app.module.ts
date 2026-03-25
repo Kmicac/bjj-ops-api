@@ -26,6 +26,7 @@ import { ClassesModule } from './classes/classes.module';
 import { AttendanceModule } from './attendance/attendance.module';
 import { PromotionsModule } from './promotions/promotions.module';
 import { BillingModule } from './billing/billing.module';
+import { IntegrationsModule } from './integrations/integrations.module';
 
 @Module({
   imports: [
@@ -53,6 +54,7 @@ import { BillingModule } from './billing/billing.module';
     MembershipsModule,
     StudentsModule,
     BillingModule,
+    IntegrationsModule,
     ClassesModule,
     AttendanceModule,
     PromotionsModule,

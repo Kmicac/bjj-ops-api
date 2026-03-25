@@ -63,6 +63,9 @@ export const ModelName = {
   StudentMembership: 'StudentMembership',
   BillingCharge: 'BillingCharge',
   PaymentRecord: 'PaymentRecord',
+  IntegrationConnection: 'IntegrationConnection',
+  IntegrationSyncJob: 'IntegrationSyncJob',
+  ExternalEntityLink: 'ExternalEntityLink',
   BillingPolicy: 'BillingPolicy',
   ClassSchedule: 'ClassSchedule',
   ClassSession: 'ClassSession',
@@ -317,6 +320,66 @@ export const PaymentRecordScalarFieldEnum = {
 } as const
 
 export type PaymentRecordScalarFieldEnum = (typeof PaymentRecordScalarFieldEnum)[keyof typeof PaymentRecordScalarFieldEnum]
+
+
+export const IntegrationConnectionScalarFieldEnum = {
+  id: 'id',
+  organizationId: 'organizationId',
+  branchId: 'branchId',
+  provider: 'provider',
+  status: 'status',
+  scopeType: 'scopeType',
+  displayName: 'displayName',
+  configJson: 'configJson',
+  lastSyncAt: 'lastSyncAt',
+  lastSyncStatus: 'lastSyncStatus',
+  lastSyncError: 'lastSyncError',
+  createdByMembershipId: 'createdByMembershipId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  deletedAt: 'deletedAt'
+} as const
+
+export type IntegrationConnectionScalarFieldEnum = (typeof IntegrationConnectionScalarFieldEnum)[keyof typeof IntegrationConnectionScalarFieldEnum]
+
+
+export const IntegrationSyncJobScalarFieldEnum = {
+  id: 'id',
+  organizationId: 'organizationId',
+  branchId: 'branchId',
+  integrationConnectionId: 'integrationConnectionId',
+  provider: 'provider',
+  syncKind: 'syncKind',
+  status: 'status',
+  startedAt: 'startedAt',
+  finishedAt: 'finishedAt',
+  triggeredByMembershipId: 'triggeredByMembershipId',
+  summaryJson: 'summaryJson',
+  errorMessage: 'errorMessage',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type IntegrationSyncJobScalarFieldEnum = (typeof IntegrationSyncJobScalarFieldEnum)[keyof typeof IntegrationSyncJobScalarFieldEnum]
+
+
+export const ExternalEntityLinkScalarFieldEnum = {
+  id: 'id',
+  organizationId: 'organizationId',
+  branchId: 'branchId',
+  integrationConnectionId: 'integrationConnectionId',
+  provider: 'provider',
+  entityType: 'entityType',
+  internalEntityId: 'internalEntityId',
+  externalEntityId: 'externalEntityId',
+  externalReference: 'externalReference',
+  metadataJson: 'metadataJson',
+  createdByMembershipId: 'createdByMembershipId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type ExternalEntityLinkScalarFieldEnum = (typeof ExternalEntityLinkScalarFieldEnum)[keyof typeof ExternalEntityLinkScalarFieldEnum]
 
 
 export const BillingPolicyScalarFieldEnum = {

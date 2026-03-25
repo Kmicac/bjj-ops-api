@@ -396,6 +396,9 @@ export const ModelName = {
   StudentMembership: 'StudentMembership',
   BillingCharge: 'BillingCharge',
   PaymentRecord: 'PaymentRecord',
+  IntegrationConnection: 'IntegrationConnection',
+  IntegrationSyncJob: 'IntegrationSyncJob',
+  ExternalEntityLink: 'ExternalEntityLink',
   BillingPolicy: 'BillingPolicy',
   ClassSchedule: 'ClassSchedule',
   ClassSession: 'ClassSession',
@@ -418,7 +421,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "organization" | "branch" | "branchPublicProfile" | "organizationMembership" | "membershipRoleAssignment" | "membershipBranchScope" | "student" | "billingPlan" | "studentMembership" | "billingCharge" | "paymentRecord" | "billingPolicy" | "classSchedule" | "classSession" | "attendanceRecord" | "promotionRequest" | "promotionEvaluation" | "auditLog"
+    modelProps: "user" | "organization" | "branch" | "branchPublicProfile" | "organizationMembership" | "membershipRoleAssignment" | "membershipBranchScope" | "student" | "billingPlan" | "studentMembership" | "billingCharge" | "paymentRecord" | "integrationConnection" | "integrationSyncJob" | "externalEntityLink" | "billingPolicy" | "classSchedule" | "classSession" | "attendanceRecord" | "promotionRequest" | "promotionEvaluation" | "auditLog"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -1310,6 +1313,228 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    IntegrationConnection: {
+      payload: Prisma.$IntegrationConnectionPayload<ExtArgs>
+      fields: Prisma.IntegrationConnectionFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.IntegrationConnectionFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$IntegrationConnectionPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.IntegrationConnectionFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$IntegrationConnectionPayload>
+        }
+        findFirst: {
+          args: Prisma.IntegrationConnectionFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$IntegrationConnectionPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.IntegrationConnectionFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$IntegrationConnectionPayload>
+        }
+        findMany: {
+          args: Prisma.IntegrationConnectionFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$IntegrationConnectionPayload>[]
+        }
+        create: {
+          args: Prisma.IntegrationConnectionCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$IntegrationConnectionPayload>
+        }
+        createMany: {
+          args: Prisma.IntegrationConnectionCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.IntegrationConnectionCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$IntegrationConnectionPayload>[]
+        }
+        delete: {
+          args: Prisma.IntegrationConnectionDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$IntegrationConnectionPayload>
+        }
+        update: {
+          args: Prisma.IntegrationConnectionUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$IntegrationConnectionPayload>
+        }
+        deleteMany: {
+          args: Prisma.IntegrationConnectionDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.IntegrationConnectionUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.IntegrationConnectionUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$IntegrationConnectionPayload>[]
+        }
+        upsert: {
+          args: Prisma.IntegrationConnectionUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$IntegrationConnectionPayload>
+        }
+        aggregate: {
+          args: Prisma.IntegrationConnectionAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateIntegrationConnection>
+        }
+        groupBy: {
+          args: Prisma.IntegrationConnectionGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.IntegrationConnectionGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.IntegrationConnectionCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.IntegrationConnectionCountAggregateOutputType> | number
+        }
+      }
+    }
+    IntegrationSyncJob: {
+      payload: Prisma.$IntegrationSyncJobPayload<ExtArgs>
+      fields: Prisma.IntegrationSyncJobFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.IntegrationSyncJobFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$IntegrationSyncJobPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.IntegrationSyncJobFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$IntegrationSyncJobPayload>
+        }
+        findFirst: {
+          args: Prisma.IntegrationSyncJobFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$IntegrationSyncJobPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.IntegrationSyncJobFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$IntegrationSyncJobPayload>
+        }
+        findMany: {
+          args: Prisma.IntegrationSyncJobFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$IntegrationSyncJobPayload>[]
+        }
+        create: {
+          args: Prisma.IntegrationSyncJobCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$IntegrationSyncJobPayload>
+        }
+        createMany: {
+          args: Prisma.IntegrationSyncJobCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.IntegrationSyncJobCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$IntegrationSyncJobPayload>[]
+        }
+        delete: {
+          args: Prisma.IntegrationSyncJobDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$IntegrationSyncJobPayload>
+        }
+        update: {
+          args: Prisma.IntegrationSyncJobUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$IntegrationSyncJobPayload>
+        }
+        deleteMany: {
+          args: Prisma.IntegrationSyncJobDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.IntegrationSyncJobUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.IntegrationSyncJobUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$IntegrationSyncJobPayload>[]
+        }
+        upsert: {
+          args: Prisma.IntegrationSyncJobUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$IntegrationSyncJobPayload>
+        }
+        aggregate: {
+          args: Prisma.IntegrationSyncJobAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateIntegrationSyncJob>
+        }
+        groupBy: {
+          args: Prisma.IntegrationSyncJobGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.IntegrationSyncJobGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.IntegrationSyncJobCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.IntegrationSyncJobCountAggregateOutputType> | number
+        }
+      }
+    }
+    ExternalEntityLink: {
+      payload: Prisma.$ExternalEntityLinkPayload<ExtArgs>
+      fields: Prisma.ExternalEntityLinkFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.ExternalEntityLinkFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ExternalEntityLinkPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.ExternalEntityLinkFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ExternalEntityLinkPayload>
+        }
+        findFirst: {
+          args: Prisma.ExternalEntityLinkFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ExternalEntityLinkPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.ExternalEntityLinkFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ExternalEntityLinkPayload>
+        }
+        findMany: {
+          args: Prisma.ExternalEntityLinkFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ExternalEntityLinkPayload>[]
+        }
+        create: {
+          args: Prisma.ExternalEntityLinkCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ExternalEntityLinkPayload>
+        }
+        createMany: {
+          args: Prisma.ExternalEntityLinkCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.ExternalEntityLinkCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ExternalEntityLinkPayload>[]
+        }
+        delete: {
+          args: Prisma.ExternalEntityLinkDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ExternalEntityLinkPayload>
+        }
+        update: {
+          args: Prisma.ExternalEntityLinkUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ExternalEntityLinkPayload>
+        }
+        deleteMany: {
+          args: Prisma.ExternalEntityLinkDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.ExternalEntityLinkUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.ExternalEntityLinkUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ExternalEntityLinkPayload>[]
+        }
+        upsert: {
+          args: Prisma.ExternalEntityLinkUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ExternalEntityLinkPayload>
+        }
+        aggregate: {
+          args: Prisma.ExternalEntityLinkAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateExternalEntityLink>
+        }
+        groupBy: {
+          args: Prisma.ExternalEntityLinkGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ExternalEntityLinkGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.ExternalEntityLinkCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ExternalEntityLinkCountAggregateOutputType> | number
+        }
+      }
+    }
     BillingPolicy: {
       payload: Prisma.$BillingPolicyPayload<ExtArgs>
       fields: Prisma.BillingPolicyFieldRefs
@@ -2098,6 +2323,66 @@ export const PaymentRecordScalarFieldEnum = {
 export type PaymentRecordScalarFieldEnum = (typeof PaymentRecordScalarFieldEnum)[keyof typeof PaymentRecordScalarFieldEnum]
 
 
+export const IntegrationConnectionScalarFieldEnum = {
+  id: 'id',
+  organizationId: 'organizationId',
+  branchId: 'branchId',
+  provider: 'provider',
+  status: 'status',
+  scopeType: 'scopeType',
+  displayName: 'displayName',
+  configJson: 'configJson',
+  lastSyncAt: 'lastSyncAt',
+  lastSyncStatus: 'lastSyncStatus',
+  lastSyncError: 'lastSyncError',
+  createdByMembershipId: 'createdByMembershipId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  deletedAt: 'deletedAt'
+} as const
+
+export type IntegrationConnectionScalarFieldEnum = (typeof IntegrationConnectionScalarFieldEnum)[keyof typeof IntegrationConnectionScalarFieldEnum]
+
+
+export const IntegrationSyncJobScalarFieldEnum = {
+  id: 'id',
+  organizationId: 'organizationId',
+  branchId: 'branchId',
+  integrationConnectionId: 'integrationConnectionId',
+  provider: 'provider',
+  syncKind: 'syncKind',
+  status: 'status',
+  startedAt: 'startedAt',
+  finishedAt: 'finishedAt',
+  triggeredByMembershipId: 'triggeredByMembershipId',
+  summaryJson: 'summaryJson',
+  errorMessage: 'errorMessage',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type IntegrationSyncJobScalarFieldEnum = (typeof IntegrationSyncJobScalarFieldEnum)[keyof typeof IntegrationSyncJobScalarFieldEnum]
+
+
+export const ExternalEntityLinkScalarFieldEnum = {
+  id: 'id',
+  organizationId: 'organizationId',
+  branchId: 'branchId',
+  integrationConnectionId: 'integrationConnectionId',
+  provider: 'provider',
+  entityType: 'entityType',
+  internalEntityId: 'internalEntityId',
+  externalEntityId: 'externalEntityId',
+  externalReference: 'externalReference',
+  metadataJson: 'metadataJson',
+  createdByMembershipId: 'createdByMembershipId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type ExternalEntityLinkScalarFieldEnum = (typeof ExternalEntityLinkScalarFieldEnum)[keyof typeof ExternalEntityLinkScalarFieldEnum]
+
+
 export const BillingPolicyScalarFieldEnum = {
   id: 'id',
   organizationId: 'organizationId',
@@ -2599,6 +2884,104 @@ export type ListEnumPaymentStatusFieldRefInput<$PrismaModel> = FieldRefInputType
 
 
 /**
+ * Reference to a field of type 'IntegrationProvider'
+ */
+export type EnumIntegrationProviderFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'IntegrationProvider'>
+    
+
+
+/**
+ * Reference to a field of type 'IntegrationProvider[]'
+ */
+export type ListEnumIntegrationProviderFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'IntegrationProvider[]'>
+    
+
+
+/**
+ * Reference to a field of type 'IntegrationStatus'
+ */
+export type EnumIntegrationStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'IntegrationStatus'>
+    
+
+
+/**
+ * Reference to a field of type 'IntegrationStatus[]'
+ */
+export type ListEnumIntegrationStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'IntegrationStatus[]'>
+    
+
+
+/**
+ * Reference to a field of type 'IntegrationScopeType'
+ */
+export type EnumIntegrationScopeTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'IntegrationScopeType'>
+    
+
+
+/**
+ * Reference to a field of type 'IntegrationScopeType[]'
+ */
+export type ListEnumIntegrationScopeTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'IntegrationScopeType[]'>
+    
+
+
+/**
+ * Reference to a field of type 'Json'
+ */
+export type JsonFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Json'>
+    
+
+
+/**
+ * Reference to a field of type 'QueryMode'
+ */
+export type EnumQueryModeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'QueryMode'>
+    
+
+
+/**
+ * Reference to a field of type 'IntegrationSyncStatus'
+ */
+export type EnumIntegrationSyncStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'IntegrationSyncStatus'>
+    
+
+
+/**
+ * Reference to a field of type 'IntegrationSyncStatus[]'
+ */
+export type ListEnumIntegrationSyncStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'IntegrationSyncStatus[]'>
+    
+
+
+/**
+ * Reference to a field of type 'IntegrationSyncKind'
+ */
+export type EnumIntegrationSyncKindFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'IntegrationSyncKind'>
+    
+
+
+/**
+ * Reference to a field of type 'IntegrationSyncKind[]'
+ */
+export type ListEnumIntegrationSyncKindFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'IntegrationSyncKind[]'>
+    
+
+
+/**
+ * Reference to a field of type 'ExternalEntityType'
+ */
+export type EnumExternalEntityTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ExternalEntityType'>
+    
+
+
+/**
+ * Reference to a field of type 'ExternalEntityType[]'
+ */
+export type ListEnumExternalEntityTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ExternalEntityType[]'>
+    
+
+
+/**
  * Reference to a field of type 'ClassType'
  */
 export type EnumClassTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ClassType'>
@@ -2693,20 +3076,6 @@ export type EnumPromotionRecommendationFieldRefInput<$PrismaModel> = FieldRefInp
  * Reference to a field of type 'PromotionRecommendation[]'
  */
 export type ListEnumPromotionRecommendationFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'PromotionRecommendation[]'>
-    
-
-
-/**
- * Reference to a field of type 'Json'
- */
-export type JsonFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Json'>
-    
-
-
-/**
- * Reference to a field of type 'QueryMode'
- */
-export type EnumQueryModeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'QueryMode'>
     
 
 
@@ -2830,6 +3199,9 @@ export type GlobalOmitConfig = {
   studentMembership?: Prisma.StudentMembershipOmit
   billingCharge?: Prisma.BillingChargeOmit
   paymentRecord?: Prisma.PaymentRecordOmit
+  integrationConnection?: Prisma.IntegrationConnectionOmit
+  integrationSyncJob?: Prisma.IntegrationSyncJobOmit
+  externalEntityLink?: Prisma.ExternalEntityLinkOmit
   billingPolicy?: Prisma.BillingPolicyOmit
   classSchedule?: Prisma.ClassScheduleOmit
   classSession?: Prisma.ClassSessionOmit

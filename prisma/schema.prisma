@@ -123,6 +123,48 @@ enum PaymentStatus {
   FAILED
 }
 
+enum IntegrationProvider {
+  MERCADO_PAGO
+  TAKENOS
+  SMOOTHCOMP
+}
+
+enum IntegrationStatus {
+  ACTIVE
+  INACTIVE
+  ERROR
+  DISCONNECTED
+}
+
+enum IntegrationScopeType {
+  ORGANIZATION
+  BRANCH
+}
+
+enum IntegrationSyncKind {
+  TEST_CONNECTION
+  IMPORT_STUDENT_COMPETITIONS
+  SYNC_PAYMENT_STATUS
+  IMPORT_EXTERNAL_TRANSACTIONS
+}
+
+enum IntegrationSyncStatus {
+  PENDING
+  RUNNING
+  SUCCEEDED
+  FAILED
+  PARTIALLY_SUCCEEDED
+}
+
+enum ExternalEntityType {
+  STUDENT
+  PAYMENT
+  BILLING_CHARGE
+  COMPETITION_PROFILE
+  COMPETITION_EVENT
+  COMPETITION_MATCH
+}
+
 enum Weekday {
   MONDAY
   TUESDAY
@@ -247,6 +289,9 @@ model Organization {
   billingCharges       BillingCharge[]
   paymentRecords       PaymentRecord[]
   billingPolicies      BillingPolicy[]
+  integrationConnections IntegrationConnection[]
+  integrationSyncJobs    IntegrationSyncJob[]
+  externalEntityLinks    ExternalEntityLink[]
   auditLogs            AuditLog[]
 
   @@index([status])
@@ -284,6 +329,9 @@ model Branch {
   billingCharges      BillingCharge[]
   paymentRecords      PaymentRecord[]
   billingPolicy       BillingPolicy?
+  integrationConnections IntegrationConnection[]
+  integrationSyncJobs    IntegrationSyncJob[]
+  externalEntityLinks    ExternalEntityLink[]
   primaryMemberships  OrganizationMembership[] @relation("MembershipPrimaryBranch")
   membershipScopes    MembershipBranchScope[]
   auditLogs           AuditLog[]
@@ -340,6 +388,9 @@ model OrganizationMembership {
   reviewedPromotionRequests   PromotionRequest[]         @relation("PromotionReviewedByMembership")
   updatedPromotionEvaluations PromotionEvaluation[]      @relation("PromotionEvaluationUpdatedByMembership")
   recordedPayments            PaymentRecord[]            @relation("PaymentRecordedByMembership")
+  createdIntegrationConnections IntegrationConnection[]  @relation("IntegrationConnectionCreatedByMembership")
+  triggeredIntegrationSyncJobs   IntegrationSyncJob[]    @relation("IntegrationSyncJobTriggeredByMembership")
+  createdExternalEntityLinks     ExternalEntityLink[]    @relation("ExternalEntityLinkCreatedByMembership")
   branchScopes                MembershipBranchScope[]
   roles                       MembershipRoleAssignment[]
   auditLogs                   AuditLog[]                 @relation("AuditActorMembership")
@@ -536,6 +587,88 @@ model PaymentRecord {
   @@index([studentId, recordedAt])
   @@index([billingChargeId, recordedAt])
   @@index([branchId, externalProvider, externalReference])
+}
+
+model IntegrationConnection {
+  id                    String               @id @default(cuid())
+  organizationId        String
+  branchId              String?
+  provider              IntegrationProvider
+  status                IntegrationStatus    @default(INACTIVE)
+  scopeType             IntegrationScopeType
+  displayName           String
+  configJson            Json?
+  lastSyncAt            DateTime?            @db.Timestamptz(3)
+  lastSyncStatus        IntegrationSyncStatus?
+  lastSyncError         String?
+  createdByMembershipId String
+  createdAt             DateTime             @default(now()) @db.Timestamptz(3)
+  updatedAt             DateTime             @updatedAt @db.Timestamptz(3)
+  deletedAt             DateTime?            @db.Timestamptz(3)
+
+  organization         Organization           @relation(fields: [organizationId], references: [id], onDelete: Restrict)
+  branch               Branch?                @relation(fields: [branchId, organizationId], references: [id, organizationId], onDelete: Restrict)
+  createdByMembership  OrganizationMembership @relation("IntegrationConnectionCreatedByMembership", fields: [createdByMembershipId, organizationId], references: [id, organizationId], onDelete: Restrict)
+  syncJobs             IntegrationSyncJob[]
+  externalEntityLinks  ExternalEntityLink[]
+
+  @@unique([id, organizationId])
+  @@index([organizationId, provider, status])
+  @@index([branchId, provider, status])
+  @@index([organizationId, scopeType, deletedAt])
+}
+
+model IntegrationSyncJob {
+  id                     String                @id @default(cuid())
+  organizationId         String
+  branchId               String?
+  integrationConnectionId String
+  provider               IntegrationProvider
+  syncKind               IntegrationSyncKind
+  status                 IntegrationSyncStatus @default(PENDING)
+  startedAt              DateTime              @db.Timestamptz(3)
+  finishedAt             DateTime?             @db.Timestamptz(3)
+  triggeredByMembershipId String?
+  summaryJson            Json?
+  errorMessage           String?
+  createdAt              DateTime              @default(now()) @db.Timestamptz(3)
+  updatedAt              DateTime              @updatedAt @db.Timestamptz(3)
+
+  organization          Organization             @relation(fields: [organizationId], references: [id], onDelete: Restrict)
+  branch                Branch?                  @relation(fields: [branchId, organizationId], references: [id, organizationId], onDelete: Restrict)
+  integrationConnection IntegrationConnection    @relation(fields: [integrationConnectionId, organizationId], references: [id, organizationId], onDelete: Restrict)
+  triggeredByMembership OrganizationMembership?  @relation("IntegrationSyncJobTriggeredByMembership", fields: [triggeredByMembershipId, organizationId], references: [id, organizationId], onDelete: Restrict)
+
+  @@unique([id, organizationId])
+  @@index([integrationConnectionId, createdAt])
+  @@index([organizationId, branchId, createdAt])
+  @@index([organizationId, provider, syncKind, createdAt])
+}
+
+model ExternalEntityLink {
+  id                    String             @id @default(cuid())
+  organizationId        String
+  branchId              String?
+  integrationConnectionId String
+  provider              IntegrationProvider
+  entityType            ExternalEntityType
+  internalEntityId      String
+  externalEntityId      String
+  externalReference     String?
+  metadataJson          Json?
+  createdByMembershipId String?
+  createdAt             DateTime           @default(now()) @db.Timestamptz(3)
+  updatedAt             DateTime           @updatedAt @db.Timestamptz(3)
+
+  organization         Organization             @relation(fields: [organizationId], references: [id], onDelete: Restrict)
+  branch               Branch?                  @relation(fields: [branchId, organizationId], references: [id, organizationId], onDelete: Restrict)
+  integrationConnection IntegrationConnection   @relation(fields: [integrationConnectionId, organizationId], references: [id, organizationId], onDelete: Restrict)
+  createdByMembership  OrganizationMembership?  @relation("ExternalEntityLinkCreatedByMembership", fields: [createdByMembershipId, organizationId], references: [id, organizationId], onDelete: Restrict)
+
+  @@unique([id, organizationId])
+  @@unique([integrationConnectionId, entityType, internalEntityId, externalEntityId])
+  @@index([organizationId, provider, entityType])
+  @@index([integrationConnectionId, entityType, createdAt])
 }
 
 model BillingPolicy {

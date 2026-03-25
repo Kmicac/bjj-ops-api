@@ -168,6 +168,66 @@ export const PaymentStatus = {
 export type PaymentStatus = (typeof PaymentStatus)[keyof typeof PaymentStatus]
 
 
+export const IntegrationProvider = {
+  MERCADO_PAGO: 'MERCADO_PAGO',
+  TAKENOS: 'TAKENOS',
+  SMOOTHCOMP: 'SMOOTHCOMP'
+} as const
+
+export type IntegrationProvider = (typeof IntegrationProvider)[keyof typeof IntegrationProvider]
+
+
+export const IntegrationStatus = {
+  ACTIVE: 'ACTIVE',
+  INACTIVE: 'INACTIVE',
+  ERROR: 'ERROR',
+  DISCONNECTED: 'DISCONNECTED'
+} as const
+
+export type IntegrationStatus = (typeof IntegrationStatus)[keyof typeof IntegrationStatus]
+
+
+export const IntegrationScopeType = {
+  ORGANIZATION: 'ORGANIZATION',
+  BRANCH: 'BRANCH'
+} as const
+
+export type IntegrationScopeType = (typeof IntegrationScopeType)[keyof typeof IntegrationScopeType]
+
+
+export const IntegrationSyncKind = {
+  TEST_CONNECTION: 'TEST_CONNECTION',
+  IMPORT_STUDENT_COMPETITIONS: 'IMPORT_STUDENT_COMPETITIONS',
+  SYNC_PAYMENT_STATUS: 'SYNC_PAYMENT_STATUS',
+  IMPORT_EXTERNAL_TRANSACTIONS: 'IMPORT_EXTERNAL_TRANSACTIONS'
+} as const
+
+export type IntegrationSyncKind = (typeof IntegrationSyncKind)[keyof typeof IntegrationSyncKind]
+
+
+export const IntegrationSyncStatus = {
+  PENDING: 'PENDING',
+  RUNNING: 'RUNNING',
+  SUCCEEDED: 'SUCCEEDED',
+  FAILED: 'FAILED',
+  PARTIALLY_SUCCEEDED: 'PARTIALLY_SUCCEEDED'
+} as const
+
+export type IntegrationSyncStatus = (typeof IntegrationSyncStatus)[keyof typeof IntegrationSyncStatus]
+
+
+export const ExternalEntityType = {
+  STUDENT: 'STUDENT',
+  PAYMENT: 'PAYMENT',
+  BILLING_CHARGE: 'BILLING_CHARGE',
+  COMPETITION_PROFILE: 'COMPETITION_PROFILE',
+  COMPETITION_EVENT: 'COMPETITION_EVENT',
+  COMPETITION_MATCH: 'COMPETITION_MATCH'
+} as const
+
+export type ExternalEntityType = (typeof ExternalEntityType)[keyof typeof ExternalEntityType]
+
+
 export const Weekday = {
   MONDAY: 'MONDAY',
   TUESDAY: 'TUESDAY',

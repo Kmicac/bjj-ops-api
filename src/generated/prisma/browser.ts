@@ -78,6 +78,21 @@ export type BillingCharge = Prisma.BillingChargeModel
  */
 export type PaymentRecord = Prisma.PaymentRecordModel
 /**
+ * Model IntegrationConnection
+ * 
+ */
+export type IntegrationConnection = Prisma.IntegrationConnectionModel
+/**
+ * Model IntegrationSyncJob
+ * 
+ */
+export type IntegrationSyncJob = Prisma.IntegrationSyncJobModel
+/**
+ * Model ExternalEntityLink
+ * 
+ */
+export type ExternalEntityLink = Prisma.ExternalEntityLinkModel
+/**
  * Model BillingPolicy
  * 
  */

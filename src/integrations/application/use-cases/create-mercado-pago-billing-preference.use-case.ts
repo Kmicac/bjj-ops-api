@@ -151,18 +151,50 @@ export class CreateMercadoPagoBillingPreferenceUseCase {
         },
       );
 
-    await this.integrationsRepository.createExternalEntityLink({
-      organizationId: params.organizationId,
-      branchId: params.branchId,
-      integrationConnectionId: connection.id,
-      provider: IntegrationProvider.MERCADO_PAGO,
-      entityType: ExternalEntityType.BILLING_CHARGE,
-      internalEntityId: params.billingChargeId,
-      externalEntityId: preference.preferenceId,
-      externalReference: params.externalReference,
-      metadataJson: this.buildMetadata(params.amount, params.currency, preference),
-      createdByMembershipId: params.createdByMembershipId,
-    });
+    try {
+      await this.integrationsRepository.createExternalEntityLink({
+        organizationId: params.organizationId,
+        branchId: params.branchId,
+        integrationConnectionId: connection.id,
+        provider: IntegrationProvider.MERCADO_PAGO,
+        entityType: ExternalEntityType.BILLING_CHARGE,
+        internalEntityId: params.billingChargeId,
+        externalEntityId: preference.preferenceId,
+        externalReference: params.externalReference,
+        metadataJson: this.buildMetadata(
+          params.amount,
+          params.currency,
+          preference,
+        ),
+        createdByMembershipId: params.createdByMembershipId,
+      });
+    } catch (error) {
+      if (!(error instanceof ConflictException)) {
+        throw error;
+      }
+
+      const concurrentLink =
+        await this.integrationsRepository.findSingleExternalEntityLinkByInternalEntity(
+          {
+            organizationId: params.organizationId,
+            integrationConnectionId: connection.id,
+            entityType: ExternalEntityType.BILLING_CHARGE,
+            internalEntityId: params.billingChargeId,
+          },
+        );
+
+      if (!concurrentLink) {
+        throw error;
+      }
+
+      return this.buildExistingPreferenceResult(
+        concurrentLink,
+        params.billingChargeExternalReference,
+        params.amount,
+        params.currency,
+        connection.id,
+      );
+    }
 
     return {
       connectionId: connection.id,

@@ -203,4 +203,49 @@ describe('CreateMercadoPagoBillingPreferenceUseCase', () => {
       }),
     ).rejects.toThrow(ConflictException);
   });
+
+  it('reuses the existing link when another request wins the create race first', async () => {
+    integrationsRepository.createExternalEntityLink.mockRejectedValueOnce(
+      new ConflictException('External entity link already exists'),
+    );
+    integrationsRepository.findSingleExternalEntityLinkByInternalEntity
+      .mockResolvedValueOnce(null)
+      .mockResolvedValueOnce({
+        id: 'link_race_1',
+        externalEntityId: 'pref_race_winner',
+        externalReference: 'billing_charge:charge_1',
+        metadataJson: {
+          kind: 'mercado_pago_checkout_pro_preference',
+          environment: 'test',
+          initPoint: 'https://www.mercadopago.com/init/pref_race_winner',
+          sandboxInitPoint:
+            'https://sandbox.mercadopago.com/init/pref_race_winner',
+          amount: '100.00',
+          currency: 'ARS',
+        },
+      });
+
+    const result = await useCase.execute({
+      organizationId: 'org_1',
+      branchId: 'branch_1',
+      billingChargeId: 'charge_1',
+      title: 'BJJ Ops billing charge',
+      amount: 100,
+      currency: 'ARS',
+      externalReference: 'billing_charge:charge_1',
+      createdByMembershipId: 'membership_1',
+    });
+
+    expect(mercadoPagoProviderClient.createCheckoutProPreference).toHaveBeenCalled();
+    expect(result).toEqual({
+      connectionId: 'integration_1',
+      environment: 'test',
+      preferenceId: 'pref_race_winner',
+      externalReference: 'billing_charge:charge_1',
+      initPoint: 'https://www.mercadopago.com/init/pref_race_winner',
+      sandboxInitPoint:
+        'https://sandbox.mercadopago.com/init/pref_race_winner',
+      reused: true,
+    });
+  });
 });

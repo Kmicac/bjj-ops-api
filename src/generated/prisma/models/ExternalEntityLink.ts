@@ -271,6 +271,7 @@ export type ExternalEntityLinkOrderByWithRelationInput = {
 export type ExternalEntityLinkWhereUniqueInput = Prisma.AtLeast<{
   id?: string
   id_organizationId?: Prisma.ExternalEntityLinkIdOrganizationIdCompoundUniqueInput
+  integrationConnectionId_entityType_internalEntityId?: Prisma.ExternalEntityLinkIntegrationConnectionIdEntityTypeInternalEntityIdCompoundUniqueInput
   integrationConnectionId_entityType_internalEntityId_externalEntityId?: Prisma.ExternalEntityLinkIntegrationConnectionIdEntityTypeInternalEntityIdExternalEntityIdCompoundUniqueInput
   AND?: Prisma.ExternalEntityLinkWhereInput | Prisma.ExternalEntityLinkWhereInput[]
   OR?: Prisma.ExternalEntityLinkWhereInput[]
@@ -291,7 +292,7 @@ export type ExternalEntityLinkWhereUniqueInput = Prisma.AtLeast<{
   branch?: Prisma.XOR<Prisma.BranchNullableScalarRelationFilter, Prisma.BranchWhereInput> | null
   integrationConnection?: Prisma.XOR<Prisma.IntegrationConnectionScalarRelationFilter, Prisma.IntegrationConnectionWhereInput>
   createdByMembership?: Prisma.XOR<Prisma.OrganizationMembershipNullableScalarRelationFilter, Prisma.OrganizationMembershipWhereInput> | null
-}, "id" | "id_organizationId" | "integrationConnectionId_entityType_internalEntityId_externalEntityId">
+}, "id" | "id_organizationId" | "integrationConnectionId_entityType_internalEntityId" | "integrationConnectionId_entityType_internalEntityId_externalEntityId">
 
 export type ExternalEntityLinkOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
@@ -452,6 +453,12 @@ export type ExternalEntityLinkOrderByRelationAggregateInput = {
 export type ExternalEntityLinkIdOrganizationIdCompoundUniqueInput = {
   id: string
   organizationId: string
+}
+
+export type ExternalEntityLinkIntegrationConnectionIdEntityTypeInternalEntityIdCompoundUniqueInput = {
+  integrationConnectionId: string
+  entityType: $Enums.ExternalEntityType
+  internalEntityId: string
 }
 
 export type ExternalEntityLinkIntegrationConnectionIdEntityTypeInternalEntityIdExternalEntityIdCompoundUniqueInput = {

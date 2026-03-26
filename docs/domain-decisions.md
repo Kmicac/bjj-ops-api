@@ -438,6 +438,7 @@ Implication:
 
 - `integrations` validates authenticity, fetches provider resources, normalizes payloads, and stores webhook traceability.
 - `billing` decides whether a Mercado Pago `payment` creates or updates a `PaymentRecord` and whether it impacts `BillingCharge`.
+- Mercado Pago checkout preference links for a `BillingCharge` are treated as single-link records per integration connection; concurrent preference creation must converge on reuse instead of storing multiple internal links for the same charge.
 - Internal confirmation is limited to Mercado Pago payments whose top-level status is `approved`, except refund/chargeback-like states that remain only observed until a dedicated reversal flow exists.
 - Mercado Pago statuses `pending`, `authorized`, `in_process`, and `in_mediation` are observed internally as pending payment attempts and must not increase `BillingCharge.amountPaid`.
 - Mercado Pago statuses `rejected` and `cancelled` are recorded as non-confirmed payment attempts and must not confirm collection.

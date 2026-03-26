@@ -722,7 +722,8 @@ model ExternalEntityLink {
   createdByMembership  OrganizationMembership?  @relation("ExternalEntityLinkCreatedByMembership", fields: [createdByMembershipId, organizationId], references: [id, organizationId], onDelete: Restrict)
 
   @@unique([id, organizationId])
-  @@unique([integrationConnectionId, entityType, internalEntityId, externalEntityId])
+  @@unique([integrationConnectionId, entityType, internalEntityId], map: "ExternalEntityLink_single_internal_entity_link_key")
+  @@unique([integrationConnectionId, entityType, internalEntityId, externalEntityId], map: "ExternalEntityLink_unique_internal_external_pair_key")
   @@index([organizationId, provider, entityType])
   @@index([integrationConnectionId, entityType, createdAt])
 }

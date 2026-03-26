@@ -684,10 +684,12 @@ export type OrganizationMembershipCreateNestedOneWithoutRecordedPaymentsInput = 
   connect?: Prisma.OrganizationMembershipWhereUniqueInput
 }
 
-export type OrganizationMembershipUpdateOneRequiredWithoutRecordedPaymentsNestedInput = {
+export type OrganizationMembershipUpdateOneWithoutRecordedPaymentsNestedInput = {
   create?: Prisma.XOR<Prisma.OrganizationMembershipCreateWithoutRecordedPaymentsInput, Prisma.OrganizationMembershipUncheckedCreateWithoutRecordedPaymentsInput>
   connectOrCreate?: Prisma.OrganizationMembershipCreateOrConnectWithoutRecordedPaymentsInput
   upsert?: Prisma.OrganizationMembershipUpsertWithoutRecordedPaymentsInput
+  disconnect?: Prisma.OrganizationMembershipWhereInput | boolean
+  delete?: Prisma.OrganizationMembershipWhereInput | boolean
   connect?: Prisma.OrganizationMembershipWhereUniqueInput
   update?: Prisma.XOR<Prisma.XOR<Prisma.OrganizationMembershipUpdateToOneWithWhereWithoutRecordedPaymentsInput, Prisma.OrganizationMembershipUpdateWithoutRecordedPaymentsInput>, Prisma.OrganizationMembershipUncheckedUpdateWithoutRecordedPaymentsInput>
 }

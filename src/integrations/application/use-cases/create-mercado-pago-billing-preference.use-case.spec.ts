@@ -1,0 +1,206 @@
+import { ConflictException, NotFoundException } from '@nestjs/common';
+import { Test, TestingModule } from '@nestjs/testing';
+import { ExternalEntityType, IntegrationProvider } from '../../../generated/prisma/enums';
+import { IntegrationProviderConfigService } from '../provider-clients/integration-provider-config.service';
+import { IntegrationsRepository } from '../../infrastructure/integrations.repository';
+import { MercadoPagoProviderClient } from '../../infrastructure/provider-clients/mercado-pago-provider.client';
+import { CreateMercadoPagoBillingPreferenceUseCase } from './create-mercado-pago-billing-preference.use-case';
+
+describe('CreateMercadoPagoBillingPreferenceUseCase', () => {
+  let useCase: CreateMercadoPagoBillingPreferenceUseCase;
+  let integrationsRepository: {
+    getSingleActiveBranchConnectionByProvider: jest.Mock;
+    findSingleExternalEntityLinkByInternalEntity: jest.Mock;
+    createExternalEntityLink: jest.Mock;
+  };
+  let integrationProviderConfigService: {
+    resolveConfigForProvider: jest.Mock;
+  };
+  let mercadoPagoProviderClient: {
+    createCheckoutProPreference: jest.Mock;
+  };
+
+  beforeEach(async () => {
+    integrationsRepository = {
+      getSingleActiveBranchConnectionByProvider: jest.fn().mockResolvedValue({
+        id: 'integration_1',
+        organizationId: 'org_1',
+        branchId: 'branch_1',
+        provider: IntegrationProvider.MERCADO_PAGO,
+        configJson: {
+          kind: 'encrypted',
+        },
+      }),
+      findSingleExternalEntityLinkByInternalEntity: jest.fn().mockResolvedValue(null),
+      createExternalEntityLink: jest.fn().mockResolvedValue({
+        id: 'link_1',
+      }),
+    };
+
+    integrationProviderConfigService = {
+      resolveConfigForProvider: jest.fn().mockReturnValue({
+        accessToken: 'APP_USR-12345678901234567890',
+        environment: 'test',
+      }),
+    };
+
+    mercadoPagoProviderClient = {
+      createCheckoutProPreference: jest.fn().mockResolvedValue({
+        preferenceId: 'pref_123',
+        initPoint: 'https://www.mercadopago.com/init/pref_123',
+        sandboxInitPoint: 'https://sandbox.mercadopago.com/init/pref_123',
+        environment: 'test',
+      }),
+    };
+
+    const module: TestingModule = await Test.createTestingModule({
+      providers: [
+        CreateMercadoPagoBillingPreferenceUseCase,
+        {
+          provide: IntegrationsRepository,
+          useValue: integrationsRepository,
+        },
+        {
+          provide: IntegrationProviderConfigService,
+          useValue: integrationProviderConfigService,
+        },
+        {
+          provide: MercadoPagoProviderClient,
+          useValue: mercadoPagoProviderClient,
+        },
+      ],
+    }).compile();
+
+    useCase = module.get<CreateMercadoPagoBillingPreferenceUseCase>(
+      CreateMercadoPagoBillingPreferenceUseCase,
+    );
+  });
+
+  it('creates a Mercado Pago preference and stores an external entity link', async () => {
+    const result = await useCase.execute({
+      organizationId: 'org_1',
+      branchId: 'branch_1',
+      billingChargeId: 'charge_1',
+      title: 'BJJ Ops billing charge',
+      amount: 100,
+      currency: 'ARS',
+      externalReference: 'billing_charge:charge_1',
+      createdByMembershipId: 'membership_1',
+    });
+
+    expect(
+      integrationsRepository.getSingleActiveBranchConnectionByProvider,
+    ).toHaveBeenCalledWith(
+      'org_1',
+      'branch_1',
+      IntegrationProvider.MERCADO_PAGO,
+    );
+    expect(
+      mercadoPagoProviderClient.createCheckoutProPreference,
+    ).toHaveBeenCalledWith(
+      {
+        accessToken: 'APP_USR-12345678901234567890',
+        environment: 'test',
+      },
+      expect.objectContaining({
+        externalReference: 'billing_charge:charge_1',
+        amount: 100,
+        currency: 'ARS',
+      }),
+    );
+    expect(integrationsRepository.createExternalEntityLink).toHaveBeenCalledWith(
+      expect.objectContaining({
+        integrationConnectionId: 'integration_1',
+        provider: IntegrationProvider.MERCADO_PAGO,
+        entityType: ExternalEntityType.BILLING_CHARGE,
+        internalEntityId: 'charge_1',
+        externalEntityId: 'pref_123',
+        externalReference: 'billing_charge:charge_1',
+      }),
+    );
+    expect(result).toEqual({
+      connectionId: 'integration_1',
+      environment: 'test',
+      preferenceId: 'pref_123',
+      externalReference: 'billing_charge:charge_1',
+      initPoint: 'https://www.mercadopago.com/init/pref_123',
+      sandboxInitPoint: 'https://sandbox.mercadopago.com/init/pref_123',
+      reused: false,
+    });
+  });
+
+  it('reuses an existing external entity link when the current balance still matches', async () => {
+    integrationsRepository.findSingleExternalEntityLinkByInternalEntity.mockResolvedValue({
+      id: 'link_1',
+      externalEntityId: 'pref_existing',
+      externalReference: 'billing_charge:charge_1',
+      metadataJson: {
+        kind: 'mercado_pago_checkout_pro_preference',
+        environment: 'test',
+        initPoint: 'https://www.mercadopago.com/init/pref_existing',
+        sandboxInitPoint: 'https://sandbox.mercadopago.com/init/pref_existing',
+        amount: '100.00',
+        currency: 'ARS',
+      },
+    });
+
+    const result = await useCase.execute({
+      organizationId: 'org_1',
+      branchId: 'branch_1',
+      billingChargeId: 'charge_1',
+      billingChargeExternalReference: 'pref_existing',
+      title: 'BJJ Ops billing charge',
+      amount: 100,
+      currency: 'ARS',
+      externalReference: 'billing_charge:charge_1',
+      createdByMembershipId: 'membership_1',
+    });
+
+    expect(mercadoPagoProviderClient.createCheckoutProPreference).not.toHaveBeenCalled();
+    expect(integrationsRepository.createExternalEntityLink).not.toHaveBeenCalled();
+    expect(result).toEqual({
+      connectionId: 'integration_1',
+      environment: 'test',
+      preferenceId: 'pref_existing',
+      externalReference: 'billing_charge:charge_1',
+      initPoint: 'https://www.mercadopago.com/init/pref_existing',
+      sandboxInitPoint: 'https://sandbox.mercadopago.com/init/pref_existing',
+      reused: true,
+    });
+  });
+
+  it('fails when no active branch integration is configured', async () => {
+    integrationsRepository.getSingleActiveBranchConnectionByProvider.mockRejectedValue(
+      new NotFoundException('Active branch integration connection not found'),
+    );
+
+    await expect(
+      useCase.execute({
+        organizationId: 'org_1',
+        branchId: 'branch_1',
+        billingChargeId: 'charge_1',
+        title: 'BJJ Ops billing charge',
+        amount: 100,
+        currency: 'ARS',
+        externalReference: 'billing_charge:charge_1',
+        createdByMembershipId: 'membership_1',
+      }),
+    ).rejects.toThrow('Active branch integration connection not found');
+  });
+
+  it('fails when a charge already has a Mercado Pago reference but no stored link', async () => {
+    await expect(
+      useCase.execute({
+        organizationId: 'org_1',
+        branchId: 'branch_1',
+        billingChargeId: 'charge_1',
+        billingChargeExternalReference: 'pref_missing_link',
+        title: 'BJJ Ops billing charge',
+        amount: 100,
+        currency: 'ARS',
+        externalReference: 'billing_charge:charge_1',
+        createdByMembershipId: 'membership_1',
+      }),
+    ).rejects.toThrow(ConflictException);
+  });
+});

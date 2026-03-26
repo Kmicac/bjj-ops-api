@@ -263,6 +263,7 @@ export type IntegrationConnectionWhereInput = {
   createdByMembership?: Prisma.XOR<Prisma.OrganizationMembershipScalarRelationFilter, Prisma.OrganizationMembershipWhereInput>
   syncJobs?: Prisma.IntegrationSyncJobListRelationFilter
   externalEntityLinks?: Prisma.ExternalEntityLinkListRelationFilter
+  webhookEvents?: Prisma.IntegrationWebhookEventListRelationFilter
 }
 
 export type IntegrationConnectionOrderByWithRelationInput = {
@@ -286,6 +287,7 @@ export type IntegrationConnectionOrderByWithRelationInput = {
   createdByMembership?: Prisma.OrganizationMembershipOrderByWithRelationInput
   syncJobs?: Prisma.IntegrationSyncJobOrderByRelationAggregateInput
   externalEntityLinks?: Prisma.ExternalEntityLinkOrderByRelationAggregateInput
+  webhookEvents?: Prisma.IntegrationWebhookEventOrderByRelationAggregateInput
 }
 
 export type IntegrationConnectionWhereUniqueInput = Prisma.AtLeast<{
@@ -313,6 +315,7 @@ export type IntegrationConnectionWhereUniqueInput = Prisma.AtLeast<{
   createdByMembership?: Prisma.XOR<Prisma.OrganizationMembershipScalarRelationFilter, Prisma.OrganizationMembershipWhereInput>
   syncJobs?: Prisma.IntegrationSyncJobListRelationFilter
   externalEntityLinks?: Prisma.ExternalEntityLinkListRelationFilter
+  webhookEvents?: Prisma.IntegrationWebhookEventListRelationFilter
 }, "id" | "id_organizationId">
 
 export type IntegrationConnectionOrderByWithAggregationInput = {
@@ -375,6 +378,7 @@ export type IntegrationConnectionCreateInput = {
   createdByMembership: Prisma.OrganizationMembershipCreateNestedOneWithoutCreatedIntegrationConnectionsInput
   syncJobs?: Prisma.IntegrationSyncJobCreateNestedManyWithoutIntegrationConnectionInput
   externalEntityLinks?: Prisma.ExternalEntityLinkCreateNestedManyWithoutIntegrationConnectionInput
+  webhookEvents?: Prisma.IntegrationWebhookEventCreateNestedManyWithoutIntegrationConnectionInput
 }
 
 export type IntegrationConnectionUncheckedCreateInput = {
@@ -395,6 +399,7 @@ export type IntegrationConnectionUncheckedCreateInput = {
   deletedAt?: Date | string | null
   syncJobs?: Prisma.IntegrationSyncJobUncheckedCreateNestedManyWithoutIntegrationConnectionInput
   externalEntityLinks?: Prisma.ExternalEntityLinkUncheckedCreateNestedManyWithoutIntegrationConnectionInput
+  webhookEvents?: Prisma.IntegrationWebhookEventUncheckedCreateNestedManyWithoutIntegrationConnectionInput
 }
 
 export type IntegrationConnectionUpdateInput = {
@@ -415,6 +420,7 @@ export type IntegrationConnectionUpdateInput = {
   createdByMembership?: Prisma.OrganizationMembershipUpdateOneRequiredWithoutCreatedIntegrationConnectionsNestedInput
   syncJobs?: Prisma.IntegrationSyncJobUpdateManyWithoutIntegrationConnectionNestedInput
   externalEntityLinks?: Prisma.ExternalEntityLinkUpdateManyWithoutIntegrationConnectionNestedInput
+  webhookEvents?: Prisma.IntegrationWebhookEventUpdateManyWithoutIntegrationConnectionNestedInput
 }
 
 export type IntegrationConnectionUncheckedUpdateInput = {
@@ -435,6 +441,7 @@ export type IntegrationConnectionUncheckedUpdateInput = {
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   syncJobs?: Prisma.IntegrationSyncJobUncheckedUpdateManyWithoutIntegrationConnectionNestedInput
   externalEntityLinks?: Prisma.ExternalEntityLinkUncheckedUpdateManyWithoutIntegrationConnectionNestedInput
+  webhookEvents?: Prisma.IntegrationWebhookEventUncheckedUpdateManyWithoutIntegrationConnectionNestedInput
 }
 
 export type IntegrationConnectionCreateManyInput = {
@@ -558,6 +565,11 @@ export type IntegrationConnectionMinOrderByAggregateInput = {
 export type IntegrationConnectionScalarRelationFilter = {
   is?: Prisma.IntegrationConnectionWhereInput
   isNot?: Prisma.IntegrationConnectionWhereInput
+}
+
+export type IntegrationConnectionNullableScalarRelationFilter = {
+  is?: Prisma.IntegrationConnectionWhereInput | null
+  isNot?: Prisma.IntegrationConnectionWhereInput | null
 }
 
 export type IntegrationConnectionCreateNestedManyWithoutOrganizationInput = {
@@ -716,6 +728,22 @@ export type IntegrationConnectionUpdateOneRequiredWithoutSyncJobsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.IntegrationConnectionUpdateToOneWithWhereWithoutSyncJobsInput, Prisma.IntegrationConnectionUpdateWithoutSyncJobsInput>, Prisma.IntegrationConnectionUncheckedUpdateWithoutSyncJobsInput>
 }
 
+export type IntegrationConnectionCreateNestedOneWithoutWebhookEventsInput = {
+  create?: Prisma.XOR<Prisma.IntegrationConnectionCreateWithoutWebhookEventsInput, Prisma.IntegrationConnectionUncheckedCreateWithoutWebhookEventsInput>
+  connectOrCreate?: Prisma.IntegrationConnectionCreateOrConnectWithoutWebhookEventsInput
+  connect?: Prisma.IntegrationConnectionWhereUniqueInput
+}
+
+export type IntegrationConnectionUpdateOneWithoutWebhookEventsNestedInput = {
+  create?: Prisma.XOR<Prisma.IntegrationConnectionCreateWithoutWebhookEventsInput, Prisma.IntegrationConnectionUncheckedCreateWithoutWebhookEventsInput>
+  connectOrCreate?: Prisma.IntegrationConnectionCreateOrConnectWithoutWebhookEventsInput
+  upsert?: Prisma.IntegrationConnectionUpsertWithoutWebhookEventsInput
+  disconnect?: Prisma.IntegrationConnectionWhereInput | boolean
+  delete?: Prisma.IntegrationConnectionWhereInput | boolean
+  connect?: Prisma.IntegrationConnectionWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.IntegrationConnectionUpdateToOneWithWhereWithoutWebhookEventsInput, Prisma.IntegrationConnectionUpdateWithoutWebhookEventsInput>, Prisma.IntegrationConnectionUncheckedUpdateWithoutWebhookEventsInput>
+}
+
 export type IntegrationConnectionCreateNestedOneWithoutExternalEntityLinksInput = {
   create?: Prisma.XOR<Prisma.IntegrationConnectionCreateWithoutExternalEntityLinksInput, Prisma.IntegrationConnectionUncheckedCreateWithoutExternalEntityLinksInput>
   connectOrCreate?: Prisma.IntegrationConnectionCreateOrConnectWithoutExternalEntityLinksInput
@@ -747,6 +775,7 @@ export type IntegrationConnectionCreateWithoutOrganizationInput = {
   createdByMembership: Prisma.OrganizationMembershipCreateNestedOneWithoutCreatedIntegrationConnectionsInput
   syncJobs?: Prisma.IntegrationSyncJobCreateNestedManyWithoutIntegrationConnectionInput
   externalEntityLinks?: Prisma.ExternalEntityLinkCreateNestedManyWithoutIntegrationConnectionInput
+  webhookEvents?: Prisma.IntegrationWebhookEventCreateNestedManyWithoutIntegrationConnectionInput
 }
 
 export type IntegrationConnectionUncheckedCreateWithoutOrganizationInput = {
@@ -766,6 +795,7 @@ export type IntegrationConnectionUncheckedCreateWithoutOrganizationInput = {
   deletedAt?: Date | string | null
   syncJobs?: Prisma.IntegrationSyncJobUncheckedCreateNestedManyWithoutIntegrationConnectionInput
   externalEntityLinks?: Prisma.ExternalEntityLinkUncheckedCreateNestedManyWithoutIntegrationConnectionInput
+  webhookEvents?: Prisma.IntegrationWebhookEventUncheckedCreateNestedManyWithoutIntegrationConnectionInput
 }
 
 export type IntegrationConnectionCreateOrConnectWithoutOrganizationInput = {
@@ -832,6 +862,7 @@ export type IntegrationConnectionCreateWithoutBranchInput = {
   createdByMembership: Prisma.OrganizationMembershipCreateNestedOneWithoutCreatedIntegrationConnectionsInput
   syncJobs?: Prisma.IntegrationSyncJobCreateNestedManyWithoutIntegrationConnectionInput
   externalEntityLinks?: Prisma.ExternalEntityLinkCreateNestedManyWithoutIntegrationConnectionInput
+  webhookEvents?: Prisma.IntegrationWebhookEventCreateNestedManyWithoutIntegrationConnectionInput
 }
 
 export type IntegrationConnectionUncheckedCreateWithoutBranchInput = {
@@ -850,6 +881,7 @@ export type IntegrationConnectionUncheckedCreateWithoutBranchInput = {
   deletedAt?: Date | string | null
   syncJobs?: Prisma.IntegrationSyncJobUncheckedCreateNestedManyWithoutIntegrationConnectionInput
   externalEntityLinks?: Prisma.ExternalEntityLinkUncheckedCreateNestedManyWithoutIntegrationConnectionInput
+  webhookEvents?: Prisma.IntegrationWebhookEventUncheckedCreateNestedManyWithoutIntegrationConnectionInput
 }
 
 export type IntegrationConnectionCreateOrConnectWithoutBranchInput = {
@@ -895,6 +927,7 @@ export type IntegrationConnectionCreateWithoutCreatedByMembershipInput = {
   branch?: Prisma.BranchCreateNestedOneWithoutIntegrationConnectionsInput
   syncJobs?: Prisma.IntegrationSyncJobCreateNestedManyWithoutIntegrationConnectionInput
   externalEntityLinks?: Prisma.ExternalEntityLinkCreateNestedManyWithoutIntegrationConnectionInput
+  webhookEvents?: Prisma.IntegrationWebhookEventCreateNestedManyWithoutIntegrationConnectionInput
 }
 
 export type IntegrationConnectionUncheckedCreateWithoutCreatedByMembershipInput = {
@@ -913,6 +946,7 @@ export type IntegrationConnectionUncheckedCreateWithoutCreatedByMembershipInput 
   deletedAt?: Date | string | null
   syncJobs?: Prisma.IntegrationSyncJobUncheckedCreateNestedManyWithoutIntegrationConnectionInput
   externalEntityLinks?: Prisma.ExternalEntityLinkUncheckedCreateNestedManyWithoutIntegrationConnectionInput
+  webhookEvents?: Prisma.IntegrationWebhookEventUncheckedCreateNestedManyWithoutIntegrationConnectionInput
 }
 
 export type IntegrationConnectionCreateOrConnectWithoutCreatedByMembershipInput = {
@@ -958,6 +992,7 @@ export type IntegrationConnectionCreateWithoutSyncJobsInput = {
   branch?: Prisma.BranchCreateNestedOneWithoutIntegrationConnectionsInput
   createdByMembership: Prisma.OrganizationMembershipCreateNestedOneWithoutCreatedIntegrationConnectionsInput
   externalEntityLinks?: Prisma.ExternalEntityLinkCreateNestedManyWithoutIntegrationConnectionInput
+  webhookEvents?: Prisma.IntegrationWebhookEventCreateNestedManyWithoutIntegrationConnectionInput
 }
 
 export type IntegrationConnectionUncheckedCreateWithoutSyncJobsInput = {
@@ -977,6 +1012,7 @@ export type IntegrationConnectionUncheckedCreateWithoutSyncJobsInput = {
   updatedAt?: Date | string
   deletedAt?: Date | string | null
   externalEntityLinks?: Prisma.ExternalEntityLinkUncheckedCreateNestedManyWithoutIntegrationConnectionInput
+  webhookEvents?: Prisma.IntegrationWebhookEventUncheckedCreateNestedManyWithoutIntegrationConnectionInput
 }
 
 export type IntegrationConnectionCreateOrConnectWithoutSyncJobsInput = {
@@ -1012,6 +1048,7 @@ export type IntegrationConnectionUpdateWithoutSyncJobsInput = {
   branch?: Prisma.BranchUpdateOneWithoutIntegrationConnectionsNestedInput
   createdByMembership?: Prisma.OrganizationMembershipUpdateOneRequiredWithoutCreatedIntegrationConnectionsNestedInput
   externalEntityLinks?: Prisma.ExternalEntityLinkUpdateManyWithoutIntegrationConnectionNestedInput
+  webhookEvents?: Prisma.IntegrationWebhookEventUpdateManyWithoutIntegrationConnectionNestedInput
 }
 
 export type IntegrationConnectionUncheckedUpdateWithoutSyncJobsInput = {
@@ -1030,6 +1067,103 @@ export type IntegrationConnectionUncheckedUpdateWithoutSyncJobsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  externalEntityLinks?: Prisma.ExternalEntityLinkUncheckedUpdateManyWithoutIntegrationConnectionNestedInput
+  webhookEvents?: Prisma.IntegrationWebhookEventUncheckedUpdateManyWithoutIntegrationConnectionNestedInput
+}
+
+export type IntegrationConnectionCreateWithoutWebhookEventsInput = {
+  id?: string
+  provider: $Enums.IntegrationProvider
+  status?: $Enums.IntegrationStatus
+  scopeType: $Enums.IntegrationScopeType
+  displayName: string
+  configJson?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  lastSyncAt?: Date | string | null
+  lastSyncStatus?: $Enums.IntegrationSyncStatus | null
+  lastSyncError?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
+  organization: Prisma.OrganizationCreateNestedOneWithoutIntegrationConnectionsInput
+  branch?: Prisma.BranchCreateNestedOneWithoutIntegrationConnectionsInput
+  createdByMembership: Prisma.OrganizationMembershipCreateNestedOneWithoutCreatedIntegrationConnectionsInput
+  syncJobs?: Prisma.IntegrationSyncJobCreateNestedManyWithoutIntegrationConnectionInput
+  externalEntityLinks?: Prisma.ExternalEntityLinkCreateNestedManyWithoutIntegrationConnectionInput
+}
+
+export type IntegrationConnectionUncheckedCreateWithoutWebhookEventsInput = {
+  id?: string
+  organizationId: string
+  branchId?: string | null
+  provider: $Enums.IntegrationProvider
+  status?: $Enums.IntegrationStatus
+  scopeType: $Enums.IntegrationScopeType
+  displayName: string
+  configJson?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  lastSyncAt?: Date | string | null
+  lastSyncStatus?: $Enums.IntegrationSyncStatus | null
+  lastSyncError?: string | null
+  createdByMembershipId: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
+  syncJobs?: Prisma.IntegrationSyncJobUncheckedCreateNestedManyWithoutIntegrationConnectionInput
+  externalEntityLinks?: Prisma.ExternalEntityLinkUncheckedCreateNestedManyWithoutIntegrationConnectionInput
+}
+
+export type IntegrationConnectionCreateOrConnectWithoutWebhookEventsInput = {
+  where: Prisma.IntegrationConnectionWhereUniqueInput
+  create: Prisma.XOR<Prisma.IntegrationConnectionCreateWithoutWebhookEventsInput, Prisma.IntegrationConnectionUncheckedCreateWithoutWebhookEventsInput>
+}
+
+export type IntegrationConnectionUpsertWithoutWebhookEventsInput = {
+  update: Prisma.XOR<Prisma.IntegrationConnectionUpdateWithoutWebhookEventsInput, Prisma.IntegrationConnectionUncheckedUpdateWithoutWebhookEventsInput>
+  create: Prisma.XOR<Prisma.IntegrationConnectionCreateWithoutWebhookEventsInput, Prisma.IntegrationConnectionUncheckedCreateWithoutWebhookEventsInput>
+  where?: Prisma.IntegrationConnectionWhereInput
+}
+
+export type IntegrationConnectionUpdateToOneWithWhereWithoutWebhookEventsInput = {
+  where?: Prisma.IntegrationConnectionWhereInput
+  data: Prisma.XOR<Prisma.IntegrationConnectionUpdateWithoutWebhookEventsInput, Prisma.IntegrationConnectionUncheckedUpdateWithoutWebhookEventsInput>
+}
+
+export type IntegrationConnectionUpdateWithoutWebhookEventsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  provider?: Prisma.EnumIntegrationProviderFieldUpdateOperationsInput | $Enums.IntegrationProvider
+  status?: Prisma.EnumIntegrationStatusFieldUpdateOperationsInput | $Enums.IntegrationStatus
+  scopeType?: Prisma.EnumIntegrationScopeTypeFieldUpdateOperationsInput | $Enums.IntegrationScopeType
+  displayName?: Prisma.StringFieldUpdateOperationsInput | string
+  configJson?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  lastSyncAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastSyncStatus?: Prisma.NullableEnumIntegrationSyncStatusFieldUpdateOperationsInput | $Enums.IntegrationSyncStatus | null
+  lastSyncError?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  organization?: Prisma.OrganizationUpdateOneRequiredWithoutIntegrationConnectionsNestedInput
+  branch?: Prisma.BranchUpdateOneWithoutIntegrationConnectionsNestedInput
+  createdByMembership?: Prisma.OrganizationMembershipUpdateOneRequiredWithoutCreatedIntegrationConnectionsNestedInput
+  syncJobs?: Prisma.IntegrationSyncJobUpdateManyWithoutIntegrationConnectionNestedInput
+  externalEntityLinks?: Prisma.ExternalEntityLinkUpdateManyWithoutIntegrationConnectionNestedInput
+}
+
+export type IntegrationConnectionUncheckedUpdateWithoutWebhookEventsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  organizationId?: Prisma.StringFieldUpdateOperationsInput | string
+  branchId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  provider?: Prisma.EnumIntegrationProviderFieldUpdateOperationsInput | $Enums.IntegrationProvider
+  status?: Prisma.EnumIntegrationStatusFieldUpdateOperationsInput | $Enums.IntegrationStatus
+  scopeType?: Prisma.EnumIntegrationScopeTypeFieldUpdateOperationsInput | $Enums.IntegrationScopeType
+  displayName?: Prisma.StringFieldUpdateOperationsInput | string
+  configJson?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  lastSyncAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastSyncStatus?: Prisma.NullableEnumIntegrationSyncStatusFieldUpdateOperationsInput | $Enums.IntegrationSyncStatus | null
+  lastSyncError?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdByMembershipId?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  syncJobs?: Prisma.IntegrationSyncJobUncheckedUpdateManyWithoutIntegrationConnectionNestedInput
   externalEntityLinks?: Prisma.ExternalEntityLinkUncheckedUpdateManyWithoutIntegrationConnectionNestedInput
 }
 
@@ -1050,6 +1184,7 @@ export type IntegrationConnectionCreateWithoutExternalEntityLinksInput = {
   branch?: Prisma.BranchCreateNestedOneWithoutIntegrationConnectionsInput
   createdByMembership: Prisma.OrganizationMembershipCreateNestedOneWithoutCreatedIntegrationConnectionsInput
   syncJobs?: Prisma.IntegrationSyncJobCreateNestedManyWithoutIntegrationConnectionInput
+  webhookEvents?: Prisma.IntegrationWebhookEventCreateNestedManyWithoutIntegrationConnectionInput
 }
 
 export type IntegrationConnectionUncheckedCreateWithoutExternalEntityLinksInput = {
@@ -1069,6 +1204,7 @@ export type IntegrationConnectionUncheckedCreateWithoutExternalEntityLinksInput 
   updatedAt?: Date | string
   deletedAt?: Date | string | null
   syncJobs?: Prisma.IntegrationSyncJobUncheckedCreateNestedManyWithoutIntegrationConnectionInput
+  webhookEvents?: Prisma.IntegrationWebhookEventUncheckedCreateNestedManyWithoutIntegrationConnectionInput
 }
 
 export type IntegrationConnectionCreateOrConnectWithoutExternalEntityLinksInput = {
@@ -1104,6 +1240,7 @@ export type IntegrationConnectionUpdateWithoutExternalEntityLinksInput = {
   branch?: Prisma.BranchUpdateOneWithoutIntegrationConnectionsNestedInput
   createdByMembership?: Prisma.OrganizationMembershipUpdateOneRequiredWithoutCreatedIntegrationConnectionsNestedInput
   syncJobs?: Prisma.IntegrationSyncJobUpdateManyWithoutIntegrationConnectionNestedInput
+  webhookEvents?: Prisma.IntegrationWebhookEventUpdateManyWithoutIntegrationConnectionNestedInput
 }
 
 export type IntegrationConnectionUncheckedUpdateWithoutExternalEntityLinksInput = {
@@ -1123,6 +1260,7 @@ export type IntegrationConnectionUncheckedUpdateWithoutExternalEntityLinksInput 
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   syncJobs?: Prisma.IntegrationSyncJobUncheckedUpdateManyWithoutIntegrationConnectionNestedInput
+  webhookEvents?: Prisma.IntegrationWebhookEventUncheckedUpdateManyWithoutIntegrationConnectionNestedInput
 }
 
 export type IntegrationConnectionCreateManyOrganizationInput = {
@@ -1159,6 +1297,7 @@ export type IntegrationConnectionUpdateWithoutOrganizationInput = {
   createdByMembership?: Prisma.OrganizationMembershipUpdateOneRequiredWithoutCreatedIntegrationConnectionsNestedInput
   syncJobs?: Prisma.IntegrationSyncJobUpdateManyWithoutIntegrationConnectionNestedInput
   externalEntityLinks?: Prisma.ExternalEntityLinkUpdateManyWithoutIntegrationConnectionNestedInput
+  webhookEvents?: Prisma.IntegrationWebhookEventUpdateManyWithoutIntegrationConnectionNestedInput
 }
 
 export type IntegrationConnectionUncheckedUpdateWithoutOrganizationInput = {
@@ -1178,6 +1317,7 @@ export type IntegrationConnectionUncheckedUpdateWithoutOrganizationInput = {
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   syncJobs?: Prisma.IntegrationSyncJobUncheckedUpdateManyWithoutIntegrationConnectionNestedInput
   externalEntityLinks?: Prisma.ExternalEntityLinkUncheckedUpdateManyWithoutIntegrationConnectionNestedInput
+  webhookEvents?: Prisma.IntegrationWebhookEventUncheckedUpdateManyWithoutIntegrationConnectionNestedInput
 }
 
 export type IntegrationConnectionUncheckedUpdateManyWithoutOrganizationInput = {
@@ -1230,6 +1370,7 @@ export type IntegrationConnectionUpdateWithoutBranchInput = {
   createdByMembership?: Prisma.OrganizationMembershipUpdateOneRequiredWithoutCreatedIntegrationConnectionsNestedInput
   syncJobs?: Prisma.IntegrationSyncJobUpdateManyWithoutIntegrationConnectionNestedInput
   externalEntityLinks?: Prisma.ExternalEntityLinkUpdateManyWithoutIntegrationConnectionNestedInput
+  webhookEvents?: Prisma.IntegrationWebhookEventUpdateManyWithoutIntegrationConnectionNestedInput
 }
 
 export type IntegrationConnectionUncheckedUpdateWithoutBranchInput = {
@@ -1248,6 +1389,7 @@ export type IntegrationConnectionUncheckedUpdateWithoutBranchInput = {
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   syncJobs?: Prisma.IntegrationSyncJobUncheckedUpdateManyWithoutIntegrationConnectionNestedInput
   externalEntityLinks?: Prisma.ExternalEntityLinkUncheckedUpdateManyWithoutIntegrationConnectionNestedInput
+  webhookEvents?: Prisma.IntegrationWebhookEventUncheckedUpdateManyWithoutIntegrationConnectionNestedInput
 }
 
 export type IntegrationConnectionUncheckedUpdateManyWithoutBranchInput = {
@@ -1299,6 +1441,7 @@ export type IntegrationConnectionUpdateWithoutCreatedByMembershipInput = {
   branch?: Prisma.BranchUpdateOneWithoutIntegrationConnectionsNestedInput
   syncJobs?: Prisma.IntegrationSyncJobUpdateManyWithoutIntegrationConnectionNestedInput
   externalEntityLinks?: Prisma.ExternalEntityLinkUpdateManyWithoutIntegrationConnectionNestedInput
+  webhookEvents?: Prisma.IntegrationWebhookEventUpdateManyWithoutIntegrationConnectionNestedInput
 }
 
 export type IntegrationConnectionUncheckedUpdateWithoutCreatedByMembershipInput = {
@@ -1317,6 +1460,7 @@ export type IntegrationConnectionUncheckedUpdateWithoutCreatedByMembershipInput 
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   syncJobs?: Prisma.IntegrationSyncJobUncheckedUpdateManyWithoutIntegrationConnectionNestedInput
   externalEntityLinks?: Prisma.ExternalEntityLinkUncheckedUpdateManyWithoutIntegrationConnectionNestedInput
+  webhookEvents?: Prisma.IntegrationWebhookEventUncheckedUpdateManyWithoutIntegrationConnectionNestedInput
 }
 
 export type IntegrationConnectionUncheckedUpdateManyWithoutCreatedByMembershipInput = {
@@ -1343,11 +1487,13 @@ export type IntegrationConnectionUncheckedUpdateManyWithoutCreatedByMembershipIn
 export type IntegrationConnectionCountOutputType = {
   syncJobs: number
   externalEntityLinks: number
+  webhookEvents: number
 }
 
 export type IntegrationConnectionCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   syncJobs?: boolean | IntegrationConnectionCountOutputTypeCountSyncJobsArgs
   externalEntityLinks?: boolean | IntegrationConnectionCountOutputTypeCountExternalEntityLinksArgs
+  webhookEvents?: boolean | IntegrationConnectionCountOutputTypeCountWebhookEventsArgs
 }
 
 /**
@@ -1374,6 +1520,13 @@ export type IntegrationConnectionCountOutputTypeCountExternalEntityLinksArgs<Ext
   where?: Prisma.ExternalEntityLinkWhereInput
 }
 
+/**
+ * IntegrationConnectionCountOutputType without action
+ */
+export type IntegrationConnectionCountOutputTypeCountWebhookEventsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.IntegrationWebhookEventWhereInput
+}
+
 
 export type IntegrationConnectionSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -1396,6 +1549,7 @@ export type IntegrationConnectionSelect<ExtArgs extends runtime.Types.Extensions
   createdByMembership?: boolean | Prisma.OrganizationMembershipDefaultArgs<ExtArgs>
   syncJobs?: boolean | Prisma.IntegrationConnection$syncJobsArgs<ExtArgs>
   externalEntityLinks?: boolean | Prisma.IntegrationConnection$externalEntityLinksArgs<ExtArgs>
+  webhookEvents?: boolean | Prisma.IntegrationConnection$webhookEventsArgs<ExtArgs>
   _count?: boolean | Prisma.IntegrationConnectionCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["integrationConnection"]>
 
@@ -1466,6 +1620,7 @@ export type IntegrationConnectionInclude<ExtArgs extends runtime.Types.Extension
   createdByMembership?: boolean | Prisma.OrganizationMembershipDefaultArgs<ExtArgs>
   syncJobs?: boolean | Prisma.IntegrationConnection$syncJobsArgs<ExtArgs>
   externalEntityLinks?: boolean | Prisma.IntegrationConnection$externalEntityLinksArgs<ExtArgs>
+  webhookEvents?: boolean | Prisma.IntegrationConnection$webhookEventsArgs<ExtArgs>
   _count?: boolean | Prisma.IntegrationConnectionCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type IntegrationConnectionIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1487,6 +1642,7 @@ export type $IntegrationConnectionPayload<ExtArgs extends runtime.Types.Extensio
     createdByMembership: Prisma.$OrganizationMembershipPayload<ExtArgs>
     syncJobs: Prisma.$IntegrationSyncJobPayload<ExtArgs>[]
     externalEntityLinks: Prisma.$ExternalEntityLinkPayload<ExtArgs>[]
+    webhookEvents: Prisma.$IntegrationWebhookEventPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1903,6 +2059,7 @@ export interface Prisma__IntegrationConnectionClient<T, Null = never, ExtArgs ex
   createdByMembership<T extends Prisma.OrganizationMembershipDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.OrganizationMembershipDefaultArgs<ExtArgs>>): Prisma.Prisma__OrganizationMembershipClient<runtime.Types.Result.GetResult<Prisma.$OrganizationMembershipPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   syncJobs<T extends Prisma.IntegrationConnection$syncJobsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.IntegrationConnection$syncJobsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$IntegrationSyncJobPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   externalEntityLinks<T extends Prisma.IntegrationConnection$externalEntityLinksArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.IntegrationConnection$externalEntityLinksArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ExternalEntityLinkPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  webhookEvents<T extends Prisma.IntegrationConnection$webhookEventsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.IntegrationConnection$webhookEventsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$IntegrationWebhookEventPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2412,6 +2569,30 @@ export type IntegrationConnection$externalEntityLinksArgs<ExtArgs extends runtim
   take?: number
   skip?: number
   distinct?: Prisma.ExternalEntityLinkScalarFieldEnum | Prisma.ExternalEntityLinkScalarFieldEnum[]
+}
+
+/**
+ * IntegrationConnection.webhookEvents
+ */
+export type IntegrationConnection$webhookEventsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the IntegrationWebhookEvent
+   */
+  select?: Prisma.IntegrationWebhookEventSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the IntegrationWebhookEvent
+   */
+  omit?: Prisma.IntegrationWebhookEventOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.IntegrationWebhookEventInclude<ExtArgs> | null
+  where?: Prisma.IntegrationWebhookEventWhereInput
+  orderBy?: Prisma.IntegrationWebhookEventOrderByWithRelationInput | Prisma.IntegrationWebhookEventOrderByWithRelationInput[]
+  cursor?: Prisma.IntegrationWebhookEventWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.IntegrationWebhookEventScalarFieldEnum | Prisma.IntegrationWebhookEventScalarFieldEnum[]
 }
 
 /**

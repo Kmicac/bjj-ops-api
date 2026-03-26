@@ -65,6 +65,7 @@ export const ModelName = {
   PaymentRecord: 'PaymentRecord',
   IntegrationConnection: 'IntegrationConnection',
   IntegrationSyncJob: 'IntegrationSyncJob',
+  IntegrationWebhookEvent: 'IntegrationWebhookEvent',
   ExternalEntityLink: 'ExternalEntityLink',
   BillingPolicy: 'BillingPolicy',
   ClassSchedule: 'ClassSchedule',
@@ -288,6 +289,10 @@ export const BillingChargeScalarFieldEnum = {
   description: 'description',
   externalProvider: 'externalProvider',
   externalReference: 'externalReference',
+  lastExternalPaymentReference: 'lastExternalPaymentReference',
+  lastExternalPaymentStatus: 'lastExternalPaymentStatus',
+  lastExternalPaymentStatusDetail: 'lastExternalPaymentStatusDetail',
+  lastExternalPaymentObservedAt: 'lastExternalPaymentObservedAt',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
   deletedAt: 'deletedAt'
@@ -361,6 +366,36 @@ export const IntegrationSyncJobScalarFieldEnum = {
 } as const
 
 export type IntegrationSyncJobScalarFieldEnum = (typeof IntegrationSyncJobScalarFieldEnum)[keyof typeof IntegrationSyncJobScalarFieldEnum]
+
+
+export const IntegrationWebhookEventScalarFieldEnum = {
+  id: 'id',
+  provider: 'provider',
+  organizationId: 'organizationId',
+  branchId: 'branchId',
+  integrationConnectionId: 'integrationConnectionId',
+  deliveryId: 'deliveryId',
+  notificationType: 'notificationType',
+  action: 'action',
+  externalEventId: 'externalEventId',
+  externalResourceId: 'externalResourceId',
+  validationStatus: 'validationStatus',
+  validationError: 'validationError',
+  processingStatus: 'processingStatus',
+  processingError: 'processingError',
+  payloadJson: 'payloadJson',
+  resourceJson: 'resourceJson',
+  queryJson: 'queryJson',
+  headersJson: 'headersJson',
+  receivedAt: 'receivedAt',
+  processedAt: 'processedAt',
+  reprocessCount: 'reprocessCount',
+  lastReprocessedAt: 'lastReprocessedAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type IntegrationWebhookEventScalarFieldEnum = (typeof IntegrationWebhookEventScalarFieldEnum)[keyof typeof IntegrationWebhookEventScalarFieldEnum]
 
 
 export const ExternalEntityLinkScalarFieldEnum = {
@@ -548,6 +583,13 @@ export const NullableJsonNullValueInput = {
 } as const
 
 export type NullableJsonNullValueInput = (typeof NullableJsonNullValueInput)[keyof typeof NullableJsonNullValueInput]
+
+
+export const JsonNullValueInput = {
+  JsonNull: JsonNull
+} as const
+
+export type JsonNullValueInput = (typeof JsonNullValueInput)[keyof typeof JsonNullValueInput]
 
 
 export const QueryMode = {

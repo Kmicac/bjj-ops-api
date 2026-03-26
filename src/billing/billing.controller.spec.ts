@@ -2,6 +2,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { BillingController } from './billing.controller';
 import { CreateBillingChargeUseCase } from './application/use-cases/create-billing-charge.use-case';
 import { CreateBillingPlanUseCase } from './application/use-cases/create-billing-plan.use-case';
+import { CreateMercadoPagoBillingChargePreferenceUseCase } from './application/use-cases/create-mercado-pago-billing-charge-preference.use-case';
 import { CreateStudentMembershipUseCase } from './application/use-cases/create-student-membership.use-case';
 import { GetBranchBillingPolicyUseCase } from './application/use-cases/get-branch-billing-policy.use-case';
 import { GetBranchBillingSummaryUseCase } from './application/use-cases/get-branch-billing-summary.use-case';
@@ -30,6 +31,7 @@ describe('BillingController', () => {
         { provide: CreateBillingPlanUseCase, useValue: {} },
         { provide: ListBillingPlansUseCase, useValue: {} },
         { provide: UpdateBillingPlanUseCase, useValue: {} },
+        { provide: CreateMercadoPagoBillingChargePreferenceUseCase, useValue: {} },
         { provide: CreateStudentMembershipUseCase, useValue: {} },
         { provide: GetStudentMembershipUseCase, useValue: {} },
         { provide: UpdateStudentMembershipUseCase, useValue: {} },

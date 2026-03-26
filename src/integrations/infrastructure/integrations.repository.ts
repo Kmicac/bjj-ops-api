@@ -1,6 +1,11 @@
 import { ConflictException, Injectable, NotFoundException } from '@nestjs/common';
 import { Prisma } from '../../generated/prisma/client';
-import { IntegrationScopeType } from '../../generated/prisma/enums';
+import {
+  IntegrationScopeType,
+  IntegrationStatus,
+  IntegrationWebhookProcessingStatus,
+  IntegrationWebhookValidationStatus,
+} from '../../generated/prisma/enums';
 import { PrismaService } from '../../prisma/prisma.service';
 
 const branchAccessSelect = {
@@ -66,6 +71,33 @@ const externalEntityLinkSelect = {
   updatedAt: true,
 } satisfies Prisma.ExternalEntityLinkSelect;
 
+const integrationWebhookEventSelect = {
+  id: true,
+  provider: true,
+  organizationId: true,
+  branchId: true,
+  integrationConnectionId: true,
+  deliveryId: true,
+  notificationType: true,
+  action: true,
+  externalEventId: true,
+  externalResourceId: true,
+  validationStatus: true,
+  validationError: true,
+  processingStatus: true,
+  processingError: true,
+  payloadJson: true,
+  resourceJson: true,
+  queryJson: true,
+  headersJson: true,
+  receivedAt: true,
+  processedAt: true,
+  reprocessCount: true,
+  lastReprocessedAt: true,
+  createdAt: true,
+  updatedAt: true,
+} satisfies Prisma.IntegrationWebhookEventSelect;
+
 type IntegrationConnectionRecord = Prisma.IntegrationConnectionGetPayload<{
   select: typeof integrationConnectionSelect;
 }>;
@@ -82,12 +114,38 @@ type ExternalEntityLinkRecord = Prisma.ExternalEntityLinkGetPayload<{
   select: typeof externalEntityLinkSelect;
 }>;
 
+type IntegrationWebhookEventRecord = Prisma.IntegrationWebhookEventGetPayload<{
+  select: typeof integrationWebhookEventSelect;
+}>;
+
 function toNullableJsonValue(value: Prisma.InputJsonValue | null | undefined) {
   if (value === undefined) {
     return undefined;
   }
 
   return value === null ? Prisma.JsonNull : value;
+}
+
+function toStartOfUtcDay(value: Date | string) {
+  const date = typeof value === 'string' ? new Date(value) : new Date(value);
+  return new Date(
+    Date.UTC(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate()),
+  );
+}
+
+function toEndOfUtcDay(value: string) {
+  const date = new Date(value);
+  return new Date(
+    Date.UTC(
+      date.getUTCFullYear(),
+      date.getUTCMonth(),
+      date.getUTCDate(),
+      23,
+      59,
+      59,
+      999,
+    ),
+  );
 }
 
 @Injectable()
@@ -129,6 +187,55 @@ export class IntegrationsRepository {
     }
 
     return connection;
+  }
+
+  async getSingleActiveBranchConnectionByProvider(
+    organizationId: string,
+    branchId: string,
+    provider: Prisma.IntegrationConnectionWhereInput['provider'],
+  ): Promise<IntegrationConnectionAccessRecord> {
+    const connections = await this.prisma.integrationConnection.findMany({
+      where: {
+        organizationId,
+        branchId,
+        provider,
+        scopeType: IntegrationScopeType.BRANCH,
+        status: IntegrationStatus.ACTIVE,
+        deletedAt: null,
+      },
+      take: 2,
+      orderBy: [{ updatedAt: 'desc' }],
+      select: integrationConnectionAccessSelect,
+    });
+
+    if (connections.length === 0) {
+      throw new NotFoundException(
+        'Active branch integration connection not found',
+      );
+    }
+
+    if (connections.length > 1) {
+      throw new ConflictException(
+        'Multiple active branch integration connections are configured for this provider',
+      );
+    }
+
+    return connections[0];
+  }
+
+  async listActiveBranchConnectionsByProvider(
+    provider: Prisma.IntegrationConnectionWhereInput['provider'],
+  ): Promise<IntegrationConnectionAccessRecord[]> {
+    return this.prisma.integrationConnection.findMany({
+      where: {
+        provider,
+        scopeType: IntegrationScopeType.BRANCH,
+        status: IntegrationStatus.ACTIVE,
+        deletedAt: null,
+      },
+      orderBy: [{ updatedAt: 'desc' }],
+      select: integrationConnectionAccessSelect,
+    });
   }
 
   async createIntegrationConnection(params: {
@@ -357,6 +464,228 @@ export class IntegrationsRepository {
 
       throw error;
     }
+  }
+
+  async findSingleExternalEntityLinkByInternalEntity(params: {
+    organizationId: string;
+    integrationConnectionId: string;
+    entityType: Prisma.ExternalEntityLinkWhereInput['entityType'];
+    internalEntityId: string;
+  }): Promise<ExternalEntityLinkRecord | null> {
+    const links = await this.prisma.externalEntityLink.findMany({
+      where: {
+        organizationId: params.organizationId,
+        integrationConnectionId: params.integrationConnectionId,
+        entityType: params.entityType,
+        internalEntityId: params.internalEntityId,
+      },
+      take: 2,
+      orderBy: [{ createdAt: 'desc' }],
+      select: externalEntityLinkSelect,
+    });
+
+    if (links.length > 1) {
+      throw new ConflictException(
+        'Multiple external entity links are configured for the same internal entity',
+      );
+    }
+
+    return links[0] ?? null;
+  }
+
+  async findWebhookEventByProviderAndDeliveryId(
+    provider: Prisma.IntegrationWebhookEventWhereInput['provider'],
+    deliveryId: string,
+  ): Promise<IntegrationWebhookEventRecord | null> {
+    return this.prisma.integrationWebhookEvent.findFirst({
+      where: {
+        provider,
+        deliveryId,
+      },
+      orderBy: [{ receivedAt: 'desc' }],
+      select: integrationWebhookEventSelect,
+    });
+  }
+
+  async createWebhookEvent(params: {
+    provider: Prisma.IntegrationWebhookEventCreateInput['provider'];
+    organizationId?: string | null;
+    branchId?: string | null;
+    integrationConnectionId?: string | null;
+    deliveryId?: string | null;
+    notificationType?: string | null;
+    action?: string | null;
+    externalEventId?: string | null;
+    externalResourceId?: string | null;
+    validationStatus: Prisma.IntegrationWebhookEventCreateInput['validationStatus'];
+    validationError?: string | null;
+    processingStatus?: Prisma.IntegrationWebhookEventCreateInput['processingStatus'];
+    processingError?: string | null;
+    payloadJson: Prisma.InputJsonValue;
+    resourceJson?: Prisma.InputJsonValue | null;
+    queryJson?: Prisma.InputJsonValue | null;
+    headersJson?: Prisma.InputJsonValue | null;
+    receivedAt?: Date;
+    processedAt?: Date | null;
+  }): Promise<IntegrationWebhookEventRecord> {
+    return this.prisma.integrationWebhookEvent.create({
+      data: {
+        provider: params.provider,
+        organizationId: params.organizationId ?? null,
+        branchId: params.branchId ?? null,
+        integrationConnectionId: params.integrationConnectionId ?? null,
+        deliveryId: params.deliveryId ?? null,
+        notificationType: params.notificationType ?? null,
+        action: params.action ?? null,
+        externalEventId: params.externalEventId ?? null,
+        externalResourceId: params.externalResourceId ?? null,
+        validationStatus: params.validationStatus,
+        validationError: params.validationError ?? null,
+        processingStatus:
+          params.processingStatus ?? IntegrationWebhookProcessingStatus.RECEIVED,
+        processingError: params.processingError ?? null,
+        payloadJson: toNullableJsonValue(params.payloadJson) ?? Prisma.JsonNull,
+        resourceJson: toNullableJsonValue(params.resourceJson),
+        queryJson: toNullableJsonValue(params.queryJson),
+        headersJson: toNullableJsonValue(params.headersJson),
+        receivedAt: params.receivedAt ?? new Date(),
+        processedAt: params.processedAt ?? null,
+      },
+      select: integrationWebhookEventSelect,
+    });
+  }
+
+  async getWebhookEventById(eventId: string): Promise<IntegrationWebhookEventRecord> {
+    const event = await this.prisma.integrationWebhookEvent.findUnique({
+      where: {
+        id: eventId,
+      },
+      select: integrationWebhookEventSelect,
+    });
+
+    if (!event) {
+      throw new NotFoundException('Integration webhook event not found');
+    }
+
+    return event;
+  }
+
+  async updateWebhookEvent(params: {
+    eventId: string;
+    validationStatus?: IntegrationWebhookValidationStatus;
+    validationError?: string | null;
+    processingStatus?: IntegrationWebhookProcessingStatus;
+    processingError?: string | null;
+    resourceJson?: Prisma.InputJsonValue | null;
+    processedAt?: Date | null;
+  }): Promise<IntegrationWebhookEventRecord> {
+    return this.prisma.integrationWebhookEvent.update({
+      where: {
+        id: params.eventId,
+      },
+      data: {
+        validationStatus: params.validationStatus,
+        validationError: params.validationError,
+        processingStatus: params.processingStatus,
+        processingError: params.processingError,
+        resourceJson: toNullableJsonValue(params.resourceJson),
+        processedAt: params.processedAt,
+      },
+      select: integrationWebhookEventSelect,
+    });
+  }
+
+  async markWebhookEventReprocessed(params: {
+    eventId: string;
+    reprocessedAt: Date;
+  }): Promise<IntegrationWebhookEventRecord> {
+    return this.prisma.integrationWebhookEvent.update({
+      where: {
+        id: params.eventId,
+      },
+      data: {
+        reprocessCount: {
+          increment: 1,
+        },
+        lastReprocessedAt: params.reprocessedAt,
+      },
+      select: integrationWebhookEventSelect,
+    });
+  }
+
+  async listWebhookEvents(params: {
+    organizationId: string;
+    integrationConnectionId: string;
+    validationStatus?: IntegrationWebhookValidationStatus;
+    processingStatus?: IntegrationWebhookProcessingStatus;
+    notificationType?: string;
+    externalResourceId?: string;
+    dateFrom?: string;
+    dateTo?: string;
+    onlyRecoverable?: boolean;
+    recoverableIgnoredReasons?: string[];
+    skip: number;
+    take: number;
+  }) {
+    const where: Prisma.IntegrationWebhookEventWhereInput = {
+      organizationId: params.organizationId,
+      integrationConnectionId: params.integrationConnectionId,
+      validationStatus: params.validationStatus,
+      processingStatus: params.processingStatus,
+      notificationType: params.notificationType,
+      externalResourceId: params.externalResourceId
+        ? {
+            contains: params.externalResourceId,
+          }
+        : undefined,
+      receivedAt:
+        params.dateFrom || params.dateTo
+          ? {
+              gte: params.dateFrom
+                ? toStartOfUtcDay(params.dateFrom)
+                : undefined,
+              lte: params.dateTo ? toEndOfUtcDay(params.dateTo) : undefined,
+            }
+          : undefined,
+    };
+
+    if (params.onlyRecoverable) {
+      where.validationStatus = IntegrationWebhookValidationStatus.VALID;
+      where.OR = [
+        {
+          processingStatus: IntegrationWebhookProcessingStatus.RECEIVED,
+        },
+        {
+          processingStatus: IntegrationWebhookProcessingStatus.FAILED,
+        },
+        {
+          processingStatus: IntegrationWebhookProcessingStatus.IGNORED,
+          processingError: params.recoverableIgnoredReasons?.length
+            ? {
+                in: params.recoverableIgnoredReasons,
+              }
+            : '__none__',
+        },
+      ];
+    }
+
+    const [items, total] = await this.prisma.$transaction([
+      this.prisma.integrationWebhookEvent.findMany({
+        where,
+        orderBy: [{ receivedAt: 'desc' }, { createdAt: 'desc' }],
+        skip: params.skip,
+        take: params.take,
+        select: integrationWebhookEventSelect,
+      }),
+      this.prisma.integrationWebhookEvent.count({
+        where,
+      }),
+    ]);
+
+    return {
+      items,
+      total,
+    };
   }
 
   async listExternalEntityLinks(params: {

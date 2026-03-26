@@ -54,6 +54,10 @@ export type BillingChargeMinAggregateOutputType = {
   description: string | null
   externalProvider: string | null
   externalReference: string | null
+  lastExternalPaymentReference: string | null
+  lastExternalPaymentStatus: string | null
+  lastExternalPaymentStatusDetail: string | null
+  lastExternalPaymentObservedAt: Date | null
   createdAt: Date | null
   updatedAt: Date | null
   deletedAt: Date | null
@@ -77,6 +81,10 @@ export type BillingChargeMaxAggregateOutputType = {
   description: string | null
   externalProvider: string | null
   externalReference: string | null
+  lastExternalPaymentReference: string | null
+  lastExternalPaymentStatus: string | null
+  lastExternalPaymentStatusDetail: string | null
+  lastExternalPaymentObservedAt: Date | null
   createdAt: Date | null
   updatedAt: Date | null
   deletedAt: Date | null
@@ -100,6 +108,10 @@ export type BillingChargeCountAggregateOutputType = {
   description: number
   externalProvider: number
   externalReference: number
+  lastExternalPaymentReference: number
+  lastExternalPaymentStatus: number
+  lastExternalPaymentStatusDetail: number
+  lastExternalPaymentObservedAt: number
   createdAt: number
   updatedAt: number
   deletedAt: number
@@ -135,6 +147,10 @@ export type BillingChargeMinAggregateInputType = {
   description?: true
   externalProvider?: true
   externalReference?: true
+  lastExternalPaymentReference?: true
+  lastExternalPaymentStatus?: true
+  lastExternalPaymentStatusDetail?: true
+  lastExternalPaymentObservedAt?: true
   createdAt?: true
   updatedAt?: true
   deletedAt?: true
@@ -158,6 +174,10 @@ export type BillingChargeMaxAggregateInputType = {
   description?: true
   externalProvider?: true
   externalReference?: true
+  lastExternalPaymentReference?: true
+  lastExternalPaymentStatus?: true
+  lastExternalPaymentStatusDetail?: true
+  lastExternalPaymentObservedAt?: true
   createdAt?: true
   updatedAt?: true
   deletedAt?: true
@@ -181,6 +201,10 @@ export type BillingChargeCountAggregateInputType = {
   description?: true
   externalProvider?: true
   externalReference?: true
+  lastExternalPaymentReference?: true
+  lastExternalPaymentStatus?: true
+  lastExternalPaymentStatusDetail?: true
+  lastExternalPaymentObservedAt?: true
   createdAt?: true
   updatedAt?: true
   deletedAt?: true
@@ -291,6 +315,10 @@ export type BillingChargeGroupByOutputType = {
   description: string | null
   externalProvider: string | null
   externalReference: string | null
+  lastExternalPaymentReference: string | null
+  lastExternalPaymentStatus: string | null
+  lastExternalPaymentStatusDetail: string | null
+  lastExternalPaymentObservedAt: Date | null
   createdAt: Date
   updatedAt: Date
   deletedAt: Date | null
@@ -337,6 +365,10 @@ export type BillingChargeWhereInput = {
   description?: Prisma.StringNullableFilter<"BillingCharge"> | string | null
   externalProvider?: Prisma.StringNullableFilter<"BillingCharge"> | string | null
   externalReference?: Prisma.StringNullableFilter<"BillingCharge"> | string | null
+  lastExternalPaymentReference?: Prisma.StringNullableFilter<"BillingCharge"> | string | null
+  lastExternalPaymentStatus?: Prisma.StringNullableFilter<"BillingCharge"> | string | null
+  lastExternalPaymentStatusDetail?: Prisma.StringNullableFilter<"BillingCharge"> | string | null
+  lastExternalPaymentObservedAt?: Prisma.DateTimeNullableFilter<"BillingCharge"> | Date | string | null
   createdAt?: Prisma.DateTimeFilter<"BillingCharge"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"BillingCharge"> | Date | string
   deletedAt?: Prisma.DateTimeNullableFilter<"BillingCharge"> | Date | string | null
@@ -366,6 +398,10 @@ export type BillingChargeOrderByWithRelationInput = {
   description?: Prisma.SortOrderInput | Prisma.SortOrder
   externalProvider?: Prisma.SortOrderInput | Prisma.SortOrder
   externalReference?: Prisma.SortOrderInput | Prisma.SortOrder
+  lastExternalPaymentReference?: Prisma.SortOrderInput | Prisma.SortOrder
+  lastExternalPaymentStatus?: Prisma.SortOrderInput | Prisma.SortOrder
+  lastExternalPaymentStatusDetail?: Prisma.SortOrderInput | Prisma.SortOrder
+  lastExternalPaymentObservedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   deletedAt?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -399,6 +435,10 @@ export type BillingChargeWhereUniqueInput = Prisma.AtLeast<{
   description?: Prisma.StringNullableFilter<"BillingCharge"> | string | null
   externalProvider?: Prisma.StringNullableFilter<"BillingCharge"> | string | null
   externalReference?: Prisma.StringNullableFilter<"BillingCharge"> | string | null
+  lastExternalPaymentReference?: Prisma.StringNullableFilter<"BillingCharge"> | string | null
+  lastExternalPaymentStatus?: Prisma.StringNullableFilter<"BillingCharge"> | string | null
+  lastExternalPaymentStatusDetail?: Prisma.StringNullableFilter<"BillingCharge"> | string | null
+  lastExternalPaymentObservedAt?: Prisma.DateTimeNullableFilter<"BillingCharge"> | Date | string | null
   createdAt?: Prisma.DateTimeFilter<"BillingCharge"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"BillingCharge"> | Date | string
   deletedAt?: Prisma.DateTimeNullableFilter<"BillingCharge"> | Date | string | null
@@ -428,6 +468,10 @@ export type BillingChargeOrderByWithAggregationInput = {
   description?: Prisma.SortOrderInput | Prisma.SortOrder
   externalProvider?: Prisma.SortOrderInput | Prisma.SortOrder
   externalReference?: Prisma.SortOrderInput | Prisma.SortOrder
+  lastExternalPaymentReference?: Prisma.SortOrderInput | Prisma.SortOrder
+  lastExternalPaymentStatus?: Prisma.SortOrderInput | Prisma.SortOrder
+  lastExternalPaymentStatusDetail?: Prisma.SortOrderInput | Prisma.SortOrder
+  lastExternalPaymentObservedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   deletedAt?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -459,6 +503,10 @@ export type BillingChargeScalarWhereWithAggregatesInput = {
   description?: Prisma.StringNullableWithAggregatesFilter<"BillingCharge"> | string | null
   externalProvider?: Prisma.StringNullableWithAggregatesFilter<"BillingCharge"> | string | null
   externalReference?: Prisma.StringNullableWithAggregatesFilter<"BillingCharge"> | string | null
+  lastExternalPaymentReference?: Prisma.StringNullableWithAggregatesFilter<"BillingCharge"> | string | null
+  lastExternalPaymentStatus?: Prisma.StringNullableWithAggregatesFilter<"BillingCharge"> | string | null
+  lastExternalPaymentStatusDetail?: Prisma.StringNullableWithAggregatesFilter<"BillingCharge"> | string | null
+  lastExternalPaymentObservedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"BillingCharge"> | Date | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"BillingCharge"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"BillingCharge"> | Date | string
   deletedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"BillingCharge"> | Date | string | null
@@ -477,6 +525,10 @@ export type BillingChargeCreateInput = {
   description?: string | null
   externalProvider?: string | null
   externalReference?: string | null
+  lastExternalPaymentReference?: string | null
+  lastExternalPaymentStatus?: string | null
+  lastExternalPaymentStatusDetail?: string | null
+  lastExternalPaymentObservedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
@@ -506,6 +558,10 @@ export type BillingChargeUncheckedCreateInput = {
   description?: string | null
   externalProvider?: string | null
   externalReference?: string | null
+  lastExternalPaymentReference?: string | null
+  lastExternalPaymentStatus?: string | null
+  lastExternalPaymentStatusDetail?: string | null
+  lastExternalPaymentObservedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
@@ -525,6 +581,10 @@ export type BillingChargeUpdateInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   externalProvider?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   externalReference?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastExternalPaymentReference?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastExternalPaymentStatus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastExternalPaymentStatusDetail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastExternalPaymentObservedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -554,6 +614,10 @@ export type BillingChargeUncheckedUpdateInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   externalProvider?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   externalReference?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastExternalPaymentReference?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastExternalPaymentStatus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastExternalPaymentStatusDetail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastExternalPaymentObservedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -578,6 +642,10 @@ export type BillingChargeCreateManyInput = {
   description?: string | null
   externalProvider?: string | null
   externalReference?: string | null
+  lastExternalPaymentReference?: string | null
+  lastExternalPaymentStatus?: string | null
+  lastExternalPaymentStatusDetail?: string | null
+  lastExternalPaymentObservedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
@@ -596,6 +664,10 @@ export type BillingChargeUpdateManyMutationInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   externalProvider?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   externalReference?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastExternalPaymentReference?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastExternalPaymentStatus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastExternalPaymentStatusDetail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastExternalPaymentObservedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -619,6 +691,10 @@ export type BillingChargeUncheckedUpdateManyInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   externalProvider?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   externalReference?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastExternalPaymentReference?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastExternalPaymentStatus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastExternalPaymentStatusDetail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastExternalPaymentObservedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -657,6 +733,10 @@ export type BillingChargeCountOrderByAggregateInput = {
   description?: Prisma.SortOrder
   externalProvider?: Prisma.SortOrder
   externalReference?: Prisma.SortOrder
+  lastExternalPaymentReference?: Prisma.SortOrder
+  lastExternalPaymentStatus?: Prisma.SortOrder
+  lastExternalPaymentStatusDetail?: Prisma.SortOrder
+  lastExternalPaymentObservedAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   deletedAt?: Prisma.SortOrder
@@ -685,6 +765,10 @@ export type BillingChargeMaxOrderByAggregateInput = {
   description?: Prisma.SortOrder
   externalProvider?: Prisma.SortOrder
   externalReference?: Prisma.SortOrder
+  lastExternalPaymentReference?: Prisma.SortOrder
+  lastExternalPaymentStatus?: Prisma.SortOrder
+  lastExternalPaymentStatusDetail?: Prisma.SortOrder
+  lastExternalPaymentObservedAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   deletedAt?: Prisma.SortOrder
@@ -708,6 +792,10 @@ export type BillingChargeMinOrderByAggregateInput = {
   description?: Prisma.SortOrder
   externalProvider?: Prisma.SortOrder
   externalReference?: Prisma.SortOrder
+  lastExternalPaymentReference?: Prisma.SortOrder
+  lastExternalPaymentStatus?: Prisma.SortOrder
+  lastExternalPaymentStatusDetail?: Prisma.SortOrder
+  lastExternalPaymentObservedAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   deletedAt?: Prisma.SortOrder
@@ -970,6 +1058,10 @@ export type BillingChargeCreateWithoutOrganizationInput = {
   description?: string | null
   externalProvider?: string | null
   externalReference?: string | null
+  lastExternalPaymentReference?: string | null
+  lastExternalPaymentStatus?: string | null
+  lastExternalPaymentStatusDetail?: string | null
+  lastExternalPaymentObservedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
@@ -997,6 +1089,10 @@ export type BillingChargeUncheckedCreateWithoutOrganizationInput = {
   description?: string | null
   externalProvider?: string | null
   externalReference?: string | null
+  lastExternalPaymentReference?: string | null
+  lastExternalPaymentStatus?: string | null
+  lastExternalPaymentStatusDetail?: string | null
+  lastExternalPaymentObservedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
@@ -1050,6 +1146,10 @@ export type BillingChargeScalarWhereInput = {
   description?: Prisma.StringNullableFilter<"BillingCharge"> | string | null
   externalProvider?: Prisma.StringNullableFilter<"BillingCharge"> | string | null
   externalReference?: Prisma.StringNullableFilter<"BillingCharge"> | string | null
+  lastExternalPaymentReference?: Prisma.StringNullableFilter<"BillingCharge"> | string | null
+  lastExternalPaymentStatus?: Prisma.StringNullableFilter<"BillingCharge"> | string | null
+  lastExternalPaymentStatusDetail?: Prisma.StringNullableFilter<"BillingCharge"> | string | null
+  lastExternalPaymentObservedAt?: Prisma.DateTimeNullableFilter<"BillingCharge"> | Date | string | null
   createdAt?: Prisma.DateTimeFilter<"BillingCharge"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"BillingCharge"> | Date | string
   deletedAt?: Prisma.DateTimeNullableFilter<"BillingCharge"> | Date | string | null
@@ -1068,6 +1168,10 @@ export type BillingChargeCreateWithoutBranchInput = {
   description?: string | null
   externalProvider?: string | null
   externalReference?: string | null
+  lastExternalPaymentReference?: string | null
+  lastExternalPaymentStatus?: string | null
+  lastExternalPaymentStatusDetail?: string | null
+  lastExternalPaymentObservedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
@@ -1094,6 +1198,10 @@ export type BillingChargeUncheckedCreateWithoutBranchInput = {
   description?: string | null
   externalProvider?: string | null
   externalReference?: string | null
+  lastExternalPaymentReference?: string | null
+  lastExternalPaymentStatus?: string | null
+  lastExternalPaymentStatusDetail?: string | null
+  lastExternalPaymentObservedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
@@ -1139,6 +1247,10 @@ export type BillingChargeCreateWithoutStudentInput = {
   description?: string | null
   externalProvider?: string | null
   externalReference?: string | null
+  lastExternalPaymentReference?: string | null
+  lastExternalPaymentStatus?: string | null
+  lastExternalPaymentStatusDetail?: string | null
+  lastExternalPaymentObservedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
@@ -1165,6 +1277,10 @@ export type BillingChargeUncheckedCreateWithoutStudentInput = {
   description?: string | null
   externalProvider?: string | null
   externalReference?: string | null
+  lastExternalPaymentReference?: string | null
+  lastExternalPaymentStatus?: string | null
+  lastExternalPaymentStatusDetail?: string | null
+  lastExternalPaymentObservedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
@@ -1210,6 +1326,10 @@ export type BillingChargeCreateWithoutBillingPlanInput = {
   description?: string | null
   externalProvider?: string | null
   externalReference?: string | null
+  lastExternalPaymentReference?: string | null
+  lastExternalPaymentStatus?: string | null
+  lastExternalPaymentStatusDetail?: string | null
+  lastExternalPaymentObservedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
@@ -1236,6 +1356,10 @@ export type BillingChargeUncheckedCreateWithoutBillingPlanInput = {
   description?: string | null
   externalProvider?: string | null
   externalReference?: string | null
+  lastExternalPaymentReference?: string | null
+  lastExternalPaymentStatus?: string | null
+  lastExternalPaymentStatusDetail?: string | null
+  lastExternalPaymentObservedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
@@ -1281,6 +1405,10 @@ export type BillingChargeCreateWithoutStudentMembershipInput = {
   description?: string | null
   externalProvider?: string | null
   externalReference?: string | null
+  lastExternalPaymentReference?: string | null
+  lastExternalPaymentStatus?: string | null
+  lastExternalPaymentStatusDetail?: string | null
+  lastExternalPaymentObservedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
@@ -1307,6 +1435,10 @@ export type BillingChargeUncheckedCreateWithoutStudentMembershipInput = {
   description?: string | null
   externalProvider?: string | null
   externalReference?: string | null
+  lastExternalPaymentReference?: string | null
+  lastExternalPaymentStatus?: string | null
+  lastExternalPaymentStatusDetail?: string | null
+  lastExternalPaymentObservedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
@@ -1352,6 +1484,10 @@ export type BillingChargeCreateWithoutPaymentsInput = {
   description?: string | null
   externalProvider?: string | null
   externalReference?: string | null
+  lastExternalPaymentReference?: string | null
+  lastExternalPaymentStatus?: string | null
+  lastExternalPaymentStatusDetail?: string | null
+  lastExternalPaymentObservedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
@@ -1380,6 +1516,10 @@ export type BillingChargeUncheckedCreateWithoutPaymentsInput = {
   description?: string | null
   externalProvider?: string | null
   externalReference?: string | null
+  lastExternalPaymentReference?: string | null
+  lastExternalPaymentStatus?: string | null
+  lastExternalPaymentStatusDetail?: string | null
+  lastExternalPaymentObservedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
@@ -1414,6 +1554,10 @@ export type BillingChargeUpdateWithoutPaymentsInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   externalProvider?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   externalReference?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastExternalPaymentReference?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastExternalPaymentStatus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastExternalPaymentStatusDetail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastExternalPaymentObservedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1442,6 +1586,10 @@ export type BillingChargeUncheckedUpdateWithoutPaymentsInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   externalProvider?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   externalReference?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastExternalPaymentReference?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastExternalPaymentStatus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastExternalPaymentStatusDetail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastExternalPaymentObservedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1464,6 +1612,10 @@ export type BillingChargeCreateManyOrganizationInput = {
   description?: string | null
   externalProvider?: string | null
   externalReference?: string | null
+  lastExternalPaymentReference?: string | null
+  lastExternalPaymentStatus?: string | null
+  lastExternalPaymentStatusDetail?: string | null
+  lastExternalPaymentObservedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
@@ -1482,6 +1634,10 @@ export type BillingChargeUpdateWithoutOrganizationInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   externalProvider?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   externalReference?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastExternalPaymentReference?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastExternalPaymentStatus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastExternalPaymentStatusDetail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastExternalPaymentObservedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1509,6 +1665,10 @@ export type BillingChargeUncheckedUpdateWithoutOrganizationInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   externalProvider?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   externalReference?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastExternalPaymentReference?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastExternalPaymentStatus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastExternalPaymentStatusDetail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastExternalPaymentObservedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1532,6 +1692,10 @@ export type BillingChargeUncheckedUpdateManyWithoutOrganizationInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   externalProvider?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   externalReference?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastExternalPaymentReference?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastExternalPaymentStatus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastExternalPaymentStatusDetail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastExternalPaymentObservedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1553,6 +1717,10 @@ export type BillingChargeCreateManyBranchInput = {
   description?: string | null
   externalProvider?: string | null
   externalReference?: string | null
+  lastExternalPaymentReference?: string | null
+  lastExternalPaymentStatus?: string | null
+  lastExternalPaymentStatusDetail?: string | null
+  lastExternalPaymentObservedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
@@ -1571,6 +1739,10 @@ export type BillingChargeUpdateWithoutBranchInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   externalProvider?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   externalReference?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastExternalPaymentReference?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastExternalPaymentStatus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastExternalPaymentStatusDetail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastExternalPaymentObservedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1597,6 +1769,10 @@ export type BillingChargeUncheckedUpdateWithoutBranchInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   externalProvider?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   externalReference?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastExternalPaymentReference?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastExternalPaymentStatus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastExternalPaymentStatusDetail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastExternalPaymentObservedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1619,6 +1795,10 @@ export type BillingChargeUncheckedUpdateManyWithoutBranchInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   externalProvider?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   externalReference?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastExternalPaymentReference?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastExternalPaymentStatus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastExternalPaymentStatusDetail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastExternalPaymentObservedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1640,6 +1820,10 @@ export type BillingChargeCreateManyStudentInput = {
   description?: string | null
   externalProvider?: string | null
   externalReference?: string | null
+  lastExternalPaymentReference?: string | null
+  lastExternalPaymentStatus?: string | null
+  lastExternalPaymentStatusDetail?: string | null
+  lastExternalPaymentObservedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
@@ -1658,6 +1842,10 @@ export type BillingChargeUpdateWithoutStudentInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   externalProvider?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   externalReference?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastExternalPaymentReference?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastExternalPaymentStatus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastExternalPaymentStatusDetail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastExternalPaymentObservedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1684,6 +1872,10 @@ export type BillingChargeUncheckedUpdateWithoutStudentInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   externalProvider?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   externalReference?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastExternalPaymentReference?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastExternalPaymentStatus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastExternalPaymentStatusDetail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastExternalPaymentObservedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1706,6 +1898,10 @@ export type BillingChargeUncheckedUpdateManyWithoutStudentInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   externalProvider?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   externalReference?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastExternalPaymentReference?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastExternalPaymentStatus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastExternalPaymentStatusDetail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastExternalPaymentObservedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1727,6 +1923,10 @@ export type BillingChargeCreateManyBillingPlanInput = {
   description?: string | null
   externalProvider?: string | null
   externalReference?: string | null
+  lastExternalPaymentReference?: string | null
+  lastExternalPaymentStatus?: string | null
+  lastExternalPaymentStatusDetail?: string | null
+  lastExternalPaymentObservedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
@@ -1745,6 +1945,10 @@ export type BillingChargeUpdateWithoutBillingPlanInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   externalProvider?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   externalReference?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastExternalPaymentReference?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastExternalPaymentStatus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastExternalPaymentStatusDetail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastExternalPaymentObservedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1771,6 +1975,10 @@ export type BillingChargeUncheckedUpdateWithoutBillingPlanInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   externalProvider?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   externalReference?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastExternalPaymentReference?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastExternalPaymentStatus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastExternalPaymentStatusDetail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastExternalPaymentObservedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1793,6 +2001,10 @@ export type BillingChargeUncheckedUpdateManyWithoutBillingPlanInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   externalProvider?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   externalReference?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastExternalPaymentReference?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastExternalPaymentStatus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastExternalPaymentStatusDetail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastExternalPaymentObservedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1814,6 +2026,10 @@ export type BillingChargeCreateManyStudentMembershipInput = {
   description?: string | null
   externalProvider?: string | null
   externalReference?: string | null
+  lastExternalPaymentReference?: string | null
+  lastExternalPaymentStatus?: string | null
+  lastExternalPaymentStatusDetail?: string | null
+  lastExternalPaymentObservedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
@@ -1832,6 +2048,10 @@ export type BillingChargeUpdateWithoutStudentMembershipInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   externalProvider?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   externalReference?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastExternalPaymentReference?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastExternalPaymentStatus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastExternalPaymentStatusDetail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastExternalPaymentObservedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1858,6 +2078,10 @@ export type BillingChargeUncheckedUpdateWithoutStudentMembershipInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   externalProvider?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   externalReference?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastExternalPaymentReference?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastExternalPaymentStatus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastExternalPaymentStatusDetail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastExternalPaymentObservedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1880,6 +2104,10 @@ export type BillingChargeUncheckedUpdateManyWithoutStudentMembershipInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   externalProvider?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   externalReference?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastExternalPaymentReference?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastExternalPaymentStatus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastExternalPaymentStatusDetail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastExternalPaymentObservedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1934,6 +2162,10 @@ export type BillingChargeSelect<ExtArgs extends runtime.Types.Extensions.Interna
   description?: boolean
   externalProvider?: boolean
   externalReference?: boolean
+  lastExternalPaymentReference?: boolean
+  lastExternalPaymentStatus?: boolean
+  lastExternalPaymentStatusDetail?: boolean
+  lastExternalPaymentObservedAt?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   deletedAt?: boolean
@@ -1964,6 +2196,10 @@ export type BillingChargeSelectCreateManyAndReturn<ExtArgs extends runtime.Types
   description?: boolean
   externalProvider?: boolean
   externalReference?: boolean
+  lastExternalPaymentReference?: boolean
+  lastExternalPaymentStatus?: boolean
+  lastExternalPaymentStatusDetail?: boolean
+  lastExternalPaymentObservedAt?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   deletedAt?: boolean
@@ -1992,6 +2228,10 @@ export type BillingChargeSelectUpdateManyAndReturn<ExtArgs extends runtime.Types
   description?: boolean
   externalProvider?: boolean
   externalReference?: boolean
+  lastExternalPaymentReference?: boolean
+  lastExternalPaymentStatus?: boolean
+  lastExternalPaymentStatusDetail?: boolean
+  lastExternalPaymentObservedAt?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   deletedAt?: boolean
@@ -2020,12 +2260,16 @@ export type BillingChargeSelectScalar = {
   description?: boolean
   externalProvider?: boolean
   externalReference?: boolean
+  lastExternalPaymentReference?: boolean
+  lastExternalPaymentStatus?: boolean
+  lastExternalPaymentStatusDetail?: boolean
+  lastExternalPaymentObservedAt?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   deletedAt?: boolean
 }
 
-export type BillingChargeOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "organizationId" | "branchId" | "studentId" | "studentMembershipId" | "billingPlanId" | "chargeType" | "periodStart" | "periodEnd" | "dueDate" | "amount" | "amountPaid" | "currency" | "status" | "description" | "externalProvider" | "externalReference" | "createdAt" | "updatedAt" | "deletedAt", ExtArgs["result"]["billingCharge"]>
+export type BillingChargeOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "organizationId" | "branchId" | "studentId" | "studentMembershipId" | "billingPlanId" | "chargeType" | "periodStart" | "periodEnd" | "dueDate" | "amount" | "amountPaid" | "currency" | "status" | "description" | "externalProvider" | "externalReference" | "lastExternalPaymentReference" | "lastExternalPaymentStatus" | "lastExternalPaymentStatusDetail" | "lastExternalPaymentObservedAt" | "createdAt" | "updatedAt" | "deletedAt", ExtArgs["result"]["billingCharge"]>
 export type BillingChargeInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   organization?: boolean | Prisma.OrganizationDefaultArgs<ExtArgs>
   branch?: boolean | Prisma.BranchDefaultArgs<ExtArgs>
@@ -2078,6 +2322,10 @@ export type $BillingChargePayload<ExtArgs extends runtime.Types.Extensions.Inter
     description: string | null
     externalProvider: string | null
     externalReference: string | null
+    lastExternalPaymentReference: string | null
+    lastExternalPaymentStatus: string | null
+    lastExternalPaymentStatusDetail: string | null
+    lastExternalPaymentObservedAt: Date | null
     createdAt: Date
     updatedAt: Date
     deletedAt: Date | null
@@ -2527,6 +2775,10 @@ export interface BillingChargeFieldRefs {
   readonly description: Prisma.FieldRef<"BillingCharge", 'String'>
   readonly externalProvider: Prisma.FieldRef<"BillingCharge", 'String'>
   readonly externalReference: Prisma.FieldRef<"BillingCharge", 'String'>
+  readonly lastExternalPaymentReference: Prisma.FieldRef<"BillingCharge", 'String'>
+  readonly lastExternalPaymentStatus: Prisma.FieldRef<"BillingCharge", 'String'>
+  readonly lastExternalPaymentStatusDetail: Prisma.FieldRef<"BillingCharge", 'String'>
+  readonly lastExternalPaymentObservedAt: Prisma.FieldRef<"BillingCharge", 'DateTime'>
   readonly createdAt: Prisma.FieldRef<"BillingCharge", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"BillingCharge", 'DateTime'>
   readonly deletedAt: Prisma.FieldRef<"BillingCharge", 'DateTime'>

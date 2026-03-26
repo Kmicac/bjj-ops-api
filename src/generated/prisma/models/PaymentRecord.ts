@@ -288,7 +288,7 @@ export type PaymentRecordGroupByOutputType = {
   description: string | null
   externalProvider: string | null
   externalReference: string | null
-  recordedByMembershipId: string
+  recordedByMembershipId: string | null
   recordedAt: Date
   notes: string | null
   createdAt: Date
@@ -334,7 +334,7 @@ export type PaymentRecordWhereInput = {
   description?: Prisma.StringNullableFilter<"PaymentRecord"> | string | null
   externalProvider?: Prisma.StringNullableFilter<"PaymentRecord"> | string | null
   externalReference?: Prisma.StringNullableFilter<"PaymentRecord"> | string | null
-  recordedByMembershipId?: Prisma.StringFilter<"PaymentRecord"> | string
+  recordedByMembershipId?: Prisma.StringNullableFilter<"PaymentRecord"> | string | null
   recordedAt?: Prisma.DateTimeFilter<"PaymentRecord"> | Date | string
   notes?: Prisma.StringNullableFilter<"PaymentRecord"> | string | null
   createdAt?: Prisma.DateTimeFilter<"PaymentRecord"> | Date | string
@@ -344,7 +344,7 @@ export type PaymentRecordWhereInput = {
   branch?: Prisma.XOR<Prisma.BranchScalarRelationFilter, Prisma.BranchWhereInput>
   student?: Prisma.XOR<Prisma.StudentNullableScalarRelationFilter, Prisma.StudentWhereInput> | null
   billingCharge?: Prisma.XOR<Prisma.BillingChargeNullableScalarRelationFilter, Prisma.BillingChargeWhereInput> | null
-  recordedByMembership?: Prisma.XOR<Prisma.OrganizationMembershipScalarRelationFilter, Prisma.OrganizationMembershipWhereInput>
+  recordedByMembership?: Prisma.XOR<Prisma.OrganizationMembershipNullableScalarRelationFilter, Prisma.OrganizationMembershipWhereInput> | null
 }
 
 export type PaymentRecordOrderByWithRelationInput = {
@@ -362,7 +362,7 @@ export type PaymentRecordOrderByWithRelationInput = {
   description?: Prisma.SortOrderInput | Prisma.SortOrder
   externalProvider?: Prisma.SortOrderInput | Prisma.SortOrder
   externalReference?: Prisma.SortOrderInput | Prisma.SortOrder
-  recordedByMembershipId?: Prisma.SortOrder
+  recordedByMembershipId?: Prisma.SortOrderInput | Prisma.SortOrder
   recordedAt?: Prisma.SortOrder
   notes?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -394,7 +394,7 @@ export type PaymentRecordWhereUniqueInput = Prisma.AtLeast<{
   description?: Prisma.StringNullableFilter<"PaymentRecord"> | string | null
   externalProvider?: Prisma.StringNullableFilter<"PaymentRecord"> | string | null
   externalReference?: Prisma.StringNullableFilter<"PaymentRecord"> | string | null
-  recordedByMembershipId?: Prisma.StringFilter<"PaymentRecord"> | string
+  recordedByMembershipId?: Prisma.StringNullableFilter<"PaymentRecord"> | string | null
   recordedAt?: Prisma.DateTimeFilter<"PaymentRecord"> | Date | string
   notes?: Prisma.StringNullableFilter<"PaymentRecord"> | string | null
   createdAt?: Prisma.DateTimeFilter<"PaymentRecord"> | Date | string
@@ -404,7 +404,7 @@ export type PaymentRecordWhereUniqueInput = Prisma.AtLeast<{
   branch?: Prisma.XOR<Prisma.BranchScalarRelationFilter, Prisma.BranchWhereInput>
   student?: Prisma.XOR<Prisma.StudentNullableScalarRelationFilter, Prisma.StudentWhereInput> | null
   billingCharge?: Prisma.XOR<Prisma.BillingChargeNullableScalarRelationFilter, Prisma.BillingChargeWhereInput> | null
-  recordedByMembership?: Prisma.XOR<Prisma.OrganizationMembershipScalarRelationFilter, Prisma.OrganizationMembershipWhereInput>
+  recordedByMembership?: Prisma.XOR<Prisma.OrganizationMembershipNullableScalarRelationFilter, Prisma.OrganizationMembershipWhereInput> | null
 }, "id" | "id_organizationId">
 
 export type PaymentRecordOrderByWithAggregationInput = {
@@ -422,7 +422,7 @@ export type PaymentRecordOrderByWithAggregationInput = {
   description?: Prisma.SortOrderInput | Prisma.SortOrder
   externalProvider?: Prisma.SortOrderInput | Prisma.SortOrder
   externalReference?: Prisma.SortOrderInput | Prisma.SortOrder
-  recordedByMembershipId?: Prisma.SortOrder
+  recordedByMembershipId?: Prisma.SortOrderInput | Prisma.SortOrder
   recordedAt?: Prisma.SortOrder
   notes?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -453,7 +453,7 @@ export type PaymentRecordScalarWhereWithAggregatesInput = {
   description?: Prisma.StringNullableWithAggregatesFilter<"PaymentRecord"> | string | null
   externalProvider?: Prisma.StringNullableWithAggregatesFilter<"PaymentRecord"> | string | null
   externalReference?: Prisma.StringNullableWithAggregatesFilter<"PaymentRecord"> | string | null
-  recordedByMembershipId?: Prisma.StringWithAggregatesFilter<"PaymentRecord"> | string
+  recordedByMembershipId?: Prisma.StringNullableWithAggregatesFilter<"PaymentRecord"> | string | null
   recordedAt?: Prisma.DateTimeWithAggregatesFilter<"PaymentRecord"> | Date | string
   notes?: Prisma.StringNullableWithAggregatesFilter<"PaymentRecord"> | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"PaymentRecord"> | Date | string
@@ -481,7 +481,7 @@ export type PaymentRecordCreateInput = {
   branch: Prisma.BranchCreateNestedOneWithoutPaymentRecordsInput
   student?: Prisma.StudentCreateNestedOneWithoutPaymentRecordsInput
   billingCharge?: Prisma.BillingChargeCreateNestedOneWithoutPaymentsInput
-  recordedByMembership: Prisma.OrganizationMembershipCreateNestedOneWithoutRecordedPaymentsInput
+  recordedByMembership?: Prisma.OrganizationMembershipCreateNestedOneWithoutRecordedPaymentsInput
 }
 
 export type PaymentRecordUncheckedCreateInput = {
@@ -499,7 +499,7 @@ export type PaymentRecordUncheckedCreateInput = {
   description?: string | null
   externalProvider?: string | null
   externalReference?: string | null
-  recordedByMembershipId: string
+  recordedByMembershipId?: string | null
   recordedAt: Date | string
   notes?: string | null
   createdAt?: Date | string
@@ -527,7 +527,7 @@ export type PaymentRecordUpdateInput = {
   branch?: Prisma.BranchUpdateOneRequiredWithoutPaymentRecordsNestedInput
   student?: Prisma.StudentUpdateOneWithoutPaymentRecordsNestedInput
   billingCharge?: Prisma.BillingChargeUpdateOneWithoutPaymentsNestedInput
-  recordedByMembership?: Prisma.OrganizationMembershipUpdateOneRequiredWithoutRecordedPaymentsNestedInput
+  recordedByMembership?: Prisma.OrganizationMembershipUpdateOneWithoutRecordedPaymentsNestedInput
 }
 
 export type PaymentRecordUncheckedUpdateInput = {
@@ -545,7 +545,7 @@ export type PaymentRecordUncheckedUpdateInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   externalProvider?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   externalReference?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  recordedByMembershipId?: Prisma.StringFieldUpdateOperationsInput | string
+  recordedByMembershipId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   recordedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -568,7 +568,7 @@ export type PaymentRecordCreateManyInput = {
   description?: string | null
   externalProvider?: string | null
   externalReference?: string | null
-  recordedByMembershipId: string
+  recordedByMembershipId?: string | null
   recordedAt: Date | string
   notes?: string | null
   createdAt?: Date | string
@@ -609,7 +609,7 @@ export type PaymentRecordUncheckedUpdateManyInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   externalProvider?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   externalReference?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  recordedByMembershipId?: Prisma.StringFieldUpdateOperationsInput | string
+  recordedByMembershipId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   recordedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -952,7 +952,7 @@ export type PaymentRecordCreateWithoutOrganizationInput = {
   branch: Prisma.BranchCreateNestedOneWithoutPaymentRecordsInput
   student?: Prisma.StudentCreateNestedOneWithoutPaymentRecordsInput
   billingCharge?: Prisma.BillingChargeCreateNestedOneWithoutPaymentsInput
-  recordedByMembership: Prisma.OrganizationMembershipCreateNestedOneWithoutRecordedPaymentsInput
+  recordedByMembership?: Prisma.OrganizationMembershipCreateNestedOneWithoutRecordedPaymentsInput
 }
 
 export type PaymentRecordUncheckedCreateWithoutOrganizationInput = {
@@ -969,7 +969,7 @@ export type PaymentRecordUncheckedCreateWithoutOrganizationInput = {
   description?: string | null
   externalProvider?: string | null
   externalReference?: string | null
-  recordedByMembershipId: string
+  recordedByMembershipId?: string | null
   recordedAt: Date | string
   notes?: string | null
   createdAt?: Date | string
@@ -1021,7 +1021,7 @@ export type PaymentRecordScalarWhereInput = {
   description?: Prisma.StringNullableFilter<"PaymentRecord"> | string | null
   externalProvider?: Prisma.StringNullableFilter<"PaymentRecord"> | string | null
   externalReference?: Prisma.StringNullableFilter<"PaymentRecord"> | string | null
-  recordedByMembershipId?: Prisma.StringFilter<"PaymentRecord"> | string
+  recordedByMembershipId?: Prisma.StringNullableFilter<"PaymentRecord"> | string | null
   recordedAt?: Prisma.DateTimeFilter<"PaymentRecord"> | Date | string
   notes?: Prisma.StringNullableFilter<"PaymentRecord"> | string | null
   createdAt?: Prisma.DateTimeFilter<"PaymentRecord"> | Date | string
@@ -1048,7 +1048,7 @@ export type PaymentRecordCreateWithoutBranchInput = {
   organization: Prisma.OrganizationCreateNestedOneWithoutPaymentRecordsInput
   student?: Prisma.StudentCreateNestedOneWithoutPaymentRecordsInput
   billingCharge?: Prisma.BillingChargeCreateNestedOneWithoutPaymentsInput
-  recordedByMembership: Prisma.OrganizationMembershipCreateNestedOneWithoutRecordedPaymentsInput
+  recordedByMembership?: Prisma.OrganizationMembershipCreateNestedOneWithoutRecordedPaymentsInput
 }
 
 export type PaymentRecordUncheckedCreateWithoutBranchInput = {
@@ -1064,7 +1064,7 @@ export type PaymentRecordUncheckedCreateWithoutBranchInput = {
   description?: string | null
   externalProvider?: string | null
   externalReference?: string | null
-  recordedByMembershipId: string
+  recordedByMembershipId?: string | null
   recordedAt: Date | string
   notes?: string | null
   createdAt?: Date | string
@@ -1186,7 +1186,7 @@ export type PaymentRecordCreateWithoutStudentInput = {
   organization: Prisma.OrganizationCreateNestedOneWithoutPaymentRecordsInput
   branch: Prisma.BranchCreateNestedOneWithoutPaymentRecordsInput
   billingCharge?: Prisma.BillingChargeCreateNestedOneWithoutPaymentsInput
-  recordedByMembership: Prisma.OrganizationMembershipCreateNestedOneWithoutRecordedPaymentsInput
+  recordedByMembership?: Prisma.OrganizationMembershipCreateNestedOneWithoutRecordedPaymentsInput
 }
 
 export type PaymentRecordUncheckedCreateWithoutStudentInput = {
@@ -1202,7 +1202,7 @@ export type PaymentRecordUncheckedCreateWithoutStudentInput = {
   description?: string | null
   externalProvider?: string | null
   externalReference?: string | null
-  recordedByMembershipId: string
+  recordedByMembershipId?: string | null
   recordedAt: Date | string
   notes?: string | null
   createdAt?: Date | string
@@ -1255,7 +1255,7 @@ export type PaymentRecordCreateWithoutBillingChargeInput = {
   organization: Prisma.OrganizationCreateNestedOneWithoutPaymentRecordsInput
   branch: Prisma.BranchCreateNestedOneWithoutPaymentRecordsInput
   student?: Prisma.StudentCreateNestedOneWithoutPaymentRecordsInput
-  recordedByMembership: Prisma.OrganizationMembershipCreateNestedOneWithoutRecordedPaymentsInput
+  recordedByMembership?: Prisma.OrganizationMembershipCreateNestedOneWithoutRecordedPaymentsInput
 }
 
 export type PaymentRecordUncheckedCreateWithoutBillingChargeInput = {
@@ -1271,7 +1271,7 @@ export type PaymentRecordUncheckedCreateWithoutBillingChargeInput = {
   description?: string | null
   externalProvider?: string | null
   externalReference?: string | null
-  recordedByMembershipId: string
+  recordedByMembershipId?: string | null
   recordedAt: Date | string
   notes?: string | null
   createdAt?: Date | string
@@ -1319,7 +1319,7 @@ export type PaymentRecordCreateManyOrganizationInput = {
   description?: string | null
   externalProvider?: string | null
   externalReference?: string | null
-  recordedByMembershipId: string
+  recordedByMembershipId?: string | null
   recordedAt: Date | string
   notes?: string | null
   createdAt?: Date | string
@@ -1346,7 +1346,7 @@ export type PaymentRecordUpdateWithoutOrganizationInput = {
   branch?: Prisma.BranchUpdateOneRequiredWithoutPaymentRecordsNestedInput
   student?: Prisma.StudentUpdateOneWithoutPaymentRecordsNestedInput
   billingCharge?: Prisma.BillingChargeUpdateOneWithoutPaymentsNestedInput
-  recordedByMembership?: Prisma.OrganizationMembershipUpdateOneRequiredWithoutRecordedPaymentsNestedInput
+  recordedByMembership?: Prisma.OrganizationMembershipUpdateOneWithoutRecordedPaymentsNestedInput
 }
 
 export type PaymentRecordUncheckedUpdateWithoutOrganizationInput = {
@@ -1363,7 +1363,7 @@ export type PaymentRecordUncheckedUpdateWithoutOrganizationInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   externalProvider?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   externalReference?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  recordedByMembershipId?: Prisma.StringFieldUpdateOperationsInput | string
+  recordedByMembershipId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   recordedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1385,7 +1385,7 @@ export type PaymentRecordUncheckedUpdateManyWithoutOrganizationInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   externalProvider?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   externalReference?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  recordedByMembershipId?: Prisma.StringFieldUpdateOperationsInput | string
+  recordedByMembershipId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   recordedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1406,7 +1406,7 @@ export type PaymentRecordCreateManyBranchInput = {
   description?: string | null
   externalProvider?: string | null
   externalReference?: string | null
-  recordedByMembershipId: string
+  recordedByMembershipId?: string | null
   recordedAt: Date | string
   notes?: string | null
   createdAt?: Date | string
@@ -1433,7 +1433,7 @@ export type PaymentRecordUpdateWithoutBranchInput = {
   organization?: Prisma.OrganizationUpdateOneRequiredWithoutPaymentRecordsNestedInput
   student?: Prisma.StudentUpdateOneWithoutPaymentRecordsNestedInput
   billingCharge?: Prisma.BillingChargeUpdateOneWithoutPaymentsNestedInput
-  recordedByMembership?: Prisma.OrganizationMembershipUpdateOneRequiredWithoutRecordedPaymentsNestedInput
+  recordedByMembership?: Prisma.OrganizationMembershipUpdateOneWithoutRecordedPaymentsNestedInput
 }
 
 export type PaymentRecordUncheckedUpdateWithoutBranchInput = {
@@ -1449,7 +1449,7 @@ export type PaymentRecordUncheckedUpdateWithoutBranchInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   externalProvider?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   externalReference?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  recordedByMembershipId?: Prisma.StringFieldUpdateOperationsInput | string
+  recordedByMembershipId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   recordedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1470,7 +1470,7 @@ export type PaymentRecordUncheckedUpdateManyWithoutBranchInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   externalProvider?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   externalReference?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  recordedByMembershipId?: Prisma.StringFieldUpdateOperationsInput | string
+  recordedByMembershipId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   recordedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1576,7 +1576,7 @@ export type PaymentRecordCreateManyStudentInput = {
   description?: string | null
   externalProvider?: string | null
   externalReference?: string | null
-  recordedByMembershipId: string
+  recordedByMembershipId?: string | null
   recordedAt: Date | string
   notes?: string | null
   createdAt?: Date | string
@@ -1603,7 +1603,7 @@ export type PaymentRecordUpdateWithoutStudentInput = {
   organization?: Prisma.OrganizationUpdateOneRequiredWithoutPaymentRecordsNestedInput
   branch?: Prisma.BranchUpdateOneRequiredWithoutPaymentRecordsNestedInput
   billingCharge?: Prisma.BillingChargeUpdateOneWithoutPaymentsNestedInput
-  recordedByMembership?: Prisma.OrganizationMembershipUpdateOneRequiredWithoutRecordedPaymentsNestedInput
+  recordedByMembership?: Prisma.OrganizationMembershipUpdateOneWithoutRecordedPaymentsNestedInput
 }
 
 export type PaymentRecordUncheckedUpdateWithoutStudentInput = {
@@ -1619,7 +1619,7 @@ export type PaymentRecordUncheckedUpdateWithoutStudentInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   externalProvider?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   externalReference?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  recordedByMembershipId?: Prisma.StringFieldUpdateOperationsInput | string
+  recordedByMembershipId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   recordedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1640,7 +1640,7 @@ export type PaymentRecordUncheckedUpdateManyWithoutStudentInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   externalProvider?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   externalReference?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  recordedByMembershipId?: Prisma.StringFieldUpdateOperationsInput | string
+  recordedByMembershipId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   recordedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1661,7 +1661,7 @@ export type PaymentRecordCreateManyBillingChargeInput = {
   description?: string | null
   externalProvider?: string | null
   externalReference?: string | null
-  recordedByMembershipId: string
+  recordedByMembershipId?: string | null
   recordedAt: Date | string
   notes?: string | null
   createdAt?: Date | string
@@ -1688,7 +1688,7 @@ export type PaymentRecordUpdateWithoutBillingChargeInput = {
   organization?: Prisma.OrganizationUpdateOneRequiredWithoutPaymentRecordsNestedInput
   branch?: Prisma.BranchUpdateOneRequiredWithoutPaymentRecordsNestedInput
   student?: Prisma.StudentUpdateOneWithoutPaymentRecordsNestedInput
-  recordedByMembership?: Prisma.OrganizationMembershipUpdateOneRequiredWithoutRecordedPaymentsNestedInput
+  recordedByMembership?: Prisma.OrganizationMembershipUpdateOneWithoutRecordedPaymentsNestedInput
 }
 
 export type PaymentRecordUncheckedUpdateWithoutBillingChargeInput = {
@@ -1704,7 +1704,7 @@ export type PaymentRecordUncheckedUpdateWithoutBillingChargeInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   externalProvider?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   externalReference?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  recordedByMembershipId?: Prisma.StringFieldUpdateOperationsInput | string
+  recordedByMembershipId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   recordedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1725,7 +1725,7 @@ export type PaymentRecordUncheckedUpdateManyWithoutBillingChargeInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   externalProvider?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   externalReference?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  recordedByMembershipId?: Prisma.StringFieldUpdateOperationsInput | string
+  recordedByMembershipId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   recordedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1760,7 +1760,7 @@ export type PaymentRecordSelect<ExtArgs extends runtime.Types.Extensions.Interna
   branch?: boolean | Prisma.BranchDefaultArgs<ExtArgs>
   student?: boolean | Prisma.PaymentRecord$studentArgs<ExtArgs>
   billingCharge?: boolean | Prisma.PaymentRecord$billingChargeArgs<ExtArgs>
-  recordedByMembership?: boolean | Prisma.OrganizationMembershipDefaultArgs<ExtArgs>
+  recordedByMembership?: boolean | Prisma.PaymentRecord$recordedByMembershipArgs<ExtArgs>
 }, ExtArgs["result"]["paymentRecord"]>
 
 export type PaymentRecordSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -1788,7 +1788,7 @@ export type PaymentRecordSelectCreateManyAndReturn<ExtArgs extends runtime.Types
   branch?: boolean | Prisma.BranchDefaultArgs<ExtArgs>
   student?: boolean | Prisma.PaymentRecord$studentArgs<ExtArgs>
   billingCharge?: boolean | Prisma.PaymentRecord$billingChargeArgs<ExtArgs>
-  recordedByMembership?: boolean | Prisma.OrganizationMembershipDefaultArgs<ExtArgs>
+  recordedByMembership?: boolean | Prisma.PaymentRecord$recordedByMembershipArgs<ExtArgs>
 }, ExtArgs["result"]["paymentRecord"]>
 
 export type PaymentRecordSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -1816,7 +1816,7 @@ export type PaymentRecordSelectUpdateManyAndReturn<ExtArgs extends runtime.Types
   branch?: boolean | Prisma.BranchDefaultArgs<ExtArgs>
   student?: boolean | Prisma.PaymentRecord$studentArgs<ExtArgs>
   billingCharge?: boolean | Prisma.PaymentRecord$billingChargeArgs<ExtArgs>
-  recordedByMembership?: boolean | Prisma.OrganizationMembershipDefaultArgs<ExtArgs>
+  recordedByMembership?: boolean | Prisma.PaymentRecord$recordedByMembershipArgs<ExtArgs>
 }, ExtArgs["result"]["paymentRecord"]>
 
 export type PaymentRecordSelectScalar = {
@@ -1848,21 +1848,21 @@ export type PaymentRecordInclude<ExtArgs extends runtime.Types.Extensions.Intern
   branch?: boolean | Prisma.BranchDefaultArgs<ExtArgs>
   student?: boolean | Prisma.PaymentRecord$studentArgs<ExtArgs>
   billingCharge?: boolean | Prisma.PaymentRecord$billingChargeArgs<ExtArgs>
-  recordedByMembership?: boolean | Prisma.OrganizationMembershipDefaultArgs<ExtArgs>
+  recordedByMembership?: boolean | Prisma.PaymentRecord$recordedByMembershipArgs<ExtArgs>
 }
 export type PaymentRecordIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   organization?: boolean | Prisma.OrganizationDefaultArgs<ExtArgs>
   branch?: boolean | Prisma.BranchDefaultArgs<ExtArgs>
   student?: boolean | Prisma.PaymentRecord$studentArgs<ExtArgs>
   billingCharge?: boolean | Prisma.PaymentRecord$billingChargeArgs<ExtArgs>
-  recordedByMembership?: boolean | Prisma.OrganizationMembershipDefaultArgs<ExtArgs>
+  recordedByMembership?: boolean | Prisma.PaymentRecord$recordedByMembershipArgs<ExtArgs>
 }
 export type PaymentRecordIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   organization?: boolean | Prisma.OrganizationDefaultArgs<ExtArgs>
   branch?: boolean | Prisma.BranchDefaultArgs<ExtArgs>
   student?: boolean | Prisma.PaymentRecord$studentArgs<ExtArgs>
   billingCharge?: boolean | Prisma.PaymentRecord$billingChargeArgs<ExtArgs>
-  recordedByMembership?: boolean | Prisma.OrganizationMembershipDefaultArgs<ExtArgs>
+  recordedByMembership?: boolean | Prisma.PaymentRecord$recordedByMembershipArgs<ExtArgs>
 }
 
 export type $PaymentRecordPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1872,7 +1872,7 @@ export type $PaymentRecordPayload<ExtArgs extends runtime.Types.Extensions.Inter
     branch: Prisma.$BranchPayload<ExtArgs>
     student: Prisma.$StudentPayload<ExtArgs> | null
     billingCharge: Prisma.$BillingChargePayload<ExtArgs> | null
-    recordedByMembership: Prisma.$OrganizationMembershipPayload<ExtArgs>
+    recordedByMembership: Prisma.$OrganizationMembershipPayload<ExtArgs> | null
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1889,7 +1889,7 @@ export type $PaymentRecordPayload<ExtArgs extends runtime.Types.Extensions.Inter
     description: string | null
     externalProvider: string | null
     externalReference: string | null
-    recordedByMembershipId: string
+    recordedByMembershipId: string | null
     recordedAt: Date
     notes: string | null
     createdAt: Date
@@ -2293,7 +2293,7 @@ export interface Prisma__PaymentRecordClient<T, Null = never, ExtArgs extends ru
   branch<T extends Prisma.BranchDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.BranchDefaultArgs<ExtArgs>>): Prisma.Prisma__BranchClient<runtime.Types.Result.GetResult<Prisma.$BranchPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   student<T extends Prisma.PaymentRecord$studentArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.PaymentRecord$studentArgs<ExtArgs>>): Prisma.Prisma__StudentClient<runtime.Types.Result.GetResult<Prisma.$StudentPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   billingCharge<T extends Prisma.PaymentRecord$billingChargeArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.PaymentRecord$billingChargeArgs<ExtArgs>>): Prisma.Prisma__BillingChargeClient<runtime.Types.Result.GetResult<Prisma.$BillingChargePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-  recordedByMembership<T extends Prisma.OrganizationMembershipDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.OrganizationMembershipDefaultArgs<ExtArgs>>): Prisma.Prisma__OrganizationMembershipClient<runtime.Types.Result.GetResult<Prisma.$OrganizationMembershipPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  recordedByMembership<T extends Prisma.PaymentRecord$recordedByMembershipArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.PaymentRecord$recordedByMembershipArgs<ExtArgs>>): Prisma.Prisma__OrganizationMembershipClient<runtime.Types.Result.GetResult<Prisma.$OrganizationMembershipPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2779,6 +2779,25 @@ export type PaymentRecord$billingChargeArgs<ExtArgs extends runtime.Types.Extens
    */
   include?: Prisma.BillingChargeInclude<ExtArgs> | null
   where?: Prisma.BillingChargeWhereInput
+}
+
+/**
+ * PaymentRecord.recordedByMembership
+ */
+export type PaymentRecord$recordedByMembershipArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the OrganizationMembership
+   */
+  select?: Prisma.OrganizationMembershipSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the OrganizationMembership
+   */
+  omit?: Prisma.OrganizationMembershipOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.OrganizationMembershipInclude<ExtArgs> | null
+  where?: Prisma.OrganizationMembershipWhereInput
 }
 
 /**

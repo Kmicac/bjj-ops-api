@@ -13,9 +13,12 @@ import type { AuthenticatedPrincipal } from '../auth/authenticated-principal.int
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 import { CreateExternalEntityLinkUseCase } from './application/use-cases/create-external-entity-link.use-case';
 import { CreateIntegrationConnectionUseCase } from './application/use-cases/create-integration-connection.use-case';
+import { GetIntegrationWebhookEventUseCase } from './application/use-cases/get-integration-webhook-event.use-case';
 import { ListExternalEntityLinksUseCase } from './application/use-cases/list-external-entity-links.use-case';
 import { ListIntegrationConnectionsUseCase } from './application/use-cases/list-integration-connections.use-case';
 import { ListIntegrationSyncJobsUseCase } from './application/use-cases/list-integration-sync-jobs.use-case';
+import { ListIntegrationWebhookEventsUseCase } from './application/use-cases/list-integration-webhook-events.use-case';
+import { ReprocessMercadoPagoWebhookEventUseCase } from './application/use-cases/reprocess-mercado-pago-webhook-event.use-case';
 import { TestIntegrationConnectionUseCase } from './application/use-cases/test-integration-connection.use-case';
 import { TriggerIntegrationSyncUseCase } from './application/use-cases/trigger-integration-sync.use-case';
 import { UpdateIntegrationConnectionUseCase } from './application/use-cases/update-integration-connection.use-case';
@@ -24,6 +27,7 @@ import { CreateIntegrationConnectionDto } from './dto/create-integration-connect
 import { ListExternalEntityLinksQueryDto } from './dto/list-external-entity-links.query.dto';
 import { ListIntegrationsQueryDto } from './dto/list-integrations.query.dto';
 import { ListIntegrationSyncJobsQueryDto } from './dto/list-integration-sync-jobs.query.dto';
+import { ListIntegrationWebhookEventsQueryDto } from './dto/list-integration-webhook-events.query.dto';
 import { TriggerIntegrationSyncDto } from './dto/trigger-integration-sync.dto';
 import { UpdateIntegrationConnectionDto } from './dto/update-integration-connection.dto';
 
@@ -37,8 +41,11 @@ export class IntegrationsController {
     private readonly testIntegrationConnectionUseCase: TestIntegrationConnectionUseCase,
     private readonly triggerIntegrationSyncUseCase: TriggerIntegrationSyncUseCase,
     private readonly listIntegrationSyncJobsUseCase: ListIntegrationSyncJobsUseCase,
+    private readonly listIntegrationWebhookEventsUseCase: ListIntegrationWebhookEventsUseCase,
+    private readonly getIntegrationWebhookEventUseCase: GetIntegrationWebhookEventUseCase,
     private readonly createExternalEntityLinkUseCase: CreateExternalEntityLinkUseCase,
     private readonly listExternalEntityLinksUseCase: ListExternalEntityLinksUseCase,
+    private readonly reprocessMercadoPagoWebhookEventUseCase: ReprocessMercadoPagoWebhookEventUseCase,
   ) {}
 
   @Post()
@@ -125,6 +132,36 @@ export class IntegrationsController {
     );
   }
 
+  @Get(':integrationId/webhook-events')
+  listWebhookEvents(
+    @CurrentPrincipal() principal: AuthenticatedPrincipal,
+    @Param('organizationId') organizationId: string,
+    @Param('integrationId') integrationId: string,
+    @Query() query: ListIntegrationWebhookEventsQueryDto,
+  ) {
+    return this.listIntegrationWebhookEventsUseCase.execute(
+      principal,
+      organizationId,
+      integrationId,
+      query,
+    );
+  }
+
+  @Get(':integrationId/webhook-events/:eventId')
+  getWebhookEvent(
+    @CurrentPrincipal() principal: AuthenticatedPrincipal,
+    @Param('organizationId') organizationId: string,
+    @Param('integrationId') integrationId: string,
+    @Param('eventId') eventId: string,
+  ) {
+    return this.getIntegrationWebhookEventUseCase.execute(
+      principal,
+      organizationId,
+      integrationId,
+      eventId,
+    );
+  }
+
   @Post(':integrationId/external-links')
   createExternalLink(
     @CurrentPrincipal() principal: AuthenticatedPrincipal,
@@ -152,6 +189,21 @@ export class IntegrationsController {
       organizationId,
       integrationId,
       query,
+    );
+  }
+
+  @Post(':integrationId/webhook-events/:eventId/reprocess')
+  reprocessWebhookEvent(
+    @CurrentPrincipal() principal: AuthenticatedPrincipal,
+    @Param('organizationId') organizationId: string,
+    @Param('integrationId') integrationId: string,
+    @Param('eventId') eventId: string,
+  ) {
+    return this.reprocessMercadoPagoWebhookEventUseCase.execute(
+      principal,
+      organizationId,
+      integrationId,
+      eventId,
     );
   }
 }

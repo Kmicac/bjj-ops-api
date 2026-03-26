@@ -216,6 +216,25 @@ export const IntegrationSyncStatus = {
 export type IntegrationSyncStatus = (typeof IntegrationSyncStatus)[keyof typeof IntegrationSyncStatus]
 
 
+export const IntegrationWebhookValidationStatus = {
+  VALID: 'VALID',
+  INVALID: 'INVALID'
+} as const
+
+export type IntegrationWebhookValidationStatus = (typeof IntegrationWebhookValidationStatus)[keyof typeof IntegrationWebhookValidationStatus]
+
+
+export const IntegrationWebhookProcessingStatus = {
+  RECEIVED: 'RECEIVED',
+  PROCESSING: 'PROCESSING',
+  PROCESSED: 'PROCESSED',
+  IGNORED: 'IGNORED',
+  FAILED: 'FAILED'
+} as const
+
+export type IntegrationWebhookProcessingStatus = (typeof IntegrationWebhookProcessingStatus)[keyof typeof IntegrationWebhookProcessingStatus]
+
+
 export const ExternalEntityType = {
   STUDENT: 'STUDENT',
   PAYMENT: 'PAYMENT',

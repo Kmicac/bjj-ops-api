@@ -427,6 +427,42 @@ Implication:
 
 ---
 
+### DD-032 — Mercado Pago reconciliation remains minimal, branch-local, and billing-owned
+
+Status: accepted
+
+Reason:
+The current product stage needs webhook-driven payment reconciliation without opening a full settlement engine, ledger, refund workflow, or cross-module ownership drift.
+
+Implication:
+
+- `integrations` validates authenticity, fetches provider resources, normalizes payloads, and stores webhook traceability.
+- `billing` decides whether a Mercado Pago `payment` creates or updates a `PaymentRecord` and whether it impacts `BillingCharge`.
+- Internal confirmation is limited to Mercado Pago payments whose top-level status is `approved`, except refund/chargeback-like states that remain only observed until a dedicated reversal flow exists.
+- Mercado Pago statuses `pending`, `authorized`, `in_process`, and `in_mediation` are observed internally as pending payment attempts and must not increase `BillingCharge.amountPaid`.
+- Mercado Pago statuses `rejected` and `cancelled` are recorded as non-confirmed payment attempts and must not confirm collection.
+- Refund and chargeback handling remains intentionally out of scope for this iteration; those states may be traced but must not silently mutate internal settled amounts.
+- System-originated `PaymentRecord` entries may exist without a human `recordedByMembershipId`.
+
+---
+
+### DD-033 — Webhook event operations stay inside integrations and use derived recoverability
+
+Status: accepted
+
+Reason:
+Operations need a safe way to inspect and retry webhook events without introducing a queue framework, a new operational service, or provider secrets exposure.
+
+Implication:
+
+- Administrative webhook-event listing and detail remain inside `integrations`.
+- Recoverability is derived from trusted internal state (`validationStatus`, `processingStatus`, and known processing reasons), not from user input.
+- Invalid or untrusted webhook events must never become reprocessable.
+- Successfully processed events are not considered operationally recoverable by default.
+- Operational responses must expose enough diagnostic context for support work, but must not expose secrets, raw signature headers, or integration configuration.
+
+---
+
 ## Future decisions intentionally left open
 
 These are intentionally not closed yet:

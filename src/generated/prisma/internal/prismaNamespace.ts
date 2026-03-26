@@ -398,6 +398,7 @@ export const ModelName = {
   PaymentRecord: 'PaymentRecord',
   IntegrationConnection: 'IntegrationConnection',
   IntegrationSyncJob: 'IntegrationSyncJob',
+  IntegrationWebhookEvent: 'IntegrationWebhookEvent',
   ExternalEntityLink: 'ExternalEntityLink',
   BillingPolicy: 'BillingPolicy',
   ClassSchedule: 'ClassSchedule',
@@ -421,7 +422,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "organization" | "branch" | "branchPublicProfile" | "organizationMembership" | "membershipRoleAssignment" | "membershipBranchScope" | "student" | "billingPlan" | "studentMembership" | "billingCharge" | "paymentRecord" | "integrationConnection" | "integrationSyncJob" | "externalEntityLink" | "billingPolicy" | "classSchedule" | "classSession" | "attendanceRecord" | "promotionRequest" | "promotionEvaluation" | "auditLog"
+    modelProps: "user" | "organization" | "branch" | "branchPublicProfile" | "organizationMembership" | "membershipRoleAssignment" | "membershipBranchScope" | "student" | "billingPlan" | "studentMembership" | "billingCharge" | "paymentRecord" | "integrationConnection" | "integrationSyncJob" | "integrationWebhookEvent" | "externalEntityLink" | "billingPolicy" | "classSchedule" | "classSession" | "attendanceRecord" | "promotionRequest" | "promotionEvaluation" | "auditLog"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -1461,6 +1462,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    IntegrationWebhookEvent: {
+      payload: Prisma.$IntegrationWebhookEventPayload<ExtArgs>
+      fields: Prisma.IntegrationWebhookEventFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.IntegrationWebhookEventFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$IntegrationWebhookEventPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.IntegrationWebhookEventFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$IntegrationWebhookEventPayload>
+        }
+        findFirst: {
+          args: Prisma.IntegrationWebhookEventFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$IntegrationWebhookEventPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.IntegrationWebhookEventFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$IntegrationWebhookEventPayload>
+        }
+        findMany: {
+          args: Prisma.IntegrationWebhookEventFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$IntegrationWebhookEventPayload>[]
+        }
+        create: {
+          args: Prisma.IntegrationWebhookEventCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$IntegrationWebhookEventPayload>
+        }
+        createMany: {
+          args: Prisma.IntegrationWebhookEventCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.IntegrationWebhookEventCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$IntegrationWebhookEventPayload>[]
+        }
+        delete: {
+          args: Prisma.IntegrationWebhookEventDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$IntegrationWebhookEventPayload>
+        }
+        update: {
+          args: Prisma.IntegrationWebhookEventUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$IntegrationWebhookEventPayload>
+        }
+        deleteMany: {
+          args: Prisma.IntegrationWebhookEventDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.IntegrationWebhookEventUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.IntegrationWebhookEventUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$IntegrationWebhookEventPayload>[]
+        }
+        upsert: {
+          args: Prisma.IntegrationWebhookEventUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$IntegrationWebhookEventPayload>
+        }
+        aggregate: {
+          args: Prisma.IntegrationWebhookEventAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateIntegrationWebhookEvent>
+        }
+        groupBy: {
+          args: Prisma.IntegrationWebhookEventGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.IntegrationWebhookEventGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.IntegrationWebhookEventCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.IntegrationWebhookEventCountAggregateOutputType> | number
+        }
+      }
+    }
     ExternalEntityLink: {
       payload: Prisma.$ExternalEntityLinkPayload<ExtArgs>
       fields: Prisma.ExternalEntityLinkFieldRefs
@@ -2289,6 +2364,10 @@ export const BillingChargeScalarFieldEnum = {
   description: 'description',
   externalProvider: 'externalProvider',
   externalReference: 'externalReference',
+  lastExternalPaymentReference: 'lastExternalPaymentReference',
+  lastExternalPaymentStatus: 'lastExternalPaymentStatus',
+  lastExternalPaymentStatusDetail: 'lastExternalPaymentStatusDetail',
+  lastExternalPaymentObservedAt: 'lastExternalPaymentObservedAt',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
   deletedAt: 'deletedAt'
@@ -2362,6 +2441,36 @@ export const IntegrationSyncJobScalarFieldEnum = {
 } as const
 
 export type IntegrationSyncJobScalarFieldEnum = (typeof IntegrationSyncJobScalarFieldEnum)[keyof typeof IntegrationSyncJobScalarFieldEnum]
+
+
+export const IntegrationWebhookEventScalarFieldEnum = {
+  id: 'id',
+  provider: 'provider',
+  organizationId: 'organizationId',
+  branchId: 'branchId',
+  integrationConnectionId: 'integrationConnectionId',
+  deliveryId: 'deliveryId',
+  notificationType: 'notificationType',
+  action: 'action',
+  externalEventId: 'externalEventId',
+  externalResourceId: 'externalResourceId',
+  validationStatus: 'validationStatus',
+  validationError: 'validationError',
+  processingStatus: 'processingStatus',
+  processingError: 'processingError',
+  payloadJson: 'payloadJson',
+  resourceJson: 'resourceJson',
+  queryJson: 'queryJson',
+  headersJson: 'headersJson',
+  receivedAt: 'receivedAt',
+  processedAt: 'processedAt',
+  reprocessCount: 'reprocessCount',
+  lastReprocessedAt: 'lastReprocessedAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type IntegrationWebhookEventScalarFieldEnum = (typeof IntegrationWebhookEventScalarFieldEnum)[keyof typeof IntegrationWebhookEventScalarFieldEnum]
 
 
 export const ExternalEntityLinkScalarFieldEnum = {
@@ -2549,6 +2658,13 @@ export const NullableJsonNullValueInput = {
 } as const
 
 export type NullableJsonNullValueInput = (typeof NullableJsonNullValueInput)[keyof typeof NullableJsonNullValueInput]
+
+
+export const JsonNullValueInput = {
+  JsonNull: JsonNull
+} as const
+
+export type JsonNullValueInput = (typeof JsonNullValueInput)[keyof typeof JsonNullValueInput]
 
 
 export const QueryMode = {
@@ -2968,6 +3084,34 @@ export type ListEnumIntegrationSyncKindFieldRefInput<$PrismaModel> = FieldRefInp
 
 
 /**
+ * Reference to a field of type 'IntegrationWebhookValidationStatus'
+ */
+export type EnumIntegrationWebhookValidationStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'IntegrationWebhookValidationStatus'>
+    
+
+
+/**
+ * Reference to a field of type 'IntegrationWebhookValidationStatus[]'
+ */
+export type ListEnumIntegrationWebhookValidationStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'IntegrationWebhookValidationStatus[]'>
+    
+
+
+/**
+ * Reference to a field of type 'IntegrationWebhookProcessingStatus'
+ */
+export type EnumIntegrationWebhookProcessingStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'IntegrationWebhookProcessingStatus'>
+    
+
+
+/**
+ * Reference to a field of type 'IntegrationWebhookProcessingStatus[]'
+ */
+export type ListEnumIntegrationWebhookProcessingStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'IntegrationWebhookProcessingStatus[]'>
+    
+
+
+/**
  * Reference to a field of type 'ExternalEntityType'
  */
 export type EnumExternalEntityTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ExternalEntityType'>
@@ -3201,6 +3345,7 @@ export type GlobalOmitConfig = {
   paymentRecord?: Prisma.PaymentRecordOmit
   integrationConnection?: Prisma.IntegrationConnectionOmit
   integrationSyncJob?: Prisma.IntegrationSyncJobOmit
+  integrationWebhookEvent?: Prisma.IntegrationWebhookEventOmit
   externalEntityLink?: Prisma.ExternalEntityLinkOmit
   billingPolicy?: Prisma.BillingPolicyOmit
   classSchedule?: Prisma.ClassScheduleOmit

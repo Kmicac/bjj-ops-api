@@ -156,6 +156,19 @@ enum IntegrationSyncStatus {
   PARTIALLY_SUCCEEDED
 }
 
+enum IntegrationWebhookValidationStatus {
+  VALID
+  INVALID
+}
+
+enum IntegrationWebhookProcessingStatus {
+  RECEIVED
+  PROCESSING
+  PROCESSED
+  IGNORED
+  FAILED
+}
+
 enum ExternalEntityType {
   STUDENT
   PAYMENT
@@ -291,6 +304,7 @@ model Organization {
   billingPolicies      BillingPolicy[]
   integrationConnections IntegrationConnection[]
   integrationSyncJobs    IntegrationSyncJob[]
+  webhookEvents          IntegrationWebhookEvent[]
   externalEntityLinks    ExternalEntityLink[]
   auditLogs            AuditLog[]
 
@@ -331,6 +345,7 @@ model Branch {
   billingPolicy       BillingPolicy?
   integrationConnections IntegrationConnection[]
   integrationSyncJobs    IntegrationSyncJob[]
+  webhookEvents          IntegrationWebhookEvent[]
   externalEntityLinks    ExternalEntityLink[]
   primaryMemberships  OrganizationMembership[] @relation("MembershipPrimaryBranch")
   membershipScopes    MembershipBranchScope[]
@@ -536,6 +551,10 @@ model BillingCharge {
   description         String?
   externalProvider    String?
   externalReference   String?
+  lastExternalPaymentReference String?
+  lastExternalPaymentStatus    String?
+  lastExternalPaymentStatusDetail String?
+  lastExternalPaymentObservedAt DateTime?   @db.Timestamptz(3)
   createdAt           DateTime            @default(now()) @db.Timestamptz(3)
   updatedAt           DateTime            @updatedAt @db.Timestamptz(3)
   deletedAt           DateTime?           @db.Timestamptz(3)
@@ -569,7 +588,7 @@ model PaymentRecord {
   description            String?
   externalProvider       String?
   externalReference      String?
-  recordedByMembershipId String
+  recordedByMembershipId String?
   recordedAt             DateTime      @db.Timestamptz(3)
   notes                  String?
   createdAt              DateTime      @default(now()) @db.Timestamptz(3)
@@ -580,7 +599,7 @@ model PaymentRecord {
   branch               Branch                 @relation(fields: [branchId, organizationId], references: [id, organizationId], onDelete: Restrict)
   student              Student?               @relation(fields: [studentId, organizationId], references: [id, organizationId], onDelete: Restrict)
   billingCharge        BillingCharge?         @relation(fields: [billingChargeId, organizationId], references: [id, organizationId], onDelete: Restrict)
-  recordedByMembership OrganizationMembership @relation("PaymentRecordedByMembership", fields: [recordedByMembershipId, organizationId], references: [id, organizationId], onDelete: Restrict)
+  recordedByMembership OrganizationMembership? @relation("PaymentRecordedByMembership", fields: [recordedByMembershipId, organizationId], references: [id, organizationId], onDelete: Restrict)
 
   @@unique([id, organizationId])
   @@index([organizationId, branchId, paymentKind, status])
@@ -611,6 +630,7 @@ model IntegrationConnection {
   createdByMembership  OrganizationMembership @relation("IntegrationConnectionCreatedByMembership", fields: [createdByMembershipId, organizationId], references: [id, organizationId], onDelete: Restrict)
   syncJobs             IntegrationSyncJob[]
   externalEntityLinks  ExternalEntityLink[]
+  webhookEvents        IntegrationWebhookEvent[]
 
   @@unique([id, organizationId])
   @@index([organizationId, provider, status])
@@ -643,6 +663,42 @@ model IntegrationSyncJob {
   @@index([integrationConnectionId, createdAt])
   @@index([organizationId, branchId, createdAt])
   @@index([organizationId, provider, syncKind, createdAt])
+}
+
+model IntegrationWebhookEvent {
+  id                      String                            @id @default(cuid())
+  provider                IntegrationProvider
+  organizationId          String?
+  branchId                String?
+  integrationConnectionId String?
+  deliveryId              String?
+  notificationType        String?
+  action                  String?
+  externalEventId         String?
+  externalResourceId      String?
+  validationStatus        IntegrationWebhookValidationStatus
+  validationError         String?
+  processingStatus        IntegrationWebhookProcessingStatus @default(RECEIVED)
+  processingError         String?
+  payloadJson             Json
+  resourceJson            Json?
+  queryJson               Json?
+  headersJson             Json?
+  receivedAt              DateTime                          @default(now()) @db.Timestamptz(3)
+  processedAt             DateTime?                         @db.Timestamptz(3)
+  reprocessCount          Int                               @default(0)
+  lastReprocessedAt       DateTime?                         @db.Timestamptz(3)
+  createdAt               DateTime                          @default(now()) @db.Timestamptz(3)
+  updatedAt               DateTime                          @updatedAt @db.Timestamptz(3)
+
+  organization         Organization?         @relation(fields: [organizationId], references: [id], onDelete: SetNull)
+  branch               Branch?               @relation(fields: [branchId, organizationId], references: [id, organizationId], onDelete: SetNull)
+  integrationConnection IntegrationConnection? @relation(fields: [integrationConnectionId, organizationId], references: [id, organizationId], onDelete: SetNull)
+
+  @@index([provider, receivedAt])
+  @@index([provider, deliveryId])
+  @@index([integrationConnectionId, receivedAt])
+  @@index([organizationId, branchId, receivedAt])
 }
 
 model ExternalEntityLink {

@@ -88,6 +88,11 @@ export type IntegrationConnection = Prisma.IntegrationConnectionModel
  */
 export type IntegrationSyncJob = Prisma.IntegrationSyncJobModel
 /**
+ * Model IntegrationWebhookEvent
+ * 
+ */
+export type IntegrationWebhookEvent = Prisma.IntegrationWebhookEventModel
+/**
  * Model ExternalEntityLink
  * 
  */

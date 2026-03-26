@@ -13,6 +13,7 @@ import type { AuthenticatedPrincipal } from '../auth/authenticated-principal.int
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 import { CreateBillingChargeUseCase } from './application/use-cases/create-billing-charge.use-case';
 import { CreateBillingPlanUseCase } from './application/use-cases/create-billing-plan.use-case';
+import { CreateMercadoPagoBillingChargePreferenceUseCase } from './application/use-cases/create-mercado-pago-billing-charge-preference.use-case';
 import { CreateStudentMembershipUseCase } from './application/use-cases/create-student-membership.use-case';
 import { GetBranchBillingPolicyUseCase } from './application/use-cases/get-branch-billing-policy.use-case';
 import { GetBranchBillingSummaryUseCase } from './application/use-cases/get-branch-billing-summary.use-case';
@@ -51,6 +52,7 @@ export class BillingController {
     private readonly createBillingPlanUseCase: CreateBillingPlanUseCase,
     private readonly listBillingPlansUseCase: ListBillingPlansUseCase,
     private readonly updateBillingPlanUseCase: UpdateBillingPlanUseCase,
+    private readonly createMercadoPagoBillingChargePreferenceUseCase: CreateMercadoPagoBillingChargePreferenceUseCase,
     private readonly createStudentMembershipUseCase: CreateStudentMembershipUseCase,
     private readonly getStudentMembershipUseCase: GetStudentMembershipUseCase,
     private readonly updateStudentMembershipUseCase: UpdateStudentMembershipUseCase,
@@ -169,6 +171,21 @@ export class BillingController {
       organizationId,
       studentId,
       dto,
+    );
+  }
+
+  @Post('students/:studentId/billing-charges/:chargeId/mercado-pago/preference')
+  createMercadoPagoBillingChargePreference(
+    @CurrentPrincipal() principal: AuthenticatedPrincipal,
+    @Param('organizationId') organizationId: string,
+    @Param('studentId') studentId: string,
+    @Param('chargeId') chargeId: string,
+  ) {
+    return this.createMercadoPagoBillingChargePreferenceUseCase.execute(
+      principal,
+      organizationId,
+      studentId,
+      chargeId,
     );
   }
 

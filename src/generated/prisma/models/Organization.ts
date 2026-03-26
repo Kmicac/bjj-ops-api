@@ -230,6 +230,7 @@ export type OrganizationWhereInput = {
   billingPolicies?: Prisma.BillingPolicyListRelationFilter
   integrationConnections?: Prisma.IntegrationConnectionListRelationFilter
   integrationSyncJobs?: Prisma.IntegrationSyncJobListRelationFilter
+  webhookEvents?: Prisma.IntegrationWebhookEventListRelationFilter
   externalEntityLinks?: Prisma.ExternalEntityLinkListRelationFilter
   auditLogs?: Prisma.AuditLogListRelationFilter
 }
@@ -260,6 +261,7 @@ export type OrganizationOrderByWithRelationInput = {
   billingPolicies?: Prisma.BillingPolicyOrderByRelationAggregateInput
   integrationConnections?: Prisma.IntegrationConnectionOrderByRelationAggregateInput
   integrationSyncJobs?: Prisma.IntegrationSyncJobOrderByRelationAggregateInput
+  webhookEvents?: Prisma.IntegrationWebhookEventOrderByRelationAggregateInput
   externalEntityLinks?: Prisma.ExternalEntityLinkOrderByRelationAggregateInput
   auditLogs?: Prisma.AuditLogOrderByRelationAggregateInput
 }
@@ -293,6 +295,7 @@ export type OrganizationWhereUniqueInput = Prisma.AtLeast<{
   billingPolicies?: Prisma.BillingPolicyListRelationFilter
   integrationConnections?: Prisma.IntegrationConnectionListRelationFilter
   integrationSyncJobs?: Prisma.IntegrationSyncJobListRelationFilter
+  webhookEvents?: Prisma.IntegrationWebhookEventListRelationFilter
   externalEntityLinks?: Prisma.ExternalEntityLinkListRelationFilter
   auditLogs?: Prisma.AuditLogListRelationFilter
 }, "id" | "slug">
@@ -353,6 +356,7 @@ export type OrganizationCreateInput = {
   billingPolicies?: Prisma.BillingPolicyCreateNestedManyWithoutOrganizationInput
   integrationConnections?: Prisma.IntegrationConnectionCreateNestedManyWithoutOrganizationInput
   integrationSyncJobs?: Prisma.IntegrationSyncJobCreateNestedManyWithoutOrganizationInput
+  webhookEvents?: Prisma.IntegrationWebhookEventCreateNestedManyWithoutOrganizationInput
   externalEntityLinks?: Prisma.ExternalEntityLinkCreateNestedManyWithoutOrganizationInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutOrganizationInput
 }
@@ -383,6 +387,7 @@ export type OrganizationUncheckedCreateInput = {
   billingPolicies?: Prisma.BillingPolicyUncheckedCreateNestedManyWithoutOrganizationInput
   integrationConnections?: Prisma.IntegrationConnectionUncheckedCreateNestedManyWithoutOrganizationInput
   integrationSyncJobs?: Prisma.IntegrationSyncJobUncheckedCreateNestedManyWithoutOrganizationInput
+  webhookEvents?: Prisma.IntegrationWebhookEventUncheckedCreateNestedManyWithoutOrganizationInput
   externalEntityLinks?: Prisma.ExternalEntityLinkUncheckedCreateNestedManyWithoutOrganizationInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutOrganizationInput
 }
@@ -413,6 +418,7 @@ export type OrganizationUpdateInput = {
   billingPolicies?: Prisma.BillingPolicyUpdateManyWithoutOrganizationNestedInput
   integrationConnections?: Prisma.IntegrationConnectionUpdateManyWithoutOrganizationNestedInput
   integrationSyncJobs?: Prisma.IntegrationSyncJobUpdateManyWithoutOrganizationNestedInput
+  webhookEvents?: Prisma.IntegrationWebhookEventUpdateManyWithoutOrganizationNestedInput
   externalEntityLinks?: Prisma.ExternalEntityLinkUpdateManyWithoutOrganizationNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutOrganizationNestedInput
 }
@@ -443,6 +449,7 @@ export type OrganizationUncheckedUpdateInput = {
   billingPolicies?: Prisma.BillingPolicyUncheckedUpdateManyWithoutOrganizationNestedInput
   integrationConnections?: Prisma.IntegrationConnectionUncheckedUpdateManyWithoutOrganizationNestedInput
   integrationSyncJobs?: Prisma.IntegrationSyncJobUncheckedUpdateManyWithoutOrganizationNestedInput
+  webhookEvents?: Prisma.IntegrationWebhookEventUncheckedUpdateManyWithoutOrganizationNestedInput
   externalEntityLinks?: Prisma.ExternalEntityLinkUncheckedUpdateManyWithoutOrganizationNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutOrganizationNestedInput
 }
@@ -522,6 +529,11 @@ export type OrganizationMinOrderByAggregateInput = {
 export type OrganizationScalarRelationFilter = {
   is?: Prisma.OrganizationWhereInput
   isNot?: Prisma.OrganizationWhereInput
+}
+
+export type OrganizationNullableScalarRelationFilter = {
+  is?: Prisma.OrganizationWhereInput | null
+  isNot?: Prisma.OrganizationWhereInput | null
 }
 
 export type EnumOrganizationStatusFieldUpdateOperationsInput = {
@@ -668,6 +680,22 @@ export type OrganizationUpdateOneRequiredWithoutIntegrationSyncJobsNestedInput =
   update?: Prisma.XOR<Prisma.XOR<Prisma.OrganizationUpdateToOneWithWhereWithoutIntegrationSyncJobsInput, Prisma.OrganizationUpdateWithoutIntegrationSyncJobsInput>, Prisma.OrganizationUncheckedUpdateWithoutIntegrationSyncJobsInput>
 }
 
+export type OrganizationCreateNestedOneWithoutWebhookEventsInput = {
+  create?: Prisma.XOR<Prisma.OrganizationCreateWithoutWebhookEventsInput, Prisma.OrganizationUncheckedCreateWithoutWebhookEventsInput>
+  connectOrCreate?: Prisma.OrganizationCreateOrConnectWithoutWebhookEventsInput
+  connect?: Prisma.OrganizationWhereUniqueInput
+}
+
+export type OrganizationUpdateOneWithoutWebhookEventsNestedInput = {
+  create?: Prisma.XOR<Prisma.OrganizationCreateWithoutWebhookEventsInput, Prisma.OrganizationUncheckedCreateWithoutWebhookEventsInput>
+  connectOrCreate?: Prisma.OrganizationCreateOrConnectWithoutWebhookEventsInput
+  upsert?: Prisma.OrganizationUpsertWithoutWebhookEventsInput
+  disconnect?: Prisma.OrganizationWhereInput | boolean
+  delete?: Prisma.OrganizationWhereInput | boolean
+  connect?: Prisma.OrganizationWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.OrganizationUpdateToOneWithWhereWithoutWebhookEventsInput, Prisma.OrganizationUpdateWithoutWebhookEventsInput>, Prisma.OrganizationUncheckedUpdateWithoutWebhookEventsInput>
+}
+
 export type OrganizationCreateNestedOneWithoutExternalEntityLinksInput = {
   create?: Prisma.XOR<Prisma.OrganizationCreateWithoutExternalEntityLinksInput, Prisma.OrganizationUncheckedCreateWithoutExternalEntityLinksInput>
   connectOrCreate?: Prisma.OrganizationCreateOrConnectWithoutExternalEntityLinksInput
@@ -805,6 +833,7 @@ export type OrganizationCreateWithoutBranchesInput = {
   billingPolicies?: Prisma.BillingPolicyCreateNestedManyWithoutOrganizationInput
   integrationConnections?: Prisma.IntegrationConnectionCreateNestedManyWithoutOrganizationInput
   integrationSyncJobs?: Prisma.IntegrationSyncJobCreateNestedManyWithoutOrganizationInput
+  webhookEvents?: Prisma.IntegrationWebhookEventCreateNestedManyWithoutOrganizationInput
   externalEntityLinks?: Prisma.ExternalEntityLinkCreateNestedManyWithoutOrganizationInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutOrganizationInput
 }
@@ -834,6 +863,7 @@ export type OrganizationUncheckedCreateWithoutBranchesInput = {
   billingPolicies?: Prisma.BillingPolicyUncheckedCreateNestedManyWithoutOrganizationInput
   integrationConnections?: Prisma.IntegrationConnectionUncheckedCreateNestedManyWithoutOrganizationInput
   integrationSyncJobs?: Prisma.IntegrationSyncJobUncheckedCreateNestedManyWithoutOrganizationInput
+  webhookEvents?: Prisma.IntegrationWebhookEventUncheckedCreateNestedManyWithoutOrganizationInput
   externalEntityLinks?: Prisma.ExternalEntityLinkUncheckedCreateNestedManyWithoutOrganizationInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutOrganizationInput
 }
@@ -879,6 +909,7 @@ export type OrganizationUpdateWithoutBranchesInput = {
   billingPolicies?: Prisma.BillingPolicyUpdateManyWithoutOrganizationNestedInput
   integrationConnections?: Prisma.IntegrationConnectionUpdateManyWithoutOrganizationNestedInput
   integrationSyncJobs?: Prisma.IntegrationSyncJobUpdateManyWithoutOrganizationNestedInput
+  webhookEvents?: Prisma.IntegrationWebhookEventUpdateManyWithoutOrganizationNestedInput
   externalEntityLinks?: Prisma.ExternalEntityLinkUpdateManyWithoutOrganizationNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutOrganizationNestedInput
 }
@@ -908,6 +939,7 @@ export type OrganizationUncheckedUpdateWithoutBranchesInput = {
   billingPolicies?: Prisma.BillingPolicyUncheckedUpdateManyWithoutOrganizationNestedInput
   integrationConnections?: Prisma.IntegrationConnectionUncheckedUpdateManyWithoutOrganizationNestedInput
   integrationSyncJobs?: Prisma.IntegrationSyncJobUncheckedUpdateManyWithoutOrganizationNestedInput
+  webhookEvents?: Prisma.IntegrationWebhookEventUncheckedUpdateManyWithoutOrganizationNestedInput
   externalEntityLinks?: Prisma.ExternalEntityLinkUncheckedUpdateManyWithoutOrganizationNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutOrganizationNestedInput
 }
@@ -937,6 +969,7 @@ export type OrganizationCreateWithoutPublicProfilesInput = {
   billingPolicies?: Prisma.BillingPolicyCreateNestedManyWithoutOrganizationInput
   integrationConnections?: Prisma.IntegrationConnectionCreateNestedManyWithoutOrganizationInput
   integrationSyncJobs?: Prisma.IntegrationSyncJobCreateNestedManyWithoutOrganizationInput
+  webhookEvents?: Prisma.IntegrationWebhookEventCreateNestedManyWithoutOrganizationInput
   externalEntityLinks?: Prisma.ExternalEntityLinkCreateNestedManyWithoutOrganizationInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutOrganizationInput
 }
@@ -966,6 +999,7 @@ export type OrganizationUncheckedCreateWithoutPublicProfilesInput = {
   billingPolicies?: Prisma.BillingPolicyUncheckedCreateNestedManyWithoutOrganizationInput
   integrationConnections?: Prisma.IntegrationConnectionUncheckedCreateNestedManyWithoutOrganizationInput
   integrationSyncJobs?: Prisma.IntegrationSyncJobUncheckedCreateNestedManyWithoutOrganizationInput
+  webhookEvents?: Prisma.IntegrationWebhookEventUncheckedCreateNestedManyWithoutOrganizationInput
   externalEntityLinks?: Prisma.ExternalEntityLinkUncheckedCreateNestedManyWithoutOrganizationInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutOrganizationInput
 }
@@ -1011,6 +1045,7 @@ export type OrganizationUpdateWithoutPublicProfilesInput = {
   billingPolicies?: Prisma.BillingPolicyUpdateManyWithoutOrganizationNestedInput
   integrationConnections?: Prisma.IntegrationConnectionUpdateManyWithoutOrganizationNestedInput
   integrationSyncJobs?: Prisma.IntegrationSyncJobUpdateManyWithoutOrganizationNestedInput
+  webhookEvents?: Prisma.IntegrationWebhookEventUpdateManyWithoutOrganizationNestedInput
   externalEntityLinks?: Prisma.ExternalEntityLinkUpdateManyWithoutOrganizationNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutOrganizationNestedInput
 }
@@ -1040,6 +1075,7 @@ export type OrganizationUncheckedUpdateWithoutPublicProfilesInput = {
   billingPolicies?: Prisma.BillingPolicyUncheckedUpdateManyWithoutOrganizationNestedInput
   integrationConnections?: Prisma.IntegrationConnectionUncheckedUpdateManyWithoutOrganizationNestedInput
   integrationSyncJobs?: Prisma.IntegrationSyncJobUncheckedUpdateManyWithoutOrganizationNestedInput
+  webhookEvents?: Prisma.IntegrationWebhookEventUncheckedUpdateManyWithoutOrganizationNestedInput
   externalEntityLinks?: Prisma.ExternalEntityLinkUncheckedUpdateManyWithoutOrganizationNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutOrganizationNestedInput
 }
@@ -1069,6 +1105,7 @@ export type OrganizationCreateWithoutMembershipsInput = {
   billingPolicies?: Prisma.BillingPolicyCreateNestedManyWithoutOrganizationInput
   integrationConnections?: Prisma.IntegrationConnectionCreateNestedManyWithoutOrganizationInput
   integrationSyncJobs?: Prisma.IntegrationSyncJobCreateNestedManyWithoutOrganizationInput
+  webhookEvents?: Prisma.IntegrationWebhookEventCreateNestedManyWithoutOrganizationInput
   externalEntityLinks?: Prisma.ExternalEntityLinkCreateNestedManyWithoutOrganizationInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutOrganizationInput
 }
@@ -1098,6 +1135,7 @@ export type OrganizationUncheckedCreateWithoutMembershipsInput = {
   billingPolicies?: Prisma.BillingPolicyUncheckedCreateNestedManyWithoutOrganizationInput
   integrationConnections?: Prisma.IntegrationConnectionUncheckedCreateNestedManyWithoutOrganizationInput
   integrationSyncJobs?: Prisma.IntegrationSyncJobUncheckedCreateNestedManyWithoutOrganizationInput
+  webhookEvents?: Prisma.IntegrationWebhookEventUncheckedCreateNestedManyWithoutOrganizationInput
   externalEntityLinks?: Prisma.ExternalEntityLinkUncheckedCreateNestedManyWithoutOrganizationInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutOrganizationInput
 }
@@ -1143,6 +1181,7 @@ export type OrganizationUpdateWithoutMembershipsInput = {
   billingPolicies?: Prisma.BillingPolicyUpdateManyWithoutOrganizationNestedInput
   integrationConnections?: Prisma.IntegrationConnectionUpdateManyWithoutOrganizationNestedInput
   integrationSyncJobs?: Prisma.IntegrationSyncJobUpdateManyWithoutOrganizationNestedInput
+  webhookEvents?: Prisma.IntegrationWebhookEventUpdateManyWithoutOrganizationNestedInput
   externalEntityLinks?: Prisma.ExternalEntityLinkUpdateManyWithoutOrganizationNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutOrganizationNestedInput
 }
@@ -1172,6 +1211,7 @@ export type OrganizationUncheckedUpdateWithoutMembershipsInput = {
   billingPolicies?: Prisma.BillingPolicyUncheckedUpdateManyWithoutOrganizationNestedInput
   integrationConnections?: Prisma.IntegrationConnectionUncheckedUpdateManyWithoutOrganizationNestedInput
   integrationSyncJobs?: Prisma.IntegrationSyncJobUncheckedUpdateManyWithoutOrganizationNestedInput
+  webhookEvents?: Prisma.IntegrationWebhookEventUncheckedUpdateManyWithoutOrganizationNestedInput
   externalEntityLinks?: Prisma.ExternalEntityLinkUncheckedUpdateManyWithoutOrganizationNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutOrganizationNestedInput
 }
@@ -1201,6 +1241,7 @@ export type OrganizationCreateWithoutStudentsInput = {
   billingPolicies?: Prisma.BillingPolicyCreateNestedManyWithoutOrganizationInput
   integrationConnections?: Prisma.IntegrationConnectionCreateNestedManyWithoutOrganizationInput
   integrationSyncJobs?: Prisma.IntegrationSyncJobCreateNestedManyWithoutOrganizationInput
+  webhookEvents?: Prisma.IntegrationWebhookEventCreateNestedManyWithoutOrganizationInput
   externalEntityLinks?: Prisma.ExternalEntityLinkCreateNestedManyWithoutOrganizationInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutOrganizationInput
 }
@@ -1230,6 +1271,7 @@ export type OrganizationUncheckedCreateWithoutStudentsInput = {
   billingPolicies?: Prisma.BillingPolicyUncheckedCreateNestedManyWithoutOrganizationInput
   integrationConnections?: Prisma.IntegrationConnectionUncheckedCreateNestedManyWithoutOrganizationInput
   integrationSyncJobs?: Prisma.IntegrationSyncJobUncheckedCreateNestedManyWithoutOrganizationInput
+  webhookEvents?: Prisma.IntegrationWebhookEventUncheckedCreateNestedManyWithoutOrganizationInput
   externalEntityLinks?: Prisma.ExternalEntityLinkUncheckedCreateNestedManyWithoutOrganizationInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutOrganizationInput
 }
@@ -1275,6 +1317,7 @@ export type OrganizationUpdateWithoutStudentsInput = {
   billingPolicies?: Prisma.BillingPolicyUpdateManyWithoutOrganizationNestedInput
   integrationConnections?: Prisma.IntegrationConnectionUpdateManyWithoutOrganizationNestedInput
   integrationSyncJobs?: Prisma.IntegrationSyncJobUpdateManyWithoutOrganizationNestedInput
+  webhookEvents?: Prisma.IntegrationWebhookEventUpdateManyWithoutOrganizationNestedInput
   externalEntityLinks?: Prisma.ExternalEntityLinkUpdateManyWithoutOrganizationNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutOrganizationNestedInput
 }
@@ -1304,6 +1347,7 @@ export type OrganizationUncheckedUpdateWithoutStudentsInput = {
   billingPolicies?: Prisma.BillingPolicyUncheckedUpdateManyWithoutOrganizationNestedInput
   integrationConnections?: Prisma.IntegrationConnectionUncheckedUpdateManyWithoutOrganizationNestedInput
   integrationSyncJobs?: Prisma.IntegrationSyncJobUncheckedUpdateManyWithoutOrganizationNestedInput
+  webhookEvents?: Prisma.IntegrationWebhookEventUncheckedUpdateManyWithoutOrganizationNestedInput
   externalEntityLinks?: Prisma.ExternalEntityLinkUncheckedUpdateManyWithoutOrganizationNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutOrganizationNestedInput
 }
@@ -1333,6 +1377,7 @@ export type OrganizationCreateWithoutBillingPlansInput = {
   billingPolicies?: Prisma.BillingPolicyCreateNestedManyWithoutOrganizationInput
   integrationConnections?: Prisma.IntegrationConnectionCreateNestedManyWithoutOrganizationInput
   integrationSyncJobs?: Prisma.IntegrationSyncJobCreateNestedManyWithoutOrganizationInput
+  webhookEvents?: Prisma.IntegrationWebhookEventCreateNestedManyWithoutOrganizationInput
   externalEntityLinks?: Prisma.ExternalEntityLinkCreateNestedManyWithoutOrganizationInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutOrganizationInput
 }
@@ -1362,6 +1407,7 @@ export type OrganizationUncheckedCreateWithoutBillingPlansInput = {
   billingPolicies?: Prisma.BillingPolicyUncheckedCreateNestedManyWithoutOrganizationInput
   integrationConnections?: Prisma.IntegrationConnectionUncheckedCreateNestedManyWithoutOrganizationInput
   integrationSyncJobs?: Prisma.IntegrationSyncJobUncheckedCreateNestedManyWithoutOrganizationInput
+  webhookEvents?: Prisma.IntegrationWebhookEventUncheckedCreateNestedManyWithoutOrganizationInput
   externalEntityLinks?: Prisma.ExternalEntityLinkUncheckedCreateNestedManyWithoutOrganizationInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutOrganizationInput
 }
@@ -1407,6 +1453,7 @@ export type OrganizationUpdateWithoutBillingPlansInput = {
   billingPolicies?: Prisma.BillingPolicyUpdateManyWithoutOrganizationNestedInput
   integrationConnections?: Prisma.IntegrationConnectionUpdateManyWithoutOrganizationNestedInput
   integrationSyncJobs?: Prisma.IntegrationSyncJobUpdateManyWithoutOrganizationNestedInput
+  webhookEvents?: Prisma.IntegrationWebhookEventUpdateManyWithoutOrganizationNestedInput
   externalEntityLinks?: Prisma.ExternalEntityLinkUpdateManyWithoutOrganizationNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutOrganizationNestedInput
 }
@@ -1436,6 +1483,7 @@ export type OrganizationUncheckedUpdateWithoutBillingPlansInput = {
   billingPolicies?: Prisma.BillingPolicyUncheckedUpdateManyWithoutOrganizationNestedInput
   integrationConnections?: Prisma.IntegrationConnectionUncheckedUpdateManyWithoutOrganizationNestedInput
   integrationSyncJobs?: Prisma.IntegrationSyncJobUncheckedUpdateManyWithoutOrganizationNestedInput
+  webhookEvents?: Prisma.IntegrationWebhookEventUncheckedUpdateManyWithoutOrganizationNestedInput
   externalEntityLinks?: Prisma.ExternalEntityLinkUncheckedUpdateManyWithoutOrganizationNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutOrganizationNestedInput
 }
@@ -1465,6 +1513,7 @@ export type OrganizationCreateWithoutStudentMembershipsInput = {
   billingPolicies?: Prisma.BillingPolicyCreateNestedManyWithoutOrganizationInput
   integrationConnections?: Prisma.IntegrationConnectionCreateNestedManyWithoutOrganizationInput
   integrationSyncJobs?: Prisma.IntegrationSyncJobCreateNestedManyWithoutOrganizationInput
+  webhookEvents?: Prisma.IntegrationWebhookEventCreateNestedManyWithoutOrganizationInput
   externalEntityLinks?: Prisma.ExternalEntityLinkCreateNestedManyWithoutOrganizationInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutOrganizationInput
 }
@@ -1494,6 +1543,7 @@ export type OrganizationUncheckedCreateWithoutStudentMembershipsInput = {
   billingPolicies?: Prisma.BillingPolicyUncheckedCreateNestedManyWithoutOrganizationInput
   integrationConnections?: Prisma.IntegrationConnectionUncheckedCreateNestedManyWithoutOrganizationInput
   integrationSyncJobs?: Prisma.IntegrationSyncJobUncheckedCreateNestedManyWithoutOrganizationInput
+  webhookEvents?: Prisma.IntegrationWebhookEventUncheckedCreateNestedManyWithoutOrganizationInput
   externalEntityLinks?: Prisma.ExternalEntityLinkUncheckedCreateNestedManyWithoutOrganizationInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutOrganizationInput
 }
@@ -1539,6 +1589,7 @@ export type OrganizationUpdateWithoutStudentMembershipsInput = {
   billingPolicies?: Prisma.BillingPolicyUpdateManyWithoutOrganizationNestedInput
   integrationConnections?: Prisma.IntegrationConnectionUpdateManyWithoutOrganizationNestedInput
   integrationSyncJobs?: Prisma.IntegrationSyncJobUpdateManyWithoutOrganizationNestedInput
+  webhookEvents?: Prisma.IntegrationWebhookEventUpdateManyWithoutOrganizationNestedInput
   externalEntityLinks?: Prisma.ExternalEntityLinkUpdateManyWithoutOrganizationNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutOrganizationNestedInput
 }
@@ -1568,6 +1619,7 @@ export type OrganizationUncheckedUpdateWithoutStudentMembershipsInput = {
   billingPolicies?: Prisma.BillingPolicyUncheckedUpdateManyWithoutOrganizationNestedInput
   integrationConnections?: Prisma.IntegrationConnectionUncheckedUpdateManyWithoutOrganizationNestedInput
   integrationSyncJobs?: Prisma.IntegrationSyncJobUncheckedUpdateManyWithoutOrganizationNestedInput
+  webhookEvents?: Prisma.IntegrationWebhookEventUncheckedUpdateManyWithoutOrganizationNestedInput
   externalEntityLinks?: Prisma.ExternalEntityLinkUncheckedUpdateManyWithoutOrganizationNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutOrganizationNestedInput
 }
@@ -1597,6 +1649,7 @@ export type OrganizationCreateWithoutBillingChargesInput = {
   billingPolicies?: Prisma.BillingPolicyCreateNestedManyWithoutOrganizationInput
   integrationConnections?: Prisma.IntegrationConnectionCreateNestedManyWithoutOrganizationInput
   integrationSyncJobs?: Prisma.IntegrationSyncJobCreateNestedManyWithoutOrganizationInput
+  webhookEvents?: Prisma.IntegrationWebhookEventCreateNestedManyWithoutOrganizationInput
   externalEntityLinks?: Prisma.ExternalEntityLinkCreateNestedManyWithoutOrganizationInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutOrganizationInput
 }
@@ -1626,6 +1679,7 @@ export type OrganizationUncheckedCreateWithoutBillingChargesInput = {
   billingPolicies?: Prisma.BillingPolicyUncheckedCreateNestedManyWithoutOrganizationInput
   integrationConnections?: Prisma.IntegrationConnectionUncheckedCreateNestedManyWithoutOrganizationInput
   integrationSyncJobs?: Prisma.IntegrationSyncJobUncheckedCreateNestedManyWithoutOrganizationInput
+  webhookEvents?: Prisma.IntegrationWebhookEventUncheckedCreateNestedManyWithoutOrganizationInput
   externalEntityLinks?: Prisma.ExternalEntityLinkUncheckedCreateNestedManyWithoutOrganizationInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutOrganizationInput
 }
@@ -1671,6 +1725,7 @@ export type OrganizationUpdateWithoutBillingChargesInput = {
   billingPolicies?: Prisma.BillingPolicyUpdateManyWithoutOrganizationNestedInput
   integrationConnections?: Prisma.IntegrationConnectionUpdateManyWithoutOrganizationNestedInput
   integrationSyncJobs?: Prisma.IntegrationSyncJobUpdateManyWithoutOrganizationNestedInput
+  webhookEvents?: Prisma.IntegrationWebhookEventUpdateManyWithoutOrganizationNestedInput
   externalEntityLinks?: Prisma.ExternalEntityLinkUpdateManyWithoutOrganizationNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutOrganizationNestedInput
 }
@@ -1700,6 +1755,7 @@ export type OrganizationUncheckedUpdateWithoutBillingChargesInput = {
   billingPolicies?: Prisma.BillingPolicyUncheckedUpdateManyWithoutOrganizationNestedInput
   integrationConnections?: Prisma.IntegrationConnectionUncheckedUpdateManyWithoutOrganizationNestedInput
   integrationSyncJobs?: Prisma.IntegrationSyncJobUncheckedUpdateManyWithoutOrganizationNestedInput
+  webhookEvents?: Prisma.IntegrationWebhookEventUncheckedUpdateManyWithoutOrganizationNestedInput
   externalEntityLinks?: Prisma.ExternalEntityLinkUncheckedUpdateManyWithoutOrganizationNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutOrganizationNestedInput
 }
@@ -1729,6 +1785,7 @@ export type OrganizationCreateWithoutPaymentRecordsInput = {
   billingPolicies?: Prisma.BillingPolicyCreateNestedManyWithoutOrganizationInput
   integrationConnections?: Prisma.IntegrationConnectionCreateNestedManyWithoutOrganizationInput
   integrationSyncJobs?: Prisma.IntegrationSyncJobCreateNestedManyWithoutOrganizationInput
+  webhookEvents?: Prisma.IntegrationWebhookEventCreateNestedManyWithoutOrganizationInput
   externalEntityLinks?: Prisma.ExternalEntityLinkCreateNestedManyWithoutOrganizationInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutOrganizationInput
 }
@@ -1758,6 +1815,7 @@ export type OrganizationUncheckedCreateWithoutPaymentRecordsInput = {
   billingPolicies?: Prisma.BillingPolicyUncheckedCreateNestedManyWithoutOrganizationInput
   integrationConnections?: Prisma.IntegrationConnectionUncheckedCreateNestedManyWithoutOrganizationInput
   integrationSyncJobs?: Prisma.IntegrationSyncJobUncheckedCreateNestedManyWithoutOrganizationInput
+  webhookEvents?: Prisma.IntegrationWebhookEventUncheckedCreateNestedManyWithoutOrganizationInput
   externalEntityLinks?: Prisma.ExternalEntityLinkUncheckedCreateNestedManyWithoutOrganizationInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutOrganizationInput
 }
@@ -1803,6 +1861,7 @@ export type OrganizationUpdateWithoutPaymentRecordsInput = {
   billingPolicies?: Prisma.BillingPolicyUpdateManyWithoutOrganizationNestedInput
   integrationConnections?: Prisma.IntegrationConnectionUpdateManyWithoutOrganizationNestedInput
   integrationSyncJobs?: Prisma.IntegrationSyncJobUpdateManyWithoutOrganizationNestedInput
+  webhookEvents?: Prisma.IntegrationWebhookEventUpdateManyWithoutOrganizationNestedInput
   externalEntityLinks?: Prisma.ExternalEntityLinkUpdateManyWithoutOrganizationNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutOrganizationNestedInput
 }
@@ -1832,6 +1891,7 @@ export type OrganizationUncheckedUpdateWithoutPaymentRecordsInput = {
   billingPolicies?: Prisma.BillingPolicyUncheckedUpdateManyWithoutOrganizationNestedInput
   integrationConnections?: Prisma.IntegrationConnectionUncheckedUpdateManyWithoutOrganizationNestedInput
   integrationSyncJobs?: Prisma.IntegrationSyncJobUncheckedUpdateManyWithoutOrganizationNestedInput
+  webhookEvents?: Prisma.IntegrationWebhookEventUncheckedUpdateManyWithoutOrganizationNestedInput
   externalEntityLinks?: Prisma.ExternalEntityLinkUncheckedUpdateManyWithoutOrganizationNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutOrganizationNestedInput
 }
@@ -1861,6 +1921,7 @@ export type OrganizationCreateWithoutIntegrationConnectionsInput = {
   paymentRecords?: Prisma.PaymentRecordCreateNestedManyWithoutOrganizationInput
   billingPolicies?: Prisma.BillingPolicyCreateNestedManyWithoutOrganizationInput
   integrationSyncJobs?: Prisma.IntegrationSyncJobCreateNestedManyWithoutOrganizationInput
+  webhookEvents?: Prisma.IntegrationWebhookEventCreateNestedManyWithoutOrganizationInput
   externalEntityLinks?: Prisma.ExternalEntityLinkCreateNestedManyWithoutOrganizationInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutOrganizationInput
 }
@@ -1890,6 +1951,7 @@ export type OrganizationUncheckedCreateWithoutIntegrationConnectionsInput = {
   paymentRecords?: Prisma.PaymentRecordUncheckedCreateNestedManyWithoutOrganizationInput
   billingPolicies?: Prisma.BillingPolicyUncheckedCreateNestedManyWithoutOrganizationInput
   integrationSyncJobs?: Prisma.IntegrationSyncJobUncheckedCreateNestedManyWithoutOrganizationInput
+  webhookEvents?: Prisma.IntegrationWebhookEventUncheckedCreateNestedManyWithoutOrganizationInput
   externalEntityLinks?: Prisma.ExternalEntityLinkUncheckedCreateNestedManyWithoutOrganizationInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutOrganizationInput
 }
@@ -1935,6 +1997,7 @@ export type OrganizationUpdateWithoutIntegrationConnectionsInput = {
   paymentRecords?: Prisma.PaymentRecordUpdateManyWithoutOrganizationNestedInput
   billingPolicies?: Prisma.BillingPolicyUpdateManyWithoutOrganizationNestedInput
   integrationSyncJobs?: Prisma.IntegrationSyncJobUpdateManyWithoutOrganizationNestedInput
+  webhookEvents?: Prisma.IntegrationWebhookEventUpdateManyWithoutOrganizationNestedInput
   externalEntityLinks?: Prisma.ExternalEntityLinkUpdateManyWithoutOrganizationNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutOrganizationNestedInput
 }
@@ -1964,6 +2027,7 @@ export type OrganizationUncheckedUpdateWithoutIntegrationConnectionsInput = {
   paymentRecords?: Prisma.PaymentRecordUncheckedUpdateManyWithoutOrganizationNestedInput
   billingPolicies?: Prisma.BillingPolicyUncheckedUpdateManyWithoutOrganizationNestedInput
   integrationSyncJobs?: Prisma.IntegrationSyncJobUncheckedUpdateManyWithoutOrganizationNestedInput
+  webhookEvents?: Prisma.IntegrationWebhookEventUncheckedUpdateManyWithoutOrganizationNestedInput
   externalEntityLinks?: Prisma.ExternalEntityLinkUncheckedUpdateManyWithoutOrganizationNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutOrganizationNestedInput
 }
@@ -1993,6 +2057,7 @@ export type OrganizationCreateWithoutIntegrationSyncJobsInput = {
   paymentRecords?: Prisma.PaymentRecordCreateNestedManyWithoutOrganizationInput
   billingPolicies?: Prisma.BillingPolicyCreateNestedManyWithoutOrganizationInput
   integrationConnections?: Prisma.IntegrationConnectionCreateNestedManyWithoutOrganizationInput
+  webhookEvents?: Prisma.IntegrationWebhookEventCreateNestedManyWithoutOrganizationInput
   externalEntityLinks?: Prisma.ExternalEntityLinkCreateNestedManyWithoutOrganizationInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutOrganizationInput
 }
@@ -2022,6 +2087,7 @@ export type OrganizationUncheckedCreateWithoutIntegrationSyncJobsInput = {
   paymentRecords?: Prisma.PaymentRecordUncheckedCreateNestedManyWithoutOrganizationInput
   billingPolicies?: Prisma.BillingPolicyUncheckedCreateNestedManyWithoutOrganizationInput
   integrationConnections?: Prisma.IntegrationConnectionUncheckedCreateNestedManyWithoutOrganizationInput
+  webhookEvents?: Prisma.IntegrationWebhookEventUncheckedCreateNestedManyWithoutOrganizationInput
   externalEntityLinks?: Prisma.ExternalEntityLinkUncheckedCreateNestedManyWithoutOrganizationInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutOrganizationInput
 }
@@ -2067,6 +2133,7 @@ export type OrganizationUpdateWithoutIntegrationSyncJobsInput = {
   paymentRecords?: Prisma.PaymentRecordUpdateManyWithoutOrganizationNestedInput
   billingPolicies?: Prisma.BillingPolicyUpdateManyWithoutOrganizationNestedInput
   integrationConnections?: Prisma.IntegrationConnectionUpdateManyWithoutOrganizationNestedInput
+  webhookEvents?: Prisma.IntegrationWebhookEventUpdateManyWithoutOrganizationNestedInput
   externalEntityLinks?: Prisma.ExternalEntityLinkUpdateManyWithoutOrganizationNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutOrganizationNestedInput
 }
@@ -2096,6 +2163,143 @@ export type OrganizationUncheckedUpdateWithoutIntegrationSyncJobsInput = {
   paymentRecords?: Prisma.PaymentRecordUncheckedUpdateManyWithoutOrganizationNestedInput
   billingPolicies?: Prisma.BillingPolicyUncheckedUpdateManyWithoutOrganizationNestedInput
   integrationConnections?: Prisma.IntegrationConnectionUncheckedUpdateManyWithoutOrganizationNestedInput
+  webhookEvents?: Prisma.IntegrationWebhookEventUncheckedUpdateManyWithoutOrganizationNestedInput
+  externalEntityLinks?: Prisma.ExternalEntityLinkUncheckedUpdateManyWithoutOrganizationNestedInput
+  auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutOrganizationNestedInput
+}
+
+export type OrganizationCreateWithoutWebhookEventsInput = {
+  id?: string
+  name: string
+  slug: string
+  description?: string | null
+  defaultTimezone: string
+  status?: $Enums.OrganizationStatus
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
+  branches?: Prisma.BranchCreateNestedManyWithoutOrganizationInput
+  memberships?: Prisma.OrganizationMembershipCreateNestedManyWithoutOrganizationInput
+  students?: Prisma.StudentCreateNestedManyWithoutOrganizationInput
+  classSchedules?: Prisma.ClassScheduleCreateNestedManyWithoutOrganizationInput
+  classSessions?: Prisma.ClassSessionCreateNestedManyWithoutOrganizationInput
+  attendanceRecords?: Prisma.AttendanceRecordCreateNestedManyWithoutOrganizationInput
+  promotionRequests?: Prisma.PromotionRequestCreateNestedManyWithoutOrganizationInput
+  promotionEvaluations?: Prisma.PromotionEvaluationCreateNestedManyWithoutOrganizationInput
+  publicProfiles?: Prisma.BranchPublicProfileCreateNestedManyWithoutOrganizationInput
+  billingPlans?: Prisma.BillingPlanCreateNestedManyWithoutOrganizationInput
+  studentMemberships?: Prisma.StudentMembershipCreateNestedManyWithoutOrganizationInput
+  billingCharges?: Prisma.BillingChargeCreateNestedManyWithoutOrganizationInput
+  paymentRecords?: Prisma.PaymentRecordCreateNestedManyWithoutOrganizationInput
+  billingPolicies?: Prisma.BillingPolicyCreateNestedManyWithoutOrganizationInput
+  integrationConnections?: Prisma.IntegrationConnectionCreateNestedManyWithoutOrganizationInput
+  integrationSyncJobs?: Prisma.IntegrationSyncJobCreateNestedManyWithoutOrganizationInput
+  externalEntityLinks?: Prisma.ExternalEntityLinkCreateNestedManyWithoutOrganizationInput
+  auditLogs?: Prisma.AuditLogCreateNestedManyWithoutOrganizationInput
+}
+
+export type OrganizationUncheckedCreateWithoutWebhookEventsInput = {
+  id?: string
+  name: string
+  slug: string
+  description?: string | null
+  defaultTimezone: string
+  status?: $Enums.OrganizationStatus
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
+  branches?: Prisma.BranchUncheckedCreateNestedManyWithoutOrganizationInput
+  memberships?: Prisma.OrganizationMembershipUncheckedCreateNestedManyWithoutOrganizationInput
+  students?: Prisma.StudentUncheckedCreateNestedManyWithoutOrganizationInput
+  classSchedules?: Prisma.ClassScheduleUncheckedCreateNestedManyWithoutOrganizationInput
+  classSessions?: Prisma.ClassSessionUncheckedCreateNestedManyWithoutOrganizationInput
+  attendanceRecords?: Prisma.AttendanceRecordUncheckedCreateNestedManyWithoutOrganizationInput
+  promotionRequests?: Prisma.PromotionRequestUncheckedCreateNestedManyWithoutOrganizationInput
+  promotionEvaluations?: Prisma.PromotionEvaluationUncheckedCreateNestedManyWithoutOrganizationInput
+  publicProfiles?: Prisma.BranchPublicProfileUncheckedCreateNestedManyWithoutOrganizationInput
+  billingPlans?: Prisma.BillingPlanUncheckedCreateNestedManyWithoutOrganizationInput
+  studentMemberships?: Prisma.StudentMembershipUncheckedCreateNestedManyWithoutOrganizationInput
+  billingCharges?: Prisma.BillingChargeUncheckedCreateNestedManyWithoutOrganizationInput
+  paymentRecords?: Prisma.PaymentRecordUncheckedCreateNestedManyWithoutOrganizationInput
+  billingPolicies?: Prisma.BillingPolicyUncheckedCreateNestedManyWithoutOrganizationInput
+  integrationConnections?: Prisma.IntegrationConnectionUncheckedCreateNestedManyWithoutOrganizationInput
+  integrationSyncJobs?: Prisma.IntegrationSyncJobUncheckedCreateNestedManyWithoutOrganizationInput
+  externalEntityLinks?: Prisma.ExternalEntityLinkUncheckedCreateNestedManyWithoutOrganizationInput
+  auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutOrganizationInput
+}
+
+export type OrganizationCreateOrConnectWithoutWebhookEventsInput = {
+  where: Prisma.OrganizationWhereUniqueInput
+  create: Prisma.XOR<Prisma.OrganizationCreateWithoutWebhookEventsInput, Prisma.OrganizationUncheckedCreateWithoutWebhookEventsInput>
+}
+
+export type OrganizationUpsertWithoutWebhookEventsInput = {
+  update: Prisma.XOR<Prisma.OrganizationUpdateWithoutWebhookEventsInput, Prisma.OrganizationUncheckedUpdateWithoutWebhookEventsInput>
+  create: Prisma.XOR<Prisma.OrganizationCreateWithoutWebhookEventsInput, Prisma.OrganizationUncheckedCreateWithoutWebhookEventsInput>
+  where?: Prisma.OrganizationWhereInput
+}
+
+export type OrganizationUpdateToOneWithWhereWithoutWebhookEventsInput = {
+  where?: Prisma.OrganizationWhereInput
+  data: Prisma.XOR<Prisma.OrganizationUpdateWithoutWebhookEventsInput, Prisma.OrganizationUncheckedUpdateWithoutWebhookEventsInput>
+}
+
+export type OrganizationUpdateWithoutWebhookEventsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  defaultTimezone?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumOrganizationStatusFieldUpdateOperationsInput | $Enums.OrganizationStatus
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  branches?: Prisma.BranchUpdateManyWithoutOrganizationNestedInput
+  memberships?: Prisma.OrganizationMembershipUpdateManyWithoutOrganizationNestedInput
+  students?: Prisma.StudentUpdateManyWithoutOrganizationNestedInput
+  classSchedules?: Prisma.ClassScheduleUpdateManyWithoutOrganizationNestedInput
+  classSessions?: Prisma.ClassSessionUpdateManyWithoutOrganizationNestedInput
+  attendanceRecords?: Prisma.AttendanceRecordUpdateManyWithoutOrganizationNestedInput
+  promotionRequests?: Prisma.PromotionRequestUpdateManyWithoutOrganizationNestedInput
+  promotionEvaluations?: Prisma.PromotionEvaluationUpdateManyWithoutOrganizationNestedInput
+  publicProfiles?: Prisma.BranchPublicProfileUpdateManyWithoutOrganizationNestedInput
+  billingPlans?: Prisma.BillingPlanUpdateManyWithoutOrganizationNestedInput
+  studentMemberships?: Prisma.StudentMembershipUpdateManyWithoutOrganizationNestedInput
+  billingCharges?: Prisma.BillingChargeUpdateManyWithoutOrganizationNestedInput
+  paymentRecords?: Prisma.PaymentRecordUpdateManyWithoutOrganizationNestedInput
+  billingPolicies?: Prisma.BillingPolicyUpdateManyWithoutOrganizationNestedInput
+  integrationConnections?: Prisma.IntegrationConnectionUpdateManyWithoutOrganizationNestedInput
+  integrationSyncJobs?: Prisma.IntegrationSyncJobUpdateManyWithoutOrganizationNestedInput
+  externalEntityLinks?: Prisma.ExternalEntityLinkUpdateManyWithoutOrganizationNestedInput
+  auditLogs?: Prisma.AuditLogUpdateManyWithoutOrganizationNestedInput
+}
+
+export type OrganizationUncheckedUpdateWithoutWebhookEventsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  defaultTimezone?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumOrganizationStatusFieldUpdateOperationsInput | $Enums.OrganizationStatus
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  branches?: Prisma.BranchUncheckedUpdateManyWithoutOrganizationNestedInput
+  memberships?: Prisma.OrganizationMembershipUncheckedUpdateManyWithoutOrganizationNestedInput
+  students?: Prisma.StudentUncheckedUpdateManyWithoutOrganizationNestedInput
+  classSchedules?: Prisma.ClassScheduleUncheckedUpdateManyWithoutOrganizationNestedInput
+  classSessions?: Prisma.ClassSessionUncheckedUpdateManyWithoutOrganizationNestedInput
+  attendanceRecords?: Prisma.AttendanceRecordUncheckedUpdateManyWithoutOrganizationNestedInput
+  promotionRequests?: Prisma.PromotionRequestUncheckedUpdateManyWithoutOrganizationNestedInput
+  promotionEvaluations?: Prisma.PromotionEvaluationUncheckedUpdateManyWithoutOrganizationNestedInput
+  publicProfiles?: Prisma.BranchPublicProfileUncheckedUpdateManyWithoutOrganizationNestedInput
+  billingPlans?: Prisma.BillingPlanUncheckedUpdateManyWithoutOrganizationNestedInput
+  studentMemberships?: Prisma.StudentMembershipUncheckedUpdateManyWithoutOrganizationNestedInput
+  billingCharges?: Prisma.BillingChargeUncheckedUpdateManyWithoutOrganizationNestedInput
+  paymentRecords?: Prisma.PaymentRecordUncheckedUpdateManyWithoutOrganizationNestedInput
+  billingPolicies?: Prisma.BillingPolicyUncheckedUpdateManyWithoutOrganizationNestedInput
+  integrationConnections?: Prisma.IntegrationConnectionUncheckedUpdateManyWithoutOrganizationNestedInput
+  integrationSyncJobs?: Prisma.IntegrationSyncJobUncheckedUpdateManyWithoutOrganizationNestedInput
   externalEntityLinks?: Prisma.ExternalEntityLinkUncheckedUpdateManyWithoutOrganizationNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutOrganizationNestedInput
 }
@@ -2126,6 +2330,7 @@ export type OrganizationCreateWithoutExternalEntityLinksInput = {
   billingPolicies?: Prisma.BillingPolicyCreateNestedManyWithoutOrganizationInput
   integrationConnections?: Prisma.IntegrationConnectionCreateNestedManyWithoutOrganizationInput
   integrationSyncJobs?: Prisma.IntegrationSyncJobCreateNestedManyWithoutOrganizationInput
+  webhookEvents?: Prisma.IntegrationWebhookEventCreateNestedManyWithoutOrganizationInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutOrganizationInput
 }
 
@@ -2155,6 +2360,7 @@ export type OrganizationUncheckedCreateWithoutExternalEntityLinksInput = {
   billingPolicies?: Prisma.BillingPolicyUncheckedCreateNestedManyWithoutOrganizationInput
   integrationConnections?: Prisma.IntegrationConnectionUncheckedCreateNestedManyWithoutOrganizationInput
   integrationSyncJobs?: Prisma.IntegrationSyncJobUncheckedCreateNestedManyWithoutOrganizationInput
+  webhookEvents?: Prisma.IntegrationWebhookEventUncheckedCreateNestedManyWithoutOrganizationInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutOrganizationInput
 }
 
@@ -2200,6 +2406,7 @@ export type OrganizationUpdateWithoutExternalEntityLinksInput = {
   billingPolicies?: Prisma.BillingPolicyUpdateManyWithoutOrganizationNestedInput
   integrationConnections?: Prisma.IntegrationConnectionUpdateManyWithoutOrganizationNestedInput
   integrationSyncJobs?: Prisma.IntegrationSyncJobUpdateManyWithoutOrganizationNestedInput
+  webhookEvents?: Prisma.IntegrationWebhookEventUpdateManyWithoutOrganizationNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutOrganizationNestedInput
 }
 
@@ -2229,6 +2436,7 @@ export type OrganizationUncheckedUpdateWithoutExternalEntityLinksInput = {
   billingPolicies?: Prisma.BillingPolicyUncheckedUpdateManyWithoutOrganizationNestedInput
   integrationConnections?: Prisma.IntegrationConnectionUncheckedUpdateManyWithoutOrganizationNestedInput
   integrationSyncJobs?: Prisma.IntegrationSyncJobUncheckedUpdateManyWithoutOrganizationNestedInput
+  webhookEvents?: Prisma.IntegrationWebhookEventUncheckedUpdateManyWithoutOrganizationNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutOrganizationNestedInput
 }
 
@@ -2257,6 +2465,7 @@ export type OrganizationCreateWithoutBillingPoliciesInput = {
   paymentRecords?: Prisma.PaymentRecordCreateNestedManyWithoutOrganizationInput
   integrationConnections?: Prisma.IntegrationConnectionCreateNestedManyWithoutOrganizationInput
   integrationSyncJobs?: Prisma.IntegrationSyncJobCreateNestedManyWithoutOrganizationInput
+  webhookEvents?: Prisma.IntegrationWebhookEventCreateNestedManyWithoutOrganizationInput
   externalEntityLinks?: Prisma.ExternalEntityLinkCreateNestedManyWithoutOrganizationInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutOrganizationInput
 }
@@ -2286,6 +2495,7 @@ export type OrganizationUncheckedCreateWithoutBillingPoliciesInput = {
   paymentRecords?: Prisma.PaymentRecordUncheckedCreateNestedManyWithoutOrganizationInput
   integrationConnections?: Prisma.IntegrationConnectionUncheckedCreateNestedManyWithoutOrganizationInput
   integrationSyncJobs?: Prisma.IntegrationSyncJobUncheckedCreateNestedManyWithoutOrganizationInput
+  webhookEvents?: Prisma.IntegrationWebhookEventUncheckedCreateNestedManyWithoutOrganizationInput
   externalEntityLinks?: Prisma.ExternalEntityLinkUncheckedCreateNestedManyWithoutOrganizationInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutOrganizationInput
 }
@@ -2331,6 +2541,7 @@ export type OrganizationUpdateWithoutBillingPoliciesInput = {
   paymentRecords?: Prisma.PaymentRecordUpdateManyWithoutOrganizationNestedInput
   integrationConnections?: Prisma.IntegrationConnectionUpdateManyWithoutOrganizationNestedInput
   integrationSyncJobs?: Prisma.IntegrationSyncJobUpdateManyWithoutOrganizationNestedInput
+  webhookEvents?: Prisma.IntegrationWebhookEventUpdateManyWithoutOrganizationNestedInput
   externalEntityLinks?: Prisma.ExternalEntityLinkUpdateManyWithoutOrganizationNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutOrganizationNestedInput
 }
@@ -2360,6 +2571,7 @@ export type OrganizationUncheckedUpdateWithoutBillingPoliciesInput = {
   paymentRecords?: Prisma.PaymentRecordUncheckedUpdateManyWithoutOrganizationNestedInput
   integrationConnections?: Prisma.IntegrationConnectionUncheckedUpdateManyWithoutOrganizationNestedInput
   integrationSyncJobs?: Prisma.IntegrationSyncJobUncheckedUpdateManyWithoutOrganizationNestedInput
+  webhookEvents?: Prisma.IntegrationWebhookEventUncheckedUpdateManyWithoutOrganizationNestedInput
   externalEntityLinks?: Prisma.ExternalEntityLinkUncheckedUpdateManyWithoutOrganizationNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutOrganizationNestedInput
 }
@@ -2389,6 +2601,7 @@ export type OrganizationCreateWithoutClassSchedulesInput = {
   billingPolicies?: Prisma.BillingPolicyCreateNestedManyWithoutOrganizationInput
   integrationConnections?: Prisma.IntegrationConnectionCreateNestedManyWithoutOrganizationInput
   integrationSyncJobs?: Prisma.IntegrationSyncJobCreateNestedManyWithoutOrganizationInput
+  webhookEvents?: Prisma.IntegrationWebhookEventCreateNestedManyWithoutOrganizationInput
   externalEntityLinks?: Prisma.ExternalEntityLinkCreateNestedManyWithoutOrganizationInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutOrganizationInput
 }
@@ -2418,6 +2631,7 @@ export type OrganizationUncheckedCreateWithoutClassSchedulesInput = {
   billingPolicies?: Prisma.BillingPolicyUncheckedCreateNestedManyWithoutOrganizationInput
   integrationConnections?: Prisma.IntegrationConnectionUncheckedCreateNestedManyWithoutOrganizationInput
   integrationSyncJobs?: Prisma.IntegrationSyncJobUncheckedCreateNestedManyWithoutOrganizationInput
+  webhookEvents?: Prisma.IntegrationWebhookEventUncheckedCreateNestedManyWithoutOrganizationInput
   externalEntityLinks?: Prisma.ExternalEntityLinkUncheckedCreateNestedManyWithoutOrganizationInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutOrganizationInput
 }
@@ -2463,6 +2677,7 @@ export type OrganizationUpdateWithoutClassSchedulesInput = {
   billingPolicies?: Prisma.BillingPolicyUpdateManyWithoutOrganizationNestedInput
   integrationConnections?: Prisma.IntegrationConnectionUpdateManyWithoutOrganizationNestedInput
   integrationSyncJobs?: Prisma.IntegrationSyncJobUpdateManyWithoutOrganizationNestedInput
+  webhookEvents?: Prisma.IntegrationWebhookEventUpdateManyWithoutOrganizationNestedInput
   externalEntityLinks?: Prisma.ExternalEntityLinkUpdateManyWithoutOrganizationNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutOrganizationNestedInput
 }
@@ -2492,6 +2707,7 @@ export type OrganizationUncheckedUpdateWithoutClassSchedulesInput = {
   billingPolicies?: Prisma.BillingPolicyUncheckedUpdateManyWithoutOrganizationNestedInput
   integrationConnections?: Prisma.IntegrationConnectionUncheckedUpdateManyWithoutOrganizationNestedInput
   integrationSyncJobs?: Prisma.IntegrationSyncJobUncheckedUpdateManyWithoutOrganizationNestedInput
+  webhookEvents?: Prisma.IntegrationWebhookEventUncheckedUpdateManyWithoutOrganizationNestedInput
   externalEntityLinks?: Prisma.ExternalEntityLinkUncheckedUpdateManyWithoutOrganizationNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutOrganizationNestedInput
 }
@@ -2521,6 +2737,7 @@ export type OrganizationCreateWithoutClassSessionsInput = {
   billingPolicies?: Prisma.BillingPolicyCreateNestedManyWithoutOrganizationInput
   integrationConnections?: Prisma.IntegrationConnectionCreateNestedManyWithoutOrganizationInput
   integrationSyncJobs?: Prisma.IntegrationSyncJobCreateNestedManyWithoutOrganizationInput
+  webhookEvents?: Prisma.IntegrationWebhookEventCreateNestedManyWithoutOrganizationInput
   externalEntityLinks?: Prisma.ExternalEntityLinkCreateNestedManyWithoutOrganizationInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutOrganizationInput
 }
@@ -2550,6 +2767,7 @@ export type OrganizationUncheckedCreateWithoutClassSessionsInput = {
   billingPolicies?: Prisma.BillingPolicyUncheckedCreateNestedManyWithoutOrganizationInput
   integrationConnections?: Prisma.IntegrationConnectionUncheckedCreateNestedManyWithoutOrganizationInput
   integrationSyncJobs?: Prisma.IntegrationSyncJobUncheckedCreateNestedManyWithoutOrganizationInput
+  webhookEvents?: Prisma.IntegrationWebhookEventUncheckedCreateNestedManyWithoutOrganizationInput
   externalEntityLinks?: Prisma.ExternalEntityLinkUncheckedCreateNestedManyWithoutOrganizationInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutOrganizationInput
 }
@@ -2595,6 +2813,7 @@ export type OrganizationUpdateWithoutClassSessionsInput = {
   billingPolicies?: Prisma.BillingPolicyUpdateManyWithoutOrganizationNestedInput
   integrationConnections?: Prisma.IntegrationConnectionUpdateManyWithoutOrganizationNestedInput
   integrationSyncJobs?: Prisma.IntegrationSyncJobUpdateManyWithoutOrganizationNestedInput
+  webhookEvents?: Prisma.IntegrationWebhookEventUpdateManyWithoutOrganizationNestedInput
   externalEntityLinks?: Prisma.ExternalEntityLinkUpdateManyWithoutOrganizationNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutOrganizationNestedInput
 }
@@ -2624,6 +2843,7 @@ export type OrganizationUncheckedUpdateWithoutClassSessionsInput = {
   billingPolicies?: Prisma.BillingPolicyUncheckedUpdateManyWithoutOrganizationNestedInput
   integrationConnections?: Prisma.IntegrationConnectionUncheckedUpdateManyWithoutOrganizationNestedInput
   integrationSyncJobs?: Prisma.IntegrationSyncJobUncheckedUpdateManyWithoutOrganizationNestedInput
+  webhookEvents?: Prisma.IntegrationWebhookEventUncheckedUpdateManyWithoutOrganizationNestedInput
   externalEntityLinks?: Prisma.ExternalEntityLinkUncheckedUpdateManyWithoutOrganizationNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutOrganizationNestedInput
 }
@@ -2653,6 +2873,7 @@ export type OrganizationCreateWithoutAttendanceRecordsInput = {
   billingPolicies?: Prisma.BillingPolicyCreateNestedManyWithoutOrganizationInput
   integrationConnections?: Prisma.IntegrationConnectionCreateNestedManyWithoutOrganizationInput
   integrationSyncJobs?: Prisma.IntegrationSyncJobCreateNestedManyWithoutOrganizationInput
+  webhookEvents?: Prisma.IntegrationWebhookEventCreateNestedManyWithoutOrganizationInput
   externalEntityLinks?: Prisma.ExternalEntityLinkCreateNestedManyWithoutOrganizationInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutOrganizationInput
 }
@@ -2682,6 +2903,7 @@ export type OrganizationUncheckedCreateWithoutAttendanceRecordsInput = {
   billingPolicies?: Prisma.BillingPolicyUncheckedCreateNestedManyWithoutOrganizationInput
   integrationConnections?: Prisma.IntegrationConnectionUncheckedCreateNestedManyWithoutOrganizationInput
   integrationSyncJobs?: Prisma.IntegrationSyncJobUncheckedCreateNestedManyWithoutOrganizationInput
+  webhookEvents?: Prisma.IntegrationWebhookEventUncheckedCreateNestedManyWithoutOrganizationInput
   externalEntityLinks?: Prisma.ExternalEntityLinkUncheckedCreateNestedManyWithoutOrganizationInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutOrganizationInput
 }
@@ -2727,6 +2949,7 @@ export type OrganizationUpdateWithoutAttendanceRecordsInput = {
   billingPolicies?: Prisma.BillingPolicyUpdateManyWithoutOrganizationNestedInput
   integrationConnections?: Prisma.IntegrationConnectionUpdateManyWithoutOrganizationNestedInput
   integrationSyncJobs?: Prisma.IntegrationSyncJobUpdateManyWithoutOrganizationNestedInput
+  webhookEvents?: Prisma.IntegrationWebhookEventUpdateManyWithoutOrganizationNestedInput
   externalEntityLinks?: Prisma.ExternalEntityLinkUpdateManyWithoutOrganizationNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutOrganizationNestedInput
 }
@@ -2756,6 +2979,7 @@ export type OrganizationUncheckedUpdateWithoutAttendanceRecordsInput = {
   billingPolicies?: Prisma.BillingPolicyUncheckedUpdateManyWithoutOrganizationNestedInput
   integrationConnections?: Prisma.IntegrationConnectionUncheckedUpdateManyWithoutOrganizationNestedInput
   integrationSyncJobs?: Prisma.IntegrationSyncJobUncheckedUpdateManyWithoutOrganizationNestedInput
+  webhookEvents?: Prisma.IntegrationWebhookEventUncheckedUpdateManyWithoutOrganizationNestedInput
   externalEntityLinks?: Prisma.ExternalEntityLinkUncheckedUpdateManyWithoutOrganizationNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutOrganizationNestedInput
 }
@@ -2785,6 +3009,7 @@ export type OrganizationCreateWithoutPromotionRequestsInput = {
   billingPolicies?: Prisma.BillingPolicyCreateNestedManyWithoutOrganizationInput
   integrationConnections?: Prisma.IntegrationConnectionCreateNestedManyWithoutOrganizationInput
   integrationSyncJobs?: Prisma.IntegrationSyncJobCreateNestedManyWithoutOrganizationInput
+  webhookEvents?: Prisma.IntegrationWebhookEventCreateNestedManyWithoutOrganizationInput
   externalEntityLinks?: Prisma.ExternalEntityLinkCreateNestedManyWithoutOrganizationInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutOrganizationInput
 }
@@ -2814,6 +3039,7 @@ export type OrganizationUncheckedCreateWithoutPromotionRequestsInput = {
   billingPolicies?: Prisma.BillingPolicyUncheckedCreateNestedManyWithoutOrganizationInput
   integrationConnections?: Prisma.IntegrationConnectionUncheckedCreateNestedManyWithoutOrganizationInput
   integrationSyncJobs?: Prisma.IntegrationSyncJobUncheckedCreateNestedManyWithoutOrganizationInput
+  webhookEvents?: Prisma.IntegrationWebhookEventUncheckedCreateNestedManyWithoutOrganizationInput
   externalEntityLinks?: Prisma.ExternalEntityLinkUncheckedCreateNestedManyWithoutOrganizationInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutOrganizationInput
 }
@@ -2859,6 +3085,7 @@ export type OrganizationUpdateWithoutPromotionRequestsInput = {
   billingPolicies?: Prisma.BillingPolicyUpdateManyWithoutOrganizationNestedInput
   integrationConnections?: Prisma.IntegrationConnectionUpdateManyWithoutOrganizationNestedInput
   integrationSyncJobs?: Prisma.IntegrationSyncJobUpdateManyWithoutOrganizationNestedInput
+  webhookEvents?: Prisma.IntegrationWebhookEventUpdateManyWithoutOrganizationNestedInput
   externalEntityLinks?: Prisma.ExternalEntityLinkUpdateManyWithoutOrganizationNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutOrganizationNestedInput
 }
@@ -2888,6 +3115,7 @@ export type OrganizationUncheckedUpdateWithoutPromotionRequestsInput = {
   billingPolicies?: Prisma.BillingPolicyUncheckedUpdateManyWithoutOrganizationNestedInput
   integrationConnections?: Prisma.IntegrationConnectionUncheckedUpdateManyWithoutOrganizationNestedInput
   integrationSyncJobs?: Prisma.IntegrationSyncJobUncheckedUpdateManyWithoutOrganizationNestedInput
+  webhookEvents?: Prisma.IntegrationWebhookEventUncheckedUpdateManyWithoutOrganizationNestedInput
   externalEntityLinks?: Prisma.ExternalEntityLinkUncheckedUpdateManyWithoutOrganizationNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutOrganizationNestedInput
 }
@@ -2917,6 +3145,7 @@ export type OrganizationCreateWithoutPromotionEvaluationsInput = {
   billingPolicies?: Prisma.BillingPolicyCreateNestedManyWithoutOrganizationInput
   integrationConnections?: Prisma.IntegrationConnectionCreateNestedManyWithoutOrganizationInput
   integrationSyncJobs?: Prisma.IntegrationSyncJobCreateNestedManyWithoutOrganizationInput
+  webhookEvents?: Prisma.IntegrationWebhookEventCreateNestedManyWithoutOrganizationInput
   externalEntityLinks?: Prisma.ExternalEntityLinkCreateNestedManyWithoutOrganizationInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutOrganizationInput
 }
@@ -2946,6 +3175,7 @@ export type OrganizationUncheckedCreateWithoutPromotionEvaluationsInput = {
   billingPolicies?: Prisma.BillingPolicyUncheckedCreateNestedManyWithoutOrganizationInput
   integrationConnections?: Prisma.IntegrationConnectionUncheckedCreateNestedManyWithoutOrganizationInput
   integrationSyncJobs?: Prisma.IntegrationSyncJobUncheckedCreateNestedManyWithoutOrganizationInput
+  webhookEvents?: Prisma.IntegrationWebhookEventUncheckedCreateNestedManyWithoutOrganizationInput
   externalEntityLinks?: Prisma.ExternalEntityLinkUncheckedCreateNestedManyWithoutOrganizationInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutOrganizationInput
 }
@@ -2991,6 +3221,7 @@ export type OrganizationUpdateWithoutPromotionEvaluationsInput = {
   billingPolicies?: Prisma.BillingPolicyUpdateManyWithoutOrganizationNestedInput
   integrationConnections?: Prisma.IntegrationConnectionUpdateManyWithoutOrganizationNestedInput
   integrationSyncJobs?: Prisma.IntegrationSyncJobUpdateManyWithoutOrganizationNestedInput
+  webhookEvents?: Prisma.IntegrationWebhookEventUpdateManyWithoutOrganizationNestedInput
   externalEntityLinks?: Prisma.ExternalEntityLinkUpdateManyWithoutOrganizationNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutOrganizationNestedInput
 }
@@ -3020,6 +3251,7 @@ export type OrganizationUncheckedUpdateWithoutPromotionEvaluationsInput = {
   billingPolicies?: Prisma.BillingPolicyUncheckedUpdateManyWithoutOrganizationNestedInput
   integrationConnections?: Prisma.IntegrationConnectionUncheckedUpdateManyWithoutOrganizationNestedInput
   integrationSyncJobs?: Prisma.IntegrationSyncJobUncheckedUpdateManyWithoutOrganizationNestedInput
+  webhookEvents?: Prisma.IntegrationWebhookEventUncheckedUpdateManyWithoutOrganizationNestedInput
   externalEntityLinks?: Prisma.ExternalEntityLinkUncheckedUpdateManyWithoutOrganizationNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutOrganizationNestedInput
 }
@@ -3050,6 +3282,7 @@ export type OrganizationCreateWithoutAuditLogsInput = {
   billingPolicies?: Prisma.BillingPolicyCreateNestedManyWithoutOrganizationInput
   integrationConnections?: Prisma.IntegrationConnectionCreateNestedManyWithoutOrganizationInput
   integrationSyncJobs?: Prisma.IntegrationSyncJobCreateNestedManyWithoutOrganizationInput
+  webhookEvents?: Prisma.IntegrationWebhookEventCreateNestedManyWithoutOrganizationInput
   externalEntityLinks?: Prisma.ExternalEntityLinkCreateNestedManyWithoutOrganizationInput
 }
 
@@ -3079,6 +3312,7 @@ export type OrganizationUncheckedCreateWithoutAuditLogsInput = {
   billingPolicies?: Prisma.BillingPolicyUncheckedCreateNestedManyWithoutOrganizationInput
   integrationConnections?: Prisma.IntegrationConnectionUncheckedCreateNestedManyWithoutOrganizationInput
   integrationSyncJobs?: Prisma.IntegrationSyncJobUncheckedCreateNestedManyWithoutOrganizationInput
+  webhookEvents?: Prisma.IntegrationWebhookEventUncheckedCreateNestedManyWithoutOrganizationInput
   externalEntityLinks?: Prisma.ExternalEntityLinkUncheckedCreateNestedManyWithoutOrganizationInput
 }
 
@@ -3124,6 +3358,7 @@ export type OrganizationUpdateWithoutAuditLogsInput = {
   billingPolicies?: Prisma.BillingPolicyUpdateManyWithoutOrganizationNestedInput
   integrationConnections?: Prisma.IntegrationConnectionUpdateManyWithoutOrganizationNestedInput
   integrationSyncJobs?: Prisma.IntegrationSyncJobUpdateManyWithoutOrganizationNestedInput
+  webhookEvents?: Prisma.IntegrationWebhookEventUpdateManyWithoutOrganizationNestedInput
   externalEntityLinks?: Prisma.ExternalEntityLinkUpdateManyWithoutOrganizationNestedInput
 }
 
@@ -3153,6 +3388,7 @@ export type OrganizationUncheckedUpdateWithoutAuditLogsInput = {
   billingPolicies?: Prisma.BillingPolicyUncheckedUpdateManyWithoutOrganizationNestedInput
   integrationConnections?: Prisma.IntegrationConnectionUncheckedUpdateManyWithoutOrganizationNestedInput
   integrationSyncJobs?: Prisma.IntegrationSyncJobUncheckedUpdateManyWithoutOrganizationNestedInput
+  webhookEvents?: Prisma.IntegrationWebhookEventUncheckedUpdateManyWithoutOrganizationNestedInput
   externalEntityLinks?: Prisma.ExternalEntityLinkUncheckedUpdateManyWithoutOrganizationNestedInput
 }
 
@@ -3178,6 +3414,7 @@ export type OrganizationCountOutputType = {
   billingPolicies: number
   integrationConnections: number
   integrationSyncJobs: number
+  webhookEvents: number
   externalEntityLinks: number
   auditLogs: number
 }
@@ -3199,6 +3436,7 @@ export type OrganizationCountOutputTypeSelect<ExtArgs extends runtime.Types.Exte
   billingPolicies?: boolean | OrganizationCountOutputTypeCountBillingPoliciesArgs
   integrationConnections?: boolean | OrganizationCountOutputTypeCountIntegrationConnectionsArgs
   integrationSyncJobs?: boolean | OrganizationCountOutputTypeCountIntegrationSyncJobsArgs
+  webhookEvents?: boolean | OrganizationCountOutputTypeCountWebhookEventsArgs
   externalEntityLinks?: boolean | OrganizationCountOutputTypeCountExternalEntityLinksArgs
   auditLogs?: boolean | OrganizationCountOutputTypeCountAuditLogsArgs
 }
@@ -3328,6 +3566,13 @@ export type OrganizationCountOutputTypeCountIntegrationSyncJobsArgs<ExtArgs exte
 /**
  * OrganizationCountOutputType without action
  */
+export type OrganizationCountOutputTypeCountWebhookEventsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.IntegrationWebhookEventWhereInput
+}
+
+/**
+ * OrganizationCountOutputType without action
+ */
 export type OrganizationCountOutputTypeCountExternalEntityLinksArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.ExternalEntityLinkWhereInput
 }
@@ -3366,6 +3611,7 @@ export type OrganizationSelect<ExtArgs extends runtime.Types.Extensions.Internal
   billingPolicies?: boolean | Prisma.Organization$billingPoliciesArgs<ExtArgs>
   integrationConnections?: boolean | Prisma.Organization$integrationConnectionsArgs<ExtArgs>
   integrationSyncJobs?: boolean | Prisma.Organization$integrationSyncJobsArgs<ExtArgs>
+  webhookEvents?: boolean | Prisma.Organization$webhookEventsArgs<ExtArgs>
   externalEntityLinks?: boolean | Prisma.Organization$externalEntityLinksArgs<ExtArgs>
   auditLogs?: boolean | Prisma.Organization$auditLogsArgs<ExtArgs>
   _count?: boolean | Prisma.OrganizationCountOutputTypeDefaultArgs<ExtArgs>
@@ -3425,6 +3671,7 @@ export type OrganizationInclude<ExtArgs extends runtime.Types.Extensions.Interna
   billingPolicies?: boolean | Prisma.Organization$billingPoliciesArgs<ExtArgs>
   integrationConnections?: boolean | Prisma.Organization$integrationConnectionsArgs<ExtArgs>
   integrationSyncJobs?: boolean | Prisma.Organization$integrationSyncJobsArgs<ExtArgs>
+  webhookEvents?: boolean | Prisma.Organization$webhookEventsArgs<ExtArgs>
   externalEntityLinks?: boolean | Prisma.Organization$externalEntityLinksArgs<ExtArgs>
   auditLogs?: boolean | Prisma.Organization$auditLogsArgs<ExtArgs>
   _count?: boolean | Prisma.OrganizationCountOutputTypeDefaultArgs<ExtArgs>
@@ -3451,6 +3698,7 @@ export type $OrganizationPayload<ExtArgs extends runtime.Types.Extensions.Intern
     billingPolicies: Prisma.$BillingPolicyPayload<ExtArgs>[]
     integrationConnections: Prisma.$IntegrationConnectionPayload<ExtArgs>[]
     integrationSyncJobs: Prisma.$IntegrationSyncJobPayload<ExtArgs>[]
+    webhookEvents: Prisma.$IntegrationWebhookEventPayload<ExtArgs>[]
     externalEntityLinks: Prisma.$ExternalEntityLinkPayload<ExtArgs>[]
     auditLogs: Prisma.$AuditLogPayload<ExtArgs>[]
   }
@@ -3874,6 +4122,7 @@ export interface Prisma__OrganizationClient<T, Null = never, ExtArgs extends run
   billingPolicies<T extends Prisma.Organization$billingPoliciesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Organization$billingPoliciesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$BillingPolicyPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   integrationConnections<T extends Prisma.Organization$integrationConnectionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Organization$integrationConnectionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$IntegrationConnectionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   integrationSyncJobs<T extends Prisma.Organization$integrationSyncJobsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Organization$integrationSyncJobsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$IntegrationSyncJobPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  webhookEvents<T extends Prisma.Organization$webhookEventsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Organization$webhookEventsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$IntegrationWebhookEventPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   externalEntityLinks<T extends Prisma.Organization$externalEntityLinksArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Organization$externalEntityLinksArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ExternalEntityLinkPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   auditLogs<T extends Prisma.Organization$auditLogsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Organization$auditLogsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AuditLogPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
@@ -4688,6 +4937,30 @@ export type Organization$integrationSyncJobsArgs<ExtArgs extends runtime.Types.E
   take?: number
   skip?: number
   distinct?: Prisma.IntegrationSyncJobScalarFieldEnum | Prisma.IntegrationSyncJobScalarFieldEnum[]
+}
+
+/**
+ * Organization.webhookEvents
+ */
+export type Organization$webhookEventsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the IntegrationWebhookEvent
+   */
+  select?: Prisma.IntegrationWebhookEventSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the IntegrationWebhookEvent
+   */
+  omit?: Prisma.IntegrationWebhookEventOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.IntegrationWebhookEventInclude<ExtArgs> | null
+  where?: Prisma.IntegrationWebhookEventWhereInput
+  orderBy?: Prisma.IntegrationWebhookEventOrderByWithRelationInput | Prisma.IntegrationWebhookEventOrderByWithRelationInput[]
+  cursor?: Prisma.IntegrationWebhookEventWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.IntegrationWebhookEventScalarFieldEnum | Prisma.IntegrationWebhookEventScalarFieldEnum[]
 }
 
 /**

@@ -671,6 +671,91 @@ export type EnumIntegrationSyncStatusWithAggregatesFilter<$PrismaModel = never> 
   _max?: Prisma.NestedEnumIntegrationSyncStatusFilter<$PrismaModel>
 }
 
+export type EnumIntegrationWebhookValidationStatusFilter<$PrismaModel = never> = {
+  equals?: $Enums.IntegrationWebhookValidationStatus | Prisma.EnumIntegrationWebhookValidationStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.IntegrationWebhookValidationStatus[] | Prisma.ListEnumIntegrationWebhookValidationStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.IntegrationWebhookValidationStatus[] | Prisma.ListEnumIntegrationWebhookValidationStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumIntegrationWebhookValidationStatusFilter<$PrismaModel> | $Enums.IntegrationWebhookValidationStatus
+}
+
+export type EnumIntegrationWebhookProcessingStatusFilter<$PrismaModel = never> = {
+  equals?: $Enums.IntegrationWebhookProcessingStatus | Prisma.EnumIntegrationWebhookProcessingStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.IntegrationWebhookProcessingStatus[] | Prisma.ListEnumIntegrationWebhookProcessingStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.IntegrationWebhookProcessingStatus[] | Prisma.ListEnumIntegrationWebhookProcessingStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumIntegrationWebhookProcessingStatusFilter<$PrismaModel> | $Enums.IntegrationWebhookProcessingStatus
+}
+
+export type JsonFilter<$PrismaModel = never> =
+| Prisma.PatchUndefined<
+    Prisma.Either<Required<JsonFilterBase<$PrismaModel>>, Exclude<keyof Required<JsonFilterBase<$PrismaModel>>, 'path'>>,
+    Required<JsonFilterBase<$PrismaModel>>
+  >
+| Prisma.OptionalFlat<Omit<Required<JsonFilterBase<$PrismaModel>>, 'path'>>
+
+export type JsonFilterBase<$PrismaModel = never> = {
+  equals?: runtime.InputJsonValue | Prisma.JsonFieldRefInput<$PrismaModel> | Prisma.JsonNullValueFilter
+  path?: string[]
+  mode?: Prisma.QueryMode | Prisma.EnumQueryModeFieldRefInput<$PrismaModel>
+  string_contains?: string | Prisma.StringFieldRefInput<$PrismaModel>
+  string_starts_with?: string | Prisma.StringFieldRefInput<$PrismaModel>
+  string_ends_with?: string | Prisma.StringFieldRefInput<$PrismaModel>
+  array_starts_with?: runtime.InputJsonValue | Prisma.JsonFieldRefInput<$PrismaModel> | null
+  array_ends_with?: runtime.InputJsonValue | Prisma.JsonFieldRefInput<$PrismaModel> | null
+  array_contains?: runtime.InputJsonValue | Prisma.JsonFieldRefInput<$PrismaModel> | null
+  lt?: runtime.InputJsonValue | Prisma.JsonFieldRefInput<$PrismaModel>
+  lte?: runtime.InputJsonValue | Prisma.JsonFieldRefInput<$PrismaModel>
+  gt?: runtime.InputJsonValue | Prisma.JsonFieldRefInput<$PrismaModel>
+  gte?: runtime.InputJsonValue | Prisma.JsonFieldRefInput<$PrismaModel>
+  not?: runtime.InputJsonValue | Prisma.JsonFieldRefInput<$PrismaModel> | Prisma.JsonNullValueFilter
+}
+
+export type EnumIntegrationWebhookValidationStatusWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.IntegrationWebhookValidationStatus | Prisma.EnumIntegrationWebhookValidationStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.IntegrationWebhookValidationStatus[] | Prisma.ListEnumIntegrationWebhookValidationStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.IntegrationWebhookValidationStatus[] | Prisma.ListEnumIntegrationWebhookValidationStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumIntegrationWebhookValidationStatusWithAggregatesFilter<$PrismaModel> | $Enums.IntegrationWebhookValidationStatus
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumIntegrationWebhookValidationStatusFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumIntegrationWebhookValidationStatusFilter<$PrismaModel>
+}
+
+export type EnumIntegrationWebhookProcessingStatusWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.IntegrationWebhookProcessingStatus | Prisma.EnumIntegrationWebhookProcessingStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.IntegrationWebhookProcessingStatus[] | Prisma.ListEnumIntegrationWebhookProcessingStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.IntegrationWebhookProcessingStatus[] | Prisma.ListEnumIntegrationWebhookProcessingStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumIntegrationWebhookProcessingStatusWithAggregatesFilter<$PrismaModel> | $Enums.IntegrationWebhookProcessingStatus
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumIntegrationWebhookProcessingStatusFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumIntegrationWebhookProcessingStatusFilter<$PrismaModel>
+}
+
+export type JsonWithAggregatesFilter<$PrismaModel = never> =
+| Prisma.PatchUndefined<
+    Prisma.Either<Required<JsonWithAggregatesFilterBase<$PrismaModel>>, Exclude<keyof Required<JsonWithAggregatesFilterBase<$PrismaModel>>, 'path'>>,
+    Required<JsonWithAggregatesFilterBase<$PrismaModel>>
+  >
+| Prisma.OptionalFlat<Omit<Required<JsonWithAggregatesFilterBase<$PrismaModel>>, 'path'>>
+
+export type JsonWithAggregatesFilterBase<$PrismaModel = never> = {
+  equals?: runtime.InputJsonValue | Prisma.JsonFieldRefInput<$PrismaModel> | Prisma.JsonNullValueFilter
+  path?: string[]
+  mode?: Prisma.QueryMode | Prisma.EnumQueryModeFieldRefInput<$PrismaModel>
+  string_contains?: string | Prisma.StringFieldRefInput<$PrismaModel>
+  string_starts_with?: string | Prisma.StringFieldRefInput<$PrismaModel>
+  string_ends_with?: string | Prisma.StringFieldRefInput<$PrismaModel>
+  array_starts_with?: runtime.InputJsonValue | Prisma.JsonFieldRefInput<$PrismaModel> | null
+  array_ends_with?: runtime.InputJsonValue | Prisma.JsonFieldRefInput<$PrismaModel> | null
+  array_contains?: runtime.InputJsonValue | Prisma.JsonFieldRefInput<$PrismaModel> | null
+  lt?: runtime.InputJsonValue | Prisma.JsonFieldRefInput<$PrismaModel>
+  lte?: runtime.InputJsonValue | Prisma.JsonFieldRefInput<$PrismaModel>
+  gt?: runtime.InputJsonValue | Prisma.JsonFieldRefInput<$PrismaModel>
+  gte?: runtime.InputJsonValue | Prisma.JsonFieldRefInput<$PrismaModel>
+  not?: runtime.InputJsonValue | Prisma.JsonFieldRefInput<$PrismaModel> | Prisma.JsonNullValueFilter
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedJsonFilter<$PrismaModel>
+  _max?: Prisma.NestedJsonFilter<$PrismaModel>
+}
+
 export type EnumExternalEntityTypeFilter<$PrismaModel = never> = {
   equals?: $Enums.ExternalEntityType | Prisma.EnumExternalEntityTypeFieldRefInput<$PrismaModel>
   in?: $Enums.ExternalEntityType[] | Prisma.ListEnumExternalEntityTypeFieldRefInput<$PrismaModel>
@@ -1475,6 +1560,64 @@ export type NestedEnumIntegrationSyncStatusWithAggregatesFilter<$PrismaModel = n
   _count?: Prisma.NestedIntFilter<$PrismaModel>
   _min?: Prisma.NestedEnumIntegrationSyncStatusFilter<$PrismaModel>
   _max?: Prisma.NestedEnumIntegrationSyncStatusFilter<$PrismaModel>
+}
+
+export type NestedEnumIntegrationWebhookValidationStatusFilter<$PrismaModel = never> = {
+  equals?: $Enums.IntegrationWebhookValidationStatus | Prisma.EnumIntegrationWebhookValidationStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.IntegrationWebhookValidationStatus[] | Prisma.ListEnumIntegrationWebhookValidationStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.IntegrationWebhookValidationStatus[] | Prisma.ListEnumIntegrationWebhookValidationStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumIntegrationWebhookValidationStatusFilter<$PrismaModel> | $Enums.IntegrationWebhookValidationStatus
+}
+
+export type NestedEnumIntegrationWebhookProcessingStatusFilter<$PrismaModel = never> = {
+  equals?: $Enums.IntegrationWebhookProcessingStatus | Prisma.EnumIntegrationWebhookProcessingStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.IntegrationWebhookProcessingStatus[] | Prisma.ListEnumIntegrationWebhookProcessingStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.IntegrationWebhookProcessingStatus[] | Prisma.ListEnumIntegrationWebhookProcessingStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumIntegrationWebhookProcessingStatusFilter<$PrismaModel> | $Enums.IntegrationWebhookProcessingStatus
+}
+
+export type NestedEnumIntegrationWebhookValidationStatusWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.IntegrationWebhookValidationStatus | Prisma.EnumIntegrationWebhookValidationStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.IntegrationWebhookValidationStatus[] | Prisma.ListEnumIntegrationWebhookValidationStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.IntegrationWebhookValidationStatus[] | Prisma.ListEnumIntegrationWebhookValidationStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumIntegrationWebhookValidationStatusWithAggregatesFilter<$PrismaModel> | $Enums.IntegrationWebhookValidationStatus
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumIntegrationWebhookValidationStatusFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumIntegrationWebhookValidationStatusFilter<$PrismaModel>
+}
+
+export type NestedEnumIntegrationWebhookProcessingStatusWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.IntegrationWebhookProcessingStatus | Prisma.EnumIntegrationWebhookProcessingStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.IntegrationWebhookProcessingStatus[] | Prisma.ListEnumIntegrationWebhookProcessingStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.IntegrationWebhookProcessingStatus[] | Prisma.ListEnumIntegrationWebhookProcessingStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumIntegrationWebhookProcessingStatusWithAggregatesFilter<$PrismaModel> | $Enums.IntegrationWebhookProcessingStatus
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumIntegrationWebhookProcessingStatusFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumIntegrationWebhookProcessingStatusFilter<$PrismaModel>
+}
+
+export type NestedJsonFilter<$PrismaModel = never> =
+| Prisma.PatchUndefined<
+    Prisma.Either<Required<NestedJsonFilterBase<$PrismaModel>>, Exclude<keyof Required<NestedJsonFilterBase<$PrismaModel>>, 'path'>>,
+    Required<NestedJsonFilterBase<$PrismaModel>>
+  >
+| Prisma.OptionalFlat<Omit<Required<NestedJsonFilterBase<$PrismaModel>>, 'path'>>
+
+export type NestedJsonFilterBase<$PrismaModel = never> = {
+  equals?: runtime.InputJsonValue | Prisma.JsonFieldRefInput<$PrismaModel> | Prisma.JsonNullValueFilter
+  path?: string[]
+  mode?: Prisma.QueryMode | Prisma.EnumQueryModeFieldRefInput<$PrismaModel>
+  string_contains?: string | Prisma.StringFieldRefInput<$PrismaModel>
+  string_starts_with?: string | Prisma.StringFieldRefInput<$PrismaModel>
+  string_ends_with?: string | Prisma.StringFieldRefInput<$PrismaModel>
+  array_starts_with?: runtime.InputJsonValue | Prisma.JsonFieldRefInput<$PrismaModel> | null
+  array_ends_with?: runtime.InputJsonValue | Prisma.JsonFieldRefInput<$PrismaModel> | null
+  array_contains?: runtime.InputJsonValue | Prisma.JsonFieldRefInput<$PrismaModel> | null
+  lt?: runtime.InputJsonValue | Prisma.JsonFieldRefInput<$PrismaModel>
+  lte?: runtime.InputJsonValue | Prisma.JsonFieldRefInput<$PrismaModel>
+  gt?: runtime.InputJsonValue | Prisma.JsonFieldRefInput<$PrismaModel>
+  gte?: runtime.InputJsonValue | Prisma.JsonFieldRefInput<$PrismaModel>
+  not?: runtime.InputJsonValue | Prisma.JsonFieldRefInput<$PrismaModel> | Prisma.JsonNullValueFilter
 }
 
 export type NestedEnumExternalEntityTypeFilter<$PrismaModel = never> = {

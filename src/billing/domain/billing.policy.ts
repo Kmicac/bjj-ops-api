@@ -8,6 +8,7 @@ import type { AuthenticatedPrincipal } from '../../auth/authenticated-principal.
 import {
   BillingChargeStatus,
   DiscountType,
+  IntegrationProvider,
   MembershipRole,
   PaymentStatus,
   StudentMembershipStatus,
@@ -46,6 +47,14 @@ type BillingChargePaymentTarget = {
   amount: { toNumber(): number };
   amountPaid: { toNumber(): number };
   status: string;
+};
+
+type BillingChargeExternalPreferenceTarget = {
+  status: BillingChargeStatus;
+  amount: { toNumber(): number };
+  amountPaid: { toNumber(): number };
+  externalProvider: string | null;
+  externalReference: string | null;
 };
 
 type DerivedFinancialCharge = {
@@ -298,6 +307,43 @@ export class BillingPolicy {
     if (!policy.allowPartialPayments) {
       throw new ConflictException(
         'Partial payments are disabled for this branch billing policy',
+      );
+    }
+  }
+
+  ensureChargeEligibleForMercadoPagoPreference(
+    charge: BillingChargeExternalPreferenceTarget,
+  ) {
+    if (
+      charge.status === BillingChargeStatus.PAID ||
+      charge.amountPaid.toNumber() >= charge.amount.toNumber()
+    ) {
+      throw new ConflictException('Billing charge is already fully paid');
+    }
+
+    if (
+      charge.status === BillingChargeStatus.CANCELED ||
+      charge.status === BillingChargeStatus.VOID
+    ) {
+      throw new ConflictException(
+        'Canceled or void charges cannot generate payment preferences',
+      );
+    }
+
+    if (
+      charge.externalProvider &&
+      charge.externalProvider !== IntegrationProvider.MERCADO_PAGO
+    ) {
+      throw new ConflictException(
+        'Billing charge is already linked to another external payment provider',
+      );
+    }
+
+    if (
+      charge.amount.toNumber() - charge.amountPaid.toNumber() <= 0
+    ) {
+      throw new ConflictException(
+        'Billing charge has no outstanding balance for a payment preference',
       );
     }
   }

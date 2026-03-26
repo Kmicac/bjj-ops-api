@@ -223,7 +223,48 @@ type BillingChargeRecord = Prisma.BillingChargeGetPayload<{
   select: typeof billingChargeSelect;
 }>;
 
+type PaymentRecordRecord = Prisma.PaymentRecordGetPayload<{
+  select: typeof paymentRecordSelect;
+}>;
+
+type BillingChargeMercadoPagoPreferenceTarget = {
+  id: string;
+  organizationId: string;
+  branchId: string;
+  studentId: string;
+  amount: Prisma.Decimal;
+  amountPaid: Prisma.Decimal;
+  currency: string;
+  status: BillingChargeStatus;
+  chargeType: BillingChargeType;
+  description: string | null;
+  externalProvider: string | null;
+  externalReference: string | null;
+};
+
+type BillingChargeExternalPaymentObservationTarget = {
+  id: string;
+  organizationId: string;
+  branchId: string;
+  studentId: string;
+  amount: Prisma.Decimal;
+  amountPaid: Prisma.Decimal;
+  currency: string;
+  status: BillingChargeStatus;
+  description: string | null;
+  externalProvider: string | null;
+  externalReference: string | null;
+  lastExternalPaymentReference: string | null;
+  lastExternalPaymentStatus: string | null;
+  lastExternalPaymentStatusDetail: string | null;
+  lastExternalPaymentObservedAt: Date | null;
+};
+
 type TxClient = Prisma.TransactionClient;
+
+function zeroDecimal() {
+  return new Prisma.Decimal(0);
+}
 
 function toStartOfUtcDay(value: Date | string) {
   const date = typeof value === 'string' ? new Date(value) : new Date(value);
@@ -823,6 +864,354 @@ export class BillingRepository {
     return charge;
   }
 
+  async getBillingChargeMercadoPagoPreferenceTarget(
+    organizationId: string,
+    chargeId: string,
+  ): Promise<BillingChargeMercadoPagoPreferenceTarget> {
+    const charge = await this.prisma.billingCharge.findFirst({
+      where: {
+        id: chargeId,
+        organizationId,
+        deletedAt: null,
+      },
+      select: {
+        id: true,
+        organizationId: true,
+        branchId: true,
+        studentId: true,
+        amount: true,
+        amountPaid: true,
+        currency: true,
+        status: true,
+        chargeType: true,
+        description: true,
+        externalProvider: true,
+        externalReference: true,
+      },
+    });
+
+    if (!charge) {
+      throw new NotFoundException('Billing charge not found');
+    }
+
+    return charge;
+  }
+
+  async attachMercadoPagoPreferenceToBillingCharge(params: {
+    organizationId: string;
+    chargeId: string;
+    externalProvider: string;
+    externalReference: string;
+  }) {
+    await this.prisma.billingCharge.updateMany({
+      where: {
+        id: params.chargeId,
+        organizationId: params.organizationId,
+        deletedAt: null,
+      },
+      data: {
+        externalProvider: params.externalProvider,
+        externalReference: params.externalReference,
+      },
+    });
+
+    const charge = await this.prisma.billingCharge.findFirst({
+      where: {
+        id: params.chargeId,
+        organizationId: params.organizationId,
+        deletedAt: null,
+      },
+      select: billingChargeSelect,
+    });
+
+    if (!charge) {
+      throw new NotFoundException('Billing charge not found');
+    }
+
+    return charge;
+  }
+
+  async getBillingChargeExternalPaymentObservationTarget(
+    organizationId: string,
+    chargeId: string,
+  ): Promise<BillingChargeExternalPaymentObservationTarget> {
+    const charge = await this.prisma.billingCharge.findFirst({
+      where: {
+        id: chargeId,
+        organizationId,
+        deletedAt: null,
+      },
+      select: {
+        id: true,
+        organizationId: true,
+        branchId: true,
+        studentId: true,
+        amount: true,
+        amountPaid: true,
+        currency: true,
+        status: true,
+        description: true,
+        externalProvider: true,
+        externalReference: true,
+        lastExternalPaymentReference: true,
+        lastExternalPaymentStatus: true,
+        lastExternalPaymentStatusDetail: true,
+        lastExternalPaymentObservedAt: true,
+      },
+    });
+
+    if (!charge) {
+      throw new NotFoundException('Billing charge not found');
+    }
+
+    return charge;
+  }
+
+  async reconcileMercadoPagoPayment(params: {
+    organizationId: string;
+    chargeId: string;
+    paymentReference: string;
+    paymentStatus: PaymentStatus;
+    paymentAmount: Prisma.Decimal;
+    currency: string;
+    description?: string;
+    externalPaymentStatus?: string;
+    externalPaymentStatusDetail?: string;
+    observedAt: Date;
+    recordedAt: Date;
+  }) {
+    return this.prisma.$transaction(
+      async (tx) => {
+        await this.acquireChargePaymentLock(tx, {
+          organizationId: params.organizationId,
+          chargeId: params.chargeId,
+        });
+
+        const charge = await tx.billingCharge.findFirst({
+          where: {
+            id: params.chargeId,
+            organizationId: params.organizationId,
+            deletedAt: null,
+          },
+          select: {
+            id: true,
+            organizationId: true,
+            branchId: true,
+            studentId: true,
+            amount: true,
+            amountPaid: true,
+            currency: true,
+            status: true,
+            lastExternalPaymentReference: true,
+            lastExternalPaymentStatus: true,
+            lastExternalPaymentStatusDetail: true,
+            lastExternalPaymentObservedAt: true,
+          },
+        });
+
+        if (!charge) {
+          throw new NotFoundException('Billing charge not found');
+        }
+
+        if (charge.currency !== params.currency) {
+          throw new ConflictException(
+            'Mercado Pago payment currency must match the linked billing charge currency',
+          );
+        }
+
+        const existingPaymentRecords = await tx.paymentRecord.findMany({
+          where: {
+            organizationId: params.organizationId,
+            branchId: charge.branchId,
+            paymentKind: PaymentKind.STUDENT_PAYMENT,
+            billingChargeId: charge.id,
+            method: PaymentMethod.MERCADO_PAGO,
+            externalProvider: 'MERCADO_PAGO',
+            externalReference: params.paymentReference,
+            deletedAt: null,
+          },
+          take: 2,
+          orderBy: [{ createdAt: 'desc' }],
+          select: paymentRecordSelect,
+        });
+
+        if (existingPaymentRecords.length > 1) {
+          throw new ConflictException(
+            'Multiple Mercado Pago payment records exist for the same external payment',
+          );
+        }
+
+        const existingPaymentRecord = existingPaymentRecords[0] ?? null;
+        const previousApprovedAmount =
+          existingPaymentRecord?.status === PaymentStatus.APPROVED
+            ? existingPaymentRecord.grossAmount
+            : zeroDecimal();
+        const nextApprovedAmount =
+          params.paymentStatus === PaymentStatus.APPROVED
+            ? params.paymentAmount
+            : zeroDecimal();
+        const approvedAmountDelta =
+          nextApprovedAmount.minus(previousApprovedAmount);
+
+        if (approvedAmountDelta.isNegative()) {
+          throw new ConflictException(
+            'Mercado Pago payment state regression is not supported yet',
+          );
+        }
+
+        if (
+          approvedAmountDelta.greaterThan(0) &&
+          (charge.status === BillingChargeStatus.CANCELED ||
+            charge.status === BillingChargeStatus.VOID)
+        ) {
+          throw new ConflictException(
+            'Canceled or void charges cannot be reconciled against Mercado Pago payments',
+          );
+        }
+
+        if (
+          approvedAmountDelta.greaterThan(0) &&
+          charge.amountPaid.greaterThanOrEqualTo(charge.amount)
+        ) {
+          throw new ConflictException(
+            'Billing charge is already fully paid before Mercado Pago reconciliation',
+          );
+        }
+
+        const updatedChargeAmountPaid =
+          charge.amountPaid.plus(approvedAmountDelta);
+
+        if (updatedChargeAmountPaid.greaterThan(charge.amount)) {
+          throw new ConflictException(
+            'Mercado Pago payment amount exceeds the outstanding billing charge balance',
+          );
+        }
+
+        let paymentRecord: PaymentRecordRecord;
+        let paymentRecordAction: 'created' | 'updated';
+
+        if (existingPaymentRecord) {
+          paymentRecord = await tx.paymentRecord.update({
+            where: {
+              id: existingPaymentRecord.id,
+            },
+            data: {
+              grossAmount: params.paymentAmount,
+              netAmount: params.paymentAmount,
+              currency: params.currency,
+              method: PaymentMethod.MERCADO_PAGO,
+              status: params.paymentStatus,
+              description: params.description,
+              externalProvider: 'MERCADO_PAGO',
+              externalReference: params.paymentReference,
+              recordedAt: params.recordedAt,
+            },
+            select: paymentRecordSelect,
+          });
+          paymentRecordAction = 'updated';
+        } else {
+          paymentRecord = await tx.paymentRecord.create({
+            data: {
+              organizationId: params.organizationId,
+              branchId: charge.branchId,
+              paymentKind: PaymentKind.STUDENT_PAYMENT,
+              studentId: charge.studentId,
+              billingChargeId: charge.id,
+              grossAmount: params.paymentAmount,
+              netAmount: params.paymentAmount,
+              currency: params.currency,
+              method: PaymentMethod.MERCADO_PAGO,
+              status: params.paymentStatus,
+              description: params.description,
+              externalProvider: 'MERCADO_PAGO',
+              externalReference: params.paymentReference,
+              recordedAt: params.recordedAt,
+            },
+            select: paymentRecordSelect,
+          });
+          paymentRecordAction = 'created';
+        }
+
+        const updatedChargeStatus =
+          params.paymentStatus === PaymentStatus.APPROVED
+            ? updatedChargeAmountPaid.greaterThanOrEqualTo(charge.amount)
+              ? BillingChargeStatus.PAID
+              : BillingChargeStatus.PARTIALLY_PAID
+            : charge.status;
+
+        const syncedCharge = await tx.billingCharge.update({
+          where: {
+            id: charge.id,
+          },
+          data: {
+            amountPaid: updatedChargeAmountPaid,
+            status: updatedChargeStatus,
+            lastExternalPaymentReference: params.paymentReference,
+            lastExternalPaymentStatus: params.externalPaymentStatus,
+            lastExternalPaymentStatusDetail: params.externalPaymentStatusDetail,
+            lastExternalPaymentObservedAt: params.observedAt,
+          },
+          select: {
+            id: true,
+            amountPaid: true,
+            status: true,
+            lastExternalPaymentReference: true,
+            lastExternalPaymentStatus: true,
+            lastExternalPaymentStatusDetail: true,
+            lastExternalPaymentObservedAt: true,
+          },
+        });
+
+        return {
+          paymentRecord,
+          paymentRecordAction,
+          charge: syncedCharge,
+        };
+      },
+      {
+        isolationLevel: Prisma.TransactionIsolationLevel.Serializable,
+      },
+    );
+  }
+
+  async markMercadoPagoPaymentObserved(params: {
+    organizationId: string;
+    chargeId: string;
+    paymentReference: string;
+    paymentStatus?: string;
+    paymentStatusDetail?: string;
+    observedAt: Date;
+  }) {
+    await this.prisma.billingCharge.updateMany({
+      where: {
+        id: params.chargeId,
+        organizationId: params.organizationId,
+        deletedAt: null,
+      },
+      data: {
+        lastExternalPaymentReference: params.paymentReference,
+        lastExternalPaymentStatus: params.paymentStatus,
+        lastExternalPaymentStatusDetail: params.paymentStatusDetail,
+        lastExternalPaymentObservedAt: params.observedAt,
+      },
+    });
+
+    const charge = await this.prisma.billingCharge.findFirst({
+      where: {
+        id: params.chargeId,
+        organizationId: params.organizationId,
+        deletedAt: null,
+      },
+      select: billingChargeSelect,
+    });
+
+    if (!charge) {
+      throw new NotFoundException('Billing charge not found');
+    }
+
+    return charge;
+  }
+
   async recordStudentPayment(params: {
     organizationId: string;
     branchId: string;
@@ -836,7 +1225,7 @@ export class BillingRepository {
     description?: string;
     externalProvider?: string;
     externalReference?: string;
-    recordedByMembershipId: string;
+    recordedByMembershipId?: string | null;
     recordedAt: Date;
     notes?: string;
   }) {
@@ -971,7 +1360,7 @@ export class BillingRepository {
     description?: string;
     externalProvider?: string;
     externalReference?: string;
-    recordedByMembershipId: string;
+    recordedByMembershipId?: string | null;
     recordedAt: Date;
     notes?: string;
   }) {

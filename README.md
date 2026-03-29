@@ -57,6 +57,87 @@ $ pnpm run test:e2e
 $ pnpm run test:cov
 ```
 
+## Local Docker development
+
+This repository now includes a minimal local Docker setup for the NestJS API and PostgreSQL.
+
+### Prerequisites
+
+- Docker Engine with `docker compose`
+
+### 1. Prepare local environment variables
+
+Use the root `.env`. The Docker setup reads the same file and only overrides `DATABASE_URL` inside the app container so the service can reach PostgreSQL through the internal hostname `postgres`.
+
+### 2. Start PostgreSQL
+
+```bash
+$ docker compose up -d postgres
+```
+
+### 3. Apply the Prisma schema
+
+Use an explicit Prisma step instead of mutating the database automatically during app startup.
+
+```bash
+$ docker compose run --rm app pnpm prisma db push
+```
+
+If you change the Prisma schema later, rerun the same command.
+
+### 4. Start the API
+
+```bash
+$ docker compose up --build app
+```
+
+The API will be available at:
+
+- `http://localhost:3001/api/v1`
+
+PostgreSQL will be available at:
+
+- `localhost:5432`
+
+### 5. Verify the setup
+
+```bash
+$ curl http://localhost:3001/api/v1
+Hello World!
+```
+
+After that you can use the Postman collections in `postman/` against `http://localhost:3001`.
+
+### Optional: run the app directly on the host
+
+If you prefer running Nest outside Docker and only keep PostgreSQL containerized:
+
+```bash
+$ docker compose up -d postgres
+$ pnpm prisma db push
+$ pnpm start:dev
+```
+
+In that host-run mode, the API stays on:
+
+- `http://localhost:3000/api/v1`
+
+### Useful commands
+
+```bash
+# stop containers
+$ docker compose down
+
+# stop containers and remove the database volume
+$ docker compose down -v
+
+# inspect app logs
+$ docker compose logs -f app
+
+# open a shell inside the app container
+$ docker compose exec app sh
+```
+
 ## Deployment
 
 When you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more information.

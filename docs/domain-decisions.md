@@ -141,6 +141,20 @@ Cross-branch financial exposure would create distrust and harm adoption.
 Implication:
 Future billing and financial modules must preserve branch-local visibility unless a feature is explicitly and safely designed otherwise.
 
+### DD-020 — Branch is the default payment-account boundary
+
+Status: accepted
+
+Reason:
+The platform enables each academy/branch to operate its own financial flow and trusted local collections.
+Mercado Pago and other payment-provider connections must therefore align to the same branch-local financial boundary.
+
+Implication:
+- payment-provider integrations for academy collections are configured at `Branch` scope by default
+- each branch may connect its own Mercado Pago account
+- the platform must not centralize merchant ownership at organization scope by default for branch-local billing flows
+- operationally, only one active branch-level connection per payment provider should exist for a branch unless a future explicit design changes that rule
+
 ---
 
 ## Student decisions

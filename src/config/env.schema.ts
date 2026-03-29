@@ -54,6 +54,28 @@ const rawEnvironmentSchema = z.object({
   LOG_LEVEL: z
     .enum(['fatal', 'error', 'warn', 'info', 'debug', 'trace', 'silent'])
     .default('info'),
+  MERCADO_PAGO_ACCESS_TOKEN: z.string().trim().min(1).optional(),
+  MERCADO_PAGO_PUBLIC_KEY: z.string().trim().min(1).optional(),
+  MERCADO_PAGO_APPLICATION_ID: z.string().trim().min(1).optional(),
+  MERCADO_PAGO_WEBHOOK_SECRET: z.string().trim().min(1).optional(),
+  MERCADO_PAGO_ENVIRONMENT: z
+    .enum(['sandbox', 'test', 'production'])
+    .transform((value) => (value === 'production' ? 'production' : 'test'))
+    .optional(),
+  MERCADO_PAGO_SUCCESS_URL: z.string().url().optional(),
+  MERCADO_PAGO_FAILURE_URL: z.string().url().optional(),
+  MERCADO_PAGO_PENDING_URL: z.string().url().optional(),
+  MERCADO_PAGO_NOTIFICATION_URL: z
+    .string()
+    .url()
+    .optional()
+    .refine((value) => {
+      if (!value) {
+        return true;
+      }
+
+      return new URL(value).protocol === 'https:';
+    }, 'MERCADO_PAGO_NOTIFICATION_URL must use https'),
 });
 
 export type EnvironmentVariables = z.output<typeof rawEnvironmentSchema>;

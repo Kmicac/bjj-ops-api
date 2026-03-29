@@ -1,3 +1,4 @@
+import { ConflictException } from '@nestjs/common';
 import { Test, TestingModule } from '@nestjs/testing';
 import { AuditService } from '../../../audit/audit.service';
 import type { AuthenticatedPrincipal } from '../../../auth/authenticated-principal.interface';
@@ -17,16 +18,19 @@ describe('CreateIntegrationConnectionUseCase', () => {
   let useCase: CreateIntegrationConnectionUseCase;
   let integrationsPolicy: {
     ensureValidScopeAssignment: jest.Mock;
+    ensureProviderScopeAllowed: jest.Mock;
     ensureCanManageOrganizationConnections: jest.Mock;
     ensureCanManageBranchConnections: jest.Mock;
     normalizeDisplayName: jest.Mock;
   };
   let integrationsRepository: {
     getBranchAccessTarget: jest.Mock;
+    hasAnotherActiveBranchConnection: jest.Mock;
     createIntegrationConnection: jest.Mock;
   };
   let integrationProviderConfigService: {
     prepareConfigForStorage: jest.Mock;
+    ensureConfigReadyForActivation: jest.Mock;
   };
   let auditService: {
     create: jest.Mock;
@@ -48,6 +52,7 @@ describe('CreateIntegrationConnectionUseCase', () => {
   beforeEach(async () => {
     integrationsPolicy = {
       ensureValidScopeAssignment: jest.fn(),
+      ensureProviderScopeAllowed: jest.fn(),
       ensureCanManageOrganizationConnections: jest.fn(),
       ensureCanManageBranchConnections: jest.fn(),
       normalizeDisplayName: jest.fn().mockReturnValue('Mercado Pago Branch'),
@@ -59,6 +64,7 @@ describe('CreateIntegrationConnectionUseCase', () => {
         organizationId: 'org_1',
         headCoachMembershipId: null,
       }),
+      hasAnotherActiveBranchConnection: jest.fn().mockResolvedValue(false),
       createIntegrationConnection: jest.fn().mockResolvedValue({
         id: 'integration_1',
         organizationId: 'org_1',
@@ -80,6 +86,7 @@ describe('CreateIntegrationConnectionUseCase', () => {
       prepareConfigForStorage: jest.fn().mockReturnValue({
         kind: 'encrypted',
       }),
+      ensureConfigReadyForActivation: jest.fn(),
     };
 
     auditService = {
@@ -144,6 +151,12 @@ describe('CreateIntegrationConnectionUseCase', () => {
       }),
     );
     expect(
+      integrationsPolicy.ensureProviderScopeAllowed,
+    ).toHaveBeenCalledWith(
+      IntegrationProvider.MERCADO_PAGO,
+      IntegrationScopeType.BRANCH,
+    );
+    expect(
       integrationProviderConfigService.prepareConfigForStorage,
     ).toHaveBeenCalledWith(IntegrationProvider.MERCADO_PAGO, {
       sandbox: true,
@@ -158,5 +171,34 @@ describe('CreateIntegrationConnectionUseCase', () => {
       }),
     );
     expect(result.id).toBe('integration_1');
+  });
+
+  it('rejects creating a second active branch connection for the same provider', async () => {
+    integrationsRepository.hasAnotherActiveBranchConnection.mockResolvedValueOnce(
+      true,
+    );
+
+    await expect(
+      useCase.execute(principal, 'org_1', {
+        provider: IntegrationProvider.MERCADO_PAGO,
+        scopeType: IntegrationScopeType.BRANCH,
+        branchId: 'branch_1',
+        displayName: 'Mercado Pago Branch',
+        status: IntegrationStatus.ACTIVE,
+        configJson: {
+          accessToken: 'APP_USR-12345678901234567890',
+          applicationId: 'app_1',
+          webhookSecret: 'secret_1',
+          environment: 'test',
+        },
+      }),
+    ).rejects.toThrow(ConflictException);
+
+    expect(
+      integrationProviderConfigService.ensureConfigReadyForActivation,
+    ).toHaveBeenCalledTimes(1);
+    expect(
+      integrationsRepository.createIntegrationConnection,
+    ).not.toHaveBeenCalled();
   });
 });

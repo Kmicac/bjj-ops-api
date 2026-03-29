@@ -18,11 +18,25 @@ type MercadoPagoProviderConfig = {
 };
 
 export type MercadoPagoCheckoutPreferenceInput = {
+  itemId?: string;
   title: string;
   description?: string;
+  categoryId?: string;
   externalReference: string;
   currency: string;
   amount: number;
+  payer?: {
+    email?: string;
+    firstName?: string;
+    lastName?: string;
+  };
+  backUrls?: {
+    success: string;
+    failure: string;
+    pending: string;
+  };
+  autoReturn?: 'approved';
+  notificationUrl?: string;
 };
 
 export type MercadoPagoCheckoutPreferenceResult = {
@@ -62,6 +76,19 @@ function asTrimmedOptionalString(value: unknown) {
 
   const normalized = value.trim();
   return normalized.length > 0 ? normalized : undefined;
+}
+
+function compactRecord(value: Record<string, unknown>) {
+  return Object.entries(value).reduce<Record<string, unknown>>(
+    (carry, [key, entry]) => {
+      if (entry !== undefined) {
+        carry[key] = entry;
+      }
+
+      return carry;
+    },
+    {},
+  );
 }
 
 @Injectable()
@@ -169,18 +196,38 @@ export class MercadoPagoProviderClient implements IntegrationProviderClient {
           Authorization: `Bearer ${validatedConfig.accessToken}`,
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({
-          items: [
-            {
-              title: input.title,
-              description: input.description,
-              quantity: 1,
-              currency_id: input.currency,
-              unit_price: input.amount,
-            },
-          ],
-          external_reference: input.externalReference,
-        }),
+        body: JSON.stringify(
+          compactRecord({
+            items: [
+              compactRecord({
+                id: input.itemId,
+                title: input.title,
+                description: input.description,
+                category_id: input.categoryId,
+                quantity: 1,
+                currency_id: input.currency,
+                unit_price: input.amount,
+              }),
+            ],
+            payer:
+              input.payer &&
+              Object.keys(compactRecord({
+                email: input.payer.email,
+                first_name: input.payer.firstName,
+                last_name: input.payer.lastName,
+              })).length > 0
+                ? compactRecord({
+                    email: input.payer.email,
+                    first_name: input.payer.firstName,
+                    last_name: input.payer.lastName,
+                  })
+                : undefined,
+            back_urls: input.backUrls,
+            auto_return: input.autoReturn,
+            notification_url: input.notificationUrl,
+            external_reference: input.externalReference,
+          }),
+        ),
         signal: AbortSignal.timeout(DEFAULT_TIMEOUT_MS),
       });
     } catch (error) {

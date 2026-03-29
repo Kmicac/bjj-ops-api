@@ -6,6 +6,7 @@ import {
 import { AccessControlService } from '../../auth/access-control.service';
 import type { AuthenticatedPrincipal } from '../../auth/authenticated-principal.interface';
 import {
+  IntegrationProvider,
   IntegrationScopeType,
   IntegrationSyncKind,
   MembershipRole,
@@ -71,6 +72,20 @@ export class IntegrationsPolicy {
     ) {
       throw new ConflictException(
         'branchId is required for branch-level integrations',
+      );
+    }
+  }
+
+  ensureProviderScopeAllowed(
+    provider: IntegrationProvider,
+    scopeType: IntegrationScopeType,
+  ) {
+    if (
+      provider === IntegrationProvider.MERCADO_PAGO &&
+      scopeType !== IntegrationScopeType.BRANCH
+    ) {
+      throw new ConflictException(
+        'Mercado Pago integrations must be configured at branch scope',
       );
     }
   }

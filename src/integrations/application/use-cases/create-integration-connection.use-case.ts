@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { ConflictException, Injectable } from '@nestjs/common';
 import type { AuthenticatedPrincipal } from '../../../auth/authenticated-principal.interface';
 import { AuditService } from '../../../audit/audit.service';
 import {
@@ -28,6 +28,10 @@ export class CreateIntegrationConnectionUseCase {
       dto.scopeType,
       dto.branchId,
     );
+    this.integrationsPolicy.ensureProviderScopeAllowed(
+      dto.provider,
+      dto.scopeType,
+    );
 
     let branchId: string | null = null;
 
@@ -49,20 +53,44 @@ export class CreateIntegrationConnectionUseCase {
       branchId = branch.id;
     }
 
+    const status = dto.status ?? IntegrationStatus.INACTIVE;
+    const preparedConfig = this.integrationProviderConfigService.prepareConfigForStorage(
+      dto.provider,
+      dto.configJson,
+    );
+
+    if (status === IntegrationStatus.ACTIVE) {
+      this.integrationProviderConfigService.ensureConfigReadyForActivation(
+        dto.provider,
+        preparedConfig,
+      );
+
+      if (
+        dto.scopeType === IntegrationScopeType.BRANCH &&
+        branchId &&
+        (await this.integrationsRepository.hasAnotherActiveBranchConnection({
+          organizationId,
+          branchId,
+          provider: dto.provider,
+        }))
+      ) {
+        throw new ConflictException(
+          'Only one active branch integration connection is allowed per provider',
+        );
+      }
+    }
+
     const connection = await this.integrationsRepository.createIntegrationConnection(
       {
         organizationId,
         branchId,
         provider: dto.provider,
-        status: dto.status ?? IntegrationStatus.INACTIVE,
+        status,
         scopeType: dto.scopeType,
         displayName: this.integrationsPolicy.normalizeDisplayName(
           dto.displayName,
         ),
-        configJson: this.integrationProviderConfigService.prepareConfigForStorage(
-          dto.provider,
-          dto.configJson,
-        ),
+        configJson: preparedConfig,
         createdByMembershipId: principal.membershipId,
       },
     );

@@ -65,7 +65,7 @@ describe('MercadoPagoProviderClient', () => {
   });
 
   it('creates a checkout preference and returns only safe fields', async () => {
-    jest.spyOn(global, 'fetch').mockResolvedValue(
+    const fetchSpy = jest.spyOn(global, 'fetch').mockResolvedValue(
       new Response(
         JSON.stringify({
           id: 'pref_123',
@@ -83,12 +83,59 @@ describe('MercadoPagoProviderClient', () => {
         environment: 'test',
       },
       {
+        itemId: 'charge_1',
         title: 'BJJ Ops billing charge',
+        description: 'March membership',
+        categoryId: 'services',
         externalReference: 'billing_charge:charge_1',
         currency: 'ARS',
         amount: 100,
+        payer: {
+          email: 'student@test.local',
+          firstName: 'Helio',
+          lastName: 'Gracie',
+        },
+        backUrls: {
+          success: 'http://localhost:3001/payments/success',
+          failure: 'http://localhost:3001/payments/failure',
+          pending: 'http://localhost:3001/payments/pending',
+        },
+        autoReturn: 'approved',
+        notificationUrl:
+          'https://payments.example.com/api/v1/integrations/webhooks/mercado-pago',
       },
     );
+
+    const [, request] = fetchSpy.mock.calls[0] ?? [];
+    const body = JSON.parse(String(request?.body));
+
+    expect(body).toEqual({
+      items: [
+        {
+          id: 'charge_1',
+          title: 'BJJ Ops billing charge',
+          description: 'March membership',
+          category_id: 'services',
+          quantity: 1,
+          currency_id: 'ARS',
+          unit_price: 100,
+        },
+      ],
+      payer: {
+        email: 'student@test.local',
+        first_name: 'Helio',
+        last_name: 'Gracie',
+      },
+      back_urls: {
+        success: 'http://localhost:3001/payments/success',
+        failure: 'http://localhost:3001/payments/failure',
+        pending: 'http://localhost:3001/payments/pending',
+      },
+      auto_return: 'approved',
+      notification_url:
+        'https://payments.example.com/api/v1/integrations/webhooks/mercado-pago',
+      external_reference: 'billing_charge:charge_1',
+    });
 
     expect(result).toEqual({
       preferenceId: 'pref_123',

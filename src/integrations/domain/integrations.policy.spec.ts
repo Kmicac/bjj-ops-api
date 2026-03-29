@@ -1,8 +1,10 @@
-import { ForbiddenException } from '@nestjs/common';
+import { ConflictException, ForbiddenException } from '@nestjs/common';
 import { Test, TestingModule } from '@nestjs/testing';
 import { AccessControlService } from '../../auth/access-control.service';
 import type { AuthenticatedPrincipal } from '../../auth/authenticated-principal.interface';
 import {
+  IntegrationProvider,
+  IntegrationScopeType,
   MembershipRole,
   MembershipScopeType,
 } from '../../generated/prisma/enums';
@@ -86,5 +88,21 @@ describe('IntegrationsPolicy', () => {
     expect(() =>
       policy.ensureCanManageBranchConnections(principal, 'org_1', branch),
     ).toThrow(ForbiddenException);
+  });
+
+  it('requires Mercado Pago integrations to remain branch-scoped', () => {
+    expect(() =>
+      policy.ensureProviderScopeAllowed(
+        IntegrationProvider.MERCADO_PAGO,
+        IntegrationScopeType.ORGANIZATION,
+      ),
+    ).toThrow(ConflictException);
+
+    expect(() =>
+      policy.ensureProviderScopeAllowed(
+        IntegrationProvider.MERCADO_PAGO,
+        IntegrationScopeType.BRANCH,
+      ),
+    ).not.toThrow();
   });
 });

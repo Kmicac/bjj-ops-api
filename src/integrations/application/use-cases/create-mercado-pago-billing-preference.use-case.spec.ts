@@ -1,6 +1,7 @@
 import { ConflictException, NotFoundException } from '@nestjs/common';
 import { Test, TestingModule } from '@nestjs/testing';
 import { ExternalEntityType, IntegrationProvider } from '../../../generated/prisma/enums';
+import { MercadoPagoCheckoutConfigService } from '../mercado-pago-checkout-config.service';
 import { IntegrationProviderConfigService } from '../provider-clients/integration-provider-config.service';
 import { IntegrationsRepository } from '../../infrastructure/integrations.repository';
 import { MercadoPagoProviderClient } from '../../infrastructure/provider-clients/mercado-pago-provider.client';
@@ -15,6 +16,9 @@ describe('CreateMercadoPagoBillingPreferenceUseCase', () => {
   };
   let integrationProviderConfigService: {
     resolveConfigForProvider: jest.Mock;
+  };
+  let mercadoPagoCheckoutConfigService: {
+    getPreferenceConfig: jest.Mock;
   };
   let mercadoPagoProviderClient: {
     createCheckoutProPreference: jest.Mock;
@@ -40,7 +44,21 @@ describe('CreateMercadoPagoBillingPreferenceUseCase', () => {
     integrationProviderConfigService = {
       resolveConfigForProvider: jest.fn().mockReturnValue({
         accessToken: 'APP_USR-12345678901234567890',
+        publicKey: 'APP_USR-123456-public',
         environment: 'test',
+      }),
+    };
+
+    mercadoPagoCheckoutConfigService = {
+      getPreferenceConfig: jest.fn().mockReturnValue({
+        backUrls: {
+          success: 'http://localhost:3001/payments/success',
+          failure: 'http://localhost:3001/payments/failure',
+          pending: 'http://localhost:3001/payments/pending',
+        },
+        autoReturn: 'approved',
+        notificationUrl:
+          'https://payments.example.com/api/v1/integrations/webhooks/mercado-pago',
       }),
     };
 
@@ -65,6 +83,10 @@ describe('CreateMercadoPagoBillingPreferenceUseCase', () => {
           useValue: integrationProviderConfigService,
         },
         {
+          provide: MercadoPagoCheckoutConfigService,
+          useValue: mercadoPagoCheckoutConfigService,
+        },
+        {
           provide: MercadoPagoProviderClient,
           useValue: mercadoPagoProviderClient,
         },
@@ -86,6 +108,7 @@ describe('CreateMercadoPagoBillingPreferenceUseCase', () => {
       currency: 'ARS',
       externalReference: 'billing_charge:charge_1',
       createdByMembershipId: 'membership_1',
+      payer: undefined,
     });
 
     expect(
@@ -100,12 +123,23 @@ describe('CreateMercadoPagoBillingPreferenceUseCase', () => {
     ).toHaveBeenCalledWith(
       {
         accessToken: 'APP_USR-12345678901234567890',
+        publicKey: 'APP_USR-123456-public',
         environment: 'test',
       },
       expect.objectContaining({
+        itemId: 'charge_1',
         externalReference: 'billing_charge:charge_1',
         amount: 100,
         currency: 'ARS',
+        categoryId: 'services',
+        backUrls: {
+          success: 'http://localhost:3001/payments/success',
+          failure: 'http://localhost:3001/payments/failure',
+          pending: 'http://localhost:3001/payments/pending',
+        },
+        autoReturn: 'approved',
+        notificationUrl:
+          'https://payments.example.com/api/v1/integrations/webhooks/mercado-pago',
       }),
     );
     expect(integrationsRepository.createExternalEntityLink).toHaveBeenCalledWith(
@@ -121,6 +155,7 @@ describe('CreateMercadoPagoBillingPreferenceUseCase', () => {
     expect(result).toEqual({
       connectionId: 'integration_1',
       environment: 'test',
+      publicKey: 'APP_USR-123456-public',
       preferenceId: 'pref_123',
       externalReference: 'billing_charge:charge_1',
       initPoint: 'https://www.mercadopago.com/init/pref_123',
@@ -161,6 +196,7 @@ describe('CreateMercadoPagoBillingPreferenceUseCase', () => {
     expect(result).toEqual({
       connectionId: 'integration_1',
       environment: 'test',
+      publicKey: 'APP_USR-123456-public',
       preferenceId: 'pref_existing',
       externalReference: 'billing_charge:charge_1',
       initPoint: 'https://www.mercadopago.com/init/pref_existing',
@@ -240,6 +276,7 @@ describe('CreateMercadoPagoBillingPreferenceUseCase', () => {
     expect(result).toEqual({
       connectionId: 'integration_1',
       environment: 'test',
+      publicKey: 'APP_USR-123456-public',
       preferenceId: 'pref_race_winner',
       externalReference: 'billing_charge:charge_1',
       initPoint: 'https://www.mercadopago.com/init/pref_race_winner',
@@ -247,5 +284,27 @@ describe('CreateMercadoPagoBillingPreferenceUseCase', () => {
         'https://sandbox.mercadopago.com/init/pref_race_winner',
       reused: true,
     });
+  });
+
+  it('fails when Mercado Pago publicKey is unavailable for Checkout Pro frontend', async () => {
+    integrationProviderConfigService.resolveConfigForProvider.mockReturnValue({
+      accessToken: 'APP_USR-12345678901234567890',
+      environment: 'test',
+    });
+
+    await expect(
+      useCase.execute({
+        organizationId: 'org_1',
+        branchId: 'branch_1',
+        billingChargeId: 'charge_1',
+        title: 'BJJ Ops billing charge',
+        amount: 100,
+        currency: 'ARS',
+        externalReference: 'billing_charge:charge_1',
+        createdByMembershipId: 'membership_1',
+      }),
+    ).rejects.toThrow(
+      'Mercado Pago publicKey is required to initialize Checkout Pro',
+    );
   });
 });

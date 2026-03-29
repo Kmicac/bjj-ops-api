@@ -9,6 +9,7 @@ import {
   IntegrationProvider,
 } from '../../../generated/prisma/enums';
 import { IntegrationProviderConfigService } from '../provider-clients/integration-provider-config.service';
+import { MercadoPagoCheckoutConfigService } from '../mercado-pago-checkout-config.service';
 import { IntegrationsRepository } from '../../infrastructure/integrations.repository';
 import {
   MercadoPagoCheckoutPreferenceResult,
@@ -33,6 +34,7 @@ type ExistingBillingChargeExternalLink = {
 export type CreateMercadoPagoBillingPreferenceResult = {
   connectionId: string;
   environment: 'test' | 'production';
+  publicKey: string;
   preferenceId: string;
   externalReference: string;
   initPoint: string;
@@ -79,6 +81,7 @@ export class CreateMercadoPagoBillingPreferenceUseCase {
   constructor(
     private readonly integrationsRepository: IntegrationsRepository,
     private readonly integrationProviderConfigService: IntegrationProviderConfigService,
+    private readonly mercadoPagoCheckoutConfigService: MercadoPagoCheckoutConfigService,
     private readonly mercadoPagoProviderClient: MercadoPagoProviderClient,
   ) {}
 
@@ -93,6 +96,11 @@ export class CreateMercadoPagoBillingPreferenceUseCase {
     currency: string;
     externalReference: string;
     createdByMembershipId: string;
+    payer?: {
+      email?: string;
+      firstName?: string;
+      lastName?: string;
+    };
   }): Promise<CreateMercadoPagoBillingPreferenceResult> {
     const connection =
       await this.integrationsRepository.getSingleActiveBranchConnectionByProvider(
@@ -100,6 +108,19 @@ export class CreateMercadoPagoBillingPreferenceUseCase {
         params.branchId,
         IntegrationProvider.MERCADO_PAGO,
       );
+    const providerConfig =
+      this.integrationProviderConfigService.resolveConfigForProvider(
+        connection.provider,
+        connection.configJson,
+      );
+
+    if (!providerConfig) {
+      throw new ConflictException(
+        'Mercado Pago credentials are not configured for this branch integration',
+      );
+    }
+
+    const publicKey = this.getRequiredPublicKey(providerConfig);
 
     const existingLink =
       await this.integrationsRepository.findSingleExternalEntityLinkByInternalEntity(
@@ -118,6 +139,7 @@ export class CreateMercadoPagoBillingPreferenceUseCase {
         params.amount,
         params.currency,
         connection.id,
+        publicKey,
       );
     }
 
@@ -127,27 +149,24 @@ export class CreateMercadoPagoBillingPreferenceUseCase {
       );
     }
 
-    const providerConfig =
-      this.integrationProviderConfigService.resolveConfigForProvider(
-        connection.provider,
-        connection.configJson,
-      );
-
-    if (!providerConfig) {
-      throw new ConflictException(
-        'Mercado Pago credentials are not configured for this branch integration',
-      );
-    }
+    const checkoutConfig =
+      this.mercadoPagoCheckoutConfigService.getPreferenceConfig();
 
     const preference =
       await this.mercadoPagoProviderClient.createCheckoutProPreference(
         providerConfig,
         {
+          itemId: params.billingChargeId,
           title: params.title,
           description: params.description,
+          categoryId: 'services',
           externalReference: params.externalReference,
           currency: params.currency,
           amount: params.amount,
+          payer: params.payer,
+          backUrls: checkoutConfig.backUrls,
+          autoReturn: checkoutConfig.autoReturn,
+          notificationUrl: checkoutConfig.notificationUrl,
         },
       );
 
@@ -193,12 +212,14 @@ export class CreateMercadoPagoBillingPreferenceUseCase {
         params.amount,
         params.currency,
         connection.id,
+        publicKey,
       );
     }
 
     return {
       connectionId: connection.id,
       environment: preference.environment,
+      publicKey,
       preferenceId: preference.preferenceId,
       externalReference: params.externalReference,
       initPoint: preference.initPoint,
@@ -213,6 +234,7 @@ export class CreateMercadoPagoBillingPreferenceUseCase {
     amount: number,
     currency: string,
     connectionId: string,
+    publicKey: string,
   ): CreateMercadoPagoBillingPreferenceResult {
     if (
       billingChargeExternalReference &&
@@ -246,12 +268,26 @@ export class CreateMercadoPagoBillingPreferenceUseCase {
     return {
       connectionId,
       environment: metadata.environment,
+      publicKey,
       preferenceId: existingLink.externalEntityId,
       externalReference: existingLink.externalReference,
       initPoint: metadata.initPoint,
       sandboxInitPoint: metadata.sandboxInitPoint,
       reused: true,
     };
+  }
+
+  private getRequiredPublicKey(config: Record<string, unknown> | null) {
+    const publicKey =
+      config && typeof config.publicKey === 'string' ? config.publicKey.trim() : '';
+
+    if (!publicKey) {
+      throw new ConflictException(
+        'Mercado Pago publicKey is required to initialize Checkout Pro',
+      );
+    }
+
+    return publicKey;
   }
 
   private buildMetadata(

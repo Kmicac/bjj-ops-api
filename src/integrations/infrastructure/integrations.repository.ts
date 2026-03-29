@@ -263,6 +263,33 @@ export class IntegrationsRepository {
     });
   }
 
+  async hasAnotherActiveBranchConnection(params: {
+    organizationId: string;
+    branchId: string;
+    provider: Prisma.IntegrationConnectionWhereInput['provider'];
+    excludeIntegrationId?: string;
+  }) {
+    const count = await this.prisma.integrationConnection.count({
+      where: {
+        organizationId: params.organizationId,
+        branchId: params.branchId,
+        provider: params.provider,
+        scopeType: IntegrationScopeType.BRANCH,
+        status: IntegrationStatus.ACTIVE,
+        deletedAt: null,
+        ...(params.excludeIntegrationId
+          ? {
+              id: {
+                not: params.excludeIntegrationId,
+              },
+            }
+          : {}),
+      },
+    });
+
+    return count > 0;
+  }
+
   async listIntegrationConnections(params: {
     organizationId: string;
     provider?: Prisma.IntegrationConnectionWhereInput['provider'];

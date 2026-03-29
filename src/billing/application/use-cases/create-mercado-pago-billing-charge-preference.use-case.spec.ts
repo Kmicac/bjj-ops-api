@@ -50,6 +50,9 @@ describe('CreateMercadoPagoBillingChargePreferenceUseCase', () => {
     billingRepository = {
       getStudentBillingTarget: jest.fn().mockResolvedValue({
         id: 'student_1',
+        email: 'student_1@example.com',
+        firstName: 'Helio',
+        lastName: 'Gracie',
         primaryBranchId: 'branch_1',
         primaryBranch: {
           id: 'branch_1',
@@ -80,6 +83,7 @@ describe('CreateMercadoPagoBillingChargePreferenceUseCase', () => {
       execute: jest.fn().mockResolvedValue({
         connectionId: 'integration_1',
         environment: 'test',
+        publicKey: 'APP_USR-123456-public',
         preferenceId: 'pref_123',
         externalReference: 'billing_charge:charge_1',
         initPoint: 'https://www.mercadopago.com/init/pref_123',
@@ -152,6 +156,11 @@ describe('CreateMercadoPagoBillingChargePreferenceUseCase', () => {
         billingChargeId: 'charge_1',
         externalReference: 'billing_charge:charge_1',
         currency: 'ARS',
+        payer: {
+          email: 'student_1@example.com',
+          firstName: 'Helio',
+          lastName: 'Gracie',
+        },
       }),
     );
     expect(
@@ -171,6 +180,7 @@ describe('CreateMercadoPagoBillingChargePreferenceUseCase', () => {
     expect(result).toEqual({
       chargeId: 'charge_1',
       provider: 'MERCADO_PAGO',
+      publicKey: 'APP_USR-123456-public',
       preferenceId: 'pref_123',
       externalReference: 'billing_charge:charge_1',
       initPoint: 'https://www.mercadopago.com/init/pref_123',
@@ -200,6 +210,7 @@ describe('CreateMercadoPagoBillingChargePreferenceUseCase', () => {
     createMercadoPagoBillingPreferenceUseCase.execute.mockResolvedValue({
       connectionId: 'integration_1',
       environment: 'test',
+      publicKey: 'APP_USR-123456-public',
       preferenceId: 'pref_123',
       externalReference: 'billing_charge:charge_1',
       initPoint: 'https://www.mercadopago.com/init/pref_123',

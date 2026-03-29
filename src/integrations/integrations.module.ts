@@ -5,6 +5,7 @@ import { BillingModule } from '../billing/billing.module';
 import { IntegrationProviderConfigService } from './application/provider-clients/integration-provider-config.service';
 import { IntegrationProviderRegistry } from './application/provider-clients/integration-provider.registry';
 import { IntegrationSecretConfigService } from './application/integration-secret-config.service';
+import { MercadoPagoCheckoutConfigService } from './application/mercado-pago-checkout-config.service';
 import { CreateMercadoPagoBillingPreferenceUseCase } from './application/use-cases/create-mercado-pago-billing-preference.use-case';
 import { GetIntegrationWebhookEventUseCase } from './application/use-cases/get-integration-webhook-event.use-case';
 import { ListIntegrationWebhookEventsUseCase } from './application/use-cases/list-integration-webhook-events.use-case';
@@ -36,6 +37,7 @@ import { MercadoPagoProviderClient } from './infrastructure/provider-clients/mer
     IntegrationWebhookEventsPolicy,
     MercadoPagoWebhookPolicy,
     IntegrationSecretConfigService,
+    MercadoPagoCheckoutConfigService,
     IntegrationProviderRegistry,
     IntegrationProviderConfigService,
     MercadoPagoProviderClient,

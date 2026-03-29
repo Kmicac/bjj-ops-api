@@ -82,6 +82,11 @@ export class CreateMercadoPagoBillingChargePreferenceUseCase {
         currency: charge.currency,
         externalReference: buildMercadoPagoExternalReference(charge.id),
         createdByMembershipId: principal.membershipId,
+        payer: {
+          email: student.email?.trim() || undefined,
+          firstName: student.firstName,
+          lastName: student.lastName,
+        },
       });
 
     const syncedCharge = await this.syncChargeExternalReference(
@@ -111,6 +116,7 @@ export class CreateMercadoPagoBillingChargePreferenceUseCase {
     return {
       chargeId: syncedCharge.id,
       provider: IntegrationProvider.MERCADO_PAGO,
+      publicKey: preference.publicKey,
       preferenceId: preference.preferenceId,
       externalReference: preference.externalReference,
       initPoint: preference.initPoint,

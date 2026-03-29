@@ -440,6 +440,7 @@ export class BillingRepository {
         primaryBranchId: true,
         firstName: true,
         lastName: true,
+        email: true,
         primaryBranch: {
           select: branchAccessSelect,
         },
@@ -1847,7 +1848,15 @@ export class BillingRepository {
     },
   ) {
     const lockKey = `org:${params.organizationId}:branch:${params.branchId}:student:${params.studentId}:billing-membership`;
-    await tx.$queryRaw`SELECT pg_advisory_xact_lock(${BILLING_MEMBERSHIP_LOCK_NAMESPACE}, hashtext(${lockKey}))`;
+    await tx.$queryRaw`
+      WITH advisory_lock AS (
+        SELECT pg_advisory_xact_lock(
+          ${BILLING_MEMBERSHIP_LOCK_NAMESPACE},
+          hashtext(${lockKey})
+        )
+      )
+      SELECT 1 FROM advisory_lock
+    `;
   }
 
   private async acquireChargePaymentLock(
@@ -1858,6 +1867,14 @@ export class BillingRepository {
     },
   ) {
     const lockKey = `org:${params.organizationId}:charge:${params.chargeId}:billing-payment`;
-    await tx.$queryRaw`SELECT pg_advisory_xact_lock(${BILLING_CHARGE_PAYMENT_LOCK_NAMESPACE}, hashtext(${lockKey}))`;
+    await tx.$queryRaw`
+      WITH advisory_lock AS (
+        SELECT pg_advisory_xact_lock(
+          ${BILLING_CHARGE_PAYMENT_LOCK_NAMESPACE},
+          hashtext(${lockKey})
+        )
+      )
+      SELECT 1 FROM advisory_lock
+    `;
   }
 }
